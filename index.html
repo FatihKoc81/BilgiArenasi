@@ -14,7 +14,7 @@
 
 <section id="home" class="card">
   <h2>Bilgini göster!</h2>
-  <p class="center">Genel kültür, bilim, tarih, coğrafya, spor ve edebiyat sorularını cevapla. Zorluk seviyesini seçerek kendini test et.</p>
+  <p class="center">Genel kültür, bilim, tarih, coğrafya, spor ve edebiyat sorularını cevapla.</p>
   <button onclick="show('setup')">🎯 Yarışmaya başla</button>
   <button class="secondary" onclick="show('multi')">🌐 Arkadaşlarla yarış</button>
 </section>
@@ -23,7 +23,6 @@
   <h2>Yarışma ayarları</h2>
   <label for="player">Oyuncu adı</label>
   <input id="player" placeholder="Adını yaz">
-  
   <label for="category">Kategori</label>
   <select id="category">
     <option value="Tümü">Tüm kategoriler</option>
@@ -32,26 +31,13 @@
     <option>Tarih</option>
     <option>Coğrafya</option>
     <option>Spor</option>
-    <option>Edebiyat</option>
   </select>
-
-  <label for="difficulty">Zorluk Seviyesi</label>
-  <select id="difficulty">
-    <option value="0">Karışık (Tüm seviyeler)</option>
-    <option value="1">Kolay</option>
-    <option value="2">Orta</option>
-    <option value="3">Zor</option>
-  </select>
-
   <label for="count">Soru sayısı</label>
   <select id="count">
-    <option value="10">10 soru</option>
-    <option value="15" selected>15 soru</option>
-    <option value="30">30 soru</option>
-    <option value="50">50 soru</option>
-    <option value="all">Tüm sorular</option>
+    <option value="5">5 soru</option>
+    <option value="10" selected>10 soru</option>
+    <option value="15">15 soru</option>
   </select>
-
   <button onclick="startQuiz()">Yarışmayı başlat</button>
   <button class="secondary" onclick="show('home')">Ana menü</button>
 </section>
@@ -65,7 +51,7 @@
   <div id="questionCount" class="muted"></div>
   <div id="question" class="question"></div>
   <div id="answers"></div>
-  <div id="feedback" class="feedback hide" aria-live="polite"></div>
+  <div id="feedback" class="feedback hide"></div>
   <button class="secondary" onclick="quitQuiz()">Yarışmadan çık</button>
 </section>
 
@@ -73,141 +59,101 @@
   <h2 id="resultTitle">Yarışma tamamlandı!</h2>
   <div id="finalScore" class="score">0</div>
   <p id="resultText" class="center"></p>
-  <p id="recordText" class="center muted"></p>
   <button onclick="show('setup')">Tekrar oyna</button>
   <button class="secondary" onclick="show('home')">Ana menü</button>
 </section>
 
 <section id="multi" class="card hide">
   <h2>Arkadaşlarla yarış</h2>
-  <p>Çevrim içi çok oyunculu mod için sunucu bağlantısı henüz kurulmadı. Şimdilik tek kişilik yarışma kullanılabilir.</p>
+  <p>Şimdilik tek kişilik yarışma kullanılabilir.</p>
   <button onclick="show('setup')">Tek kişilik yarışmaya geç</button>
   <button class="secondary" onclick="show('home')">Ana menü</button>
 </section>
 
-<p class="muted center">BİLGİ ARENASI • 400+ Soru</p>
+<p class="muted center">BİLGİ ARENASI</p>
 </main>
 
-<script src="questions.js"></script>
 <script>
+const questions = [
+{c:"Genel kültür",q:"Bir yılda kaç ay vardır?",a:["10","11","12","13"],k:2,e:"Bir yılda 12 ay vardır."},
+{c:"Genel kültür",q:"Bir günde kaç saat vardır?",a:["12","20","24","30"],k:2,e:"Bir günde 24 saat vardır."},
+{c:"Genel kültür",q:"Türkiye'nin para birimi hangisidir?",a:["Euro","Türk lirası","Dolar","Sterlin"],k:1,e:"Türkiye'nin para birimi Türk lirasıdır."},
+{c:"Bilim",q:"Suyun kimyasal formülü nedir?",a:["CO₂","H₂O","O₂","NaCl"],k:1,e:"Su iki hidrojen ve bir oksijen atomundan oluşur."},
+{c:"Bilim",q:"Kanı pompalayan organ hangisidir?",a:["Akciğer","Beyin","Karaciğer","Kalp"],k:3,e:"Kalp kanı dolaşım sistemine pompalar."},
+{c:"Bilim",q:"Dünya'nın doğal uydusu hangisidir?",a:["Mars","Ay","Güneş","Venüs"],k:1,e:"Dünya'nın doğal uydusu Ay'dır."},
+{c:"Bilim",q:"Hangi gezegen 'Kızıl Gezegen' olarak bilinir?",a:["Venüs","Mars","Jüpiter","Satürn"],k:1,e:"Mars Kızıl Gezegen olarak bilinir."},
+{c:"Coğrafya",q:"Türkiye'nin başkenti hangisidir?",a:["İstanbul","İzmir","Bursa","Ankara"],k:3,e:"Türkiye'nin başkenti Ankara'dır."},
+{c:"Coğrafya",q:"Dünyanın en büyük okyanusu hangisidir?",a:["Atlas","Hint","Arktik","Pasifik"],k:3,e:"En büyük okyanus Pasifik Okyanusu'dur."},
+{c:"Coğrafya",q:"Türkiye kaç coğrafi bölgeye ayrılır?",a:["5","6","7","8"],k:2,e:"Türkiye yedi coğrafi bölgeye ayrılır."},
+{c:"Spor",q:"Bir futbol takımı sahaya kaç oyuncuyla çıkar?",a:["9","10","11","12"],k:2,e:"Kaleci dâhil 11 oyuncu bulunur."},
+{c:"Spor",q:"Olimpiyat halkaları kaç tanedir?",a:["4","5","6","7"],k:1,e:"Olimpiyat simgesinde beş halka vardır."},
+{c:"Spor",q:"Basketbolda sahada bir takımda kaç oyuncu bulunur?",a:["4","5","6","7"],k:1,e:"Basketbol takımı sahada beş oyuncuyla yer alır."},
+{c:"Tarih",q:"Türkiye Cumhuriyeti hangi yıl ilan edildi?",a:["1919","1920","1923","1924"],k:2,e:"Cumhuriyet 29 Ekim 1923'te ilan edildi."},
+{c:"Tarih",q:"İstanbul hangi yıl fethedildi?",a:["1071","1299","1453","1517"],k:2,e:"İstanbul 1453'te fethedildi."}
+];
+
 const $ = id => document.getElementById(id);
-let list = [], idx = 0, score = 0, correct = 0, locked = false, remaining = 20, timerId = null;
+let list=[],idx=0,score=0,correct=0,locked=false,remaining=20,timerId=null;
 
-function show(id) {
-  ["home","setup","quiz","result","multi"].forEach(x => $(x).classList.toggle("hide", x !== id));
-}
+function show(id){["home","setup","quiz","result","multi"].forEach(x=>$(x).classList.toggle("hide",x!==id));}
 
-function startQuiz() {
-  const playerName = $("player").value.trim() || "Oyuncu";
-  const chosenCategory = $("category").value;
-  const diff = Number($("difficulty").value);
-
-  let filtered = chosenCategory === "Tümü" ? questions : questions.filter(x => x.c === chosenCategory);
-  if (diff > 0) filtered = filtered.filter(x => x.d === diff);
-
-  list = filtered.slice().sort(() => Math.random() - 0.5);
-  const n = $("count").value;
-  if (n !== "all") list = list.slice(0, Math.min(Number(n), list.length));
-
-  if (list.length === 0) {
-    alert("Seçtiğin kategori ve zorlukta yeterli soru yok. Lütfen farklı bir seçim yap.");
-    return;
-  }
-
-  idx = 0; score = 0; correct = 0;
-  window.playerName = playerName;
+function startQuiz(){
+  const playerName=$("player").value.trim()||"Oyuncu";
+  const cat=$("category").value;
+  let filtered=cat==="Tümü"?questions:questions.filter(x=>x.c===cat);
+  list=filtered.slice().sort(()=>Math.random()-0.5);
+  const n=Number($("count").value);
+  list=list.slice(0,Math.min(n,list.length));
+  if(list.length===0){alert("Bu kategoride soru yok");return;}
+  idx=0;score=0;correct=0;
+  window.playerName=playerName;
   show("quiz");
   renderQuestion();
 }
 
-function renderQuestion() {
-  clearInterval(timerId);
-  locked = false;
-  remaining = 20;
-  if (idx >= list.length) { finish(); return; }
-
-  const q = list[idx];
-  $("categoryLabel").textContent = q.c + (q.d === 1 ? " • Kolay" : q.d === 2 ? " • Orta" : " • Zor");
-  $("questionCount").textContent = `Soru ${idx + 1} / ${list.length}`;
-  $("question").textContent = q.q;
+function renderQuestion(){
+  clearInterval(timerId);locked=false;remaining=20;
+  if(idx>=list.length){finish();return;}
+  const q=list[idx];
+  $("categoryLabel").textContent=q.c;
+  $("questionCount").textContent=`Soru ${idx+1} / ${list.length}`;
+  $("question").textContent=q.q;
   $("feedback").classList.add("hide");
-  $("feedback").textContent = "";
-  $("answers").innerHTML = "";
-  \( ("bar").style.width = ` \){idx / list.length * 100}%`;
-
-  q.a.forEach((answer, i) => {
-    const b = document.createElement("button");
-    b.className = "answer";
-    b.textContent = String.fromCharCode(65 + i) + ") " + answer;
-    b.onclick = () => choose(i, b);
+  $("answers").innerHTML="";
+  \( ("bar").style.width=` \){idx/list.length*100}%`;
+  q.a.forEach((ans,i)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.textContent=String.fromCharCode(65+i)+") "+ans;
+    b.onclick=()=>choose(i,b);
     $("answers").appendChild(b);
   });
-
   updateTimer();
-  timerId = setInterval(() => {
-    remaining--;
-    updateTimer();
-    if (remaining <= 0) {
-      clearInterval(timerId);
-      choose(-1, null);
-    }
-  }, 1000);
+  timerId=setInterval(()=>{remaining--;updateTimer();if(remaining<=0){clearInterval(timerId);choose(-1,null);}},1000);
 }
 
-function updateTimer() {
-  $("timer").textContent = `⏱ ${remaining} sn`;
+function updateTimer(){$("timer").textContent=`⏱ ${remaining} sn`;}
+
+function choose(i,button){
+  if(locked)return;locked=true;clearInterval(timerId);
+  const q=list[idx];
+  const buttons=[...$("answers").querySelectorAll("button")];
+  buttons.forEach(b=>b.disabled=true);
+  const fb=$("feedback");fb.classList.remove("hide");
+  if(i===q.k){correct++;score+=10;button.classList.add("good");fb.textContent="✅ Doğru! "+q.e;}
+  else{if(button)button.classList.add("bad");buttons[q.k].classList.add("good");fb.textContent=(i===-1?"⏰ Süre doldu. ":"❌ Yanlış. ")+"Doğru cevap: "+q.a[q.k]+". "+q.e;}
+  \( ("bar").style.width=` \){(idx+1)/list.length*100}%`;
+  setTimeout(()=>{idx++;renderQuestion();},1600);
 }
 
-function choose(i, button) {
-  if (locked) return;
-  locked = true;
-  clearInterval(timerId);
-  const q = list[idx];
-  const buttons = [...$("answers").querySelectorAll("button")];
-  buttons.forEach(b => b.disabled = true);
-
-  const fb = $("feedback");
-  fb.classList.remove("hide");
-
-  if (i === q.k) {
-    correct++;
-    score += (q.d === 1 ? 10 : q.d === 2 ? 15 : 20);
-    button.classList.add("good");
-    fb.textContent = "✅ Doğru cevap! " + q.e;
-  } else {
-    if (button) button.classList.add("bad");
-    buttons[q.k].classList.add("good");
-    fb.textContent = (i === -1 ? "⏰ Süre doldu. " : "❌ Yanlış cevap. ") + "Doğru cevap: " + q.a[q.k] + ". " + q.e;
-  }
-
-  \( ("bar").style.width = ` \){(idx + 1) / list.length * 100}%`;
-  setTimeout(() => { idx++; renderQuestion(); }, 1600);
+function finish(){
+  clearInterval(timerId);show("result");
+  $("finalScore").textContent=score+" puan";
+  $("resultTitle").textContent=(window.playerName||"Oyuncu")+", yarışma bitti!";
+  \( ("resultText").textContent=` \){list.length} soruda ${correct} doğru yaptın.`;
 }
 
-function finish() {
-  clearInterval(timerId);
-  show("result");
-  $("finalScore").textContent = score + " puan";
-  $("resultTitle").textContent = (window.playerName || "Oyuncu") + ", yarışma tamamlandı!";
-  \( ("resultText").textContent = ` \){list.length} soruda ${correct} doğru cevap verdin. Başarı oranı: ${Math.round(correct / Math.max(list.length, 1) * 100)}%.`;
-  
-  let record = 0;
-  try {
-    record = Number(localStorage.getItem("bilgiArenasiRecord") || 0);
-    if (score > record) {
-      record = score;
-      localStorage.setItem("bilgiArenasiRecord", String(record));
-    }
-  } catch (e) {}
-  $("recordText").textContent = "🏆 Rekor: " + record + " puan";
-}
-
-function quitQuiz() {
-  if (confirm("Yarışmadan çıkmak istiyor musun?")) {
-    clearInterval(timerId);
-    show("home");
-  }
-}
+function quitQuiz(){if(confirm("Çıkmak istiyor musun?")){clearInterval(timerId);show("home");}}
 </script>
 </body>
 </html>
