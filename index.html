@@ -11,97 +11,103 @@
 <body><main>
 <h1>🧠 BİLGİ <span>ARENASI</span></h1>
 <section id="home" class="card">
-<h2>Bilgini göster!</h2><p class="center">Genel kültür, bilim, tarih, coğrafya, spor ve edebiyat sorularını cevapla.</p>
+<h2>Bilgini göster!</h2>
+<p class="center">Genel kültür, bilim, tarih, coğrafya, spor ve edebiyat sorularını cevapla. Zorluk seviyesini seçerek kendini test et.</p>
 <button onclick="show('setup')">🎯 Yarışmaya başla</button>
 <button class="secondary" onclick="show('multi')">🌐 Arkadaşlarla yarış</button>
 </section>
 <section id="setup" class="card hide">
 <h2>Yarışma ayarları</h2>
-<label for="player">Oyuncu adı</label><input id="player" placeholder="Adını yaz">
-<label for="category">Kategori</label><select id="category"><option value="Tümü">Tüm kategoriler</option><option>Genel kültür</option><option>Bilim</option><option>Tarih</option><option>Coğrafya</option><option>Spor</option><option>Edebiyat</option></select>
-<label for="count">Soru sayısı</label><select id="count"><option value="10">10 soru</option><option value="15" selected>15 soru</option><option value="30">30 soru</option><option value="all">Tüm sorular</option></select>
-<button onclick="startQuiz()">Yarışmayı başlat</button><button class="secondary" onclick="show('home')">Ana menü</button>
+<label for="player">Oyuncu adı</label>
+<input id="player" placeholder="Adını yaz">
+<label for="category">Kategori</label>
+<select id="category">
+<option value="Tümü">Tüm kategoriler</option>
+<option>Genel kültür</option>
+<option>Bilim</option>
+<option>Tarih</option>
+<option>Coğrafya</option>
+<option>Spor</option>
+<option>Edebiyat</option>
+</select>
+<label for="difficulty">Zorluk Seviyesi</label>
+<select id="difficulty">
+<option value="0">Karışık (Tüm seviyeler)</option>
+<option value="1">Kolay</option>
+<option value="2">Orta</option>
+<option value="3">Zor</option>
+</select>
+<label for="count">Soru sayısı</label>
+<select id="count">
+<option value="10">10 soru</option>
+<option value="15" selected>15 soru</option>
+<option value="30">30 soru</option>
+<option value="50">50 soru</option>
+<option value="all">Tüm sorular</option>
+</select>
+<button onclick="startQuiz()">Yarışmayı başlat</button>
+<button class="secondary" onclick="show('home')">Ana menü</button>
 </section>
 <section id="quiz" class="card hide">
 <div class="topline"><span id="categoryLabel">Genel kültür</span><span id="timer">⏱ 20 sn</span></div>
 <div class="progress"><div id="bar" class="bar"></div></div>
-<div id="questionCount" class="muted"></div><div id="question" class="question"></div>
-<div id="answers"></div><div id="feedback" class="feedback hide" aria-live="polite"></div>
+<div id="questionCount" class="muted"></div>
+<div id="question" class="question"></div>
+<div id="answers"></div>
+<div id="feedback" class="feedback hide" aria-live="polite"></div>
 <button class="secondary" onclick="quitQuiz()">Yarışmadan çık</button>
 </section>
-<section id="result" class="card hide"><h2 id="resultTitle">Yarışma tamamlandı!</h2><div id="finalScore" class="score">0</div><p id="resultText" class="center"></p><p id="recordText" class="center muted"></p><button onclick="show('setup')">Tekrar oyna</button><button class="secondary" onclick="show('home')">Ana menü</button></section>
-<section id="multi" class="card hide"><h2>Arkadaşlarla yarış</h2><p>Çevrim içi çok oyunculu mod için sunucu bağlantısı henüz kurulmadı. Şimdilik tek kişilik yarışma kullanılabilir.</p><button onclick="show('setup')">Tek kişilik yarışmaya geç</button><button class="secondary" onclick="show('home')">Ana menü</button></section>
-<p class="muted center">BİLGİ ARENASI</p>
+<section id="result" class="card hide">
+<h2 id="resultTitle">Yarışma tamamlandı!</h2>
+<div id="finalScore" class="score">0</div>
+<p id="resultText" class="center"></p>
+<p id="recordText" class="center muted"></p>
+<button onclick="show('setup')">Tekrar oyna</button>
+<button class="secondary" onclick="show('home')">Ana menü</button>
+</section>
+<section id="multi" class="card hide">
+<h2>Arkadaşlarla yarış</h2>
+<p>Çevrim içi çok oyunculu mod için sunucu bağlantısı henüz kurulmadı. Şimdilik tek kişilik yarışma kullanılabilir.</p>
+<button onclick="show('setup')">Tek kişilik yarışmaya geç</button>
+<button class="secondary" onclick="show('home')">Ana menü</button>
+</section>
+<p class="muted center">BİLGİ ARENASI • 220+ Soru</p>
 </main>
 <script>
-const questions=[
-{c:"Coğrafya",q:"Türkiye'nin en uzun nehri hangisidir?",a:["Sakarya","Kızılırmak","Fırat","Yeşilırmak"],k:1,e:"Kızılırmak, bütünüyle Türkiye'de akan en uzun nehirdir."},
-{c:"Tarih",q:"Türkiye Cumhuriyeti hangi yıl ilan edildi?",a:["1919","1920","1923","1924"],k:2,e:"Cumhuriyet 29 Ekim 1923'te ilan edildi."},
-{c:"Bilim",q:"Suyun kimyasal formülü nedir?",a:["CO₂","H₂O","O₂","NaCl"],k:1,e:"Su iki hidrojen ve bir oksijen atomundan oluşur."},
-{c:"Genel kültür",q:"Güneş Sistemi'nin en büyük gezegeni hangisidir?",a:["Dünya","Satürn","Jüpiter","Neptün"],k:2,e:"Güneş Sistemi'nin en büyük gezegeni Jüpiter'dir."},
-{c:"Spor",q:"Bir futbol takımı sahaya kaç oyuncuyla çıkar?",a:["9","10","11","12"],k:2,e:"Kaleci dâhil 11 oyuncu bulunur."},
-{c:"Edebiyat",q:"İnce Memed romanının yazarı kimdir?",a:["Orhan Kemal","Yaşar Kemal","Sabahattin Ali","Reşat Nuri Güntekin"],k:1,e:"İnce Memed, Yaşar Kemal'in romanıdır."},
-{c:"Bilim",q:"Bitkiler fotosentez sırasında hangi gazı alır?",a:["Oksijen","Azot","Karbondioksit","Hidrojen"],k:2,e:"Fotosentez sırasında karbondioksit kullanılır."},
-{c:"Coğrafya",q:"Türkiye'nin başkenti hangisidir?",a:["İstanbul","İzmir","Bursa","Ankara"],k:3,e:"Türkiye'nin başkenti Ankara'dır."},
-{c:"Tarih",q:"İstanbul hangi yıl fethedildi?",a:["1071","1299","1453","1517"],k:2,e:"İstanbul 1453'te fethedildi."},
-{c:"Genel kültür",q:"Bir yılda kaç ay vardır?",a:["10","11","12","13"],k:2,e:"Bir yılda 12 ay vardır."},
-{c:"Bilim",q:"Kanı pompalayan organ hangisidir?",a:["Akciğer","Beyin","Karaciğer","Kalp"],k:3,e:"Kalp kanı dolaşım sistemine pompalar."},
-{c:"Spor",q:"Olimpiyat halkaları kaç tanedir?",a:["4","5","6","7"],k:1,e:"Olimpiyat simgesinde beş halka vardır."},
-{c:"Edebiyat",q:"Küçük Prens kitabının yazarı kimdir?",a:["Antoine de Saint-Exupéry","Jules Verne","Victor Hugo","Albert Camus"],k:0,e:"Kitabın yazarı Antoine de Saint-Exupéry'dir."},
-{c:"Coğrafya",q:"Dünyanın en büyük okyanusu hangisidir?",a:["Atlas","Hint","Arktik","Pasifik"],k:3,e:"En büyük okyanus Pasifik Okyanusu'dur."},
-{c:"Genel kültür",q:"Türkiye'nin para birimi hangisidir?",a:["Euro","Türk lirası","Dolar","Sterlin"],k:1,e:"Türkiye'nin para birimi Türk lirasıdır."},
-{c:"Tarih",q:"TBMM hangi tarihte açıldı?",a:["23 Nisan 1920","19 Mayıs 1919","30 Ağustos 1922","29 Ekim 1923"],k:0,e:"TBMM 23 Nisan 1920'de açıldı."},
-{c:"Bilim",q:"Dünya'nın doğal uydusu hangisidir?",a:["Mars","Ay","Güneş","Venüs"],k:1,e:"Dünya'nın doğal uydusu Ay'dır."},
-{c:"Spor",q:"Basketbolda sahada bir takımda kaç oyuncu bulunur?",a:["4","5","6","7"],k:1,e:"Basketbol takımı sahada beş oyuncuyla yer alır."},
-{c:"Coğrafya",q:"Dünyanın en yüksek dağı hangisidir?",a:["Ağrı","K2","Everest","Kilimanjaro"],k:2,e:"Deniz seviyesine göre en yüksek dağ Everest'tir."},
-{c:"Edebiyat",q:"Nutuk kimin eseridir?",a:["İsmet İnönü","Mustafa Kemal Atatürk","Ziya Gökalp","Mehmet Akif Ersoy"],k:1,e:"Nutuk, Mustafa Kemal Atatürk'ün eseridir."},
-{c:"Genel kültür",q:"Bir üçgenin iç açıları toplamı kaç derecedir?",a:["90","180","270","360"],k:1,e:"Öklid geometrisinde üçgenin iç açıları toplamı 180 derecedir."},
-{c:"Bilim",q:"Işığın boşluktaki hızı yaklaşık kaç km/s'dir?",a:["30.000","150.000","300.000","1.000.000"],k:2,e:"Işığın boşluktaki hızı yaklaşık 300.000 km/s'dir."},
-{c:"Tarih",q:"Malazgirt Savaşı hangi yıl yapıldı?",a:["1071","1176","1299","1453"],k:0,e:"Malazgirt Savaşı 1071 yılında yapıldı."},
-{c:"Coğrafya",q:"Türkiye kaç coğrafi bölgeye ayrılır?",a:["5","6","7","8"],k:2,e:"Türkiye yedi coğrafi bölgeye ayrılır."},
-{c:"Spor",q:"Teniste sıfır puan hangi terimle ifade edilir?",a:["Love","Ace","Deuce","Set"],k:0,e:"Teniste sıfır puan 'love' olarak adlandırılır."},
-{c:"Genel kültür",q:"Gökkuşağında geleneksel olarak kaç renk sayılır?",a:["5","6","7","8"],k:2,e:"Geleneksel sınıflandırmada gökkuşağında yedi renk sayılır."},
-{c:"Bilim",q:"İnsan vücudunda kanı süzen organ hangisidir?",a:["Mide","Böbrek","Dalak","Pankreas"],k:1,e:"Böbrekler kanı süzer ve atıkların uzaklaştırılmasına yardım eder."},
-{c:"Edebiyat",q:"Sefiller romanının yazarı kimdir?",a:["Victor Hugo","Balzac","Dostoyevski","Tolstoy"],k:0,e:"Sefiller, Victor Hugo'nun romanıdır."},
-{c:"Tarih",q:"İlk TBMM binası hangi şehirdedir?",a:["İstanbul","Ankara","Sivas","Erzurum"],k:1,e:"İlk TBMM, Ankara'da açılmıştır."},
-{c:"Coğrafya",q:"Ekvator Dünya'yı hangi iki yarım küreye ayırır?",a:["Doğu-Batı","Kuzey-Güney","Kara-Deniz","Sıcak-Soğuk"],k:1,e:"Ekvator, Dünya'yı Kuzey ve Güney yarım kürelere ayırır."}
-];
-const $=id=>document.getElementById(id);
-let list=[],idx=0,score=0,correct=0,locked=false,remaining=20,timerId=null,chosenCategory="Tümü",playerName="Oyuncu";
-function show(id){["home","setup","quiz","result","multi"].forEach(x=>$(x).classList.toggle("hide",x!==id));}
-function startQuiz(){
- playerName=$("player").value.trim()||"Oyuncu";chosenCategory=$("category").value;
- const filtered=chosenCategory==="Tümü"?questions:questions.filter(x=>x.c===chosenCategory);
- list=filtered.slice().sort(()=>Math.random()-.5);
- const n=$("count").value;if(n!=="all")list=list.slice(0,Math.min(Number(n),list.length));
- idx=0;score=0;correct=0;show("quiz");renderQuestion();
-}
-function renderQuestion(){
- clearInterval(timerId);locked=false;remaining=20;
- if(idx>=list.length){finish();return;}
- const q=list[idx];$("categoryLabel").textContent=q.c;$("questionCount").textContent=`Soru ${idx+1} / ${list.length}`;
- $("question").textContent=q.q;$("feedback").classList.add("hide");$("feedback").textContent="";
- $("answers").innerHTML="";$("bar").style.width=`${idx/list.length*100}%`;
- q.a.forEach((answer,i)=>{const b=document.createElement("button");b.className="answer";b.textContent=String.fromCharCode(65+i)+") "+answer;b.onclick=()=>choose(i,b);$("answers").appendChild(b);});
- updateTimer();timerId=setInterval(()=>{remaining--;updateTimer();if(remaining<=0){clearInterval(timerId);choose(-1,null);}},1000);
-}
-function updateTimer(){$("timer").textContent=`⏱ ${remaining} sn`; }
-function choose(i,button){
- if(locked)return;locked=true;clearInterval(timerId);const q=list[idx];const buttons=[...$("answers").querySelectorAll("button")];buttons.forEach(b=>b.disabled=true);
- const fb=$("feedback");fb.classList.remove("hide");
- if(i===q.k){correct++;score+=10;button.classList.add("good");fb.textContent="✅ Doğru cevap! "+q.e;}
- else{if(button)button.classList.add("bad");buttons[q.k].classList.add("good");fb.textContent=(i===-1?"⏰ Süre doldu. ":"❌ Yanlış cevap. ")+"Doğru cevap: "+q.a[q.k]+". "+q.e;}
- $("bar").style.width=`${(idx+1)/list.length*100}%`;
- setTimeout(()=>{idx++;renderQuestion();},1600);
-}
-function finish(){
- clearInterval(timerId);show("result");$("finalScore").textContent=score+" puan";
- $("resultTitle").textContent=playerName+", yarışma tamamlandı!";
- $("resultText").textContent=`${list.length} soruda ${correct} doğru cevap verdin. Başarı oranı: ${Math.round(correct/Math.max(list.length,1)*100)}%.`;
- let record=0;try{record=Number(localStorage.getItem("bilgiArenasiRecord")||0);if(score>record){record=score;localStorage.setItem("bilgiArenasiRecord",String(record));}}catch(e){}
- $("recordText").textContent="🏆 Rekor: "+record+" puan";
-}
-function quitQuiz(){if(confirm("Yarışmadan çıkmak istiyor musun?")){clearInterval(timerId);show("home");}}
-</script>
-</body>
-</html>
+const questions = [
+// ========== KOLAY (d:1) ==========
+{c:"Genel kültür",q:"Bir yılda kaç ay vardır?",a:["10","11","12","13"],k:2,d:1,e:"Bir yılda 12 ay vardır."},
+{c:"Genel kültür",q:"Bir günde kaç saat vardır?",a:["12","20","24","30"],k:2,d:1,e:"Bir günde 24 saat vardır."},
+{c:"Genel kültür",q:"Gökkuşağında geleneksel olarak kaç renk sayılır?",a:["5","6","7","8"],k:2,d:1,e:"Geleneksel sınıflandırmada gökkuşağında yedi renk sayılır."},
+{c:"Genel kültür",q:"Türkiye'nin para birimi hangisidir?",a:["Euro","Türk lirası","Dolar","Sterlin"],k:1,d:1,e:"Türkiye'nin para birimi Türk lirasıdır."},
+{c:"Genel kültür",q:"Bir üçgenin iç açıları toplamı kaç derecedir?",a:["90","180","270","360"],k:1,d:1,e:"Üçgenin iç açıları toplamı 180 derecedir."},
+{c:"Bilim",q:"Suyun kimyasal formülü nedir?",a:["CO₂","H₂O","O₂","NaCl"],k:1,d:1,e:"Su iki hidrojen ve bir oksijen atomundan oluşur."},
+{c:"Bilim",q:"Kanı pompalayan organ hangisidir?",a:["Akciğer","Beyin","Karaciğer","Kalp"],k:3,d:1,e:"Kalp kanı dolaşım sistemine pompalar."},
+{c:"Bilim",q:"Dünya'nın doğal uydusu hangisidir?",a:["Mars","Ay","Güneş","Venüs"],k:1,d:1,e:"Dünya'nın doğal uydusu Ay'dır."},
+{c:"Bilim",q:"Bitkiler fotosentez sırasında hangi gazı alır?",a:["Oksijen","Azot","Karbondioksit","Hidrojen"],k:2,d:1,e:"Fotosentez sırasında karbondioksit kullanılır."},
+{c:"Coğrafya",q:"Türkiye'nin başkenti hangisidir?",a:["İstanbul","İzmir","Bursa","Ankara"],k:3,d:1,e:"Türkiye'nin başkenti Ankara'dır."},
+{c:"Coğrafya",q:"Dünyanın en büyük okyanusu hangisidir?",a:["Atlas","Hint","Arktik","Pasifik"],k:3,d:1,e:"En büyük okyanus Pasifik Okyanusu'dur."},
+{c:"Coğrafya",q:"Ekvator Dünya'yı hangi iki yarım küreye ayırır?",a:["Doğu-Batı","Kuzey-Güney","Kara-Deniz","Sıcak-Soğuk"],k:1,d:1,e:"Ekvator, Dünya'yı Kuzey ve Güney yarım kürelere ayırır."},
+{c:"Spor",q:"Bir futbol takımı sahaya kaç oyuncuyla çıkar?",a:["9","10","11","12"],k:2,d:1,e:"Kaleci dâhil 11 oyuncu bulunur."},
+{c:"Spor",q:"Olimpiyat halkaları kaç tanedir?",a:["4","5","6","7"],k:1,d:1,e:"Olimpiyat simgesinde beş halka vardır."},
+{c:"Spor",q:"Basketbolda sahada bir takımda kaç oyuncu bulunur?",a:["4","5","6","7"],k:1,d:1,e:"Basketbol takımı sahada beş oyuncuyla yer alır."},
+{c:"Edebiyat",q:"Küçük Prens kitabının yazarı kimdir?",a:["Antoine de Saint-Exupéry","Jules Verne","Victor Hugo","Albert Camus"],k:0,d:1,e:"Kitabın yazarı Antoine de Saint-Exupéry'dir."},
+{c:"Tarih",q:"Türkiye Cumhuriyeti hangi yıl ilan edildi?",a:["1919","1920","1923","1924"],k:2,d:1,e:"Cumhuriyet 29 Ekim 1923'te ilan edildi."},
+{c:"Tarih",q:"İstanbul hangi yıl fethedildi?",a:["1071","1299","1453","1517"],k:2,d:1,e:"İstanbul 1453'te fethedildi."},
+{c:"Genel kültür",q:"Hangi hayvan 'ormanlar kralı' olarak bilinir?",a:["Kaplan","Aslan","Ayı","Kurt"],k:1,d:1,e:"Aslan ormanlar kralı olarak bilinir."},
+{c:"Genel kültür",q:"Hangi mevsimde günler en uzundur?",a:["İlkbahar","Yaz","Sonbahar","Kış"],k:1,d:1,e:"Yaz mevsiminde günler en uzundur."},
+{c:"Bilim",q:"Gözün renkli kısmına ne ad verilir?",a:["Retina","İris","Kornea","Lens"],k:1,d:1,e:"Gözün renkli kısmı iristir."},
+{c:"Coğrafya",q:"Türkiye kaç coğrafi bölgeye ayrılır?",a:["5","6","7","8"],k:2,d:1,e:"Türkiye yedi coğrafi bölgeye ayrılır."},
+{c:"Spor",q:"Voleybolda bir takımda sahada kaç oyuncu bulunur?",a:["5","6","7","8"],k:1,d:1,e:"Voleybolda sahada 6 oyuncu bulunur."},
+{c:"Genel kültür",q:"Hangi renk ana renktir?",a:["Yeşil","Turuncu","Kırmızı","Mor"],k:2,d:1,e:"Kırmızı, sarı ve mavi ana renklerdir."},
+{c:"Bilim",q:"Hangi organ solunum sistemine aittir?",a:["Kalp","Akciğer","Böbrek","Karaciğer"],k:1,d:1,e:"Akciğer solunum organıdır."},
+
+// ========== ORTA (d:2) ==========
+{c:"Bilim",q:"Güneş Sistemi'nin en büyük gezegeni hangisidir?",a:["Dünya","Satürn","Jüpiter","Neptün"],k:2,d:2,e:"Güneş Sistemi'nin en büyük gezegeni Jüpiter'dir."},
+{c:"Bilim",q:"Işığın boşluktaki hızı yaklaşık kaç km/s'dir?",a:["30.000","150.000","300.000","1.000.000"],k:2,d:2,e:"Işığın boşluktaki hızı yaklaşık 300.000 km/s'dir."},
+{c:"Bilim",q:"İnsan vücudunda kanı süzen organ hangisidir?",a:["Mide","Böbrek","Dalak","Pankreas"],k:1,d:2,e:"Böbrekler kanı süzer."},
+{c:"Bilim",q:"Periyodik tabloda 'Fe' sembolü hangi elemente aittir?",a:["Flor","Demir","Fosfor","Fermiyum"],k:1,d:2,e:"Fe, demir elementinin sembolüdür."},
+{c:"Bilim",q:"İnsan vücudundaki en büyük kemik hangisidir?",a:["Kafatası","Uyluk kemiği","Kol kemiği","Kaburga"],k:1,d:2,e:"Uyluk kemiği (femur) vücudun en uzun kemiğidir."},
+{c:"Bilim",q:"Fotosentez hangi organelde gerçekleşir?",a:["Mitokondri","Kloroplast","Ribozom","Çekirdek"],k:1,d:2,e:"Fotosentez kloroplastlarda gerçekleşir."},
+{c:"Bilim",q:"Kan gruplarından hangisi evrensel vericidir?",a:["A","B","AB","0"],k:3,d:2,e:"0 kan grubu evrensel vericidir."},
+{c:"Bilim
