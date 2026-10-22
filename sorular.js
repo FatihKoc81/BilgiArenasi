@@ -1,20 +1,20 @@
 const stages = {
-    stage1: [
-    {c:"Genel kültür",q:"Dünyanın en derin noktası kabul edilen Mariana Çukuru hangi okyanustadır?",a:["Atlas Okyanusu","Hint Okyanusu","Pasifik Okyanusu","Arktik Okyanusu"],k:2,e:"Mariana Çukuru, Büyük Okyanus (Pasifik) sınırları içerisindedir."},
-    {c:"Bilim",q:"Periyodik tabloda 'Au' simgesi ile gösterilen kimyasal element hangisidir?",a:["Gümüş","Altın","Bakır","Alüminyum"],k:1,e:"'Au' simgesi Latince 'Aurum' kelimesinden gelir ve altını temsil eder."},
-    {c:"Tarih",q:"Dünyanın bilinen en eski tapınak kompleksi kabul edilen Göbeklitepe hangi ilimizdedir?",a:["Mardin","Şanlıurfa","Gaziantep","Adıyaman"],k:1,e:"Göbeklitepe, Şanlıurfa kent merkezinin yaklaşık 18 km kuzeydoğusundadır."},
-    {c:"Coğrafya",q:"Dünyada yüzölçümü bakımından en büyük dökülen veya kapalı deniz/göl hangisidir?",a:["Hazar Denizi","Süveyş","Baykal Gölü","Aral Gölü"],k:0,e:"Hazar Denizi, dünyanın en büyük kapalı su kütlesidir."},
-    {c:"Edebiyat",q:"Türk edebiyatının ilk kayda geçmiş yazılı belgeleri sayılan Orhun Kitabeleri günümüzde hangi ülkededir?",a:["Özbekistan","Kazakistan","Moğolistan","Kırgızistan"],k:2,e:"Orhun Yazıtları, Moğolistan sınırları içindeki Orhun Vadisi'nde yer alır."},
-    {c:"Bilim",q:"Vücudumuza giren mikroplarla savaşarak bağışıklık sağlayan kan hücreleri hangisidir?",a:["Alyuvarlar","Lökositler (Akyuvarlar)","Trombositler","Plazma"],k:1,e:"Akyuvarlar (lökositler) vücudun savunma mekanizmasını oluşturur."},
+        stage1: [
+    {c:"Geoloji & Coğrafya",q:"Dünyanın en yüksek dağı aşağıdakilerden hangisidir?",a:["K2 Dağı","Kilimanjaro","Everest Dağı","Mont Blanc"],k:2,e:"Everest Dağı, deniz seviyesinden 8.848 metre yüksekliğiyle dünyanın en yüksek dağıdır."},
+    {c:"Genel kültür",q:"Türkiye'nin yüzölçümü bakımından en büyük ili aşağıdakilerden hangisidir?",a:["İstanbul","Ankara","Konya","Sivas"],k:2,e:"Konya, 38.873 km² alanı ile Türkiye'nin yüzölçümü en geniş ilidir."},
+    {c:"Uzay & Bilim",q:"Güneş sistemimizde kendi etrafında ters yönde (doğudan batıya) dönen gezegen hangisidir?",a:["Mars","Venüs","Jüpiter","Merkür"],k:1,e:"Venüs, diğer gezegenlerin aksine saat yönünde (doğudan batıya) döner."},
+    {c:"Coğrafya",q:"Türkiye'nin komşularından biri olan ve başkenti Atina olan ülke hangisidir?",a:["Bulgaristan","Yunanistan","İtalya","Mısır"],k:1,e:"Yunanistan'ın başkenti Atina'dır."},
+    {c:"Bilim",q:"Dünya'nın tek doğal uydusu aşağıdakilerden hangisidir?",a:["Güneş","Mars","Ay","Venüs"],k:2,e:"Dünya'nın doğal uydusu Ay'dır."},
+    {c:"Bilim",q:"Suyun sıvı halden gaz (buhar) haline geçmesi olayına ne ad verilir?",a:["Donma","Buharlaşma","Erime","Yoğuşma"],k:1,e:"Sıvının gaz haline geçmesine buharlaşma denir."},
+    {c:"Tarih",q:"Anadolu Selçuklu Devleti'nin başkentliğini yapmış ve 'Mevlana Şehri' olarak bilinen ilimiz hangisidir?",a:["Sivas","Kayseri","Konya","Eskişehir"],k:2,e:"Anadolu Selçuklu Devleti'ne uzun yıllar Konya başkentlik yapmıştır."},
+    {c:"Spor",q:"Olimpiyat oyunlarının simgesi olan 5 renkli halka neyi temsil eder?",a:["5 Temel Sporu","5 Kıtamızı","5 Büyük Devleti","5 Olimpiyat Şehrini"],k:1,e:"Beş birleşik halka, dünyadaki 5 kıtanın birleştiği dostluğu simgeler."},
     {c:"Sanat",q:"İtalya'da bulunan ünlü 'Son Akşam Yemeği' duvar resminin ressamı kimdir?",a:["Michelangelo","Raphael","Leonardo da Vinci","Donatello"],k:2,e:"Bu ünlü duvar resmi Leonardo da Vinci tarafından yapılmıştır."},
-    {c:"Coğrafya",q:"Yeryüzünde aktif yanardağların en çok bulunduğu 'Ateş Çemberi' bölgesi hangi okyanus çevresindedir?",a:["Pasifik Okyanusu","Atlas Okyanusu","Hint Okyanusu","Kuzey Buz Okyanusu"],k:0,e:"Ateş Çemberi, Pasifik (Büyük) Okyanus havzasını çevreler."},
-    {c:"Spor",q:"Olimpiyat oyunlarının simgesi olan 5 renkli halka Neyi temsil eder?",a:["5 Temel Sporu","5 Kıtamızı","5 Büyük Devleti","5 Olimpiyat Şehrini"],k:1,e:"Beş birleşik halka, dünyadaki 5 kıtanın birleştiği dostluğu simgeler."},
-    {c:"Tarih",q:"Anadolu Selçuklu Devleti'nin başkentliğini yapmış ve 'Mevlana Şehri' olarak da bilinen ilimiz hangisidir?",a:["Sivas","Kayseri","Konya","Eskişehir"],k:2,e:"Anadolu Selçuklu Devleti'ne uzun yıllar Konya başkentlik yapmıştır."},
-    {c:"Genel kültür",q:"Dünyadaki en uzun kara sınırı hangi iki ülke arasındadır?",a:["Rusya - Çin","ABD - Kanada","Brezilya - Arjantin","Hindistan - Pakistan"],k:1,e:"ABD ile Kanada arasındaki kara sınırı 8.891 km ile dünyanın en uzun sınırıdır."},
-    {c:"Bilim",q:"Güneş sistemimizde kendi etrafında ters yönde (doğudan batıya) dönen tek gezegen hangisidir?",a:["Mars","Venüs","Jüpiter","Merkür"],k:1,e:"Venüs, diğer gezegenlerin aksine doğudan batıya doğru döner."},
-    {c:"Genel kültür",q:"Satranç oyununda en güçlü yetkiye sahip olan ancak mat edildiğinde oyunun bittiği taş hangisidir?",a:["Kale","Vezir","Şah","At"],k:2,e:"Şah tehdit altında kaldığında mat olursa oyun biter."},
-    {c:"Coğrafya",q:"Türkiye'nin komşuları arasında yüzölçümü bakımından en büyük ülke hangisidir?",a:["İran","Irak","Suriye","Yunanistan"],k:0,e:"Komşularımız arasında yüzölçümü en büyük ülke İran'dır."},
-    {c:"Tarih",q:"Mimar Sinan'ın 'Ustalık Eserim' olarak nitelendirdiği ünlü cami hangisidir?",a:["Süleymaniye Camii","Şehzade Camii","Selimiye Camii","Sultanahmet Camii"],k:2,e:"Mimar Sinan, Edirne'deki Selimiye Camii'ni ustalık eseri olarak adlandırmıştır."}
+    {c:"Coğrafya",q:"Dünyada yüzölçümü bakımından en büyük dökülen veya kapalı deniz/göl hangisidir?",a:["Hazar Denizi","Süveyş","Baykal Gölü","Aral Gölü"],k:0,e:"Hazar Denizi, dünyanın en büyük kapalı su kütlesidir."},
+    {c:"Tarih",q:"Mimar Sinan'ın 'Ustalık Eserim' olarak nitelendirdiği ünlü cami hangisidir?",a:["Süleymaniye Camii","Şehzade Camii","Selimiye Camii","Sultanahmet Camii"],k:2,e:"Mimar Sinan, Edirne'deki Selimiye Camii'ni ustalık eseri olarak adlandırmıştır."},
+    {c:"Edebiyat",q:"Türk edebiyatının ilk kayda geçmiş yazılı belgeleri sayılan Orhun Kitabeleri günümüzde hangi ülkededir?",a:["Özbekistan","Kazakistan","Moğolistan","Kırgızistan"],k:2,e:"Orhun Yazıtları Moğolistan sınırları içindedir."},
+    {c:"Bilim",q:"Periyodik tabloda 'O' harfi ile gösterilen ve yaşam için hayati önem taşıyan element hangisidir?",a:["Altın","Oksijen","Otomyum","Osnak"],k:1,e:"'O' simgesi Oksijen elementini temsil eder."},
+    {c:"Coğrafya",q:"Yeryüzünde aktif yanardağların en çok bulunduğu 'Ateş Çemberi' bölgesi hangi okyanus çevresindedir?",a:["Pasifik Okyanusu","Atlas Okyanusu","Hint Okyanusu","Kuzey Buz Okyanusu"],k:0,e:"Ateş Çemberi Pasifik Okyanusu çevresindedir."},
+    {c:"Genel kültür",q:"Dünyadaki en uzun kara sınırı hangi iki ülke arasındadır?",a:["Rusya - Çin","ABD - Kanada","Brezilya - Arjantin","Hindistan - Pakistan"],k:1,e:"ABD ile Kanada arasındaki kara sınırı 8.891 km ile en uzun sınırdır."}
   ],
   stage2: [
     {c:"Bilim",q:"Güneş sistemindeki en büyük gezegen hangisidir?",a:["Dünya","Mars","Jüpiter","Satürn"],k:2,e:"Jüpiter Güneş sisteminin en büyük gezegenidir."},
