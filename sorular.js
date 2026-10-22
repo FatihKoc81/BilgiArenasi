@@ -1,172 +1,84 @@
-const stages = {
-            stage1: [
-    {c:"Geoloji & Coğrafya",q:"Dünyanın en yüksek dağı aşağıdakilerden hangisidir?",a:["K2 Dağı","Kilimanjaro","Everest Dağı","Mont Blanc"],k:2,e:"Everest Dağı, deniz seviyesinden 8.848 metre yüksekliğiyle dünyanın en yüksek dağıdır."},
-    {c:"Genel kültür",q:"Türkiye'nin yüzölçümü bakımından en büyük ili aşağıdakilerden hangisidir?",a:["İstanbul","Ankara","Konya","Sivas"],k:2,e:"Konya, 38.873 km² alanı ile Türkiye'nin yüzölçümü en geniş ilidir."},
-    {c:"Uzay & Bilim",q:"Güneş sistemimizde kendi etrafında ters yönde (doğudan batıya) dönen gezegen hangisidir?",a:["Mars","Venüs","Jüpiter","Merkür"],k:1,e:"Venüs, diğer gezegenlerin aksine saat yönünde (doğudan batıya) döner."},
-    {c:"Coğrafya",q:"Türkiye'nin komşularından biri olan ve başkenti Atina olan ülke hangisidir?",a:["Bulgaristan","Yunanistan","İtalya","Mısır"],k:1,e:"Yunanistan'ın başkenti Atina'dır."},
-    {c:"Bilim",q:"Dünya'nın tek doğal uydusu aşağıdakilerden hangisidir?",a:["Güneş","Mars","Ay","Venüs"],k:2,e:"Dünya'nın doğal uydusu Ay'dır."},
-    {c:"Bilim",q:"Suyun sıvı halden gaz (buhar) haline geçmesi olayına ne ad verilir?",a:["Donma","Buharlaşma","Erime","Yoğuşma"],k:1,e:"Sıvının gaz haline geçmesine buharlaşma denir."},
-    {c:"Tarih",q:"Anadolu Selçuklu Devleti'nin başkentliğini yapmış ve 'Mevlana Şehri' olarak bilinen ilimiz hangisidir?",a:["Sivas","Kayseri","Konya","Eskişehir"],k:2,e:"Anadolu Selçuklu Devleti'ne uzun yıllar Konya başkentlik yapmıştır."},
-    {c:"Spor",q:"Olimpiyat oyunlarının simgesi olan 5 renkli halka neyi temsil eder?",a:["5 Temel Sporu","5 Kıtamızı","5 Büyük Devleti","5 Olimpiyat Şehrini"],k:1,e:"Beş birleşik halka, dünyadaki 5 kıtanın birleştiği dostluğu simgeler."},
-    {c:"Sanat",q:"İtalya'da bulunan ünlü 'Son Akşam Yemeği' duvar resminin ressamı kimdir?",a:["Michelangelo","Raphael","Leonardo da Vinci","Donatello"],k:2,e:"Bu ünlü duvar resmi Leonardo da Vinci tarafından yapılmıştır."},
-    {c:"Coğrafya",q:"Dünyada yüzölçümü bakımından en büyük dökülen veya kapalı deniz/göl hangisidir?",a:["Hazar Denizi","Süveyş","Baykal Gölü","Aral Gölü"],k:0,e:"Hazar Denizi, dünyanın en büyük kapalı su kütlesidir."},
-    {c:"Tarih",q:"Mimar Sinan'ın 'Ustalık Eserim' olarak nitelendirdiği ünlü cami hangisidir?",a:["Süleymaniye Camii","Şehzade Camii","Selimiye Camii","Sultanahmet Camii"],k:2,e:"Mimar Sinan, Edirne'deki Selimiye Camii'ni ustalık eseri olarak adlandırmıştır."},
-    {c:"Edebiyat",q:"Türk edebiyatının ilk kayda geçmiş yazılı belgeleri sayılan Orhun Kitabeleri günümüzde hangi ülkededir?",a:["Özbekistan","Kazakistan","Moğolistan","Kırgızistan"],k:2,e:"Orhun Yazıtları Moğolistan sınırları içindedir."},
-    {c:"Bilim",q:"Periyodik tabloda 'O' harfi ile gösterilen ve yaşam için hayati önem taşıyan element hangisidir?",a:["Altın","Oksijen","Otomyum","Osnak"],k:1,e:"'O' simgesi Oksijen elementini temsil eder."},
-    {c:"Coğrafya",q:"Yeryüzünde aktif yanardağların en çok bulunduğu 'Ateş Çemberi' bölgesi hangi okyanus çevresindedir?",a:["Pasifik Okyanusu","Atlas Okyanusu","Hint Okyanusu","Kuzey Buz Okyanusu"],k:0,e:"Ateş Çemberi Pasifik Okyanusu çevresindedir."},
-    {c:"Genel kültür",q:"Dünyadaki en uzun kara sınırı hangi iki ülke arasındadır?",a:["Rusya - Çin","ABD - Kanada","Brezilya - Arjantin","Hindistan - Pakistan"],k:1,e:"ABD ile Kanada arasındaki kara sınırı 8.891 km ile en uzun sınırdır."}
+// Her seviye bir dizidir. Her soru: ["Soru metni", ["A","B","C","D"], doğruŞıkIndeksi(0-3)]
+// Bir seviyeye istediğin kadar (örn. 15) soru ekleyebilirsin; oyun sayıyı kendisi algılar.
+const SORULAR = [
+  // Seviye 1
+  [
+    ["Türkiye'nin başkenti neresidir?", ["Ankara", "İstanbul", "İzmir", "Bursa"], 0],
+    ["Güneş Sistemi'ndeki en büyük gezegen hangisidir?", ["Mars", "Jüpiter", "Satürn", "Dünya"], 1],
+    ["Bir yılda kaç ay vardır?", ["10", "11", "12", "13"], 2],
+    ["Suyun kimyasal formülü nedir?", ["CO2", "H2O", "O2", "NaCl"], 1],
+    ["Hangi hayvan ormanlar kralı olarak bilinir?", ["Kaplan", "Aslan", "Fil", "Ayı"], 1]
   ],
-  stage2: [
-    {c:"Bilim",q:"Güneş sistemindeki en büyük gezegen hangisidir?",a:["Dünya","Mars","Jüpiter","Satürn"],k:2,e:"Jüpiter Güneş sisteminin en büyük gezegenidir."},
-    {c:"Bilim",q:"Hangi gezegen 'Kızıl Gezegen' olarak bilinir?",a:["Venüs","Mars","Jüpiter","Satürn"],k:1,e:"Mars Kızıl Gezegen olarak bilinir."},
-    {c:"Bilim",q:"Işık hızı saniyede yaklaşık kaç kilometredir?",a:["30 bin km","300 bin km","3 milyon km","3 milyar km"],k:1,e:"Işık hızı saniyede yaklaşık 300.000 kilometredir."},
-    {c:"Bilim",q:"Suyun kaynama noktası deniz seviyesinde kaç derecedir?",a:["90°C","100°C","110°C","120°C"],k:1,e:"Saf su 100°C'de kaynar."},
-    {c:"Coğrafya",q:"Dünyanın en uzun nehirlerinden olan Nil Nehri hangi kıtadadır?",a:["Asya","Afrika","Avrupa","Güney Amerika"],k:1,e:"Nil Nehri Afrika kıtasındadır."},
-    {c:"Coğrafya",q:"Türkiye'nin en yüksek dağı hangisidir?",a:["Erciyes Dağı","Kaçkar Dağı","Ağrı Dağı","Uludağ"],k:2,e:"Türkiye'nin en yüksek dağı Ağrı Dağı'dır."},
-    {c:"Coğrafya",q:"Yeryüzünün en büyük kıtası hangisidir?",a:["Afrika","Asya","Avrupa","Amerika"],k:1,e:"Asya yüzölçümü bakımından en büyük kıtadır."},
-    {c:"Spor",q:"Basketbolda sahada bir takımda kaç oyuncu bulunur?",a:["4","5","6","7"],k:1,e:"Basketbol takımı sahada beş oyuncuyla yer alır."},
-    {c:"Spor",q:"Voleybolda sahada her takımın kaç oyuncusu bulunur?",a:["5","6","7","8"],k:1,e:"Voleybolda sahada her takım 6 oyuncuyla yer alır."},
-    {c:"Spor",q:"Satranç oyununda her oyuncunun başlangıçta kaç piyonu vardır?",a:["6","7","8","10"],k:2,e:"Her oyuncunun 8 piyonu bulunur."},
-    {c:"Tarih",q:"Anadolu'nun kapılarını Türklere açan savaş hangisidir?",a:["Malazgirt Savaşı","Miryokefalon Savaşı","Pasinler Savaşı","Varna Savaşı"],k:0,e:"Malazgirt Savaşı ile Anadolu'nun kapıları Türklere açılmıştır."},
-    {c:"Genel kültür",q:"İnsan vücudunda kaç tane temel duyu organı vardır?",a:["3","4","5","6"],k:2,e:"İnsan vücudunda beş temel duyu organı bulunur."},
-    {c:"Genel kültür",q:"Trafik ışıklarında 'dur' anlamını veren renk hangisidir?",a:["Sarı","Yeşil","Kırmızı","Mavi"],k:2,e:"Kırmızı ışık dur anlamını taşır."},
-    {c:"Genel kültür",q:"Periyodik tabloda 'O' simgesi hangi elementi temsil eder?",a:["Altın","Oksijen","Osnak","Odyum"],k:1,e:"'O' simgesi Oksijen elementini temsil eder."},
-    {c:"Genel kültür",q:"Pisa Kulesi hangi ülkededir?",a:["Fransa","İtalya","İspanya","Yunanistan"],k:1,e:"Pisa Kulesi İtalya'dadır."}
+  // Seviye 2
+  [
+    ["Türkiye Cumhuriyeti hangi yıl ilan edildi?", ["1920", "1921", "1923", "1925"], 2],
+    ["Dünyanın en uzun nehri genellikle hangisi kabul edilir?", ["Nil", "Amazon", "Tuna", "Fırat"], 0],
+    ["Bir üçgenin iç açıları toplamı kaç derecedir?", ["90", "180", "270", "360"], 1],
+    ["İnce Memed romanının yazarı kimdir?", ["Yaşar Kemal", "Orhan Kemal", "Sait Faik", "Kemal Tahir"], 0],
+    ["Futbolda bir takım sahada kaç oyuncuyla yer alır?", ["9", "10", "11", "12"], 2]
   ],
-  stage3: [
-    {c:"Bilim",q:"İnsan vücudundaki en büyük organ hangisidir?",a:["Kalp","Karaciğer","Deri","Beyin"],k:2,e:"Deri, insan vücudundaki en büyük organdır."},
-    {c:"Bilim",q:"Hangi kan grubu tüm gruplara kan verebilir?",a:["A", "B", "AB", "0"],k:3,e:"0 grubu genel verici olarak bilinir."},
-    {c:"Bilim",q:"Telefonun icadı kime aittir?",a:["Thomas Edison","Alexander Graham Bell","Nikola Tesla","Albert Einstein"],k:1,e:"Telefon Alexander Graham Bell tarafından icat edilmiştir."},
-    {c:"Coğrafya",q:"Türkiye'nin komşularından biri olmayan ülke hangisidir?",a:["Bulgaristan","İran","İtalya","Suriye"],k:2,e:"İtalya'nın Türkiye ile kara sınırı yoktur."},
-    {c:"Coğrafya",q:"Van Gölü hangi bölgededir?",a:["İç Anadolu","Doğu Anadolu","Karadeniz","Akdeniz"],k:1,e:"Van Gölü Doğu Anadolu bölgesindedir."},
-    {c:"Coğrafya",q:"Eifel Kulesi hangi şehirdedir?",a:["Londra","Paris","Berlin","Roma"],k:1,e:"Eyfel Kulesi Paris'tedir."},
-    {c:"Spor",q:"Futbolda bir maç kaç dakikadır?",a:["60","75","90","120"],k:2,e:"Normal bir futbol maçı 90 dakikadır."},
-    {c:"Spor",q:"Maraton koşusu yaklaşık kaç kilometredir?",a:["21 km","30 km","42 km","50 km"],k:2,e:"Maraton koşusu 42.195 metre yani yaklaşık 42 kilometredir."},
-    {c:"Tarih",q:"Söğüt ve çevresinde kurulan beylik hangisidir?",a:["Karesioğulları","Osmanlı","Aydınoğulları","Karamanoğulları"],k:1,e:"Osmanlı Beyliği Söğüt merkezli kurulmuştur."},
-    {c:"Tarih",q:"Ankara şehrinin başkent olduğu yıl hangisidir?",a:["1920","1923","1924","1925"],k:1,e:"Ankara 29 Ekim 1923'te başkent olmuştur."},
-    {c:"Genel kültür",q:"Dünyanın en yüksek dağı olan Everest hangi sıradağlar üzerindedir?",a:["Alpler","And","Himalaya","Toroslar"],k:2,e:"Everest Dağı Himalaya sıradağlarındadır."},
-    {c:"Genel kültür",q:"Mona Lisa tablosunun ressamı kimdir?",a:["Van Gogh","Leonardo da Vinci","Pablo Picasso","Rembrandt"],k:1,e:"Mona Lisa tablosu Leonardo da Vinci'ye aittir."},
-    {c:"Genel kültür",q:"Hangi hayvan memeli gruplardan biri değildir?",a:["Yarasa","Balina","Yılan","Yunus"],k:2,e:"Yılan sürüngenler sınıfındandır."},
-    {c:"Genel kültür",q:"Tiyatroda sahne önündeki çukur orkestranın yer aldığı bölüme ne ad verilir?",a:["Balkon","Suare","Orkestra çukuru","Kulis"],k:2,e:"O bölüme orkestra çukuru denir."},
-    {c:"Genel kültür",q:"Türkiye'nin yüzölçümü en büyük ili hangisidir?",a:["Ankara","Konya","Sivas","Van"],k:1,e:"Yüzölçümü en büyük ilimiz Konya'dır."}
+  // Seviye 3
+  [
+    ["Hangi gezegen Kızıl Gezegen olarak bilinir?", ["Venüs", "Mars", "Merkür", "Neptün"], 1],
+    ["İstanbul'u fetheden padişah kimdir?", ["Yavuz Sultan Selim", "Fatih Sultan Mehmet", "Kanuni", "II. Murat"], 1],
+    ["Işığın boşlukta hızı yaklaşık kaç km/sn'dir?", ["30.000", "150.000", "300.000", "3.000.000"], 2],
+    ["Japonya'nın başkenti neresidir?", ["Osaka", "Kyoto", "Tokyo", "Seul"], 2],
+    ["İnsan vücudunun en büyük organı hangisidir?", ["Karaciğer", "Deri", "Akciğer", "Beyin"], 1]
   ],
-  stage4: [
-    {c:"Bilim",q:"Hangi gaz atmosferde en yüksek oranda bulunur?",a:["Oksijen","Azot","Karbondioksit","Helyum"],k:1,e:"Atmosferin yaklaşık yüzde 78'i azottur."},
-    {c:"Bilim",q:"Dinazorlar hangi jeolojik zamanda nesli tükenmiştir?",a:["Paleozoyik","Mezozoyik","Senozoyik","Kambriyen"],k:1,e:"Dinazorlar Mezozoyik (İkinci Zaman) sonuna doğru yok olmuştur."},
-    {c:"Coğrafya",q:"Akdeniz'e kıyısı olan en büyük Türk şehri hangisidir?",a:["Antalya","Mersin","Adana","Hatay"],k:0,e:"Antalya Akdeniz bölgesinde yüzölçümü ve nüfusuyla önemli bir şehirdir."},
-    {c:"Coğrafya",q:"Boğaziçi Köprüsü hangi iki kıtayı birbirine bağlar?",a:["Asya - Avrupa","Asya - Afrika","Avrupa - Amerika","Afrika - Avrupa"],k:0,e:"İstanbul Boğazı Asya ve Avrupa'yı birbirine bağlar."},
-    {c:"Spor",q:"Tenis maçlarında oyuncuların kazandığı en küçük sayı birimine ne denir?",a:["Set","Game","Puan (Point)","Match"],k:2,e:"En küçük sayı birimi puandır."},
-    {c:"Spor",q:"Basketbolda üç sayılık çizgisinin dışından atılan basket kaç puan kazandırır?",a:["1","2","3","4"],k:2,e:"Üç sayılık çizgi dışından atışlar 3 puan değerindedir."},
-    {c:"Tarih",q:"Lale Devri hangi Osmanlı padişahı dönemindedir?",a:["Kanuni Sultan Süleyman","III. Ahmet","II. Mahmut","IV. Murat"],k:1,e:"Lale Devri III. Ahmet döneminde yaşanmıştır."},
-    {c:"Tarih",q:"Orhun Kitabeleri hangi Türk devletine aittir?",a:["Göktürkler","Uygurlar","Hunlar","Avarlar"],k:0,e:"Orhun Kitabeleri Göktürkler dönemine aittir."},
-    {c:"Genel kültür",q:"Nobel ödülleri hangi ülkede verilmektedir?",a:["İsviçre","İsveç","Norveç","Almanya"],k:1,e:"Nobel ödülleri İsveç'te takdim edilir (Barış ödülü hariç)."},
-    {c:"Genel kültür",q:"Dünyanın en derin çukuru olan Mariana Çukuru hangi okyanustadır?",a:["Pasifik","Atlas","Hint","Arktik"],k:0,e:"Mariana Çukuru Pasifik Okyanusu'ndadır."},
-    {c:"Genel kültür",q:"Türkiye'nin ilk tescilli güzellik kraliçesi kimdir?",a:["Keriman Halis","Aydan Şener","Nebahat Çehre","Türkan Şoray"],k:0,e:"Keriman Halis Türkiye'nin ilk dünya güzeli seçilen ismidir."},
-    {c:"Genel kültür",q:"Hangi müzik aleti telli çalgılar grubuna girmez?",q:null,a:["Gitar","Keman","Flüt","Piyano"],k:2,e:"Flüt nefesli çalgılar grubundandır."},
-    {c:"Genel kültür",q:"Türkiye'nin en çok yağış alan ili hangisidir?",a:["Rize","Trabzon","Artvin","Samsun"],k:0,e:"Rize Türkiye'nin en çok yağış alan ilidir."},
-    {c:"Bilim",q:"Hangi elementin simgesi 'Fe' harfleridir?",a:["Demir","Fosfor","Flor","Fermiyum"],k:0,e:"'Fe' simgesi demir elementini ifade eder."},
-    {c:"Bilim",q:"Pusulanın ibresi hangi yönü gösterir?",a:["Batı","Güney","Kuzey","Doğu"],k:2,e:"Pusula ibresi daima kuzeyi gösterir."}
+  // Seviye 4
+  [
+    ["Mona Lisa tablosunun ressamı kimdir?", ["Michelangelo", "Leonardo da Vinci", "Raphael", "Picasso"], 1],
+    ["Atom numarası 1 olan element hangisidir?", ["Helyum", "Oksijen", "Hidrojen", "Karbon"], 2],
+    ["Türkiye'nin en yüksek dağı hangisidir?", ["Erciyes", "Uludağ", "Ağrı Dağı", "Kaçkar"], 2],
+    ["Antik Olimpiyat Oyunları hangi ülkede başlamıştır?", ["İtalya", "Yunanistan", "Mısır", "Fransa"], 1],
+    ["Standart bir piyanoda kaç tuş vardır?", ["76", "88", "92", "100"], 1]
   ],
-  stage5: [
-    {c:"Genel kültür",q:"Hangi ülkenin bayrağında akçaağaç yaprağı bulunur?",a:["ABD","Kanada","Avustralya","Brezilya"],k:1,e:"Kanada bayrağında kırmızı akçaağaç yaprağı vardır."},
-    {c:"Genel kültür",q:"Kût'ül-Amâre Kuşatması hangi cephede gerçekleşmiştir?",a:["Çanakkale","Irak","Kafkas","Galiçya"],k:1,e:"Irak cephesinde gerçekleşen önemli bir muharebedir."},
-    {c:"Tarih",q:"İstanbul'u kuşatan ilk Osmanlı padişahı kimdir?",a:["Yıldırım Bayezid","I. Murad","Orhan Bey","Fatih Sultan Mehmet"],k:0,e:"İstanbul'u ilk kuşatan Osmanlı padişahı Yıldırım Bayezid'dir."},
-    {c:"Tarih",q:"Malazgirt Savaşı hangi yıl yapılmıştır?",a:["1071","1299","1453","1516"],k:0,e:"Malazgirt Savaşı 1071 yılında yapılmıştır."},
-    {c:"Coğrafya",q:"Dünyanın en küçük yüzölçümüne sahip devleti hangisidir?",a:["Monako","San Marino","Vatikan","Liechtenstein"],k:2,e:"Vatikan en küçük bağımsız devlettir."},
-    {c:"Coğrafya",q:"Türkiye'nin en büyük gölü hangisidir?",a:["Tuz Gölü","Van Gölü","Beyşehir Gölü","Eğirdir Gölü"],k:1,e:"Yüzölçümü bakımından en büyük göl Van Gölü'dür."},
-    {c:"Bilim",q:"Hangi vitamin güneş ışığı yardımıyla vücutta sentezlenir?",a:["A Vitamini","B Vitamini","C Vitamini","D Vitamini"],k:3,e:"D vitamini güneş ışığı etkisiyle deride üretilir."},
-    {c:"Bilim",q:"Kan gruplarını keşfeden bilim insanı kimdir?",a:["Louis Pasteur","Karl Landsteiner","Alexander Fleming","Gregor Mendel"],k:1,e:"Kan gruplarını Karl Landsteiner bulmuştur."},
-    {c:"Spor",q:"Basketbolun yaratıcısı olarak bilinen kişi kimdir?",a:["James Naismith","Michael Jordan","Wilt Chamberlain","Naismith"],k:0,e:"Basketbolu James Naismith icat etmiştir."},
-    {c:"Spor",q:"Futbolda kaleyi koruyan oyuncu dışında topa elle müdahale edebilen tek oyuncu kimdir?",q:null,a:["Kaptan","Stoper","Kaleci ceza sahası içinde","Forvet"],k:2,e:"Kaleci, ceza sahası içinde topa eliyle müdahale edebilir."},
-    {c:"Genel kültür",q:"Külkedisi masalında prenses gece yarısı kaçta saraydan kaçar?",a:["11:00","12:00","01:00","03:00"],k:1,e:"Büyü saat 12:00'de bozulur."},
-    {c:"Genel kültür",q:"Hangi element periyodik tabloda 'H' ile gösterilir?",a:["Helyum","Hidrojen","Hafniyum","Holmiyum"],k:1,e:"'H' harfi Hidrojen'i simgeler."},
-    {c:"Genel kültür",q:"Dünyanın en uzun dağı hangisidir?",a:["Everest","Aconcagua","Kilimanjaro","Elbruz"],k:1,e:"Sıradağ olarak And Dağları en uzunudur."},
-    {c:"Coğrafya",q:"Anadolu yarımadasının üç tarafı denizlerle çevrilidir. Bu konumun adına ne denir?",a:["Ada","Yarımada","Körfez","İsthmus"],k:1,e:"Üç tarafı suyla çevrili karalara yarımada denir."},
-    {c:"Tarih",q:"Osmanlı Devleti'nde ilk bütçeyi hazırlayan ünlü devlet adamı kimdir?",a:["Sokullu Mehmet Paşa","Tarrancalı Ahmet","Tarhuncu Ahmet Paşa","Köprülü Mehmet Paşa"],k:2,e:"İlk modern anlamda denk bütçeyi Tarhuncu Ahmet Paşa hazırlamıştır."}
+  // Seviye 5
+  [
+    ["Mimar Sinan'ın ustalık eseri olarak kabul ettiği yapı hangisidir?", ["Süleymaniye", "Selimiye", "Şehzade", "Sultanahmet"], 1],
+    ["Altının element sembolü nedir?", ["Ag", "Au", "Fe", "Gd"], 1],
+    ["Dünyanın en büyük okyanusu hangisidir?", ["Atlantik", "Hint", "Pasifik", "Arktik"], 2],
+    ["I. Dünya Savaşı hangi yıl başlamıştır?", ["1912", "1914", "1916", "1918"], 1],
+    ["Suç ve Ceza romanının yazarı kimdir?", ["Tolstoy", "Dostoyevski", "Çehov", "Gogol"], 1]
   ],
-  stage6: [
-    {c:"Bilim",q:"Aşağıdakilerden hangisi bir katı maddedir?",a:["Su","Hava","Demir","Petrol"],k:2,e:"Demir katı bir maddedir."},
-    {c:"Bilim",q:"Atomun çekirdeğinde hangi tanecikler bulunur?",a:["Elektron ve Proton","Proton ve Nötron","Elektron ve Nötron","Yalnız Elektron"],k:1,e:"Çekirdekte proton ve nötron bulunur."},
-    {c:"Coğrafya",q:"Brezilya hangi kıtada yer alır?",a:["Asya","Afrika","Güney Amerika","Kuzey Amerika"],k:2,e:"Brezilya Güney Amerika kıtasındadır."},
-    {c:"Coğrafya",q:"Japonya'nın başkenti neresidir?",a:["Seul","Pekin","Tokyo","Kyoto"],k:2,e:"Japonya'nın başkenti Tokyo'dur."},
-    {c:"Spor",q:"Voleybol maçında bir set kaç puanda biter?",a:["15","21","25","30"],k:2,e:"Normal setler 25 puanda sona erer."},
-    {c:"Spor",q:"Yüzme yarışlarında en hızlı stil hangisidir?",a:["Kurbağalama","Sırtüstü","Kelebek","Serbest (Serbest stil genellikle kroldür)"],k:3,e:"Serbest stil en hızlı yüzme türüdür."},
-    {c:"Tarih",q:"Kanuni Sultan Süleyman'ın saltanat sürdüğü yüzyıl hangisidir?",a:["14. Yüzyıl","15. Yüzyıl","16. Yüzyıl","17. Yüzyıl"],k:2,e:"Kanuni 16. yüzyılda hüküm sürmüştür."},
-    {c:"Tarih",q:"Türklerin ana yurdu neresidir?",a:["Orta Asya","Sibirya","Ortadoğu","Anadolu"],k:0,e:"Türklerin tarihi ana yurdu Orta Asya'dır."},
-    {c:"Genel kültür",q:"Dünyanın en kalabalık ülkesi hangisidir?",a:["Hindistan","Çin","ABD","Endonezya"],k:0,e:"Günümüzde en yüksek nüfusa sahip ülke Hindistan'dır."},
-    {c:"Genel kültür",q:"Hangi ilimiz 'Gazi' unvanını almıştır?",a:["Maraş","Antep","Urfa","Bursa"],k:1,e:"Gaziantep (Antep) şehri bu unvanı taşır."},
-    {c:"Genel kültür",q:"Türkiye'nin en batıdaki noktası hangi ilimizdedir?",a:["İzmir","Çanakkale","Aydın","Muğla"],k:1,e:"En batıdaki nokta Çanakkale'nin Gökçeada ilçesidir."},
-    {c:"Bilim",q:"Ses en hızlı hangi ortamda yayılır?",a:["Katı","Sıvı","Gaz","Boşluk"],k:0,e:"Ses taneciklerin en sıkı olduğu katı ortamlarda en hızlı yayılır."},
-    {c:"Bilim",q:"Gözün renkli kısmına ne ad verilir?",a:["Göz bebeği","Retina","İris","Kornea"],k:2,e:"Gözün renkli kısmına iris denir."},
-    {c:"Coğrafya",q:"Hangi ülke hem Asya hem de Avrupa kıtasında toprakları olan ülkelerdendir?",a:["Türkiye","Mısır","Yunanistan","İtalya"],k:0,e:"Türkiye topraklarının bir kısmı Avrupa'da (Trakya) yer alır."},
-    {c:"Tarih",q:"Kırım Savaşı hangi devletler arasında yapılmıştır?",a:["Osmanlı - Rusya","Osmanlı - İngiltere","Osmanlı - Fransa","Osmanlı - Avusturya"],k:0,e:"Kırım Savaşı Osmanlı ve müttefikleri ile Rusya arasında olmuştur."}
+  // Seviye 6
+  [
+    ["DNA'nın açılımı nedir?", ["Deoksiribonükleik asit", "Dioksit nükleik asit", "Dinükleik amino asit", "Deoksi nitrik asit"], 0],
+    ["Malazgirt Savaşı hangi yıl yapılmıştır?", ["1019", "1071", "1176", "1243"], 1],
+    ["Hangi ülke hem Asya'da hem Avrupa'da toprağa sahiptir?", ["Türkiye", "Japonya", "İspanya", "Hindistan"], 0],
+    ["Pi sayısı yaklaşık olarak kaçtır?", ["2,14", "3,14", "4,13", "3,41"], 1],
+    ["Nobel Edebiyat Ödülü'nü kazanan ilk Türk yazar kimdir?", ["Yaşar Kemal", "Orhan Pamuk", "Nazım Hikmet", "Aziz Nesin"], 1]
   ],
-  stage7: [
-    {c:"Genel kültür",q:"'İstiklal Marşı'nın bestecisi kimdir?",a:["Zeki Üngör","İsmail Hakkı Bey","Osman Zeki Üngör","Cemal Reşit Rey"],k:2,e:"İstiklal Marşı'nı Osman Zeki Üngör bestelemiştir."},
-    {c:"Genel kültür",q:"'İstiklal Marşı'nın şairi kimdir?",a:["Mehmet Akif Ersoy","Yahya Kemal","Nazım Hikmet","Tevfik Fikret"],k:0,e:"Şairi Mehmet Akif Ersoy'dur."},
-    {c:"Tarih",q:"Osmanlı'nın ilk başkenti neresidir?",a:["Bursa","Edirne","Söğüt","İstanbul"],k:2,e:"İlk yönetim merkezi Söğüt, ardından Bursa olmuştur."},
-    {c:"Tarih",q:"Fatih Sultan Mehmet'in fethettiği ve Trabzon Rum İmparatorluğu'na son verdiği yıl hangisidir?",a:["1453","1461","1473","1501"],k:1,e:"Trabzon 1461 yılında fethedilmiştir."},
-    {c:"Bilim",q:"Yer çekimi kanununu bulan ünlü fizikçi kimdir?",a:["Albert Einstein","Isaac Newton","Galileo Galilei","Nikola Tesla"],k:1,e:"Yer çekimi kanunu Isaac Newton tarafından ortaya konmuştur."},
-    {c:"Bilim",q:"Kardiyoloji hangi organın hastalıkları ile ilgilenir?",a:["Beyin","Kalp","Mide","Böbrek"],k:1,e:"Kardiyoloji kalp ve damar hastalıklarını inceler."},
-    {c:"Coğrafya",q:"Marmara Denizi'ni Karadeniz'e bağlayan boğaz hangisidir?",a:["Çanakkale Boğazı","İstanbul Boğazı","Cebelitarık","Süveyş Kanalı"],k:1,e:"İstanbul Boğazı Karadeniz ile Marmara'yı birleştirir."},
-    {c:"Coğrafya",q:"Van Gölü'nün bulunduğu bölgede yer alan yüksek dağlık alan hangi ilimizdedir?",a:["Ağrı","Van","Hakkari","Kars"],k:1,e:"Van Gölü'nün kendisi Van ilindedir."},
-    {c:"Spor",q:"Halter dalında tarihi başarılara imza atmış ünlü milli sporcumuz kimdir?",a:["Naim Süleymanoğlu","Hakan Şükür","Kenan Sofuoğlu","Hamza Yerlikaya"],k:0,e:"Cep Herkülü lakaplı Naim Süleymanoğlu'dur."},
-    {c:"Spor",q:"Basketbolda bir oyuncunun potaya topu yukarıdan doğrudan geçirmesine ne denir?",a:["Faul","Dk","Smaç","Asist"],k:2,e:"Bu hareket smaç olarak adlandırılır."},
-    {c:"Genel kültür",q:"Dünyanın yedi harikasından biri olan Artemis Tapınağı hangi ülkededir?",a:["Yunanistan","Mısır","Türkiye","İtalya"],k:2,e:"Artemis Tapınağı İzmir (Selçuk) sınırları içindedir."},
-    {c:"Genel kültür",q:"Hangi meslek grubu adalet dağıtmakla görevlidir?",a:["Mühendis","Hakim","Doktor","Öğretmen"],k:1,e:"Hakimler mahkemelerde adalet dağıtır."},
-    {c:"Bilim",q:"Pencere camının hammaddesi nedir?",a:["Kil","Kireç","Kum (Silis)","Plastik"],k:2,e:"Cam temel olarak kuars kumunun eritilmesiyle yapılır."},
-    {c:"Coğrafya",q:"Türkiye'nin komşuları arasında en uzun kara sınırına sahip olan ülke hangisidir?",a:["İran","Irak","Suriye","Bulgaristan"],k:2,e:"En uzun kara sınırımız Suriye ile olan sınırdır."},
-    {c:"Tarih",q:"Karesioğulları Beyliği'nin alınmasıyla Osmanlı'ya katılan ilk denizci beylik hangisidir?",a:["Karesioğulları","Aydınoğulları","Menteşeoğulları","Saruhanoğulları"],k:0,e:"Karesioğulları Osmanlı'ya katılan ilk beyliktir."}
+  // Seviye 7
+  [
+    ["İnsanın aya ilk ayak bastığı görev hangisidir?", ["Apollo 11", "Apollo 13", "Gemini 4", "Vostok 1"], 0],
+    ["Sesin havadaki hızı yaklaşık kaç m/sn'dir?", ["34", "340", "3.400", "34.000"], 1],
+    ["Osmanlı Devleti'nin kurucusu kimdir?", ["Orhan Bey", "Osman Bey", "Ertuğrul Gazi", "I. Murat"], 1],
+    ["Hangi vitamin güneş ışığı ile cilt altında sentezlenir?", ["A", "C", "D", "K"], 2],
+    ["Dünyanın en kalabalık ülkesi hangisidir?", ["Çin", "Hindistan", "ABD", "Endonezya"], 1]
   ],
-  stage8: [
-    {c:"Bilim",q:"Yarasa hangi hayvan grubuna dahildir?",a:["Kuşlar","Memeliler","Sürüngenler","Amfibiler"],k:1,e:"Yarasa uçabilen tek memeli hayvandır."},
-    {c:"Bilim",q:"Hangi gezegen Güneş'e en yakın olanıdır?",a:["Venüs","Merkür","Mars","Dünya"],k:1,e:"Güneş'e en yakın gezegen Merkür'dür."},
-    {c:"Coğrafya",q:"Avustralya'nın başkenti neresidir?",a:["Sidney","Melbourne","Canberra","Brisbane"],k:2,e:"Avustralya'nın başkenti Canberra'dır."},
-    {c:"Coğrafya",q:"Pamukkale Travertenleri hangi ilimizdedir?",a:["Denizli","Muğla","Aydın","İzmir"],k:0,e:"Pamukkale Denizli'dedir."},
-    {c:"Spor",q:"Futbol maçlarında hakemlerin gösterdiği iki temel kart hangileridir?",a:["Mavi - Kırmızı","Sarı - Kırmızı","Siyah - Beyaz","Yeşil - Sarı"],k:1,e:"Hakemler sarı ve kırmızı kart kullanır."},
-    {c:"Spor",q:"Buz hokeyi hangi ülkede ulusal spor kadar önemlidir?",a:["Brezilya","Kanada","İtalya","Arjantin"],k:1,e:"Buz hokeyi Kanada'da çok popülerdir."},
-    {c:"Tarih",q:"İstanbul'u fetheden Osmanlı padişahı kimdir?",a:["Yıldırım Bayezid","II. Murad","Fatih Sultan Mehmet","Yavuz Sultan Selim"],k:2,e:"İstanbul'u fetheden Fatih Sultan Mehmet'tir."},
-    {c:"Tarih",q:"Topkapı Sarayı hangi padişah döneminde yaptırılmıştır?",a:["Fatih Sultan Mehmet","Kanuni Sultan Süleyman","I. Murad","Yavuz Sultan Selim"],k:0,e:"Topkapı Sarayı Fatih Sultan Mehmet tarafından yaptırılmıştır."},
-    {c:"Genel kültür",q:"Dünyanın en uzun nehirlerinden Amazon Nehri hangi kıtadadır?",a:["Afrika","Asya","Güney Amerika","Kuzey Amerika"],k:2,e:"Amazon Nehri Güney Amerika'dadır."},
-    {c:"Genel kültür",q:"Hangi ay 28 veya 29 gün çeker?",a:["Ocak","Şubat","Mart","Nisan"],k:1,e:"Şubat ayı kısa olan aydır."},
-    {c:"Genel kültür",q:"Türkiye'nin en doğusundaki ilimiz hangisidir?",a:["Kars","Ağrı","Iğdır","Van"],k:2,e:"En doğu ucumuz Iğdır ilindedir."},
-    {c:"Bilim",q:"İnsan iskeletinde en küçük kemik nerededir?",a:["El","Kulak (Üzengi)","Burun","Ayak"],k:1,e:"Kulaktaki üzengi kemiği vücudun en küçük kemiğidir."},
-    {c:"Bilim",q:"Hangi organımız kanı süzerek idrarı oluşturur?",a:["Kalp","Böbrek","Akciğer","Karaciğer"],k:1,e:"Böbrekler kanı süzme görevi yapar."},
-    {c:"Coğrafya",q:"Kapadokya bölgesi hangi illerimiz arasında yoğunlaşmıştır?",a:["Nevşehir - Kayseri - Aksaray","Ankara - Konya","İzmir - Manisa","Bursa - Yalova"],k:0,e:"Kapadokya Nevşehir ve çevresindedir."},
-    {c:"Tarih",q:"Mısır Seferi'ni düzenleyerek Halifefliği Osmanlı'ya getiren padişah kimdir?",a:["Kanuni Sultan Süleyman","Yavuz Sultan Selim","II. Bayezid","Fatih Sultan Mehmet"],k:1,e:"Yavuz Sultan Selim Mısır'ı alıp halifeliği taşımıştır."}
+  // Seviye 8
+  [
+    ["Büyük Taarruz hangi yıl başlamıştır?", ["1920", "1921", "1922", "1923"], 2],
+    ["Görelilik kuramını hangi bilim insanı geliştirmiştir?", ["Newton", "Einstein", "Bohr", "Galileo"], 1],
+    ["Mitokondrinin hücredeki temel görevi nedir?", ["Protein sentezi", "Enerji üretimi", "Kalıtım", "Sindirim"], 1],
+    ["Rönesans hareketi hangi ülkede başlamıştır?", ["Fransa", "İtalya", "İngiltere", "Almanya"], 1],
+    ["Dünyanın en derin gölü hangisidir?", ["Van", "Hazar", "Baykal", "Victoria"], 2]
   ],
-  stage9: [
-    {c:"Genel kültür",q:"'Romeo ve Juliet' eserinin dünyaca ünlü yazarı kimdir?",a:["Victor Hugo","William Shakespeare","Leo Tolstoy","Charles Dickens"],k:1,e:"Eser William Shakespeare'e aittir."},
-    {c:"Genel kültür",q:"Türkiye'nin ilk yerli otomobilinin adı nedir?",a:["Togg","Devrim","Anadol","Zafer"],k:0,e:"Günümüzdeki modern yerli otomobil Togg'dur."},
-    {c:"Tarih",q:"Çanakkale Deniz Savaşı hangi yılda gerçekleşmiştir?",a:["1914","1915","1916","1918"],k:1,e:"Çanakkale Deniz Zaferi 1915 yılında kazanılmıştır."},
-    {c:"Tarih",q:"Osmanlı Devleti'nde ilk matbaayı kuran kişi kimdir?",a:["İbrahim Müteferrika","Katip Çelebi","Evliya Çelebi","Yirmisekiz Çelebi Mehmet"],k:0,e:"İlk Türk matbaasını İbrahim Müteferrika kurmuştur."},
-    {c:"Bilim",q:"Kuantum fiziğinin öncülerinden olan ve 'E=mc²' formülünü bulan bilim insanı kimdir?",a:["Isaac Newton","Albert Einstein","Marie Curie","Thomas Edison"],k:1,e:"Bu ünlü formül Albert Einstein'a aittir."},
-    {c:"Bilim",q:"Hangi element radyum ve polonyum elementlerini keşfeden ünlü kadın fizikçidir?",a:["Rosalind Franklin","Marie Curie","Ada Lovelace","Lise Meitner"],k:1,e:"Marie Curie bu elementleri keşfetmiştir."},
-    {c:"Coğrafya",q:"Antarktika kıtası hangi kutup bölgesindedir?",a:["Kuzey Kutbu","Güney Kutbu","Ekvator","Yengeç Dönencesi"],k:1,e:"Antarktika Güney Kutbu'nda yer alır."},
-    {c:"Coğrafya",q:"Türkiye'nin en büyük adası hangisidir?",a:["Bozcaada","Gökçeada","Cunda","Avşa"],k:1,e:"En büyük ada Gökçeada'dır."},
-    {c:"Spor",q:"Satranç tahtasında toplam kaç kare bulunur?",a:["32","64","100","128"],k:1,e:"Satranç tahtası 64 karelidir."},
-    {c:"Spor",q:"Futbolda köşe vuruşuna ne ad verilir?",a:["Penaltı","Taç","Korner","Frikik"],k:2,e:"Köşe vuruşuna korner denir."},
-    {c:"Genel kültür",q:"Hangi ülke piramitleriyle meşrudur ve başkenti Kahire'dir?",a:["Fas","Mısır","Tunus","Cezayir"],k:1,e:"Mısır piramitleri ile ünlüdür."},
-    {c:"Genel kültür",q:"Dünyanın en uzun boylu memelisi hangisidir?",a:["Fil","Zürafa","Gergedan","Deve"],k:1,e:"Zürafa en uzun boylu hayvandır."},
-    {c:"Bilim",q:"Hangi organımız solunum sisteminin ana merkezlerindendir?",a:["Kalp","Mide","Akciğer","Böbrek"],k:2,e:"Akciğerler solunum yapmamızı sağlar."},
-    {c:"Coğrafya",q:"Marmara bölgesinin en büyük kenti hangisidir?",a:["Bursa","Kocaeli","İstanbul","Balıkesir"],k:2,e:"İstanbul Marmara'nın en büyük şehridir."},
-    {c:"Tarih",q:"Sultan Ahmet Camii (Mavi Cami) hangi yüzyılda inşa edilmiştir?",a:[ "15. Yüzyıl","16. Yüzyıl","17. Yüzyıl","18. Yüzyıl"],k:2,e:"Sultan Ahmet Camii 17. yüzyılda (1616) yapılmıştır."}
+  // Seviye 9
+  [
+    ["Lozan Barış Antlaşması hangi yıl imzalanmıştır?", ["1920", "1922", "1923", "1925"], 2],
+    ["Ozon tabakasına en çok zarar veren gaz grubu hangisidir?", ["Kloroflorokarbonlar", "Azot", "Argon", "Helyum"], 0],
+    ["Divanü Lügati't-Türk'ün yazarı kimdir?", ["Yusuf Has Hacib", "Kaşgarlı Mahmud", "Ahmet Yesevi", "Edip Ahmet"], 1],
+    ["Hangi şehir iki kıta üzerinde kurulmuştur?", ["İzmir", "İstanbul", "Ankara", "Konya"], 1],
+    ["Rubik küpünü icat eden kişi kimdir?", ["Ernő Rubik", "Nikola Tesla", "John von Neumann", "Béla Bartók"], 0]
   ],
-  stage10: [
-    {c:"Genel kültür",q:"Dünya Sağlık Örgütü'nün kısaltılmış uluslararası adı nedir?",a:["UNESCO","WHO","UNICEF","NATO"],k:1,e:"World Health Organization (WHO) olarak bilinir."},
-    {c:"Genel kültür",q:"Hangi gezegen halkalarıyla en çok tanınandır?",a:["Jüpiter","Satürn","Uranüs","Neptün"],k:1,e:"Satürn belirgin halkalara sahiptir."},
-    {c:"Tarih",q:"Türk tarihinin ilk yazılı belgeleri olarak bilinen yazıtlar nerededir?",a:["Orhun Vadisi","Altay Dağları","Ötüken","Kafkasya"],k:0,e:"Orhun Vadisi'nde bulunmaktadır."},
-    {c:"Tarih",q:"Osmanlı Devleti'nde ilk saray okulu olarak bilinen eğitim kurumu hangisidir?",a:["Enderun","Medrese","Sıbyan Mektebi","Rüştiye"],k:0,e:"Enderun Mektebi saraya devlet adamı yetiştirirdi."},
-    {c:"Bilim",q:"Hangi vitamin eksikliğinde vücutta iskorbüt hastalığı görülür?",a:["A Vitamini","B Vitamini","C Vitamini","D Vitamini"],k:2,e:"C vitamini eksikliği iskorbüte yol açar."},
-    {c:"Bilim",q:"Suyun donma noktası santigrat derece cinsinden kaçtır?",a:["-1°C","0°C","4°C","10°C"],k:1,e:"Saf su 0°C'de donar."},
-    {c:"Coğrafya",q:"İtalya'nın başkenti neresidir?",a:["Milano","Napoli","Roma","Floransa"],k:2,e:"İtalya'nın başkenti Roma'dır."},
-    {c:"Coğrafya",q:"Dünyanın en yüksek şelalesi olan Angel Şelalesi hangi ülkededir?",a:["Brezilya","Venezuela","Arjantin","Kanada"],k:1,e:"Angel Şelalesi Venezuela'dadır."},
-    {c:"Spor",q:"Olimpiyat oyunları kaç yılda bir düzenlenir?",a:[ "2","3","4","5"],k:2,e:"Yaz ve Kış Olimpiyatları genellikle 4 yılda bir yapılır."},
-    {c:"Spor",q:"Basketbolda bir serbest atış (faul atışı) kaç puan değerindedir?",a:["1","2","3","Hiçbiri"],k:0,e:"Serbest atışlar 1 puandır."},
-    {c:"Genel kültür",q:"Hangi ülke 'Güneşin Doğduğu Ülke' olarak anılır?",a:["Çin","Japonya","Güney Kore","Tayland"],k:1,e:"Japonya bu unvanla anılır."},
-    {c:"Genel kültür",q:"Türk tiyatrosunun geleneksel simgeleri olan Karagöz ve Hacivat hangi türe girer?",a:["Modern tiyatro","Hacivat-Karagöz oyunu / Gölge oyunu","Bale","Opera"],k:1,e:"Gölge oyunu geleneğindendir."},
-    {c:"Bilim",q:"Bitkilerin yeşil rengini veren pigmentin adı nedir?",a:["Karoten","Klorofil","Kloroplast","Protein"],k:1,e:"Klorofil bitkilere yeşil rengi verir."},
-    {c:"Coğrafya",q:"Türkiye'nin en az nüfusa sahip ili hangisidir?",a:["Bayburt","Tunceli","Ardahan","Gümüşhane"],k:0,e:"Nüfus açısından en az nüfuslu ilimiz Bayburt'tur."},
-    {c:"Tarih",q:"Büyük Selçuklu Devleti'nin en parlak dönemi hangi hükümdar zamanında yaşanmıştır?",a:["Tuğrul Bey","Alparslan","Melikşah","Sencer"],k:2,e:"En parlak dönem Sultan Melikşah dönemidir."}
+  // Seviye 10
+  [
+    ["Atina'da Akademi'yi kuran filozof kimdir?", ["Aristoteles", "Platon", "Herodot", "Epikuros"], 1],
+    ["1337'den 1453'e süren savaşın adı nedir?", ["Yüz Yıl Savaşları", "Otuz Yıl Savaşları", "Haçlı Seferleri", "Kırım Savaşı"], 0],
+    ["Doğada bulunan en sert madde hangisidir?", ["Elmas", "Kuvars", "Çelik", "Titanyum"], 0],
+    ["Türk kadınına milletvekili seçme ve seçilme hakkı hangi yıl verilmiştir?", ["1930", "1934", "1938", "1946"], 1],
+    ["Fermat'ın son teoremini kanıtlayan matematikçi kimdir?", ["Andrew Wiles", "Euler", "Gauss", "Perelman"], 0]
   ]
-};
+];
