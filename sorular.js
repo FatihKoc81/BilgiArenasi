@@ -1,20 +1,20 @@
 const stages = {
-  stage1: [
-    {c:"Genel kültür",q:"Bir yılda kaç ay vardır?",a:["10","11","12","13"],k:2,e:"Bir yılda 12 ay vardır."},
-    {c:"Genel kültür",q:"Bir günde kaç saat vardır?",a:["12","20","24","30"],k:2,e:"Bir günde 24 saat vardır."},
-    {c:"Genel kültür",q:"Türkiye'nin para birimi hangisidir?",a:["Euro","Türk lirası","Dolar","Sterlin"],k:1,e:"Türkiye'nin para birimi Türk lirasıdır."},
-    {c:"Genel kültür",q:"Türkiye'nin başkenti neresidir?",a:["İstanbul","İzmir","Ankara","Bursa"],k:2,e:"Türkiye'nin başkenti Ankara'dır."},
-    {c:"Genel kültür",q:"1 kilometre kaç metredir?",a:["100 m","500 m","1000 m","5000 m"],k:2,e:"1 kilometre 1000 metreye eşittir."},
-    {c:"Bilim",q:"Suyun kimyasal formülü nedir?",a:["CO₂","H₂O","O₂","NaCl"],k:1,e:"Su iki hidrojen ve bir oksijen atomundan oluşur."},
-    {c:"Bilim",q:"Kanı pompalayan organ hangisidir?",a:["Akciğer","Beyin","Karaciğer","Kalp"],k:3,e:"Kalp kanı dolaşım sistemine pompalar."},
-    {c:"Bilim",q:"Dünya'nın doğal uydusu hangisidir?",a:["Mars","Ay","Güneş","Venüs"],k:1,e:"Dünya'nın doğal uydusu Ay'dır."},
-    {c:"Coğrafya",q:"Dünyanın en büyük okyanusu hangisidir?",a:["Atlas","Hint","Arktik","Pasifik"],k:3,e:"En büyük okyanus Pasifik Okyanusu'dur."},
-    {c:"Coğrafya",q:"Türkiye kaç coğrafi bölgeye ayrılır?",a:["5","6","7","8"],k:2,e:"Türkiye yedi coğrafi bölgeye ayrılır."},
-    {c:"Spor",q:"Bir futbol takımı sahaya kaç oyuncuyla çıkar?",a:["9","10","11","12"],k:2,e:"Kaleci dâhil 11 oyuncu bulunur."},
-    {c:"Spor",q:"Olimpiyat halkaları kaç tanedir?",a:["4","5","6","7"],k:1,e:"Olimpiyat simgesinde beş halka vardır."},
-    {c:"Tarih",q:"İstanbul hangi yıl fethedildi?",a:["1071","1299","1453","1517"],k:2,e:"İstanbul 1453'te fethedildi."},
-    {c:"Tarih",q:"1. Dünya Savaşı hangi yıl başlamıştır?",a:["1912","1914","1918","1926"],k:1,e:"1. Dünya Savaşı 1914 yılında başlamıştır."},
-    {c:"Tarih",q:"Osmanlı Devleti'nin kurucusu kimdir?",a:["Osman Bey","Orhan Bey","Yıldırım Bayezid","Fatih Sultan Mehmet"],k:0,e:"Osmanlı Devleti'nin kurucusu Osman Bey'dir."}
+    stage1: [
+    {c:"Genel kültür",q:"Dünyanın en derin noktası kabul edilen Mariana Çukuru hangi okyanustadır?",a:["Atlas Okyanusu","Hint Okyanusu","Pasifik Okyanusu","Arktik Okyanusu"],k:2,e:"Mariana Çukuru, Büyük Okyanus (Pasifik) sınırları içerisindedir."},
+    {c:"Bilim",q:"Periyodik tabloda 'Au' simgesi ile gösterilen kimyasal element hangisidir?",a:["Gümüş","Altın","Bakır","Alüminyum"],k:1,e:"'Au' simgesi Latince 'Aurum' kelimesinden gelir ve altını temsil eder."},
+    {c:"Tarih",q:"Dünyanın bilinen en eski tapınak kompleksi kabul edilen Göbeklitepe hangi ilimizdedir?",a:["Mardin","Şanlıurfa","Gaziantep","Adıyaman"],k:1,e:"Göbeklitepe, Şanlıurfa kent merkezinin yaklaşık 18 km kuzeydoğusundadır."},
+    {c:"Coğrafya",q:"Dünyada yüzölçümü bakımından en büyük dökülen veya kapalı deniz/göl hangisidir?",a:["Hazar Denizi","Süveyş","Baykal Gölü","Aral Gölü"],k:0,e:"Hazar Denizi, dünyanın en büyük kapalı su kütlesidir."},
+    {c:"Edebiyat",q:"Türk edebiyatının ilk kayda geçmiş yazılı belgeleri sayılan Orhun Kitabeleri günümüzde hangi ülkededir?",a:["Özbekistan","Kazakistan","Moğolistan","Kırgızistan"],k:2,e:"Orhun Yazıtları, Moğolistan sınırları içindeki Orhun Vadisi'nde yer alır."},
+    {c:"Bilim",q:"Vücudumuza giren mikroplarla savaşarak bağışıklık sağlayan kan hücreleri hangisidir?",a:["Alyuvarlar","Lökositler (Akyuvarlar)","Trombositler","Plazma"],k:1,e:"Akyuvarlar (lökositler) vücudun savunma mekanizmasını oluşturur."},
+    {c:"Sanat",q:"İtalya'da bulunan ünlü 'Son Akşam Yemeği' duvar resminin ressamı kimdir?",a:["Michelangelo","Raphael","Leonardo da Vinci","Donatello"],k:2,e:"Bu ünlü duvar resmi Leonardo da Vinci tarafından yapılmıştır."},
+    {c:"Coğrafya",q:"Yeryüzünde aktif yanardağların en çok bulunduğu 'Ateş Çemberi' bölgesi hangi okyanus çevresindedir?",a:["Pasifik Okyanusu","Atlas Okyanusu","Hint Okyanusu","Kuzey Buz Okyanusu"],k:0,e:"Ateş Çemberi, Pasifik (Büyük) Okyanus havzasını çevreler."},
+    {c:"Spor",q:"Olimpiyat oyunlarının simgesi olan 5 renkli halka Neyi temsil eder?",a:["5 Temel Sporu","5 Kıtamızı","5 Büyük Devleti","5 Olimpiyat Şehrini"],k:1,e:"Beş birleşik halka, dünyadaki 5 kıtanın birleştiği dostluğu simgeler."},
+    {c:"Tarih",q:"Anadolu Selçuklu Devleti'nin başkentliğini yapmış ve 'Mevlana Şehri' olarak da bilinen ilimiz hangisidir?",a:["Sivas","Kayseri","Konya","Eskişehir"],k:2,e:"Anadolu Selçuklu Devleti'ne uzun yıllar Konya başkentlik yapmıştır."},
+    {c:"Genel kültür",q:"Dünyadaki en uzun kara sınırı hangi iki ülke arasındadır?",a:["Rusya - Çin","ABD - Kanada","Brezilya - Arjantin","Hindistan - Pakistan"],k:1,e:"ABD ile Kanada arasındaki kara sınırı 8.891 km ile dünyanın en uzun sınırıdır."},
+    {c:"Bilim",q:"Güneş sistemimizde kendi etrafında ters yönde (doğudan batıya) dönen tek gezegen hangisidir?",a:["Mars","Venüs","Jüpiter","Merkür"],k:1,e:"Venüs, diğer gezegenlerin aksine doğudan batıya doğru döner."},
+    {c:"Genel kültür",q:"Satranç oyununda en güçlü yetkiye sahip olan ancak mat edildiğinde oyunun bittiği taş hangisidir?",a:["Kale","Vezir","Şah","At"],k:2,e:"Şah tehdit altında kaldığında mat olursa oyun biter."},
+    {c:"Coğrafya",q:"Türkiye'nin komşuları arasında yüzölçümü bakımından en büyük ülke hangisidir?",a:["İran","Irak","Suriye","Yunanistan"],k:0,e:"Komşularımız arasında yüzölçümü en büyük ülke İran'dır."},
+    {c:"Tarih",q:"Mimar Sinan'ın 'Ustalık Eserim' olarak nitelendirdiği ünlü cami hangisidir?",a:["Süleymaniye Camii","Şehzade Camii","Selimiye Camii","Sultanahmet Camii"],k:2,e:"Mimar Sinan, Edirne'deki Selimiye Camii'ni ustalık eseri olarak adlandırmıştır."}
   ],
   stage2: [
     {c:"Bilim",q:"Güneş sistemindeki en büyük gezegen hangisidir?",a:["Dünya","Mars","Jüpiter","Satürn"],k:2,e:"Jüpiter Güneş sisteminin en büyük gezegenidir."},
