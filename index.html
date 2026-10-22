@@ -5,23 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bilgi Arenası</title>
     <style>
-        html, body {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            height: 100%;
-            background-color: #0b0f19;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .page-container {
+        body {
+            background-color: #0b0e14;
+            color: #ffffff;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
-            padding: 16px;
-            box-sizing: border-box;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            padding: 20px 15px;
         }
 
         .header {
@@ -30,114 +29,104 @@
         }
 
         .header h1 {
-            font-size: 24px;
-            letter-spacing: 1px;
-            color: #ffffff;
-            margin: 0;
-        }
-
-        .content-area {
-            flex: 1;
+            font-size: 1.5rem;
+            color: #f39c12;
             display: flex;
-            justify-content: center;
             align-items: center;
-            width: 100%;
+            justify-content: center;
+            gap: 8px;
         }
 
         .card {
-            width: 100%;
-            max-width: 380px;
-            background: #121829;
-            border: 1px solid #1e293b;
+            background-color: #121824;
+            border: 1px solid #1f293d;
             border-radius: 16px;
-            padding: 24px;
+            padding: 30px 20px;
+            width: 100%;
+            max-width: 400px;
             text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            box-sizing: border-box;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            margin: auto 0;
         }
 
-        .badge {
-            display: inline-block;
-            background-color: #8c3f0d;
+        .stage-badge {
+            background-color: #7f2d0f;
             color: #ffedd5;
-            padding: 6px 16px;
+            padding: 6px 18px;
             border-radius: 20px;
-            font-size: 14px;
+            font-size: 0.9rem;
             font-weight: bold;
-            margin-bottom: 16px;
+            display: inline-block;
+            margin-bottom: 20px;
         }
 
-        .card h2 {
-            font-size: 20px;
-            margin: 0 0 12px 0;
+        .title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 15px;
         }
 
-        .card p {
-            font-size: 13px;
+        .description {
             color: #94a3b8;
-            margin-bottom: 24px;
-            line-height: 1.6;
-            text-align: center;
-            padding: 0 10px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
         }
 
         .btn {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 10px;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .btn-primary {
-            background: linear-gradient(to right, #b45309, #d97706);
-            color: white;
+        .btn-start {
+            background: linear-gradient(135deg, #b45309, #d97706);
+            color: #ffffff;
         }
 
-        .btn-secondary {
+        .btn-reset {
             background-color: #1e293b;
             color: #94a3b8;
         }
 
         .footer {
-            text-align: center;
             color: #475569;
-            font-size: 14px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
             margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
 
-    <div class="page-container">
-        <!-- Üst Başlık -->
-        <header class="header">
-            <h1>🧠 BİLGİ ARENASI</h1>
-        </header>
-
-        <!-- Ortalanan Ana Bölüm -->
-        <main class="content-area">
-            <div class="card">
-                <div class="badge">Seviye 1</div>
-                <h2>Efsanevi Bilgi Sınavı</h2>
-                <p>Bilgini test et ve stratejini konuştur,<br>zirvedeki büyük ödüle adım adım yaklaş!</p>
-                
-                <!-- Orijinal buton ID'leri (JS dosyanızın doğrudan aradığı isimler) -->
-                <button id="start-btn" class="btn btn-primary">🎯 Oyuna Başla</button>
-                <button id="reset-btn" class="btn btn-secondary">🔄 İlerlemeyi Sıfırla</button>
-            </div>
-        </main>
-
-        <!-- Alt Bilgi -->
-        <footer class="footer">
-            BİLGİ ARENASI
-        </footer>
+    <div class="header">
+        <h1>🧠 BİLGİ ARENASI</h1>
     </div>
 
-    <!-- Sorular ve Oyun Mantığı Dosyası -->
+    <div class="card">
+        <div class="stage-badge">Aşama 1</div>
+        <div class="title">1.000.000 Puanlık Yarışma</div>
+        <div class="description">
+            15 soruyu bil, jokerrlerini stratejik kullan ve büyük ödüle ulaş!
+        </div>
+        
+        <button id="start-btn" class="btn btn-start">🎯 Oyuna Başla</button>
+        <button id="reset-btn" class="btn btn-reset">🔄 İlerlemeyi Sıfırla</button>
+    </div>
+
+    <div class="footer">
+        BİLGİ ARENASI
+    </div>
+
     <script src="sorular.js"></script>
 </body>
 </html>
