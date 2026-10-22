@@ -1,5 +1,5 @@
 const stages = {
-        stage1: [
+            stage1: [
     {c:"Geoloji & Coğrafya",q:"Dünyanın en yüksek dağı aşağıdakilerden hangisidir?",a:["K2 Dağı","Kilimanjaro","Everest Dağı","Mont Blanc"],k:2,e:"Everest Dağı, deniz seviyesinden 8.848 metre yüksekliğiyle dünyanın en yüksek dağıdır."},
     {c:"Genel kültür",q:"Türkiye'nin yüzölçümü bakımından en büyük ili aşağıdakilerden hangisidir?",a:["İstanbul","Ankara","Konya","Sivas"],k:2,e:"Konya, 38.873 km² alanı ile Türkiye'nin yüzölçümü en geniş ilidir."},
     {c:"Uzay & Bilim",q:"Güneş sistemimizde kendi etrafında ters yönde (doğudan batıya) dönen gezegen hangisidir?",a:["Mars","Venüs","Jüpiter","Merkür"],k:1,e:"Venüs, diğer gezegenlerin aksine saat yönünde (doğudan batıya) döner."},
