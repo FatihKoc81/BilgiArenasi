@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bilgi Arenası</title>
     <style>
-        /* CSS Kodları - Harici dosyaya gerek kalmadan doğrudan burada çalışır */
         html, body {
             margin: 0;
             padding: 0;
@@ -36,7 +35,6 @@
             color: #ffffff;
         }
 
-        /* Ekranı ortalayan ana alan */
         .content-area {
             flex: 1;
             display: flex;
@@ -69,15 +67,18 @@
         }
 
         .card h2 {
-            font-size: 22px;
+            font-size: 20px;
             margin: 0 0 12px 0;
         }
 
+        /* Açıklama metnini simetrik ve düzenli hale getirdik */
         .card p {
-            font-size: 14px;
+            font-size: 13px;
             color: #94a3b8;
             margin-bottom: 24px;
-            line-height: 1.5;
+            line-height: 1.6;
+            text-align: center;
+            padding: 0 10px;
         }
 
         .btn {
@@ -121,8 +122,8 @@
         <main class="content-area">
             <div class="card">
                 <div class="badge">Seviye 1</div>
-                <h2>1. Efsane</h2>
-                <p>Bilgini test et, stratejini konuştur ve büyük ödüle doğru adım adım ilerle!</p>
+                <h2>Efsanevi Bilgi Sınavı</h2>
+                <p>Bilgini test et ve stratejini konuştur,<br>zirvedeki büyük ödüle adım adım yaklaş!</p>
                 
                 <button class="btn btn-primary">🎯 Oyuna Başla</button>
                 <button class="btn btn-secondary">🔄 İlerlemeyi Sıfırla</button>
