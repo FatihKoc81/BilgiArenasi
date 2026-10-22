@@ -18,5 +18,5 @@ const questions = [
 {c:"Bilim",q:"Hangi organ vücudumuzun en büyük organıdır?",a:["Karaciğer","Beyin","Deri","Akciğer"],k:2,d:1,e:"Deri vücudun en büyük organıdır."},
 {c:"Bilim",q:"Sıcaklık birimi hangisidir?",a:["Metre","Santigrat","Litre","Kilogram"],k:1,d:1,e:"Santigrat (Celsius) sıcaklık birimidir."},
 {c:"Bilim",q:"Hangi element periyodik tabloda 'O' sembolüyle gösterilir?",a:["Altın","Oksijen","Azot","Karbon"],k:1,d:1,e:"O, oksijen elementinin sembolüdür."},
-{c:"Bilim",q:"Hangi gezegen 'Kızıl Gezegen' olarak bilinir?",a:["Venüs","Mars","Jüpiter","Satürn"],k:1,d:1,e:"Mars Kızıl Gezegen olarak bilinir."},
-{c:"Coğrafya",q:"Türkiye'nin başkenti hangisidir?",a:["İstanbul","İzmir","Bursa","Ankara"],k:3,d:1,e:"Türkiye'nin başkenti Ankara'dır."},
+{c:"Bilim",q:"Hangi gezegen 'Kızıl Gezegen' olarak bilinir?",a:["Venüs","Mars","Jüpiter","Satürn"],k:1,d:1,e:"Mars Kızıl Gezegen olarak bilinir."}
+];
