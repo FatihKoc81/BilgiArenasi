@@ -1,278 +1,139 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bilgi Arenası - Milyoner</title>
-<style>
-:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#070c16;color:#f4f7fb;font-family:system-ui,Arial,sans-serif}main{max-width:720px;margin:auto;padding:16px}h1{text-align:center;font-size:26px;margin:10px 0 18px;color:#f8c14b}h1 span{color:#fff}.card{background:#111b2d;border:2px solid #233550;border-radius:18px;padding:18px;margin:12px 0;box-shadow:0 8px 24px #0008}h2{text-align:center;margin-top:4px}p{line-height:1.5}.muted{color:#8ea3be;font-size:14px}button,input{font:inherit;width:100%;padding:13px;border-radius:12px;margin:6px 0;border:1px solid #3b5273}button{background:#f8c14b;color:#0b1220;font-weight:800;border:0;cursor:pointer;transition:all .2s}.secondary{background:#22344e;color:#f4f7fb}.answer{background:#192840;color:#fff;text-align:left;border:2px solid #324a6e;font-size:16px;margin:8px 0}.answer:disabled{opacity:0.8}.answer.good{background:#116043;border-color:#32b383}.answer.bad{background:#7e2237;border-color:#e66481}.hide{display:none!important}.topline{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:#f8c14b;font-weight:bold}.progress{height:8px;background:#22344e;border-radius:8px;overflow:hidden;margin:12px 0}.bar{height:100%;width:0;background:#f8c14b;transition:width .2s}.question{font-size:20px;font-weight:750;line-height:1.4;margin:18px 0;text-align:center;min-height:60px}.jokers{display:flex;gap:8px;margin-bottom:12px}.joker-btn{background:#1c2d47;color:#f8c14b;border:1px solid #f8c14b;font-size:13px;padding:10px;border-radius:10px;flex:1}.joker-btn:disabled{opacity:0.3;border-color:#445b7c;color:#8ea3be;cursor:not-allowed}.feedback{padding:12px;background:#0b1322;border-radius:10px;margin-top:10px;line-height:1.4;border:1px solid #233550;font-size:15px}.score{font-size:38px;font-weight:800;text-align:center;color:#f8c14b;margin:10px 0}.center{text-align:center}.stage-badge{background:#f8c14b;color:#070c16;padding:6px 14px;border-radius:20px;font-weight:bold;display:inline-block;margin-bottom:10px}.money-tree{background:#0b1322;padding:10px;border-radius:10px;margin-bottom:12px;text-align:center;border:1px solid #233550;color:#f8c14b;font-weight:bold}.withdraw-btn{background:#3a2010;color:#ff9d42;border:1px solid #ff9d42;margin-top:10px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilgi Arenası</title>
+    <style>
+        /* CSS Kodları - Harici dosyaya gerek kalmadan doğrudan burada çalışır */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #0b0f19;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+
+        .page-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 16px;
+            box-sizing: border-box;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            letter-spacing: 1px;
+            color: #ffffff;
+        }
+
+        /* Ekranı ortalayan ana alan */
+        .content-area {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 380px;
+            background: #121829;
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            box-sizing: border-box;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #8c3f0d;
+            color: #ffedd5;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+
+        .card h2 {
+            font-size: 22px;
+            margin: 0 0 12px 0;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, #b45309, #d97706);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: #1e293b;
+            color: #94a3b8;
+        }
+
+        .footer {
+            text-align: center;
+            color: #475569;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-<main>
-<h1>🧠 BİLGİ <span>ARENASI</span></h1>
 
-<section id="home" class="card center">
-  <div class="stage-badge" id="currentStageBadge">Aşama 1</div>
-  <h2>1.000.000 Puanlık Yarışma</h2>
-  <p>15 soruyu bil, jokerrlerini stratejik kullan ve büyük ödüle ulaş!</p>
-  <button onclick="startQuiz()">🎯 Oyuna Başla</button>
-  <button class="secondary" onclick="resetProgress()">🔄 İlerlemeyi Sıfırla</button>
-</section>
+    <div class="page-container">
+        <!-- Üst Başlık -->
+        <header class="header">
+            <h1>🧠 BİLGİ ARENASI</h1>
+        </header>
 
-<section id="quiz" class="card hide">
-  <div class="topline">
-    <span id="categoryLabel">Aşama 1</span>
-    <span id="timer">⏱ 30 sn</span>
-  </div>
-  
-  <div class="money-tree" id="prizeLabel">Soru 1 / Hedef: 100 Puan</div>
-  
-  <!-- Joker Alanı -->
-  <div class="jokers">
-    <button id="joker50" class="joker-btn" onclick="useJoker50()">%50</button>
-    <button id="jokerAudience" class="joker-btn" onclick="useJokerAudience()">Seyirci</button>
-    <button id="jokerDouble" class="joker-btn" onclick="useJokerDouble()">Çift Cevap</button>
-  </div>
+        <!-- Ortalanan Ana Bölüm -->
+        <main class="content-area">
+            <div class="card">
+                <div class="badge">Seviye 1</div>
+                <h2>1. Efsane</h2>
+                <p>Bilgini test et, stratejini konuştur ve büyük ödüle doğru adım adım ilerle!</p>
+                
+                <button class="btn btn-primary">🎯 Oyuna Başla</button>
+                <button class="btn btn-secondary">🔄 İlerlemeyi Sıfırla</button>
+            </div>
+        </main>
 
-  <div class="progress"><div id="bar" class="bar"></div></div>
-  <div id="question" class="question"></div>
-  <div id="answers"></div>
-  <div id="feedback" class="feedback hide"></div>
-  
-  <button id="withdrawBtn" class="withdraw-btn" onclick="withdraw()">💰 Puanı Al ve Çekil</button>
-</section>
+        <!-- Alt Bilgi -->
+        <footer class="footer">
+            BİLGİ ARENASI
+        </footer>
+    </div>
 
-<section id="result" class="card hide center">
-  <h2 id="resultTitle">Yarışma Bitti!</h2>
-  <div id="finalScore" class="score">0 Puan</div>
-  <p id="resultText"></p>
-  <button id="nextStageBtn" onclick="nextStage()">▶ Sonraki Aşamaya Geç</button>
-  <button class="secondary" onclick="show('home')">Ana Menü</button>
-</section>
-
-<p class="muted center">BİLGİ ARENASI</p>
-</main>
-
-<script src="sorular.js"></script>
-
-<script>
-const $ = id => document.getElementById(id);
-
-// Milyoner Puan Merdiveni (5 ve 10 Baraj Soruları)
-const prizes = [100, 200, 300, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 125000, 250000, 500000, 1000000];
-
-let currentStage = Number(localStorage.getItem("userStage")) || 1;
-let list=[], idx=0, currentPrize=0, guaranteedPrize=0;
-let locked=false, remaining=30, timerId=null;
-
-// Joker Durumları
-let jokers = { percent50: true, audience: true, double: true };
-let doubleAnswerActive = false;
-let doubleAnswerUsedTries = 0;
-
-function updateHomeBadge(){
-  $("currentStageBadge").textContent = `Aşama ${currentStage}`;
-}
-
-function show(id){
-  ["home","quiz","result"].forEach(x=>$(x).classList.toggle("hide",x!==id));
-  if(id === "home") updateHomeBadge();
-}
-
-function startQuiz(){
-  const stageKey = "stage" + currentStage;
-  if(!stages[stageKey]){
-    alert("Tebrikler! Mevcut tüm aşamaları bitirdiniz. Yeni aşamalar yakında eklenecek!");
-    return;
-  }
-  list = stages[stageKey];
-  idx = 0; currentPrize = 0; guaranteedPrize = 0;
-  jokers = { percent50: true, audience: true, double: true };
-  resetJokerButtons();
-  
-  show("quiz");
-  renderQuestion();
-}
-
-function resetJokerButtons(){
-  $("joker50").disabled = false;
-  $("jokerAudience").disabled = false;
-  $("jokerDouble").disabled = false;
-}
-
-function renderQuestion(){
-  clearInterval(timerId); locked = false; remaining = 30;
-  doubleAnswerActive = false;
-  doubleAnswerUsedTries = 0;
-  
-  if(idx >= list.length){ finish(true); return; }
-  
-  const q = list[idx];
-  $("categoryLabel").textContent = `Aşama ${currentStage} - ${q.c}`;
-  $("prizeLabel").textContent = `Soru ${idx+1} / Hedef Ödül: ${prizes[idx].toLocaleString('tr-TR')} Puan`;
-  $("question").textContent = q.q;
-  $("feedback").classList.add("hide");
-  $("answers").innerHTML = "";
-  $("bar").style.width = `${((idx)/list.length)*100}%`;
-  
-  q.a.forEach((ans,i)=>{
-    const b = document.createElement("button");
-    b.className = "answer";
-    b.id = "ans_" + i;
-    b.textContent = String.fromCharCode(65+i) + ") " + ans;
-    b.onclick = () => choose(i,b);
-    $("answers").appendChild(b);
-  });
-  
-  updateTimer();
-  timerId = setInterval(()=>{
-    remaining--;
-    updateTimer();
-    if(remaining <= 0){ clearInterval(timerId); handleWrong(-1, null); }
-  }, 1000);
-}
-
-function updateTimer(){ $("timer").textContent = `⏱ ${remaining} sn`; }
-
-function choose(i, button){
-  if(locked) return;
-  
-  const q = list[idx];
-  
-  if(i === q.k){
-    // Doğru cevap
-    locked = true; clearInterval(timerId);
-    button.classList.add("good");
-    currentPrize = prizes[idx];
-    
-    // Baraj Kontrolü (5. ve 10. Sorular)
-    if(idx === 4) guaranteedPrize = prizes[4];
-    if(idx === 9) guaranteedPrize = prizes[9];
-    
-    const fb = $("feedback"); fb.classList.remove("hide");
-    fb.textContent = "✅ Doğru Cevap! " + q.e;
-    
-    setTimeout(()=>{ idx++; renderQuestion(); }, 1800);
-  } else {
-    // Yanlış cevap durumu
-    if(doubleAnswerActive && doubleAnswerUsedTries === 0){
-      doubleAnswerUsedTries++;
-      button.disabled = true;
-      button.classList.add("bad");
-      const fb = $("feedback"); fb.classList.remove("hide");
-      fb.textContent = "⚠️ İlk hakkınız yanlış çıktı! Çift Cevap jokeriniz sayesinde 2. hakkınızı kullanabilirsiniz.";
-      return;
-    }
-    
-    handleWrong(i, button);
-  }
-}
-
-function handleWrong(i, button){
-  locked = true; clearInterval(timerId);
-  const q = list[idx];
-  const buttons = [...$("answers").querySelectorAll("button")];
-  buttons.forEach(b => b.disabled = true);
-  
-  if(button) button.classList.add("bad");
-  if(buttons[q.k]) buttons[q.k].classList.add("good");
-  
-  const fb = $("feedback"); fb.classList.remove("hide");
-  fb.textContent = (i === -1 ? "⏰ Süre doldu. " : "❌ Yanlış Cevap. ") + "Doğru cevap: " + q.a[q.k] + ". " + q.e;
-  
-  setTimeout(()=>{ finish(false); }, 2200);
-}
-
-// JOKER FONKSİYONLARI
-function useJoker50(){
-  if(!jokers.percent50 || locked) return;
-  jokers.percent50 = false;
-  $("joker50").disabled = true;
-  
-  const q = list[idx];
-  let wrongIndexes = [0,1,2,3].filter(x => x !== q.k);
-  wrongIndexes.sort(() => Math.random() - 0.5);
-  
-  // 2 Yanlış şıkkı gizle
-  $("ans_" + wrongIndexes[0]).style.visibility = "hidden";
-  $("ans_" + wrongIndexes[1]).style.visibility = "hidden";
-}
-
-function useJokerAudience(){
-  if(!jokers.audience || locked) return;
-  jokers.audience = false;
-  $("jokerAudience").disabled = true;
-  
-  const q = list[idx];
-  let p = [0,0,0,0];
-  p[q.k] = Math.floor(Math.random() * 30) + 50; // Doğru şıkka %50-%80 arası ver
-  let rest = 100 - p[q.k];
-  
-  for(let i=0; i<4; i++){
-    if(i !== q.k){
-      let val = Math.floor(Math.random() * rest);
-      p[i] = val;
-      rest -= val;
-    }
-  }
-  p[q.k] += rest; // Kalanı aktar
-  
-  const fb = $("feedback"); fb.classList.remove("hide");
-  fb.textContent = `📊 Seyirci Oyları: A: %${p[0]}, B: %${p[1]}, C: %${p[2]}, D: %${p[3]}`;
-}
-
-function useJokerDouble(){
-  if(!jokers.double || locked) return;
-  jokers.double = false;
-  $("jokerDouble").disabled = true;
-  doubleAnswerActive = true;
-  
-  const fb = $("feedback"); fb.classList.remove("hide");
-  fb.textContent = "🎯 Çift Cevap Jokeri Aktif! Bu soru için 2 tahmin hakkınız var.";
-}
-
-function withdraw(){
-  if(confirm(`Yarışmadan çekilmek ve kazandığınız ${currentPrize.toLocaleString('tr-TR')} Puanı almak istiyor musunuz?`)){
-    clearInterval(timerId);
-    finish(true, true);
-  }
-}
-
-function finish(isWin, isWithdrawn = false){
-  clearInterval(timerId);
-  show("result");
-  
-  if(isWithdrawn){
-    $("resultTitle").textContent = "Yarışmadan Çekildiniz!";
-    $("finalScore").textContent = currentPrize.toLocaleString('tr-TR') + " Puan";
-    $("resultText").textContent = `Soru ${idx+1}'de çekilerek puanınızı korudunuz.`;
-  } else if(isWin){
-    $("resultTitle").textContent = "🏆 TEBRİKLER! BÜYÜK ÖDÜL!";
-    $("finalScore").textContent = "1.000.000 Puan";
-    $("resultText").textContent = `Aşama ${currentStage} sorularının tamamını bildiniz!`;
-    currentStage++;
-    localStorage.setItem("userStage", currentStage);
-  } else {
-    $("resultTitle").textContent = "Elendiniz!";
-    $("finalScore").textContent = guaranteedPrize.toLocaleString('tr-TR') + " Puan";
-    $("resultText").textContent = guaranteedPrize > 0 ? 
-      `Baraj puanınız korundu ve ${guaranteedPrize.toLocaleString('tr-TR')} puan kazandınız.` : 
-      "Baraja ulaşamadığınız için puan kazanamadınız.";
-  }
-}
-
-function nextStage(){ startQuiz(); }
-
-function resetProgress(){
-  if(confirm("Tüm ilerlemeniz sıfırlanacak ve 1. Aşamadan başlayacaksınız. Emin misiniz?")){
-    currentStage = 1;
-    localStorage.setItem("userStage", 1);
-    updateHomeBadge();
-  }
-}
-
-updateHomeBadge();
-</script>
 </body>
 </html>
