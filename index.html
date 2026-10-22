@@ -71,7 +71,6 @@
             margin: 0 0 12px 0;
         }
 
-        /* Açıklama metnini simetrik ve düzenli hale getirdik */
         .card p {
             font-size: 13px;
             color: #94a3b8;
@@ -125,8 +124,9 @@
                 <h2>Efsanevi Bilgi Sınavı</h2>
                 <p>Bilgini test et ve stratejini konuştur,<br>zirvedeki büyük ödüle adım adım yaklaş!</p>
                 
-                <button class="btn btn-primary">🎯 Oyuna Başla</button>
-                <button class="btn btn-secondary">🔄 İlerlemeyi Sıfırla</button>
+                <!-- Oyunu başlatmak için gereken butonlar -->
+                <button id="start-btn" class="btn btn-primary">🎯 Oyuna Başla</button>
+                <button id="reset-btn" class="btn btn-secondary">🔄 İlerlemeyi Sıfırla</button>
             </div>
         </main>
 
@@ -136,5 +136,7 @@
         </footer>
     </div>
 
+    <!-- Oyun mantığının ve soruların çalıştığı dosya bağlantısı -->
+    <script src="sorular.js"></script>
 </body>
 </html>
