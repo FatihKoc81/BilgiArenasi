@@ -33,6 +33,7 @@
             font-size: 24px;
             letter-spacing: 1px;
             color: #ffffff;
+            margin: 0;
         }
 
         .content-area {
@@ -89,6 +90,11 @@
             font-weight: bold;
             cursor: pointer;
             margin-bottom: 12px;
+            transition: opacity 0.2s ease;
+        }
+
+        .btn:active {
+            opacity: 0.8;
         }
 
         .btn-primary {
@@ -119,14 +125,13 @@
 
         <!-- Ortalanan Ana Bölüm -->
         <main class="content-area">
-            <div class="card">
-                <div class="badge">Seviye 1</div>
-                <h2>Efsanevi Bilgi Sınavı</h2>
-                <p>Bilgini test et ve stratejini konuştur,<br>zirvedeki büyük ödüle adım adım yaklaş!</p>
+            <div class="card" id="game-card">
+                <div class="badge" id="stage-badge">Seviye 1</div>
+                <h2 id="quiz-title">Efsanevi Bilgi Sınavı</h2>
+                <p id="quiz-desc">Bilgini test et ve stratejini konuştur,<br>zirvedeki büyük ödüle adım adım yaklaş!</p>
                 
-                <!-- Oyunu başlatmak için gereken butonlar -->
-                <button id="start-btn" class="btn btn-primary">🎯 Oyuna Başla</button>
-                <button id="reset-btn" class="btn btn-secondary">🔄 İlerlemeyi Sıfırla</button>
+                <button id="start-btn" class="btn btn-primary" onclick="if(typeof startQuiz === 'function') startQuiz(); else if(typeof baslat === 'function') baslat();">🎯 Oyuna Başla</button>
+                <button id="reset-btn" class="btn btn-secondary" onclick="if(typeof resetProgress === 'function') resetProgress(); else if(typeof sifirla === 'function') sifirla();">🔄 İlerlemeyi Sıfırla</button>
             </div>
         </main>
 
@@ -136,7 +141,7 @@
         </footer>
     </div>
 
-    <!-- Oyun mantığının ve soruların çalıştığı dosya bağlantısı -->
+    <!-- Sorular ve Oyun Mantığı Script Dosyası -->
     <script src="sorular.js"></script>
 </body>
 </html>
