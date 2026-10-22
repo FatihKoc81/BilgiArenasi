@@ -120,13 +120,14 @@
 
         <!-- Ortalanan Ana Bölüm -->
         <main class="content-area">
-            <div class="card" id="start-screen">
+            <div class="card">
                 <div class="badge">Seviye 1</div>
                 <h2>Efsanevi Bilgi Sınavı</h2>
                 <p>Bilgini test et ve stratejini konuştur,<br>zirvedeki büyük ödüle adım adım yaklaş!</p>
                 
-                <button id="btn-start" class="btn btn-primary" onclick="oyunuBaslat()">🎯 Oyuna Başla</button>
-                <button id="btn-reset" class="btn btn-secondary" onclick="ilerlemeyiSifirla()">🔄 İlerlemeyi Sıfırla</button>
+                <!-- Orijinal buton ID'leri (JS dosyanızın doğrudan aradığı isimler) -->
+                <button id="start-btn" class="btn btn-primary">🎯 Oyuna Başla</button>
+                <button id="reset-btn" class="btn btn-secondary">🔄 İlerlemeyi Sıfırla</button>
             </div>
         </main>
 
@@ -136,18 +137,7 @@
         </footer>
     </div>
 
-    <!-- Sorular ve Oyun Dosyası Bağlantısı -->
+    <!-- Sorular ve Oyun Mantığı Dosyası -->
     <script src="sorular.js"></script>
-    <script>
-        function oyunuBaslat() {
-            if (typeof baslat === 'function') baslat();
-            else if (typeof startQuiz === 'function') startQuiz();
-            else if (typeof initGame === 'function') initGame();
-        }
-        function ilerlemeyiSifirla() {
-            if (typeof sifirla === 'function') sifirla();
-            else { localStorage.clear(); location.reload(); }
-        }
-    </script>
 </body>
 </html>
