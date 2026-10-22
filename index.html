@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101827">
+<title>Bilgi Arenası</title>
+<style>
+:root{--bg:#0b1220;--panel:#131f33;--panel2:#1b2a42;--gold:#f8c14b;--text:#f5f7fb;--muted:#a9b7cc;--green:#28c58a;--red:#ff647c}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#1b3150 0,#0b1220 60%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
+.wrap{max-width:760px;margin:auto;padding:18px 15px 36px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:5px 0 22px}.brand{font-size:22px;font-weight:900;letter-spacing:.3px}.brand span{color:var(--gold)}.pill{border:1px solid #34445e;background:#111d30;border-radius:99px;padding:8px 11px;color:var(--muted);font-size:12px}
+.panel{background:linear-gradient(160deg,#17263d,#101a2b);border:1px solid #2a3c57;border-radius:22px;padding:20px;box-shadow:0 14px 45px #0003}.hero{text-align:center;padding:26px 20px}.logo{width:76px;height:76px;border-radius:24px;background:linear-gradient(145deg,#ffd56d,#e99c27);color:#172033;display:grid;place-items:center;font-size:36px;margin:0 auto 16px;box-shadow:0 8px 30px #f8c14b30}.eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:11px;color:var(--gold);font-weight:800}h1{font-size:32px;line-height:1.1;margin:8px 0 12px}p{color:var(--muted);line-height:1.5}.btn{width:100%;border:0;border-radius:14px;padding:15px 16px;font-size:16px;font-weight:800;cursor:pointer;margin-top:10px;background:var(--gold);color:#182235}.btn.secondary{background:#22344e;color:var(--text);border:1px solid #3a4e6c}.btn:disabled{opacity:.45}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:15px}.feature{background:#101b2d;border:1px solid #293c57;border-radius:14px;padding:13px 8px;text-align:center;font-size:12px;color:var(--muted)}.feature b{display:block;color:white;font-size:19px;margin-bottom:4px}.field{width:100%;padding:13px 14px;border:1px solid #344965;background:#0d1728;color:white;border-radius:12px;font-size:15px;margin-top:8px}.label{font-size:13px;color:var(--muted);display:block;margin-top:15px}.hide{display:none!important}.row{display:flex;align-items:center;justify-content:space-between;gap:12px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:15px 0}.stat{background:#0d1829;border-radius:13px;padding:12px;text-align:center}.stat small{display:block;color:var(--muted);font-size:11px}.stat strong{font-size:20px}.progress{height:6px;background:#263650;border-radius:9px;overflow:hidden;margin:14px 0 20px}.progress div{height:100%;background:var(--gold);width:0;transition:width .2s}.question{font-size:22px;font-weight:800;line-height:1.35;margin:8px 0 20px}.answers{display:grid;gap:10px}.answer{background:#1a2a42;color:white;border:1px solid #344a68;text-align:left;border-radius:14px;padding:15px;font-size:15px;font-weight:650;cursor:pointer}.answer:active{transform:scale(.99)}.answer.correct{background:#124d40;border-color:var(--green)}.answer.wrong{background:#512337;border-color:var(--red)}.answer:disabled{cursor:default}.feedback{margin-top:14px;padding:12px;border-radius:12px;background:#0d1829;color:var(--muted);font-size:14px}.section-title{font-size:19px;margin:0 0 8px}.category-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}.cat{border:1px solid #344965;background:#142239;color:white;border-radius:13px;padding:14px;text-align:left;font-weight:700;cursor:pointer}.cat.active{border-color:var(--gold);background:#3b321f}.small{font-size:12px;color:var(--muted)}.notice{font-size:12px;color:#a9b7cc;margin-top:16px;text-align:center}.score-big{font-size:50px;color:var(--gold);font-weight:900;text-align:center}.center{text-align:center}.room-code{font-size:30px;font-weight:900;letter-spacing:6px;color:var(--gold);margin:12px}.footer{text-align:center;color:#71819a;font-size:11px;margin:18px 0}
+@media(min-width:600px){.wrap{padding-top:28px}.hero{padding:38px 35px}.question{font-size:25px}}
+</style>
+</head>
+<body><main class="wrap">
+<header class="top"><div class="brand">🧠 BİLGİ <span>ARENASI</span></div><div class="pill">TÜRKÇE • BETA</div></header>
+<section id="home" class="panel hero">
+ <div class="logo">🏆</div><div class="eyebrow">Bilgini göster</div><h1>Bilgi Arenası'na<br>hoş geldin!</h1>
+ <p>Genel kültürden bilime, tarihten spora kadar soruları cevapla, puan topla ve rekorunu kır.</p>
+ <button class="btn" id="soloBtn">🎯 Tek kişilik yarışma</button><button class="btn secondary" id="multiBtn">🌐 Arkadaşlarla yarış</button>
+ <div class="features"><div class="feature"><b>∞</b>Soru havuzu büyütülebilir</div><div class="feature"><b>⏱</b>Süreli sorular</div><div class="feature"><b>🏅</b>Rekor kaydı</div></div>
+ <p class="notice">İlk sürüm · Çok oyunculu ekranı arayüz demosudur; canlı oda sunucusu sonraki aşamada bağlanır.</p>
+</section>
+<section id="setup" class="panel hide">
+ <div class="eyebrow">Yarışma ayarları</div><h2 class="section-title">Yarışmanı hazırla</h2>
+ <label class="label" for="player">Oyuncu adı</label><input id="player" class="field" maxlength="18" placeholder="Adını yaz (isteğe bağlı)">
+ <label class="label">Kategori</label><div class="category-grid" id="categories"></div>
+ <label class="label" for="count">Soru sayısı</label><select id="count" class="field"><option value="10">10 soru</option><option value="15" selected>15 soru</option><option value="30">30 soru</option><option value="0">Soru havuzundaki tüm sorular</option></select>
+ <button id="startBtn" class="btn">Yarışmayı başlat →</button><button id="backBtn" class="btn secondary">← Ana menü</button>
+</section>
+<section id="quiz" class="panel hide">
+ <div class="row"><div class="eyebrow" id="categoryName">GENEL KÜLTÜR</div><div class="pill" id="timer">⏱ 20 sn</div></div>
+ <div class="progress"><div id="progressBar"></div></div>
+ <div class="row"><span class="small" id="questionCount">Soru 1/15</span><span class="small" id="playerName"></span></div>
+ <div class="stats"><div class="stat"><small>PUAN</small><strong id="score">0</strong></div><div class="stat"><small>DOĞRU</small><strong id="correctCount">0</strong></div><div class="stat"><small>REKOR</small><strong id="best">0</strong></div></div>
+ <div id="question" class="question"></div><div id="answers" class="answers"></div><div id="feedback" class="feedback hide"></div>
+ <button id="nextBtn" class="btn hide">Sonraki soru →</button><button id="quitBtn" class="btn secondary">Yarışmadan çık</button>
+</section>
+<section id="result" class="panel hide center">
+ <div class="logo">🏅</div><div class="eyebrow">Yarışma tamamlandı</div><h1 id="resultTitle">Harika!</h1><div class="score-big" id="finalScore">0</div><p id="resultText"></p>
+ <div class="stats"><div class="stat"><small>DOĞRU</small><strong id="finalCorrect">0</strong></div><div class="stat"><small>YANLIŞ</small><strong id="finalWrong">0</strong></div><div class="stat"><small>BAŞARI</small><strong id="finalPercent">%0</strong></div></div>
+ <button class="btn" id="againBtn">Tekrar oyna</button><button class="btn secondary" id="homeBtn">Ana menü</button>
+</section>
+<section id="multi" class="panel hide">
+ <div class="eyebrow">Çok oyunculu</div><h2 class="section-title">Arkadaşlarınla yarış</h2>
+ <p>Bu ekran ilk sürümde tasarım demosudur. Gerçek zamanlı oda kodu ve canlı skor için çevrim içi sunucu bağlantısı sonraki adımda eklenecek.</p>
+ <label class="label">Oda kur</label><input id="roomPlayer" class="field" placeholder="Oyuncu adın" maxlength="18">
+ <button id="createRoom" class="btn">＋ Oda kur (demo)</button>
+ <div id="roomInfo" class="center hide"><div class="small">DEMO ODA KODUN</div><div class="room-code">ARENA7</div><p>Bu kod şu an diğer cihazlara bağlanmaz.</p></div>
+ <label class="label">Oda koduyla katıl</label><input id="roomCodeInput" class="field" placeholder="Örn. ARENA7" maxlength="8">
+ <button id="joinRoom" class="btn secondary">Odaya katıl (demo)</button><div id="joinMsg" class="feedback hide"></div>
+ <button id="multiBack" class="btn secondary">← Ana menü</button>
+</section>
+<div class="footer">BİLGİ ARENASI · İlk prototip · İlerledikçe geliştirilecek</div>
+</main>
+<script>
+const questions = [
+{c:"Coğrafya",q:"Türkiye'nin en uzun nehri hangisidir?",a:["Sakarya Nehri","Kızılırmak","Fırat Nehri","Yeşilırmak"],k:1,e:"Kızılırmak, bütünüyle Türkiye sınırları içinde akan en uzun nehirdir."},
+{c:"Tarih",q:"Türkiye Cumhuriyeti hangi yıl ilan edildi?",a:["1919","1920","1923","1924"],k:2,e:"Cumhuriyet 29 Ekim 1923'te ilan edildi."},
+{c:"Bilim",q:"Suyun kimyasal formülü nedir?",a:["CO₂","H₂O","O₂","NaCl"],k:1,e:"Bir su molekülü iki hidrojen ve bir oksijen atomundan oluşur."},
+{c:"Genel kültür",q:"Güneş Sistemi'nin en büyük gezegeni hangisidir?",a:["Dünya","Satürn","Jüpiter","Neptün"],k:2,e:"Jüpiter, Güneş Sistemi'nin en büyük gezegenidir."},
+{c:"Spor",q:"Bir futbol takımı sahaya normal şartlarda kaç oyuncuyla çıkar?",a:["9","10","11","12"],k:2,e:"Her takımın sahada kaleci dâhil 11 oyuncusu bulunur."},
+{c:"Edebiyat",q:"'İnce Memed' romanının yazarı kimdir?",a:["Orhan Kemal","Yaşar Kemal","Sabahattin Ali","Reşat Nuri Güntekin"],k:1,e:"İnce Memed, Yaşar Kemal'in ünlü romanıdır."},
+{c:"Bilim",q:"Bitkiler fotosentez sırasında çoğunlukla hangi gazı alır?",a:["Oksijen","Azot","Karbondioksit","Hidrojen"],k:2,e:"Fotosentezde karbondioksit ve su kullanılır; oksijen açığa çıkar."},
+{c:"Coğrafya",q:"Türkiye'nin başkenti hangisidir?",a:["İstanbul","İzmir","Bursa","Ankara"],k:3,e:"Türkiye'nin başkenti Ankara'dır."},
+{c:"Tarih",q:"İstanbul hangi yıl fethedildi?",a:["1071","1299","1453","1517"],k:2,e:"İstanbul, 29 Mayıs 1453'te fethedildi."},
+{c:"Genel kültür",q:"Bir yılda normal olarak kaç ay vardır?",a:["10","11","12","13"],k:2,e:"Bir yıl 12 aydan oluşur."},
+{c:"Bilim",q:"İnsan vücudunda kanı pompalayan organ hangisidir?",a:["Akciğer","Beyin","Karaciğer","Kalp"],k:3,e:"Kalp kanı dolaşım sistemine pompalar."},
+{c:"Spor",q:"Olimpiyat halkaları kaç tanedir?",a:["4","5","6","7"],k:1,e:"Olimpiyat simgesinde birbirine geçmiş beş halka bulunur."},
+{c:"Edebiyat",q:"'Küçük Prens' kitabının yazarı kimdir?",a:["Antoine de Saint-Exupéry","Jules Verne","Victor Hugo","Albert Camus"],k:0,e:"Küçük Prens'i Antoine de Saint-Exupéry yazmıştır."},
+{c:"Coğrafya",q:"Dünyanın en büyük okyanusu hangisidir?",a:["Atlas Okyanusu","Hint Okyanusu","Arktik Okyanusu","Pasifik Okyanusu"],k:3,e:"Pasifik Okyanusu yüzölçümü bakımından en büyüğüdür."},
+{c:"Genel kültür",q:"Türkiye'nin para birimi hangisidir?",a:["Euro","Türk lirası","Dolar","Sterlin"],k:1,e:"Türkiye'nin resmî para birimi Türk lirasıdır."},
+{c:"Tarih",q:"Türkiye Büyük Millet Meclisi hangi tarihte açıldı?",a:["23 Nisan 1920","19 Mayıs 1919","30 Ağustos 1922","29 Ekim 1923"],k:0,e:"TBMM 23 Nisan 1920'de açıldı."},
+{c:"Bilim",q:"Işığın boşluktaki hızı yaklaşık kaç km/s'dir?",a:["30.000","150.000","300.000","1.000.000"],k:2,e:"Işık boşlukta saniyede yaklaşık 300 bin kilometre yol alır."},
+{c:"Spor",q:"Teniste sıfır puan için hangi terim kullanılır?",a:["Love","Nil","Blank","Zero"],k:0,e:"Teniste sıfır puan 'love' olarak adlandırılır."},
+{c:"Coğrafya",q:"Dünyanın doğal uydusu hangisidir?",a:["Mars","Ay","Venüs","Güneş"],k:1,e:"Ay, Dünya'nın doğal uydusudur."},
+{c:"Edebiyat",q:"'Çalıkuşu' romanının yazarı kimdir?",a:["Halide Edib Adıvar","Reşat Nuri Güntekin","Yakup Kadri Karaosmanoğlu","Peyami Safa"],k:1,e:"Çalıkuşu, Reşat Nuri Güntekin'in romanıdır."},
+{c:"Genel kültür",q:"Arıların ürettiği tatlı besin nedir?",a:["Pekmez","Reçel","Bal","Şurup"],k:2,e:"Bal, arıların ürettiği doğal bir besindir."},
+{c:"Bilim",q:"Dünya'nın yıldızı hangisidir?",a:["Sirius","Güneş","Kutup Yıldızı","Vega"],k:1,e:"Dünya, Güneş'in etrafında dolanır."},
+{c:"Tarih",q:"Malazgirt Savaşı hangi yıl yapıldı?",a:["1071","1176","1299","1453"],k:0,e:"Malazgirt Savaşı 1071 yılında yapıldı."},
+{c:"Coğrafya",q:"Ekvator Dünya'yı hangi iki yarım küreye ayırır?",a:["Doğu-Batı","Kuzey-Güney","Kara-Deniz","Yaz-Kış"],k:1,e:"Ekvator, Dünya'yı Kuzey ve Güney yarım kürelerine ayırır."},
+{c:"Spor",q:"Basketbolda sahada aynı takımın kaç oyuncusu bulunur?",a:["4","5","6","7"],k:1,e:"Standart basketbolda her takım sahada beş oyuncuyla oynar."},
+{c:"Edebiyat",q:"'Kürk Mantolu Madonna' romanını kim yazdı?",a:["Sabahattin Ali","Sait Faik Abasıyanık","Orhan Pamuk","Aziz Nesin"],k:0,e:"Romanın yazarı Sabahattin Ali'dir."},
+{c:"Genel kültür",q:"Gökkuşağında geleneksel olarak kaç renk sayılır?",a:["5","6","7","8"],k:2,e:"Geleneksel sınıflandırmada yedi renk sayılır."},
+{c:"Bilim",q:"Ses boşlukta yayılabilir mi?",a:["Evet, her zaman","Hayır, maddesel ortam gerekir","Yalnız geceleri","Yalnız suda"],k:1,e:"Sesin yayılması için hava, su veya katı gibi bir ortam gerekir."},
+{c:"Coğrafya",q:"Türkiye kaç coğrafi bölgeye ayrılır?",a:["5","6","7","8"],k:2,e:"Türkiye geleneksel olarak yedi coğrafi bölgeye ayrılır."},
+{c:"Tarih",q:"İlk Türk alfabesi olarak bilinen tarihî yazı sistemlerinden biri hangisidir?",a:["Göktürk alfabesi","Kiril alfabesi","Latin alfabesi","Fenike alfabesi"],k:0,e:"Göktürk alfabesi, eski Türklerin kullandığı yazı sistemlerinden biridir."}
+];
+const $=id=>document.getElementById(id);let category="Tümü",deck=[],idx=0,score=0,correct=0,wrong=0,timer=null,seconds=20,locked=false,player="";
+const screens=["home","setup","quiz","result","multi"];
+function show(id){screens.forEach(s=>$(s).classList.toggle("hide",s!==id));}
+const cats=["Tümü",...new Set(questions.map(q=>q.c))];
+$("categories").innerHTML=cats.map((c,i)=>`<button class="cat ${i===0?"active":""}" data-cat="${c}">${({ "Tümü":"🌟","Coğrafya":"🌍","Tarih":"🏛️","Bilim":"🔬","Genel kültür":"🧠","Spor":"⚽","Edebiyat":"📚"})[c]||"✨"} ${c}</button>`).join("");
+$("categories").addEventListener("click",e=>{const b=e.target.closest("[data-cat]");if(!b)return;category=b.dataset.cat;document.querySelectorAll(".cat").forEach(x=>x.classList.toggle("active",x===b));});
+$("soloBtn").onclick=()=>show("setup");$("backBtn").onclick=()=>show("home");$("multiBtn").onclick=()=>show("multi");$("multiBack").onclick=()=>show("home");
+function shuffle(a){return a.map(x=>[Math.random(),x]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);}
+$("startBtn").onclick=()=>{
+ player=$("player").value.trim()||"Oyuncu";let pool=questions.filter(q=>category==="Tümü"||q.c===category);deck=shuffle(pool);let n=+$("count").value;if(n>0)deck=deck.slice(0,Math.min(n,deck.length));idx=0;score=0;correct=0;wrong=0;show("quiz");renderQuestion();
+};
+function renderQuestion(){clearInterval(timer);if(idx>=deck.length){finish();return;}locked=false;seconds=20;let q=deck[idx];$("categoryName").textContent=q.c.toLocaleUpperCase("tr-TR");$("questionCount").textContent=`Soru ${idx+1}/${deck.length}`;$("playerName").textContent=player;$("question").textContent=q.q;$("score").textContent=score;$("correctCount").textContent=correct;$("best").textContent=localStorage.getItem("arenaBest")||0;$("progressBar").style.width=`${idx/deck.length*100}%`;$("feedback").classList.add("hide");$("nextBtn").classList.add("hide");$("answers").innerHTML=q.a.map((a,i)=>`<button class="answer" data-answer="${i}">${["A","B","C","D"][i]}) ${a}</button>`).join("");$("answers").querySelectorAll("button").forEach(b=>b.onclick=()=>answer(+b.dataset.answer));updateTimer();timer=setInterval(()=>{seconds--;updateTimer();if(seconds<=0)answer(-1);},1000);}
+function updateTimer(){$("timer").textContent=`⏱ ${seconds} sn`;if(seconds<=5)$("timer").style.color="var(--red)";else $("timer").style.color="var(--muted)";}
+function answer(choice){if(locked)return;locked=true;clearInterval(timer);let q=deck[idx];$("answers").querySelectorAll("button").forEach((b,i)=>{b.disabled=true;if(i===q.k)b.classList.add("correct");if(i===choice&&choice!==q.k)b.classList.add("wrong");});if(choice===q.k){correct++;score+=100+seconds*5;$("feedback").textContent="✅ Doğru cevap! "+q.e;}else{wrong++;$("feedback").textContent=(choice===-1?"⏰ Süre doldu. ":"❌ Yanlış cevap. ")+q.e;}$("score").textContent=score;$("correctCount").textContent=correct;$("feedback").classList.remove("hide");$("nextBtn").classList.remove("hide");$("nextBtn").textContent=idx===deck.length-1?"Sonuçları gör →":"Sonraki soru →";$("progressBar").style.width=`${(idx+1)/deck.length*100}%`;}
+$("nextBtn").onclick=()=>{idx++;renderQuestion();};$("quitBtn").onclick=()=>{clearInterval(timer);show("home");};
+function finish(){clearInterval(timer);let best=+(localStorage.getItem("arenaBest")||0);if(score>best){best=score;localStorage.setItem("arenaBest",best);}show("result");$("finalScore").textContent=score;$("finalCorrect").textContent=correct;$("finalWrong").textContent=wrong;$("finalPercent").textContent=Math.round(correct/Math.max(1,deck.length)*100)+"%";$("resultTitle").textContent=correct===deck.length?"Mükemmel!":correct>=deck.length*.7?"Harika iş!":"Bir tur daha?";$("resultText").textContent=`${player}, ${deck.length} soruda ${correct} doğru yaptın. En iyi skorun: ${best} puan.`;}
+$("againBtn").onclick=()=>show("setup");$("homeBtn").onclick=()=>show("home");
+$("createRoom").onclick=()=>{$("roomInfo").classList.remove("hide");$("roomInfo").scrollIntoView({behavior:"smooth",block:"center"});};
+$("joinRoom").onclick=()=>{$("joinMsg").textContent=$("roomCodeInput").value.trim()?"Bu prototipte canlı sunucu bağlı değil. Gerçek oda bağlantısını sonraki adımda kuracağız.":"Lütfen oda kodunu yaz."; $("joinMsg").classList.remove("hide");};
+</script></body></html>
