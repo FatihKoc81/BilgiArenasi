@@ -9,11 +9,10 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Roboto, Arial, sans-serif;
         }
-
         body {
-            background-color: #0b0e14;
+            background-color: #02040f;
             color: #ffffff;
             display: flex;
             flex-direction: column;
@@ -22,82 +21,72 @@
             min-height: 100vh;
             padding: 20px 15px;
         }
-
         .header {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 40px;
         }
-
         .header h1 {
-            font-size: 1.5rem;
-            color: #f39c12;
+            font-size: 2rem;
+            color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
         }
-
         .card {
-            background-color: #121824;
-            border: 1px solid #1f293d;
-            border-radius: 16px;
-            padding: 30px 20px;
+            background-color: #000514;
+            border: 1px solid #1e293b;
+            border-radius: 28px;
+            padding: 40px 30px;
             width: 100%;
             max-width: 400px;
             text-align: center;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 40px rgba(30, 41, 59, 0.35);
             margin: auto 0;
         }
-
         .stage-badge {
-            background-color: #7f2d0f;
-            color: #ffedd5;
-            padding: 6px 18px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            background-color: #4a0000;
+            color: #fde8c8;
+            padding: 8px 26px;
+            border-radius: 30px;
+            font-size: 1.1rem;
             font-weight: bold;
             display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
-
         .title {
-            font-size: 1.4rem;
+            font-size: 1.7rem;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
-
         .description {
-            color: #94a3b8;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 25px;
+            color: #64748b;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 35px;
         }
-
         .btn {
             width: 100%;
-            padding: 14px;
+            padding: 18px;
             border: none;
-            border-radius: 10px;
-            font-size: 1rem;
+            border-radius: 14px;
+            font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
         }
-
         .btn-start {
-            background: linear-gradient(135deg, #b45309, #d97706);
+            background: #3a0000;
             color: #ffffff;
         }
-
         .btn-reset {
             background-color: #1e293b;
             color: #94a3b8;
         }
-
         .footer {
             color: #475569;
             font-size: 0.85rem;
@@ -113,12 +102,12 @@
     </div>
 
     <div class="card">
-        <div class="stage-badge">Aşama 1</div>
-        <div class="title">1.000.000 Puanlık Yarışma</div>
+        <div class="stage-badge">Seviye 1</div>
+        <div class="title">Efsanevi Bilgi Sınavı</div>
         <div class="description">
-            15 soruyu bil, jokerrlerini stratejik kullan ve büyük ödüle ulaş!
+            Bilgini test et ve stratejini konuştur,<br>zirvedeki büyük ödüle adım adım yaklaş!
         </div>
-        
+
         <button id="start-btn" class="btn btn-start">🎯 Oyuna Başla</button>
         <button id="reset-btn" class="btn btn-reset">🔄 İlerlemeyi Sıfırla</button>
     </div>
