@@ -5,47 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bilgi Arenası</title>
 <style>
-:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#0b1220;color:#f4f7fb;font-family:system-ui,Arial,sans-serif}main{max-width:720px;margin:auto;padding:18px}h1{text-align:center;font-size:28px;margin:10px 0 22px}h1 span{color:#f8c14b}.card{background:#17263d;border:1px solid #344965;border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 8px 24px #0002}h2{text-align:center;margin-top:4px}p{line-height:1.5}.muted{color:#aebdd0;font-size:14px}button,select,input{font:inherit;width:100%;padding:14px;border-radius:12px;margin:6px 0;border:1px solid #455a76}button{background:#f8c14b;color:#172235;font-weight:750;border:0;cursor:pointer}.secondary{background:#293b55;color:#f4f7fb}.answer{background:#293b55;color:#fff;text-align:left;border:1px solid #435773}.answer:disabled{opacity:1}.answer.good{background:#146548;border-color:#38b889}.answer.bad{background:#842c42;border-color:#ef8298}.hide{display:none!important}.topline{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:14px;color:#b8c7da}.progress{height:6px;background:#33465f;border-radius:8px;overflow:hidden;margin:12px 0}.bar{height:100%;width:0;background:#f8c14b;transition:width .2s}.question{font-size:22px;font-weight:750;line-height:1.4;margin:22px 0}.feedback{padding:14px;background:#0e1a2c;border-radius:12px;margin-top:12px;line-height:1.5}.score{font-size:44px;font-weight:800;text-align:center;color:#f8c14b}.center{text-align:center}
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#0b1220;color:#f4f7fb;font-family:system-ui,Arial,sans-serif}main{max-width:720px;margin:auto;padding:18px}h1{text-align:center;font-size:28px;margin:10px 0 22px}h1 span{color:#f8c14b}.card{background:#17263d;border:1px solid #344965;border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 8px 24px #0002}h2{text-align:center;margin-top:4px}p{line-height:1.5}.muted{color:#aebdd0;font-size:14px}button,select,input{font:inherit;width:100%;padding:14px;border-radius:12px;margin:6px 0;border:1px solid #455a76}button{background:#f8c14b;color:#172235;font-weight:750;border:0;cursor:pointer}.secondary{background:#293b55;color:#f4f7fb}.answer{background:#293b55;color:#fff;text-align:left;border:1px solid #435773}.answer:disabled{opacity:1}.answer.good{background:#146548;border-color:#38b889}.answer.bad{background:#842c42;border-color:#ef8298}.hide{display:none!important}.topline{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:14px;color:#b8c7da}.progress{height:6px;background:#33465f;border-radius:8px;overflow:hidden;margin:12px 0}.bar{height:100%;width:0;background:#f8c14b;transition:width .2s}.question{font-size:22px;font-weight:750;line-height:1.4;margin:22px 0}.feedback{padding:14px;background:#0e1a2c;border-radius:12px;margin-top:12px;line-height:1.5}.score{font-size:44px;font-weight:800;text-align:center;color:#f8c14b}.center{text-align:center}.stage-badge{background:#f8c14b;color:#0b1220;padding:6px 14px;border-radius:20px;font-weight:bold;display:inline-block;margin-bottom:10px}
 </style>
 </head>
 <body>
 <main>
 <h1>🧠 BİLGİ <span>ARENASI</span></h1>
 
-<section id="home" class="card">
-  <h2>Bilgini göster!</h2>
-  <p class="center">Genel kültür, bilim, tarih, coğrafya, spor ve edebiyat sorularını cevapla.</p>
-  <button onclick="show('setup')">🎯 Yarışmaya başla</button>
-  <button class="secondary" onclick="show('multi')">🌐 Arkadaşlarla yarış</button>
-</section>
-
-<section id="setup" class="card hide">
-  <h2>Yarışma ayarları</h2>
-  <label for="player">Oyuncu adı</label>
-  <input id="player" placeholder="Adını yaz">
-  <label for="category">Kategori</label>
-  <select id="category">
-    <option value="Tümü">Tüm kategoriler</option>
-    <option>Genel kültür</option>
-    <option>Bilim</option>
-    <option>Tarih</option>
-    <option>Coğrafya</option>
-    <option>Spor</option>
-  </select>
-  <label for="count">Soru sayısı</label>
-  <select id="count">
-    <option value="5">5 soru</option>
-    <option value="10" selected>10 soru</option>
-    <option value="15">15 soru</option>
-    <option value="20">20 soru</option>
-  </select>
-  <button onclick="startQuiz()">Yarışmayı başlat</button>
-  <button class="secondary" onclick="show('home')">Ana menü</button>
+<section id="home" class="card center">
+  <div class="stage-badge" id="currentStageBadge">Aşama 1</div>
+  <h2>Bilgini Göster!</h2>
+  <p>Her aşamada 15 soru. Aşamaları geç, ilerlemen otomatik kaydedilsin!</p>
+  <button onclick="startQuiz()">🎯 Oyuna Devam Et</button>
+  <button class="secondary" onclick="resetProgress()">🔄 İlerlemeyi Sıfırla</button>
 </section>
 
 <section id="quiz" class="card hide">
   <div class="topline">
-    <span id="categoryLabel">Genel kültür</span>
+    <span id="categoryLabel">Aşama 1</span>
     <span id="timer">⏱ 20 sn</span>
   </div>
   <div class="progress"><div id="bar" class="bar"></div></div>
@@ -56,90 +33,127 @@
   <button class="secondary" onclick="quitQuiz()">Yarışmadan çık</button>
 </section>
 
-<section id="result" class="card hide">
-  <h2 id="resultTitle">Yarışma tamamlandı!</h2>
+<section id="result" class="card hide center">
+  <h2 id="resultTitle">Aşama Tamamlandı!</h2>
   <div id="finalScore" class="score">0</div>
-  <p id="resultText" class="center"></p>
-  <button onclick="show('setup')">Tekrar oyna</button>
-  <button class="secondary" onclick="show('home')">Ana menü</button>
-</section>
-
-<section id="multi" class="card hide">
-  <h2>Arkadaşlarla yarış</h2>
-  <p>Şimdilik tek kişilik yarışma kullanılabilir.</p>
-  <button onclick="show('setup')">Tek kişilik yarışmaya geç</button>
-  <button class="secondary" onclick="show('home')">Ana menü</button>
+  <p id="resultText"></p>
+  <button id="nextStageBtn" onclick="nextStage()">▶ Sonraki Aşamaya Geç</button>
+  <button class="secondary" onclick="show('home')">Ana Menü</button>
 </section>
 
 <p class="muted center">BİLGİ ARENASI</p>
 </main>
 
-<!-- Soruları dışarıdan alan dosya bağlantısı -->
 <script src="sorular.js"></script>
 
 <script>
 const $ = id => document.getElementById(id);
-let list=[],idx=0,score=0,correct=0,locked=false,remaining=20,timerId=null;
+let currentStage = Number(localStorage.getItem("userStage")) || 1;
+let list=[], idx=0, score=0, correct=0, locked=false, remaining=20, timerId=null;
 
-function show(id){["home","setup","quiz","result","multi"].forEach(x=>$(x).classList.toggle("hide",x!==id));}
+function updateHomeBadge(){
+  $("currentStageBadge").textContent = `Aşama ${currentStage}`;
+}
+
+function show(id){
+  ["home","quiz","result"].forEach(x=>$(x).classList.toggle("hide",x!==id));
+  if(id === "home") updateHomeBadge();
+}
 
 function startQuiz(){
-  const playerName=$("player").value.trim()||"Oyuncu";
-  const cat=$("category").value;
-  let filtered=cat==="Tümü"?questions:questions.filter(x=>x.c===cat);
-  list=filtered.slice().sort(()=>Math.random()-0.5);
-  const n=Number($("count").value);
-  list=list.slice(0,Math.min(n,list.length));
-  if(list.length===0){alert("Bu kategoride soru yok");return;}
-  idx=0;score=0;correct=0;
-  window.playerName=playerName;
+  const stageKey = "stage" + currentStage;
+  if(!stages[stageKey]){
+    alert("Tebrikler! Mevcut tüm aşamaları bitirdiniz. Yeni aşamalar yakında eklenecek!");
+    return;
+  }
+  list = stages[stageKey];
+  idx = 0; score = 0; correct = 0;
   show("quiz");
   renderQuestion();
 }
 
 function renderQuestion(){
-  clearInterval(timerId);locked=false;remaining=20;
-  if(idx>=list.length){finish();return;}
-  const q=list[idx];
-  $("categoryLabel").textContent=q.c;
-  $("questionCount").textContent=`Soru ${idx+1} / ${list.length}`;
-  $("question").textContent=q.q;
+  clearInterval(timerId); locked = false; remaining = 20;
+  if(idx >= list.length){ finish(); return; }
+  const q = list[idx];
+  $("categoryLabel").textContent = `Aşama ${currentStage} - ${q.c}`;
+  $("questionCount").textContent = `Soru ${idx+1} / ${list.length}`;
+  $("question").textContent = q.q;
   $("feedback").classList.add("hide");
-  $("answers").innerHTML="";
-  $("bar").style.width=`${(idx/list.length)*100}%`;
+  $("answers").innerHTML = "";
+  $("bar").style.width = `${(idx/list.length)*100}%`;
+  
   q.a.forEach((ans,i)=>{
-    const b=document.createElement("button");
-    b.className="answer";
-    b.textContent=String.fromCharCode(65+i)+") "+ans;
-    b.onclick=()=>choose(i,b);
+    const b = document.createElement("button");
+    b.className = "answer";
+    b.textContent = String.fromCharCode(65+i) + ") " + ans;
+    b.onclick = () => choose(i,b);
     $("answers").appendChild(b);
   });
   updateTimer();
-  timerId=setInterval(()=>{remaining--;updateTimer();if(remaining<=0){clearInterval(timerId);choose(-1,null);}},1000);
+  timerId = setInterval(()=>{
+    remaining--;
+    updateTimer();
+    if(remaining <= 0){ clearInterval(timerId); choose(-1,null); }
+  }, 1000);
 }
 
-function updateTimer(){$("timer").textContent=`⏱ ${remaining} sn`;}
+function updateTimer(){ $("timer").textContent = `⏱ ${remaining} sn`; }
 
 function choose(i,button){
-  if(locked)return;locked=true;clearInterval(timerId);
-  const q=list[idx];
-  const buttons=[...$("answers").querySelectorAll("button")];
-  buttons.forEach(b=>b.disabled=true);
-  const fb=$("feedback");fb.classList.remove("hide");
-  if(i===q.k){correct++;score+=10;button.classList.add("good");fb.textContent="✅ Doğru! "+q.e;}
-  else{if(button)button.classList.add("bad");buttons[q.k].classList.add("good");fb.textContent=(i===-1?"⏰ Süre doldu. ":"❌ Yanlış. ")+"Doğru cevap: "+q.a[q.k]+". "+q.e;}
-  $("bar").style.width=`${((idx+1)/list.length)*100}%`;
-  setTimeout(()=>{idx++;renderQuestion();},1600);
+  if(locked) return;
+  locked = true; clearInterval(timerId);
+  const q = list[idx];
+  const buttons = [...$("answers").querySelectorAll("button")];
+  buttons.forEach(b => b.disabled = true);
+  const fb = $("feedback"); fb.classList.remove("hide");
+  
+  if(i === q.k){
+    correct++; score += 10;
+    if(button) button.classList.add("good");
+    fb.textContent = "✅ Doğru! " + q.e;
+  } else {
+    if(button) button.classList.add("bad");
+    buttons[q.k].classList.add("good");
+    fb.textContent = (i === -1 ? "⏰ Süre doldu. " : "❌ Yanlış. ") + "Doğru cevap: " + q.a[q.k] + ". " + q.e;
+  }
+  $("bar").style.width = `${((idx+1)/list.length)*100}%`;
+  setTimeout(()=>{ idx++; renderQuestion(); }, 1600);
 }
 
 function finish(){
-  clearInterval(timerId);show("result");
-  $("finalScore").textContent=score+" puan";
-  $("resultTitle").textContent=(window.playerName||"Oyuncu")+", yarışma bitti!";
-  $("resultText").textContent=`${list.length} soruda ${correct} doğru yaptın.`;
+  clearInterval(timerId);
+  show("result");
+  $("finalScore").textContent = score + " Puan";
+  $("resultTitle").textContent = `Aşama ${currentStage} Tamamlandı!`;
+  $("resultText").textContent = `15 soruda ${correct} doğru yaptın.`;
+  
+  // Bir sonraki aşamaya geçiş kaydı
+  currentStage++;
+  localStorage.setItem("userStage", currentStage);
 }
 
-function quitQuiz(){if(confirm("Çıkmak istiyor musun?")){clearInterval(timerId);show("home");}}
+function nextStage(){
+  startQuiz();
+}
+
+function resetProgress(){
+  if(confirm("Tüm ilerlemeniz sıfırlanacak ve 1. Aşamadan başlayacaksınız. Emin misiniz?")){
+    currentStage = 1;
+    localStorage.setItem("userStage", 1);
+    updateHomeBadge();
+  }
+}
+
+function quitQuiz(){
+  if(confirm("Yarışmadan çıkmak istiyor musun? İlerlemen kaybolmaz.")){
+    clearInterval(timerId);
+    show("home");
+  }
+}
+
+// Başlangıç ekranını güncelle
+updateHomeBadge();
 </script>
 </body>
 </html>
