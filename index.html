@@ -120,7 +120,7 @@ function renderQuestion(){
   $("question").textContent=q.q;
   $("feedback").classList.add("hide");
   $("answers").innerHTML="";
-  \( ("bar").style.width=` \){idx/list.length*100}%`;
+  $("bar").style.width=`${(idx/list.length)*100}%`;
   q.a.forEach((ans,i)=>{
     const b=document.createElement("button");
     b.className="answer";
@@ -142,7 +142,7 @@ function choose(i,button){
   const fb=$("feedback");fb.classList.remove("hide");
   if(i===q.k){correct++;score+=10;button.classList.add("good");fb.textContent="✅ Doğru! "+q.e;}
   else{if(button)button.classList.add("bad");buttons[q.k].classList.add("good");fb.textContent=(i===-1?"⏰ Süre doldu. ":"❌ Yanlış. ")+"Doğru cevap: "+q.a[q.k]+". "+q.e;}
-  \( ("bar").style.width=` \){(idx+1)/list.length*100}%`;
+  $("bar").style.width=`${((idx+1)/list.length)*100}%`;
   setTimeout(()=>{idx++;renderQuestion();},1600);
 }
 
@@ -150,7 +150,7 @@ function finish(){
   clearInterval(timerId);show("result");
   $("finalScore").textContent=score+" puan";
   $("resultTitle").textContent=(window.playerName||"Oyuncu")+", yarışma bitti!";
-  \( ("resultText").textContent=` \){list.length} soruda ${correct} doğru yaptın.`;
+  $("resultText").textContent=`${list.length} soruda ${correct} doğru yaptın.`;
 }
 
 function quitQuiz(){if(confirm("Çıkmak istiyor musun?")){clearInterval(timerId);show("home");}}
