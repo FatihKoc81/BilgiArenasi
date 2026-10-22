@@ -4,116 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bilgi Arenası</title>
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            background-color: #0b0f19;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-        }
-
-        .page-container {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            padding: 16px;
-            box-sizing: border-box;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header {
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .header h1 {
-            font-size: 24px;
-            letter-spacing: 1px;
-            color: #ffffff;
-            margin: 0;
-        }
-
-        .content-area {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-
-        .card {
-            width: 100%;
-            max-width: 380px;
-            background: #121829;
-            border: 1px solid #1e293b;
-            border-radius: 16px;
-            padding: 24px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            box-sizing: border-box;
-        }
-
-        .badge {
-            display: inline-block;
-            background-color: #8c3f0d;
-            color: #ffedd5;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 16px;
-        }
-
-        .card h2 {
-            font-size: 20px;
-            margin: 0 0 12px 0;
-        }
-
-        .card p {
-            font-size: 13px;
-            color: #94a3b8;
-            margin-bottom: 24px;
-            line-height: 1.6;
-            text-align: center;
-            padding: 0 10px;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 12px;
-            transition: opacity 0.2s ease;
-        }
-
-        .btn:active {
-            opacity: 0.8;
-        }
-
-        .btn-primary {
-            background: linear-gradient(to right, #b45309, #d97706);
-            color: white;
-        }
-
-        .btn-secondary {
-            background-color: #1e293b;
-            color: #94a3b8;
-        }
-
-        .footer {
-            text-align: center;
-            color: #475569;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -125,13 +16,13 @@
 
         <!-- Ortalanan Ana Bölüm -->
         <main class="content-area">
-            <div class="card" id="game-card">
-                <div class="badge" id="stage-badge">Seviye 1</div>
-                <h2 id="quiz-title">Efsanevi Bilgi Sınavı</h2>
-                <p id="quiz-desc">Bilgini test et ve stratejini konuştur,<br>zirvedeki büyük ödüle adım adım yaklaş!</p>
+            <div class="card" id="start-screen">
+                <div class="badge">Seviye 1</div>
+                <h2>Efsanevi Bilgi Sınavı</h2>
+                <p>Bilgini test et ve stratejini konuştur,<br>zirvedeki büyük ödüle adım adım yaklaş!</p>
                 
-                <button id="start-btn" class="btn btn-primary" onclick="if(typeof startQuiz === 'function') startQuiz(); else if(typeof baslat === 'function') baslat();">🎯 Oyuna Başla</button>
-                <button id="reset-btn" class="btn btn-secondary" onclick="if(typeof resetProgress === 'function') resetProgress(); else if(typeof sifirla === 'function') sifirla();">🔄 İlerlemeyi Sıfırla</button>
+                <button id="btn-start" class="btn btn-primary" onclick="oyunuBaslat()">🎯 Oyuna Başla</button>
+                <button id="btn-reset" class="btn btn-secondary" onclick="ilerlemeyiSifirla()">🔄 İlerlemeyi Sıfırla</button>
             </div>
         </main>
 
@@ -141,7 +32,17 @@
         </footer>
     </div>
 
-    <!-- Sorular ve Oyun Mantığı Script Dosyası -->
     <script src="sorular.js"></script>
+    <script>
+        function oyunuBaslat() {
+            if (typeof baslat === 'function') baslat();
+            else if (typeof startQuiz === 'function') startQuiz();
+            else if (typeof initGame === 'function') initGame();
+        }
+        function ilerlemeyiSifirla() {
+            if (typeof sifirla === 'function') sifirla();
+            else { localStorage.clear(); location.reload(); }
+        }
+    </script>
 </body>
 </html>
