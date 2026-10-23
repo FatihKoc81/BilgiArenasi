@@ -381,5 +381,25 @@
   inp.addEventListener("keydown", e => { if (e.key === "Enter") gonder(); });
 
   // Başlığa tıklanınca (ortak.js) süreyi durdur ve temizle
+    // Alt başlık: oyunda altta sabit, klavye açılınca gizli, tıklayınca ana sayfa
+  const stl = document.createElement("style");
+  stl.textContent = "body.ppOyunda{padding-bottom:70px}body.ppOyunda h1{display:block!important;position:fixed;left:0;right:0;bottom:0;margin:0;padding:10px 0 calc(10px + env(safe-area-inset-bottom));font-size:20px;text-align:center;background:rgba(3,3,12,.96);z-index:5;cursor:pointer}body.ppOyunda.ppKlavye h1{display:none!important}";
+  document.head.append(stl);
+  let enBuyukH = innerHeight;
+  const hGuncelle = () => {
+    const a = !sec.classList.contains("hidden") && !oyun.classList.contains("hidden");
+    document.body.classList.toggle("ppOyunda", a);
+    if (!a) document.body.classList.remove("ppKlavye");
+  };
+  const mo = new MutationObserver(hGuncelle);
+  mo.observe(sec, { attributes: true, attributeFilter: ["class"] });
+  mo.observe(oyun, { attributes: true, attributeFilter: ["class"] });
+  addEventListener("resize", () => {
+    enBuyukH = Math.max(enBuyukH, innerHeight);
+    document.body.classList.toggle("ppKlavye", document.body.classList.contains("ppOyunda") && innerHeight < enBuyukH - 150);
+  });
+  document.querySelector("h1").addEventListener("click", () => {
+    if (document.body.classList.contains("ppOyunda")) menuyeDon();
+  });
   document.addEventListener("anasayfa", menuyeDon);
 })();
