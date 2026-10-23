@@ -8,6 +8,10 @@
   const basla = document.getElementById("basla");
   if (basla) basla.textContent = "🎯 Milyoner";
 
+  // Ana menüdeki "Seviye 1" kutusunu gizle
+  const seviye = document.getElementById("seviye");
+  if (seviye) seviye.style.display = "none";
+
   const baslik = document.querySelector("h1");
   baslik.style.cursor = "pointer";
   baslik.addEventListener("click", () => {
