@@ -14,13 +14,13 @@
   #isEkran .isHedef b{display:block;font-size:60px;line-height:1.1;color:#fff}
   #isEkran .isSure{height:8px;background:#232f4a;border-radius:8px;margin:12px 0;overflow:hidden}
   #isEkran .isSure i{display:block;height:100%;width:100%;background:#2fbf71;transition:width 1s linear}
-  #isEkran .isGrid{display:grid;gap:10px;margin-bottom:12px}
-  #isEkran .isSay{grid-template-columns:repeat(3,1fr)}
-  #isEkran .isIsl{grid-template-columns:repeat(4,1fr)}
-  #isEkran .isGrid button{border:0;border-radius:999px;background:#232f4a;color:#fff;font:inherit;font-size:24px;font-weight:700;padding:14px 0;cursor:pointer}
-  #isEkran .isGrid button.sec{background:#5c1a1a}
+  #isEkran .isGrid{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:12px}
+  #isEkran .isSay button{flex:0 0 calc((100% - 20px) / 3)}
+  #isEkran .isIsl button{flex:0 0 calc((100% - 30px) / 4)}
+  #isEkran .isGrid button{box-sizing:border-box;border:0;border-radius:999px;background:#232f4a;color:#fff;font:inherit;font-size:24px;font-weight:700;line-height:1.2;height:64px;padding:0;text-align:center;display:flex;align-items:center;justify-content:center;cursor:pointer}
+  #isEkran .isGrid button.secili{background:#5c1a1a}
   #isEkran .isGrid button:disabled{opacity:.3;cursor:default}
-  #isEkran .isLog{min-height:80px;white-space:pre-line;color:#7f89b8;line-height:1.7;margin-bottom:8px}
+  #isEkran .isLog{min-height:80px;white-space:pre-line;color:#7f89b8;line-height:1.7;margin-bottom:8px;text-align:center}
   #isEkran .isMsg{text-align:center;font-weight:700;min-height:28px;margin-bottom:8px}
   #isEkran .isUst{display:flex;justify-content:space-between;color:#7f89b8;margin-bottom:6px}
   `;
@@ -124,7 +124,7 @@
     sayilar.forEach(n => {
       const b = document.createElement("button");
       b.textContent = n.v;
-      if (secA === n.id) b.className = "sec";
+      if (secA === n.id) b.className = "secili";
       b.disabled = bitti;
       b.onclick = () => sayiSec(n.id);
       kutu.append(b);
@@ -134,7 +134,7 @@
     OPS.forEach(o => {
       const b = document.createElement("button");
       b.textContent = o;
-      if (secOp === o) b.className = "sec";
+      if (secOp === o) b.className = "secili";
       b.disabled = bitti || secA === null;
       b.onclick = () => { secOp = o; ciz(); };
       ok.append(b);
@@ -157,9 +157,10 @@
     $("isMsg").textContent = "";
     gecmis.push({ onceki: sayilar.slice(), yazi: a.v + " " + secOp + " " + b.v + " = " + r });
     sayilar = sayilar.filter(n => n.id !== a.id && n.id !== b.id);
-    sayilar.push({ v: r, id: 100 + gecmis.length + rnd(1000000) });
-    secA = null; secOp = null;
-    if (r === hedef) { bitir(); return; }
+    const yeniId = 100 + gecmis.length + rnd(1000000);
+    sayilar.push({ v: r, id: yeniId });
+    if (r === hedef) { secA = null; secOp = null; bitir(); return; }
+    secA = yeniId; secOp = null;
     ciz();
   }
 
