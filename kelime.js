@@ -104,9 +104,9 @@
       <input id="kkCevap" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" placeholder="Tahminin (Türkçe karakterle)">
       <p id="kkGeriBildirim"></p>
       <div class="kkSatir">
-        <button class="btn" id="kkTahmin">Tahmin</button>
         <button class="btn ikinci" id="kkHarfAl">💡 Harf Al</button>
         <button class="btn ikinci" id="kkPas">Pas</button>
+        <button class="btn" id="kkTahmin">Tahmin</button>
       </div>
     </div>
     <div id="kkSon" class="hidden">
