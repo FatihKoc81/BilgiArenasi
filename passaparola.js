@@ -183,6 +183,7 @@
   // ---------- Stil ----------
   const css = document.createElement("style");
   css.textContent = `
+  .btn.oval{border-radius:999px}
   #pp.ppK{padding:14px 12px}
   #ppHarfler{position:relative;width:250px;height:250px;margin:0 auto 8px}
   .ppH{position:absolute;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#0d1426;border:1px solid #1d2540;font-weight:700;font-size:11px;line-height:1}
@@ -205,12 +206,11 @@
 
   // ---------- Ana menü butonu ----------
   const ana = document.getElementById("ana");
-  const sifirla = document.getElementById("sifirla");
   const menuBtn = document.createElement("button");
-  menuBtn.className = "btn ikinci";
+  menuBtn.className = "btn ikinci oval";
   menuBtn.id = "ppAc";
   menuBtn.textContent = "🔤 Passaparola";
-  sifirla.insertAdjacentElement("afterend", menuBtn);
+  ana.append(menuBtn);
 
   // ---------- Passaparola ekranı ----------
   const sec = document.createElement("section");
@@ -232,8 +232,8 @@
       <input id="ppCevap" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" placeholder="Cevabını yaz (Türkçe karakterle)">
       <p id="ppGeriBildirim"></p>
       <div class="ppSatir">
-        <button class="btn" id="ppGonder">Cevapla</button>
         <button class="btn ikinci" id="ppPas">Pas</button>
+        <button class="btn" id="ppGonder">Cevapla</button>
       </div>
     </div>
     <div id="ppSon" class="hidden">
