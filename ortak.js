@@ -2,6 +2,12 @@
 // index.html'de </body> öncesine ekle:  <script src="ortak.js"></script>
 // "BİLGİ ARENASI" başlığına tıklayınca, hangi oyunda olursan ol ana sayfaya döner.
 (function () {
+  // Ana menü düzenlemesi: "İlerlemeyi Sıfırla" kaldırılır, "Oyuna Başla" -> "Milyoner"
+  const sifirla = document.getElementById("sifirla");
+  if (sifirla) sifirla.remove();
+  const basla = document.getElementById("basla");
+  if (basla) basla.textContent = "🎯 Milyoner";
+
   const baslik = document.querySelector("h1");
   baslik.style.cursor = "pointer";
   baslik.addEventListener("click", () => {
