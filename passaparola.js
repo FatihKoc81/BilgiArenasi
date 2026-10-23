@@ -412,5 +412,7 @@
   new MutationObserver(yerles).observe(document.body, { attributes: true, attributeFilter: ["class"] });
   addEventListener("resize", yerles);
   addEventListener("scroll", yerles);
+    stl.textContent += "#ppSoru{text-wrap:balance;text-align:center}";
+  inp.placeholder = "";
   document.addEventListener("anasayfa", menuyeDon);
 })();
