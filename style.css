@@ -23,4 +23,3 @@ button{font:inherit;color:#fff;border:0;cursor:pointer}
 .jokerler{display:flex;gap:8px;margin-top:16px}
 .jok{flex:1;padding:12px 4px;border-radius:14px;background:#222f45;font-size:14px;font-weight:700}
 .jok:disabled{opacity:.35}
-
