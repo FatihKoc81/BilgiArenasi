@@ -133,7 +133,7 @@
     oyun.classList.toggle("hidden", b !== "oyun");
     son.classList.toggle("hidden", b !== "son");
     sec.classList.toggle("kkK", b === "oyun");
-    document.querySelector("h1").style.display = b === "oyun" ? "none" : "";
+    
   };
 
   function menuyeDon() {
