@@ -116,8 +116,20 @@ function bitir(kazandi) {
   ekran("son");
 }
 
-$("basla").onclick = baslat;
-$("sDevam").onclick = baslat;
+function guvenliBaslat() {
+  try {
+    if (typeof SORULAR === "undefined") {
+      alert("HATA: sorular.js yüklenmedi ya da SORULAR bulunamadı.");
+      return;
+    }
+    baslat();
+  } catch (e) {
+    alert("Milyoner hatası: " + e.message);
+  }
+}
+document.addEventListener("click", e => {
+  if (e.target.closest("#basla") || e.target.closest("#sDevam")) guvenliBaslat();
+});
 
 $("jYarim").onclick = () => {
   if (kilit || !jok.yarim) return;
