@@ -1,6 +1,7 @@
 // ORTAK AYARLAR (tüm oyunlar için)
-// index.html'de </body> öncesine ekle:  <script src="ortak.js"></script>
+// index.html'de </body> öncesine ekle: <script src="ortak.js"></script>
 // "BİLGİ ARENASI" başlığına tıklayınca, hangi oyunda olursan ol ana sayfaya döner.
+
 (function () {
   // Ana menü düzenlemesi: "İlerlemeyi Sıfırla" kaldırılır, "Oyuna Başla" -> "Milyoner"
   const sifirla = document.getElementById("sifirla");
@@ -34,4 +35,41 @@
     b.onclick = anaSayfa;
     milyoner.append(b);
   }
+})();
+
+// FK LOGOSU (sadece ana sayfada) + OYUN BUTONLARI RENKLERİ
+(function () {
+  const ana = document.getElementById("ana");
+  if (!ana) return;
+
+  const r = document.createElement("div");
+  r.textContent = "FK";
+  r.style.cssText = "position:fixed;right:10px;bottom:4px;width:62px;height:40px;display:flex;align-items:center;justify-content:center;border:2px solid #d4a63a;border-radius:11px;color:#d4a63a;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:700;font-size:21px;line-height:1;pointer-events:none;z-index:5";
+  document.body.append(r);
+  const g = () => { r.style.display = ana.classList.contains("hidden") || ana.style.display === "none" ? "none" : "flex"; };
+  new MutationObserver(g).observe(ana, { attributes: true, attributeFilter: ["class", "style"] });
+  g();
+
+  // Milyoner koyu kalır, diğer oyunlar renkli (butonlar yazısına göre bulunur)
+  window.addEventListener("load", () => {
+    const renk = { "Passaparola": "#0f9d8a", "Kelime": "#3b6fe0", "İşlem": "#8e4fd6" };
+    ana.querySelectorAll("button").forEach(b => {
+      for (const k in renk) if (b.textContent.includes(k)) {
+        b.style.setProperty("background", renk[k], "important");
+        b.style.setProperty("color", "#fff", "important");
+      }
+    });
+  });
+})();
+
+// AÇIKLAMA YAZISI: iki satır, ortalı
+(function () {
+  const alt = document.querySelector("#ana .alt");
+  if (!alt) return;
+  alt.style.textAlign = "center";
+  alt.style.fontSize = "clamp(11px, 3.9vw, 15px)";
+  alt.querySelectorAll("span").forEach(s => {
+    s.style.display = "block";
+    s.style.whiteSpace = "nowrap";
+  });
 })();
