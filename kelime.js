@@ -272,4 +272,3 @@
   // Başlığa tıklanınca (ortak.js) süreyi durdur ve ana sayfaya dön
   document.addEventListener("anasayfa", menuyeDon);
 })();
-
