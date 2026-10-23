@@ -286,7 +286,7 @@
     }).join("");
     $("ppBuyuk").textContent = HARFLER[idx];
     $("ppPuan").textContent = "✅ " + dur.filter(x => x === 1).length + " / " + HARFLER.length;
-    $("ppSoru").textContent = HARFLER[idx] + " ile başlar: " + sorular[idx][0];
+    $("ppSoru").textContent = sorular[idx][0];
     sureYaz();
   }
 
