@@ -401,5 +401,16 @@
   document.querySelector("h1").addEventListener("click", () => {
     if (document.body.classList.contains("ppOyunda")) menuyeDon();
   });
+    stl.textContent = "body.ppOyunda{padding-bottom:80px}body.ppOyunda h1{display:block!important;position:fixed!important;left:0;right:0;margin:0!important;text-align:center;z-index:5;cursor:pointer}body.ppOyunda.ppKlavye h1{display:none!important}";
+  const h1 = document.querySelector("h1");
+  const yerles = () => {
+    if (!document.body.classList.contains("ppOyunda")) return;
+    const alt = sec.getBoundingClientRect().bottom, h = h1.offsetHeight;
+    h1.style.top = Math.max(alt + 8, Math.min(alt + (innerHeight - alt - h) / 2, innerHeight - h - 8)) + "px";
+  };
+  new ResizeObserver(yerles).observe(sec);
+  new MutationObserver(yerles).observe(document.body, { attributes: true, attributeFilter: ["class"] });
+  addEventListener("resize", yerles);
+  addEventListener("scroll", yerles);
   document.addEventListener("anasayfa", menuyeDon);
 })();
