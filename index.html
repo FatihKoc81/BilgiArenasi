@@ -38,6 +38,20 @@
 
 <script src="sorular.js"></script>
 <script>
+// milyonerSorulari {seviye1:[{soru,secenekler,cevap}]} -> SORULAR [[soru,[secenekler],dogruIndex]]
+var SORULAR = (function () {
+  if (typeof milyonerSorulari === "undefined") return typeof window.SORULAR !== "undefined" ? window.SORULAR : [];
+  return Object.keys(milyonerSorulari)
+    .sort((a, b) => parseInt(a.replace(/\D/g, "")) - parseInt(b.replace(/\D/g, "")))
+    .map(k => milyonerSorulari[k].map(q => {
+      const sec = q.secenekler || q.seceler || q.secenek || q.siklar || [];
+      let d = sec.findIndex(s => String(s).trim() === String(q.cevap).trim());
+      if (d < 0) d = 0;
+      return [q.soru, sec, d];
+    }));
+})();
+</script>
+<script>
 const KEY = "bilgiArenasi";
 const $ = id => document.getElementById(id);
 let st = { seviye: 1 };
