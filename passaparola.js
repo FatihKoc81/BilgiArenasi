@@ -184,6 +184,8 @@
   const css = document.createElement("style");
   css.textContent = `
   .btn.oval{border-radius:999px}
+  .ppRozet{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:#1d4ed8;color:#fff;font-size:12px;font-weight:700;vertical-align:middle;margin-right:6px;letter-spacing:0}
+  .ppRozet.b{width:40px;height:40px;font-size:16px}
   #pp.ppK{padding:14px 12px}
   #ppHarfler{position:relative;width:250px;height:250px;margin:0 auto 8px}
   .ppH{position:absolute;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#0d1426;border:1px solid #1d2540;font-weight:700;font-size:11px;line-height:1}
@@ -209,7 +211,7 @@
   const menuBtn = document.createElement("button");
   menuBtn.className = "btn ikinci oval";
   menuBtn.id = "ppAc";
-  menuBtn.textContent = "🔤 Passaparola";
+  menuBtn.innerHTML = '<span class="ppRozet">abc</span> Passaparola';
   ana.append(menuBtn);
 
   // ---------- Passaparola ekranı ----------
@@ -218,7 +220,7 @@
   sec.id = "pp";
   sec.innerHTML = `
     <div id="ppGiris">
-      <h2>🔤 Passaparola</h2>
+      <h2><span class="ppRozet b">abc</span> Passaparola</h2>
       <p class="alt">28 harf, ${SURE} saniye. Her harfin sorusunu bil, bilemezsen pas geç; pas geçilenlere sonra tekrar dönersin. Cevapları Türkçe karakterlerle yaz (ş, ç, ğ, ı, ö, ü).</p>
       <button class="btn" id="ppBasla">▶️ Başla</button>
       <button class="btn ikinci" id="ppGeri">Ana menü</button>
