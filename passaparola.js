@@ -183,18 +183,23 @@
   // ---------- Stil ----------
   const css = document.createElement("style");
   css.textContent = `
-  #ppHarfler{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:20px}
-  .ppH{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#0d1426;border:1px solid #1d2540;font-weight:700;font-size:15px}
-  .ppH.su{border-color:#ffe9c7;background:#3b0000;color:#ffe9c7}
+  #pp.ppK{padding:14px 12px}
+  #ppHarfler{position:relative;width:250px;height:250px;margin:0 auto 8px}
+  .ppH{position:absolute;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#0d1426;border:1px solid #1d2540;font-weight:700;font-size:11px;line-height:1}
+  .ppH.su{border-color:#ffe9c7;background:#3b0000;color:#ffe9c7;transform:scale(1.25);z-index:2}
   .ppH.d{background:#14532d;border-color:#22c55e}
   .ppH.y{background:#7f1d1d;border-color:#ef4444}
   .ppH.p{background:#5b4a14;border-color:#eab308}
-  #ppSoru{font-size:20px;line-height:1.45;margin-bottom:16px}
-  #ppCevap{width:100%;padding:16px;border-radius:16px;border:1px solid #1d2540;background:#0d1426;color:#fff;font:inherit;font-size:18px;text-align:center;outline:none}
+  #ppMerkez{position:absolute;inset:36px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+  #ppBuyuk{font-size:56px;font-weight:700;color:#ffe9c7;line-height:1}
+  #ppSure{font-size:20px;font-weight:700}
+  #ppPuan{font-size:14px;color:#8e9bc4}
+  #ppSoru{font-size:17px;line-height:1.35;margin-bottom:10px}
+  #ppCevap{width:100%;padding:12px;border-radius:16px;border:1px solid #1d2540;background:#0d1426;color:#fff;font:inherit;font-size:18px;text-align:center;outline:none}
   #ppCevap:focus{border-color:#8e9bc4}
-  #ppGeriBildirim{min-height:26px;margin-top:10px;font-weight:700}
+  #ppGeriBildirim{min-height:22px;margin-top:6px;font-weight:700}
   .ppSatir{display:flex;gap:10px}
-  .ppSatir .btn{margin-top:10px;padding:16px;font-size:18px}
+  .ppSatir .btn{margin-top:6px;padding:13px;font-size:17px}
   `;
   document.head.append(css);
 
@@ -219,8 +224,10 @@
       <button class="btn ikinci" id="ppGeri">Ana menü</button>
     </div>
     <div id="ppOyun" class="hidden">
-      <div class="ust"><b id="ppPuan"></b><span id="ppSure"></span></div>
-      <div id="ppHarfler"></div>
+      <div id="ppHarfler">
+        <div id="ppMerkez"><div id="ppBuyuk"></div><span id="ppSure"></span><b id="ppPuan"></b></div>
+        <div id="ppChips"></div>
+      </div>
       <p id="ppSoru"></p>
       <input id="ppCevap" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" placeholder="Cevabını yaz (Türkçe karakterle)">
       <p id="ppGeriBildirim"></p>
@@ -251,11 +258,15 @@
     giris.classList.toggle("hidden", b !== "giris");
     oyun.classList.toggle("hidden", b !== "oyun");
     son.classList.toggle("hidden", b !== "son");
+    sec.classList.toggle("ppK", b === "oyun");
+    document.querySelector("h1").style.display = b === "oyun" ? "none" : "";
   };
 
   function menuyeDon() {
     clearInterval(zaman);
     sec.classList.add("hidden");
+    sec.classList.remove("ppK");
+    document.querySelector("h1").style.display = "";
     ana.classList.remove("hidden");
   }
 
@@ -265,10 +276,13 @@
   }
 
   function ciz() {
-    $("ppHarfler").innerHTML = HARFLER.map((h, i) => {
+    $("ppChips").innerHTML = HARFLER.map((h, i) => {
       const c = ["", "d", "y", "p"][dur[i]];
-      return `<div class="ppH ${c} ${i === idx ? "su" : ""}">${h}</div>`;
+      const a = -Math.PI / 2 + i * 2 * Math.PI / HARFLER.length;
+      const x = 125 + 111 * Math.cos(a) - 12, y = 125 + 111 * Math.sin(a) - 12;
+      return `<div class="ppH ${c} ${i === idx ? "su" : ""}" style="left:${x.toFixed(1)}px;top:${y.toFixed(1)}px">${h}</div>`;
     }).join("");
+    $("ppBuyuk").textContent = HARFLER[idx];
     $("ppPuan").textContent = "✅ " + dur.filter(x => x === 1).length + " / " + HARFLER.length;
     $("ppSoru").textContent = HARFLER[idx] + " ile başlar: " + sorular[idx][0];
     sureYaz();
@@ -303,6 +317,7 @@
     bolum("oyun");
     ciz();
     inp.focus();
+    setTimeout(kaydir, 400);
     clearInterval(zaman);
     zaman = setInterval(() => {
       sure--;
@@ -357,5 +372,9 @@
   $("ppMenu").onclick = menuyeDon;
   $("ppGonder").onclick = gonder;
   $("ppPas").onclick = pas;
+  const kaydir = () => $("ppGonder").scrollIntoView({ block: "end", behavior: "smooth" });
+  inp.addEventListener("focus", () => setTimeout(kaydir, 400));
+  const mv = document.querySelector('meta[name="viewport"]');
+  if (mv && !/interactive-widget/.test(mv.content)) mv.content += ", interactive-widget=resizes-content";
   inp.addEventListener("keydown", e => { if (e.key === "Enter") gonder(); });
 })();
