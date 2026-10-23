@@ -1,156 +1,172 @@
 const milyonerSorulari = {
-    seviye1: [
-        {
-            soru: "Güneş sistemine en yakın olan yıldızın adı nedir?",
-            secenekler: ["Proxima Centauri", "Sirius", "Betelgeuse", "Vega"],
-            cevap: "Proxima Centauri"
-        },
-        {
-            soru: "Nobel Ödülleri hangi ülkede verilmektedir?",
-            secenekler: ["İsveç", "İsviçre", "Norveç", "Almanya"],
-            cevap: "İsveç"
-        },
-        {
-            soru: "Fatih Sultan Mehmet'in fethettiği Trabzon İmparatorluğu'na son veren devlet hangisidir?",
-            secenekler: ["Osmanlı İmparatorluğu", "Bizans İmparatorluğu", "Venedik Cumhuriyeti", "Akkoyunlular"],
-            cevap: "Osmanlı İmparatorluğu"
-        },
-        {
-            soru: "Kimya tablosunda 'Hg' simgesiyle gösterilen element hangisidir?",
-            secenekler: ["Cıva", "Gümüş", "Altın", "Bakır"],
-            cevap: "Cıva"
-        },
-        {
-            soru: "Uluslararası Para Fonu'nun (IMF) merkezi hangi şehirde bulunmaktadır?",
-            secenekler: ["Washington, D.C.", "New York", "Cenevre", "Brüksel"],
-            cevap: "Washington, D.C."
-        },
-        {
-            soru: "İstiklal Marşı'nın bestecisi kimdir?",
-            secenekler: ["Osman Zeki Üngör", "Zeki Müren", "Itri", "Ahmed Adnan Saygun"],
-            cevap: "Osman Zeki Üngör"
-        },
-        {
-            soru: "İnsan vücudundaki en uzun kemik hangisidir?",
-            secenekler: ["Uyluk kemiği (Femur)", "Kaval kemiği", "Pazu kemiği", "Leğen kemiği"],
-            cevap: "Uyluk kemiği (Femur)"
-        },
-        {
-            soru: "Mona Lisa tablosu hangi müzede sergilenmektedir?",
-            secenekler: ["Louvre Müzesi", "British Museum", "Metropolitan Sanat Müzesi", "Uffizi Galerisi"],
-            cevap: "Louvre Müzesi"
-        },
-        {
-            soru: "Dünyanın en derin okyanus çukuru hangisidir?",
-            secenekler: ["Mariana Çukuru", "Puerto Rico Çukuru", "Java Çukuru", "Sunda Çukuru"],
-            cevap: "Mariana Çukuru"
-        },
-        {
-            soru: "Aspirinin ham maddesi olan ağaç kabuğu aşağıdakilerden hangisidir?",
-            secenekler: ["Söğüt", "Meşe", "Kavak", "Çam"],
-            cevap: "Söğüt"
-        },
-        {
-            soru: "Hangi gezegenin halka sistemi çıplak gözle değilse bile teleskopla ilk kez Galileo tarafından gözlemlenmiştir?",
-            secenekler: ["Satürn", "Jüpiter", "Uranüs", "Neptün"],
-            cevap: "Satürn"
-        },
-        {
-            soru: "Türkiye'nin en yüksek dağı olan Ağrı Dağı hangi coğrafi bölgededir?",
-            secenekler: ["Doğu Anadolu", "İç Anadolu", "Karadeniz", "Güneydoğu Anadolu"],
-            cevap: "Doğu Anadolu"
-        },
-        {
-            soru: "Fransız İhtilali hangi yıl başlamıştır?",
-            secenekler: ["1789", "1776", "1815", "1489"],
-            cevap: "1789"
-        },
-        {
-            soru: "Matematikte 'sıfır' sayısını ilk kullanan medeniyetlerden biri hangisidir?",
-            secenekler: ["Hintliler", "Yunanlılar", "Romalılar", "Mısırlılar"],
-            cevap: "Hintliler"
-        },
-        {
-            soru: "Kanije Kalesi savunmasıyla tanınan Osmanlı veziri kimdir?",
-            secenekler: ["Tiryaki Hasan Paşa", "Sokollu Mehmet Paşa", "Karamürsel Bey", "Köprülü Fazıl Ahmet Paşa"],
-            cevap: "Tiryaki Hasan Paşa"
-        }
-    ],
-    seviye2: [
-        {
-            soru: "Hangi elementin simgesi 'Au' harfleridir?",
-            secenekler: ["Altın", "Gümüş", "Alüminyum", "Arsenik"],
-            cevap: "Altın"
-        },
-        {
-            soru: "Yerden yüksekliği en fazla olan şelale hangisidir?",
-            secenekler: ["Angel Şelalesi", "Niagara Şelalesi", "Iguazu Şelalesi", "Victoria Şelalesi"],
-            cevap: "Angel Şelalesi"
-        },
-        {
-            soru: "Hangi ülkenin bayrağında hiçbir geometrik şekil veya arma bulunmayıp sadece tek renk zemin üzerindedir?",
-            secenekler: ["Libya (Geçmişteki düz yeşil bayrak dönemi referansı / güncel benzerlikler)", "Japonya", "İsviçre", "Nepal"],
-            cevap: "Libya"
-        },
-        {
-            soru: "Buhar makinesini geliştirerek sanayi devriminin önünü açan bilim insanı kimdir?",
-            secenekler: ["James Watt", "Thomas Edison", "Nikola Tesla", "Alexander Graham Bell"],
-            cevap: "James Watt"
-        },
-        {
-            soru: "Tiyatroda üç birlik kuralını savunan, Klasisizm akımının öncülerinden olan Fransız oyun yazarı kimdir?",
-            secenekler: ["Molière", "Victor Hugo", "William Shakespeare", "Goethe"],
-            cevap: "Molière"
-        },
-        {
-            soru: "Hangi element periyodik tablonun birinci grubunun ilk elementidir ve evrende en çok bulunan gazdır?",
-            secenekler: ["Hidrojen", "Helyum", "Oksijen", "Azot"],
-            cevap: "Hidrojen"
-        },
-        {
-            soru: "Türk edebiyatının ilk yerli romanı olan 'Taaşşuk-u Talat ve Fitnat'ın yazarı kimdir?",
-            secenekler: ["Şemsettin Sami", "Namık Kemal", "Halit Ziya Uşaklıgil", "Recaizade Mahmud Ekrem"],
-            cevap: "Şemsettin Sami"
-        },
-        {
-            soru: "Roma İmparatorluğu'nu Doğu ve Batı olarak ikiye ayıran imparator kimdir?",
-            secenekler: ["I. Theodosius", "Jülyar Sezar", "Neron", "Konstantin"],
-            cevap: "I. Theodosius"
-        },
-        {
-            soru: "Hangi ülkenin başkenti Canberra'dır?",
-            secenekler: ["Avustralya", "Yeni Zelanda", "Kanada", "Güney Afrika"],
-            cevap: "Avustralya"
-        },
-        {
-            soru: "Hangi organımızda insülin hormonu üretilir?",
-            secenekler: ["Pankreas", "Karaciğer", "Böbrek", "Mide"],
-            cevap: "Pankreas"
-        },
-        {
-            soru: "Kuantum teorisinin kurucularından olan ve enerji paketçikleri kavramını ortaya atan Alman fizikçi kimdir?",
-            secenekler: ["Max Planck", "Albert Einstein", "Niels Bohr", "Erwin Schrödinger"],
-            cevap: "Max Planck"
-        },
-        {
-            soru: "Anadolu Selçuklu Devleti'nin başkenti olan şehir hangisidir?",
-            secenekler: ["Konya", "İznik", "Bursa", "Sivas"],
-            cevap: "Konya"
-        },
-        {
-            soru: "Hangi deniz, Atlas Okyanusu'na kıyısı olmayıp sadece Avrupa, Asya ve Afrika arasında yer alır?",
-            secenekler: ["Akdeniz", "Karadeniz", "Kızıldeniz", "Baltık Denizi"],
-            cevap: "Akdeniz"
-        },
-        {
-            soru: "Hangi yazar 'Suç ve Ceza' romanının yazarıdır?",
-            secenekler: ["Dostoyevski", "Tolstoy", "Gogol", "Çehov"],
-            cevap: "Dostoyevski"
-        },
-        {
-            soru: "Türkiye'nin UNESCO Dünya Miras Listesi'nde yer alan ilk antik kenti veya kalıntısı aşağıdakilerden hangisidir? (İlk eklenenlerden)",
-            secenekler: ["Göreme Millî Parkı ve Kapadokya", "Ephesus", "Truva Antik Kenti", "Hierapolis"],
-            cevap: "Göreme Millî Parkı ve Kapadokya"
-        }
-    ]
+  seviye1: [
+    { soru: "Türkiye'nin başkenti neresidir?", secenekler: ["İstanbul", "Ankara", "İzmir", "Bursa"], cevap: "Ankara" },
+    { soru: "Hangi hayvan 'ormanların kralı' olarak bilinir?", secenekler: ["Kaplan", "Ayı", "Kurt", "Aslan"], cevap: "Aslan" },
+    { soru: "Gökkuşağında kaç renk vardır?", secenekler: ["5", "6", "7", "9"], cevap: "7" },
+    { soru: "Dünya'nın doğal uydusu hangisidir?", secenekler: ["Ay", "Mars", "Venüs", "Güneş"], cevap: "Ay" },
+    { soru: "Su, deniz seviyesinde kaç derecede kaynar?", secenekler: ["90 °C", "80 °C", "100 °C", "120 °C"], cevap: "100 °C" },
+    { soru: "Hangisi bir meyve değildir?", secenekler: ["Havuç", "Armut", "Elma", "Muz"], cevap: "Havuç" },
+    { soru: "Futbolda bir takım sahada kaç oyuncuyla yer alır?", secenekler: ["9", "12", "11", "10"], cevap: "11" },
+    { soru: "Türkiye'nin en kalabalık şehri hangisidir?", secenekler: ["Ankara", "Konya", "İzmir", "İstanbul"], cevap: "İstanbul" },
+    { soru: "Hangi gezegen 'Kızıl Gezegen' olarak bilinir?", secenekler: ["Jüpiter", "Mars", "Venüs", "Satürn"], cevap: "Mars" },
+    { soru: "Arılar hangi besini üretir?", secenekler: ["İpek", "Yumurta", "Bal", "Süt"], cevap: "Bal" },
+    { soru: "Dünyanın en büyük okyanusu hangisidir?", secenekler: ["Arktik Okyanusu", "Pasifik Okyanusu", "Hint Okyanusu", "Atlas Okyanusu"], cevap: "Pasifik Okyanusu" },
+    { soru: "Vücudumuzda kanı pompalayan organ hangisidir?", secenekler: ["Böbrek", "Kalp", "Akciğer", "Karaciğer"], cevap: "Kalp" },
+    { soru: "Türk bayrağındaki renkler hangileridir?", secenekler: ["Kırmızı ve yeşil", "Sarı ve kırmızı", "Kırmızı ve beyaz", "Mavi ve beyaz"], cevap: "Kırmızı ve beyaz" },
+    { soru: "Hangi hayvan yumurtlayarak ürer?", secenekler: ["At", "Tavuk", "İnek", "Koyun"], cevap: "Tavuk" },
+    { soru: "Mısır'daki ünlü piramitler hangi kıtadadır?", secenekler: ["Avrupa", "Asya", "Güney Amerika", "Afrika"], cevap: "Afrika" },
+  ],
+  seviye2: [
+    { soru: "Türkiye'nin en yüksek dağı hangisidir?", secenekler: ["Uludağ", "Erciyes Dağı", "Ağrı Dağı", "Kaçkar Dağı"], cevap: "Ağrı Dağı" },
+    { soru: "Hangi ülke 'Doğan Güneşin Ülkesi' olarak bilinir?", secenekler: ["Kore", "Tayland", "Çin", "Japonya"], cevap: "Japonya" },
+    { soru: "Eyfel Kulesi hangi şehirdedir?", secenekler: ["Madrid", "Londra", "Roma", "Paris"], cevap: "Paris" },
+    { soru: "Mona Lisa tablosunun ressamı kimdir?", secenekler: ["Michelangelo", "Van Gogh", "Picasso", "Leonardo da Vinci"], cevap: "Leonardo da Vinci" },
+    { soru: "Su formülündeki (H2O) 'H' hangi elementi gösterir?", secenekler: ["Helyum", "Azot", "Oksijen", "Hidrojen"], cevap: "Hidrojen" },
+    { soru: "Dünyanın en büyük kıtası hangisidir?", secenekler: ["Afrika", "Avrupa", "Asya", "Kuzey Amerika"], cevap: "Asya" },
+    { soru: "İstanbul Boğazı hangi iki denizi birbirine bağlar?", secenekler: ["Ege ve Akdeniz", "Marmara ve Ege", "Karadeniz ve Marmara", "Karadeniz ve Akdeniz"], cevap: "Karadeniz ve Marmara" },
+    { soru: "Raket ve file kullanılan spor hangisidir?", secenekler: ["Okçuluk", "Tenis", "Güreş", "Yüzme"], cevap: "Tenis" },
+    { soru: "Türkiye'nin en büyük gölü hangisidir?", secenekler: ["Van Gölü", "Beyşehir Gölü", "Eğirdir Gölü", "Tuz Gölü"], cevap: "Van Gölü" },
+    { soru: "'Romeo ve Juliet' oyununun yazarı kimdir?", secenekler: ["Victor Hugo", "William Shakespeare", "Goethe", "Charles Dickens"], cevap: "William Shakespeare" },
+    { soru: "Güneş'e en yakın gezegen hangisidir?", secenekler: ["Merkür", "Mars", "Dünya", "Venüs"], cevap: "Merkür" },
+    { soru: "Güneş ışığıyla vücudumuzda üretilen vitamin hangisidir?", secenekler: ["A vitamini", "D vitamini", "B12 vitamini", "C vitamini"], cevap: "D vitamini" },
+    { soru: "Ankara hangi coğrafi bölgemizdedir?", secenekler: ["Ege", "Karadeniz", "Marmara", "İç Anadolu"], cevap: "İç Anadolu" },
+    { soru: "Dünyanın bilinen en büyük hayvanı hangisidir?", secenekler: ["Köpekbalığı", "Fil", "Mavi balina", "Zürafa"], cevap: "Mavi balina" },
+    { soru: "Brezilya'nın resmi dili hangisidir?", secenekler: ["Portekizce", "İspanyolca", "Fransızca", "İngilizce"], cevap: "Portekizce" },
+  ],
+  seviye3: [
+    { soru: "İstanbul hangi yıl fethedilmiştir?", secenekler: ["1071", "1453", "1517", "1299"], cevap: "1453" },
+    { soru: "Mimar Sinan'ın 'ustalık eserim' dediği yapı hangisidir?", secenekler: ["Selimiye Camii", "Süleymaniye Camii", "Şehzade Camii", "Sultanahmet Camii"], cevap: "Selimiye Camii" },
+    { soru: "Güneş Sistemi'nin en büyük gezegeni hangisidir?", secenekler: ["Jüpiter", "Uranüs", "Neptün", "Satürn"], cevap: "Jüpiter" },
+    { soru: "Kanada'nın başkenti neresidir?", secenekler: ["Toronto", "Ottawa", "Montreal", "Vancouver"], cevap: "Ottawa" },
+    { soru: "Altının kimyasal sembolü nedir?", secenekler: ["Fe", "Au", "Ag", "Al"], cevap: "Au" },
+    { soru: "Yetişkin bir insanda kaç diş bulunur?", secenekler: ["36", "30", "28", "32"], cevap: "32" },
+    { soru: "Dünyanın en yüksek dağı hangisidir?", secenekler: ["Mont Blanc", "K2", "Kilimanjaro", "Everest"], cevap: "Everest" },
+    { soru: "Pamukkale travertenleri hangi ilimizdedir?", secenekler: ["Denizli", "Uşak", "Aydın", "Muğla"], cevap: "Denizli" },
+    { soru: "İstiklal Marşı'nın şairi kimdir?", secenekler: ["Tevfik Fikret", "Mehmet Akif Ersoy", "Ziya Gökalp", "Namık Kemal"], cevap: "Mehmet Akif Ersoy" },
+    { soru: "Antik Olimpiyat Oyunları hangi ülkede başlamıştır?", secenekler: ["Yunanistan", "İtalya", "Mısır", "Türkiye"], cevap: "Yunanistan" },
+    { soru: "Bitkiler fotosentez sırasında havadan hangi gazı alır?", secenekler: ["Karbondioksit", "Oksijen", "Hidrojen", "Azot"], cevap: "Karbondioksit" },
+    { soru: "Hem suda hem karada yaşayabilen canlılara ne ad verilir?", secenekler: ["Kuş", "Amfibi (iki yaşamlı)", "Memeli", "Sürüngen"], cevap: "Amfibi (iki yaşamlı)" },
+    { soru: "Japonya'nın para birimi nedir?", secenekler: ["Ringgit", "Won", "Yen", "Yuan"], cevap: "Yen" },
+    { soru: "'Kuyucaklı Yusuf' romanının yazarı kimdir?", secenekler: ["Yaşar Kemal", "Sabahattin Ali", "Orhan Pamuk", "Nâzım Hikmet"], cevap: "Sabahattin Ali" },
+    { soru: "Beethoven hangi alanda ünlüdür?", secenekler: ["Resim", "Mimarlık", "Heykel", "Müzik (besteci)"], cevap: "Müzik (besteci)" },
+  ],
+  seviye4: [
+    { soru: "Kapadokya ve peribacaları en çok hangi ilimizle anılır?", secenekler: ["Nevşehir", "Aksaray", "Kayseri", "Niğde"], cevap: "Nevşehir" },
+    { soru: "Mevlânâ'nın türbesi hangi şehirdedir?", secenekler: ["Bursa", "Konya", "Kayseri", "Sivas"], cevap: "Konya" },
+    { soru: "Halkalarıyla ünlü gezegen hangisidir?", secenekler: ["Venüs", "Satürn", "Mars", "Merkür"], cevap: "Satürn" },
+    { soru: "Eski Mısırlıların kullandığı yazı sistemi hangisidir?", secenekler: ["Runik yazı", "Latin alfabesi", "Hiyeroglif", "Çivi yazısı"], cevap: "Hiyeroglif" },
+    { soru: "Çanakkale Boğazı hangi iki denizi birleştirir?", secenekler: ["Marmara ve Ege", "Karadeniz ve Marmara", "Ege ve Akdeniz", "Marmara ve Akdeniz"], cevap: "Marmara ve Ege" },
+    { soru: "Işığın boşluktaki hızı yaklaşık kaç km/sn'dir?", secenekler: ["3.000.000", "300.000", "3.000", "30.000"], cevap: "300.000" },
+    { soru: "Yer çekimi yasasıyla ünlenen bilim insanı kimdir?", secenekler: ["Isaac Newton", "Tesla", "Einstein", "Galileo"], cevap: "Isaac Newton" },
+    { soru: "Amazon Nehri hangi kıtadadır?", secenekler: ["Asya", "Güney Amerika", "Avrupa", "Afrika"], cevap: "Güney Amerika" },
+    { soru: "Osmanlı Devleti'nin kurucusu kimdir?", secenekler: ["I. Murad", "Orhan Bey", "Ertuğrul Gazi", "Osman Bey"], cevap: "Osman Bey" },
+    { soru: "Nobel Edebiyat Ödülü'nü kazanan ilk Türk yazar kimdir?", secenekler: ["Yaşar Kemal", "Nâzım Hikmet", "Orhan Pamuk", "Elif Şafak"], cevap: "Orhan Pamuk" },
+    { soru: "Periyodik tablodaki en hafif element hangisidir?", secenekler: ["Hidrojen", "Lityum", "Karbon", "Helyum"], cevap: "Hidrojen" },
+    { soru: "Dünyanın en küçük ülkesi hangisidir?", secenekler: ["San Marino", "Lihtenştayn", "Monako", "Vatikan"], cevap: "Vatikan" },
+    { soru: "İzmir hangi denizin kıyısındadır?", secenekler: ["Ege Denizi", "Marmara Denizi", "Karadeniz", "Akdeniz"], cevap: "Ege Denizi" },
+    { soru: "Standart bir piyanoda kaç tuş bulunur?", secenekler: ["100", "92", "76", "88"], cevap: "88" },
+    { soru: "Bugünkü Ayasofya'yı yaptıran Bizans imparatoru kimdir?", secenekler: ["Büyük Konstantin", "I. Justinianus", "Herakleios", "II. Basileios"], cevap: "I. Justinianus" },
+  ],
+  seviye5: [
+    { soru: "Malazgirt Savaşı hangi yıl yapılmıştır?", secenekler: ["1071", "1243", "1402", "1176"], cevap: "1071" },
+    { soru: "Kanuni Sultan Süleyman şiirlerinde hangi mahlası kullanmıştır?", secenekler: ["Muhibbî", "Fuzulî", "Nedîm", "Bâkî"], cevap: "Muhibbî" },
+    { soru: "'Savaş ve Barış' romanının yazarı kimdir?", secenekler: ["Dostoyevski", "Gogol", "Lev Tolstoy", "Çehov"], cevap: "Lev Tolstoy" },
+    { soru: "Hücrenin 'enerji santrali' olarak bilinen organeli hangisidir?", secenekler: ["Mitokondri", "Golgi aygıtı", "Çekirdek", "Ribozom"], cevap: "Mitokondri" },
+    { soru: "Avustralya'nın başkenti neresidir?", secenekler: ["Canberra", "Perth", "Sidney", "Melbourne"], cevap: "Canberra" },
+    { soru: "Dünya atmosferinde en fazla bulunan gaz hangisidir?", secenekler: ["Argon", "Karbondioksit", "Azot", "Oksijen"], cevap: "Azot" },
+    { soru: "Çivi yazısını geliştiren uygarlık hangisidir?", secenekler: ["Romalılar", "Sümerler", "Hititler", "Mısırlılar"], cevap: "Sümerler" },
+    { soru: "Sultanahmet Camii'nin mimarı kimdir?", secenekler: ["Sedefkâr Mehmed Ağa", "Mimar Kemaleddin", "Davud Ağa", "Mimar Sinan"], cevap: "Sedefkâr Mehmed Ağa" },
+    { soru: "Mozart hangi ülkede doğmuştur?", secenekler: ["Almanya", "Fransa", "İtalya", "Avusturya"], cevap: "Avusturya" },
+    { soru: "Ozon tabakası atmosferin hangi katmanında bulunur?", secenekler: ["Troposfer", "Stratosfer", "Termosfer", "Mezosfer"], cevap: "Stratosfer" },
+    { soru: "Rönesans hareketi hangi ülkede başlamıştır?", secenekler: ["İspanya", "Fransa", "İtalya", "İngiltere"], cevap: "İtalya" },
+    { soru: "Türkiye'nin en uzun nehri hangisidir?", secenekler: ["Yeşilırmak", "Kızılırmak", "Sakarya", "Fırat"], cevap: "Kızılırmak" },
+    { soru: "Bilgisayarlarda 'CPU' neyin kısaltmasıdır?", secenekler: ["Bellek Birimi", "Güç Kaynağı", "Ekran Kartı", "Merkezi İşlem Birimi"], cevap: "Merkezi İşlem Birimi" },
+    { soru: "Kuzey Işıkları (Aurora Borealis) en çok hangi bölgede görülür?", secenekler: ["Kutup bölgeleri", "Çöller", "Tropikal ormanlar", "Ekvator"], cevap: "Kutup bölgeleri" },
+    { soru: "'Yıldızlı Gece' tablosunun ressamı kimdir?", secenekler: ["Salvador Dalí", "Rembrandt", "Vincent van Gogh", "Claude Monet"], cevap: "Vincent van Gogh" },
+  ],
+  seviye6: [
+    { soru: "Birinci Dünya Savaşı hangi yıl başlamıştır?", secenekler: ["1918", "1914", "1939", "1905"], cevap: "1914" },
+    { soru: "Modern Olimpiyat Oyunları ilk kez hangi şehirde düzenlenmiştir?", secenekler: ["Paris", "Atina", "Roma", "Londra"], cevap: "Atina" },
+    { soru: "Görelilik kuramını ortaya atan bilim insanı kimdir?", secenekler: ["Stephen Hawking", "Max Planck", "Albert Einstein", "Niels Bohr"], cevap: "Albert Einstein" },
+    { soru: "'Suç ve Ceza' romanının yazarı kimdir?", secenekler: ["Fyodor Dostoyevski", "Puşkin", "Tolstoy", "Turgenyev"], cevap: "Fyodor Dostoyevski" },
+    { soru: "Magna Carta hangi ülkede imzalanmıştır?", secenekler: ["İngiltere", "Almanya", "Fransa", "İspanya"], cevap: "İngiltere" },
+    { soru: "Asya ile Avrupa'yı ayıran dağ silsilesi hangisidir?", secenekler: ["Ural Dağları", "Kafkaslar", "Pireneler", "Alpler"], cevap: "Ural Dağları" },
+    { soru: "Seine Nehri hangi şehirden geçer?", secenekler: ["Viyana", "Roma", "Berlin", "Paris"], cevap: "Paris" },
+    { soru: "'Çalıkuşu' romanının yazarı kimdir?", secenekler: ["Reşat Nuri Güntekin", "Peyami Safa", "Halide Edip Adıvar", "Refik Halit Karay"], cevap: "Reşat Nuri Güntekin" },
+    { soru: "Pi sayısının yaklaşık değeri nedir?", secenekler: ["3,14", "1,61", "3,41", "2,71"], cevap: "3,14" },
+    { soru: "İnsanın Ay'a ilk ayak bastığı Apollo 11 görevi hangi yıl gerçekleşmiştir?", secenekler: ["1969", "1975", "1961", "1957"], cevap: "1969" },
+    { soru: "Hangi kan grubu 'evrensel verici' olarak bilinir?", secenekler: ["A Rh pozitif", "0 Rh negatif", "AB Rh pozitif", "B Rh negatif"], cevap: "0 Rh negatif" },
+    { soru: "Efes Antik Kenti hangi ilimizin sınırları içindedir?", secenekler: ["Muğla", "Aydın", "İzmir", "Manisa"], cevap: "İzmir" },
+    { soru: "Güney Amerika'nın batısında uzanan büyük dağ silsilesi hangisidir?", secenekler: ["Atlas Dağları", "And Dağları", "Himalayalar", "Kaya Dağları"], cevap: "And Dağları" },
+    { soru: "Voltaire hangi ülkenin düşünürüdür?", secenekler: ["Fransa", "İngiltere", "Almanya", "İtalya"], cevap: "Fransa" },
+    { soru: "Dünyanın en büyük sıcak çölü hangisidir?", secenekler: ["Arabistan Çölü", "Gobi Çölü", "Kalahari Çölü", "Sahra Çölü"], cevap: "Sahra Çölü" },
+  ],
+  seviye7: [
+    { soru: "Fransız İhtilali hangi yıl başlamıştır?", secenekler: ["1848", "1776", "1789", "1815"], cevap: "1789" },
+    { soru: "Ankara Savaşı'nda Yıldırım Bayezid kimin karşısında yenilmiştir?", secenekler: ["Şah İsmail", "Cengiz Han", "Uzun Hasan", "Timur"], cevap: "Timur" },
+    { soru: "'Simyacı' romanının yazarı kimdir?", secenekler: ["Umberto Eco", "Gabriel García Márquez", "Dan Brown", "Paulo Coelho"], cevap: "Paulo Coelho" },
+    { soru: "Mariana Çukuru hangi okyanustadır?", secenekler: ["Arktik Okyanusu", "Atlas Okyanusu", "Hint Okyanusu", "Pasifik Okyanusu"], cevap: "Pasifik Okyanusu" },
+    { soru: "Demirin kimyasal sembolü nedir?", secenekler: ["Ir", "Fe", "Dm", "De"], cevap: "Fe" },
+    { soru: "'Leyla ile Mecnun' mesnevisinin Türk edebiyatındaki en ünlü yazarı kimdir?", secenekler: ["Fuzulî", "Bâkî", "Nef'î", "Şeyh Galip"], cevap: "Fuzulî" },
+    { soru: "Berlin Duvarı hangi yıl yıkılmıştır?", secenekler: ["1991", "1961", "1989", "1975"], cevap: "1989" },
+    { soru: "Işık yılı neyin ölçü birimidir?", secenekler: ["Parlaklık", "Uzaklık", "Zaman", "Hız"], cevap: "Uzaklık" },
+    { soru: "Osmanlı'da Divan-ı Hümayun'a kim başkanlık ederdi?", secenekler: ["Sadrazam", "Şeyhülislam", "Defterdar", "Kaptan-ı Derya"], cevap: "Sadrazam" },
+    { soru: "'Düşünen Adam' heykelinin sanatçısı kimdir?", secenekler: ["Auguste Rodin", "Henry Moore", "Michelangelo", "Donatello"], cevap: "Auguste Rodin" },
+    { soru: "Kuşları inceleyen bilim dalı hangisidir?", secenekler: ["İhtiyoloji", "Entomoloji", "Herpetoloji", "Ornitoloji"], cevap: "Ornitoloji" },
+    { soru: "Avrupa'da modern matbaayı geliştiren kişi kimdir?", secenekler: ["Leonardo da Vinci", "Johannes Gutenberg", "Galileo", "Martin Luther"], cevap: "Johannes Gutenberg" },
+    { soru: "İspanya'ya geçen ve 711'de çıkarma yapan Müslüman komutan kimdir?", secenekler: ["Musa bin Nusayr", "Halid bin Velid", "Tarık bin Ziyad", "Amr bin As"], cevap: "Tarık bin Ziyad" },
+    { soru: "DNA'nın yapısını çift sarmal olarak tanımlayan bilim insanları kimlerdir?", secenekler: ["Mendel ve Darwin", "Curie ve Bohr", "Pasteur ve Koch", "Watson ve Crick"], cevap: "Watson ve Crick" },
+    { soru: "'1984' romanının yazarı kimdir?", secenekler: ["Aldous Huxley", "Ray Bradbury", "H. G. Wells", "George Orwell"], cevap: "George Orwell" },
+  ],
+  seviye8: [
+    { soru: "Lale Devri hangi Osmanlı padişahı döneminde yaşanmıştır?", secenekler: ["III. Selim", "IV. Murad", "III. Ahmed", "II. Mahmud"], cevap: "III. Ahmed" },
+    { soru: "Büyük Selçuklu Devleti'nin kurucusu kimdir?", secenekler: ["Sencer", "Alp Arslan", "Tuğrul Bey", "Melikşah"], cevap: "Tuğrul Bey" },
+    { soru: "Periyodik tabloyu geliştiren bilim insanı kimdir?", secenekler: ["Dmitri Mendeleyev", "Dalton", "Rutherford", "Lavoisier"], cevap: "Dmitri Mendeleyev" },
+    { soru: "'İlahi Komedya' eserinin yazarı kimdir?", secenekler: ["Dante Alighieri", "Boccaccio", "Machiavelli", "Petrarca"], cevap: "Dante Alighieri" },
+    { soru: "Büyük İskender'in hocası olan Yunan filozof kimdir?", secenekler: ["Sokrates", "Aristoteles", "Platon", "Pisagor"], cevap: "Aristoteles" },
+    { soru: "Telefonun mucidi olarak bilinen kişi kimdir?", secenekler: ["Alexander Graham Bell", "Marconi", "Nikola Tesla", "Thomas Edison"], cevap: "Alexander Graham Bell" },
+    { soru: "Napolyon'un son yenilgisini aldığı savaş hangisidir?", secenekler: ["Borodino Savaşı", "Leipzig Savaşı", "Austerlitz Savaşı", "Waterloo Savaşı"], cevap: "Waterloo Savaşı" },
+    { soru: "Tarihte Avrupa ile Çin'i bağlayan ticaret yolu hangisidir?", secenekler: ["Baharat Yolu", "Kral Yolu", "İpek Yolu", "Amber Yolu"], cevap: "İpek Yolu" },
+    { soru: "Dünyanın en yüksek şelalesi hangisidir?", secenekler: ["Iguazu Şelalesi", "Angel Şelalesi", "Victoria Şelalesi", "Niagara Şelalesi"], cevap: "Angel Şelalesi" },
+    { soru: "Evliya Çelebi'nin ünlü eseri hangisidir?", secenekler: ["Tezkire", "Cihannüma", "Seyahatname", "Siyasetname"], cevap: "Seyahatname" },
+    { soru: "Yeniçeri Ocağı hangi padişah döneminde kaldırılmıştır?", secenekler: ["Abdülmecid", "IV. Mehmed", "II. Mahmud", "III. Selim"], cevap: "II. Mahmud" },
+    { soru: "İnsülin hormonunu hangi organ salgılar?", secenekler: ["Karaciğer", "Mide", "Pankreas", "Dalak"], cevap: "Pankreas" },
+    { soru: "Hammurabi Kanunları hangi uygarlığa aittir?", secenekler: ["Babil", "Asur", "Hitit", "Mısır"], cevap: "Babil" },
+    { soru: "'Dönüşüm' adlı eserin yazarı kimdir?", secenekler: ["Stefan Zweig", "Thomas Mann", "Hermann Hesse", "Franz Kafka"], cevap: "Franz Kafka" },
+    { soru: "Tanzimat Fermanı hangi yıl ilan edilmiştir?", secenekler: ["1856", "1839", "1808", "1876"], cevap: "1839" },
+  ],
+  seviye9: [
+    { soru: "Konstantinopolis şehrini başkent olarak kuran Roma imparatoru kimdir?", secenekler: ["Theodosius", "Büyük Konstantin", "Augustus", "Nero"], cevap: "Büyük Konstantin" },
+    { soru: "Mohaç Meydan Muharebesi hangi yıl yapılmıştır?", secenekler: ["1571", "1514", "1453", "1526"], cevap: "1526" },
+    { soru: "Belirsizlik ilkesiyle tanınan fizikçi kimdir?", secenekler: ["Werner Heisenberg", "Max Born", "Enrico Fermi", "Paul Dirac"], cevap: "Werner Heisenberg" },
+    { soru: "Buhar makinesini geliştirerek Sanayi Devrimi'ne katkı yapan mucit kimdir?", secenekler: ["Richard Arkwright", "Thomas Newcomen", "George Stephenson", "James Watt"], cevap: "James Watt" },
+    { soru: "İnsan vücudundaki hücrelerin çekirdeğinde normalde kaç kromozom bulunur?", secenekler: ["46", "44", "23", "48"], cevap: "46" },
+    { soru: "Roma İmparatorluğu'nun Doğu ve Batı olarak kalıcı biçimde ikiye ayrıldığı yıl hangisidir?", secenekler: ["527", "395", "330", "476"], cevap: "395" },
+    { soru: "'Don Kişot' romanının yazarı kimdir?", secenekler: ["Gabriel García Márquez", "Calderón", "Lope de Vega", "Miguel de Cervantes"], cevap: "Miguel de Cervantes" },
+    { soru: "Radyoaktivite çalışmalarıyla iki farklı dalda Nobel kazanan bilim insanı kimdir?", secenekler: ["Rosalind Franklin", "Dorothy Hodgkin", "Marie Curie", "Lise Meitner"], cevap: "Marie Curie" },
+    { soru: "Amerikan Bağımsızlık Bildirgesi hangi yıl ilan edilmiştir?", secenekler: ["1776", "1789", "1783", "1812"], cevap: "1776" },
+    { soru: "Edirne'yi fethedip başkent yapan Osmanlı padişahı kimdir?", secenekler: ["II. Murad", "Yıldırım Bayezid", "I. Murad", "I. Mehmed"], cevap: "I. Murad" },
+    { soru: "Garip akımının öncülerinden biri olan şair kimdir?", secenekler: ["Ahmet Haşim", "Cahit Sıtkı Tarancı", "Necip Fazıl Kısakürek", "Orhan Veli Kanık"], cevap: "Orhan Veli Kanık" },
+    { soru: "Dünyanın en derin gölü hangisidir?", secenekler: ["Baykal Gölü", "Victoria Gölü", "Tanganyika Gölü", "Superior Gölü"], cevap: "Baykal Gölü" },
+    { soru: "Cihannüma adlı coğrafya eserinin yazarı kimdir?", secenekler: ["Kâtip Çelebi", "Piri Reis", "Katip Salih", "Evliya Çelebi"], cevap: "Kâtip Çelebi" },
+    { soru: "Dinamiti icat eden kişi kimdir?", secenekler: ["Alfred Nobel", "Marie Curie", "Ernest Rutherford", "Robert Oppenheimer"], cevap: "Alfred Nobel" },
+    { soru: "Piri Reis'in ünlü dünya haritasını hangi padişaha sunmuştur?", secenekler: ["Yavuz Sultan Selim", "Kanuni Sultan Süleyman", "Fatih Sultan Mehmed", "II. Bayezid"], cevap: "Yavuz Sultan Selim" },
+  ],
+  seviye10: [
+    { soru: "Preveze Deniz Savaşı'nda Osmanlı donanmasının komutanı kimdi?", secenekler: ["Turgut Reis", "Kılıç Ali Paşa", "Barbaros Hayreddin Paşa", "Piri Reis"], cevap: "Barbaros Hayreddin Paşa" },
+    { soru: "Fatih'in İstanbul kuşatmasında kullanılan büyük topları döken Macar usta kimdir?", secenekler: ["Orban Kasım", "Dracula", "Urban", "Vlad"], cevap: "Urban" },
+    { soru: "Avrupa'da Otuz Yıl Savaşları'nı sona erdiren antlaşma hangisidir?", secenekler: ["Utrecht Antlaşması", "Viyana Antlaşması", "Vestfalya Antlaşması", "Versay Antlaşması"], cevap: "Vestfalya Antlaşması" },
+    { soru: "Miryokefalon Savaşı'nda Bizans'ı yenen Anadolu Selçuklu sultanı kimdir?", secenekler: ["I. Mesud", "II. Mesud", "II. Kılıç Arslan", "I. Kılıç Arslan"], cevap: "II. Kılıç Arslan" },
+    { soru: "Karlofça Antlaşması hangi yıl imzalanmıştır?", secenekler: ["1718", "1699", "1774", "1683"], cevap: "1699" },
+    { soru: "'Sefiller' romanının yazarı kimdir?", secenekler: ["Émile Zola", "Honoré de Balzac", "Victor Hugo", "Gustave Flaubert"], cevap: "Victor Hugo" },
+    { soru: "Kuantum fiziğinde ünlü 'kedi' düşünce deneyini ortaya atan fizikçi kimdir?", secenekler: ["Louis de Broglie", "Max Planck", "Erwin Schrödinger", "Niels Bohr"], cevap: "Erwin Schrödinger" },
+    { soru: "Rosetta Taşı'nı çözerek Mısır hiyerogliflerinin okunmasını sağlayan bilim insanı kimdir?", secenekler: ["Auguste Mariette", "Jean-François Champollion", "Howard Carter", "Heinrich Schliemann"], cevap: "Jean-François Champollion" },
+    { soru: "'Ulysses' romanının yazarı kimdir?", secenekler: ["James Joyce", "Virginia Woolf", "Marcel Proust", "Samuel Beckett"], cevap: "James Joyce" },
+    { soru: "Atom çekirdeğinde bulunan yüksüz parçacık hangisidir?", secenekler: ["Pozitron", "Proton", "Nötron", "Elektron"], cevap: "Nötron" },
+    { soru: "Birinci Haçlı Seferi'ni başlatan çağrıyı yapan Papa kimdir?", secenekler: ["IV. Alexander", "III. Innocentius", "II. Urbanus", "VII. Gregorius"], cevap: "II. Urbanus" },
+    { soru: "Yavuz Sultan Selim'in Ridaniye Savaşı'yla sonunu getirdiği devlet hangisidir?", secenekler: ["Memlükler", "Eyyubiler", "Akkoyunlular", "Safeviler"], cevap: "Memlükler" },
+    { soru: "'Usta ile Margarita' romanının yazarı kimdir?", secenekler: ["Maksim Gorki", "Mihail Bulgakov", "Boris Pasternak", "Vladimir Nabokov"], cevap: "Mihail Bulgakov" },
+    { soru: "Göbeklitepe'nin yaşı yaklaşık kaç yıldır?", secenekler: ["20.000", "12.000", "5.000", "8.000"], cevap: "12.000" },
+    { soru: "Göbeklitepe hangi ilimizdedir?", secenekler: ["Diyarbakır", "Mardin", "Şanlıurfa", "Gaziantep"], cevap: "Şanlıurfa" },
+  ],
 };
