@@ -377,4 +377,7 @@
   const mv = document.querySelector('meta[name="viewport"]');
   if (mv && !/interactive-widget/.test(mv.content)) mv.content += ", interactive-widget=resizes-content";
   inp.addEventListener("keydown", e => { if (e.key === "Enter") gonder(); });
+
+  // Başlığa tıklanınca (ortak.js) süreyi durdur ve temizle
+  document.addEventListener("anasayfa", menuyeDon);
 })();
