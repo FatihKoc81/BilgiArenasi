@@ -82,4 +82,3 @@ const SORULAR = [
     ["Fermat'ın son teoremini kanıtlayan matematikçi kimdir?", ["Andrew Wiles", "Euler", "Gauss", "Perelman"], 0]
   ]
 ];
-
