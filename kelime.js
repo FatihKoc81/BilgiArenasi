@@ -67,10 +67,10 @@
   .kkH.d{background:#22c55e;color:#fff}
   .kkH.y{background:#ef4444;color:#fff}
   #kkPot{color:#ffe9c7;font-weight:700;font-size:16px}
-  #kkIpucu{font-size:17px;line-height:1.35;margin:8px 0 10px}
-  #kkCevap{width:100%;padding:12px;border-radius:16px;border:1px solid #1d2540;background:#0d1426;color:#fff;font:inherit;font-size:18px;text-align:center;outline:none}
+  #kkIpucu{font-size:17px;line-height:1.35;margin:8px 0 10px;text-align:center;white-space:pre-line}
+  #kkCevap{width:100%;padding:12px;border-radius:16px;border:1px solid #1d2540;background:#0d1426;color:#fff;font:inherit;font-size:18px;text-align:center;outline:none;caret-color:#fff}
   #kkCevap:focus{border-color:#8e9bc4}
-  #kkGeriBildirim{min-height:22px;margin-top:6px;font-weight:700}
+  #kkGeriBildirim{min-height:22px;margin-top:6px;font-weight:700;text-align:center}
   .kkSatir{display:flex;gap:8px}
   .kkSatir .btn{margin-top:6px;padding:13px 6px;font-size:15px}
   .kkTitre{animation:kkt .3s}
@@ -101,7 +101,7 @@
       <div id="kkHeks"></div>
       <div id="kkBilgi2" style="display:flex;justify-content:space-between"><span id="kkPot"></span><span id="kkSure" style="font-weight:700"></span></div>
       <p id="kkIpucu"></p>
-      <input id="kkCevap" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" placeholder="Tahminin (Türkçe karakterle)">
+      <input id="kkCevap" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false">
       <p id="kkGeriBildirim"></p>
       <div class="kkSatir">
         <button class="btn ikinci" id="kkHarfAl">💡 Harf Al</button>
@@ -128,12 +128,25 @@
   const karistir = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
   const kapali = () => acik.filter(x => !x).length;
 
+  // İpucunu iki satıra böl: üst satır alt satırdan uzun olmasın
+  function ipucuBol(metin) {
+    if (metin.length <= 32) return metin;
+    const k = metin.split(" ");
+    let en = -1, enFark = Infinity;
+    for (let i = 1; i < k.length; i++) {
+      const ust = k.slice(0, i).join(" ").length;
+      const alt = k.slice(i).join(" ").length;
+      if (ust <= alt && alt - ust < enFark) { enFark = alt - ust; en = i; }
+    }
+    if (en < 0) return metin;
+    return k.slice(0, en).join(" ") + "\n" + k.slice(en).join(" ");
+  }
+
   const bolum = b => {
     giris.classList.toggle("hidden", b !== "giris");
     oyun.classList.toggle("hidden", b !== "oyun");
     son.classList.toggle("hidden", b !== "son");
     sec.classList.toggle("kkK", b === "oyun");
-    
   };
 
   function menuyeDon() {
@@ -157,7 +170,7 @@
     $("kkSayi").textContent = "Kelime " + (k + 1) + "/" + liste.length;
     $("kkPuan").textContent = "⭐ " + toplam;
     $("kkPot").textContent = "💰 " + kapali() * PUAN + "  " + "❤️".repeat(hak);
-    $("kkIpucu").textContent = liste[k][1];
+    $("kkIpucu").textContent = ipucuBol(liste[k][1]);
     $("kkHarfAl").disabled = kilit || kapali() <= 1;
     sureYaz();
   }
