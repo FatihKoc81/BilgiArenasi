@@ -49,6 +49,7 @@
   ana.append(buton);
 
   let hedef, sayilar, gecmis, secA, secOp, kalan, tid, bitti, toplam = 0;
+  let sonrakiTid;
 
   function hesapla(a, op, b) {
     if (op === "+") return a + b;
@@ -79,6 +80,7 @@
   }
 
   function basla() {
+    clearTimeout(sonrakiTid);
     const p = bulmaca();
     hedef = p.hedef;
     sayilar = p.havuz.map((v, i) => ({ v, id: i }));
@@ -112,6 +114,7 @@
     $("isPuan").textContent = "Puan: " + toplam;
     $("isMsg").style.color = puan ? "#2fbf71" : "#f0b429";
     $("isMsg").textContent = yazi;
+    sonrakiTid = setTimeout(basla, 3000);
     ciz();
   }
 
@@ -165,7 +168,7 @@
     ekran.classList.remove("hidden");
     basla();
   };
-  $("isBitir").onclick = bitir;
+  $("isBitir").onclick = () => bitti ? basla() : bitir();
   $("isYeni").onclick = basla;
   $("isGeri").onclick = () => {
     if (bitti || !gecmis.length) return;
@@ -173,6 +176,9 @@
     $("isMsg").textContent = "";
     ciz();
   };
-  $("isMenu").onclick = () => document.querySelector("h1").click();
-  document.addEventListener("anasayfa", () => clearInterval(tid));
+  $("isMenu").onclick = () => {
+    clearTimeout(sonrakiTid);
+    document.querySelector("h1").click();
+  };
+  document.addEventListener("anasayfa", () => { clearInterval(tid); clearTimeout(sonrakiTid); });
 })();
