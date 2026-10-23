@@ -383,3 +383,4 @@
   // Başlığa tıklanınca (ortak.js) süreyi durdur ve temizle
   document.addEventListener("anasayfa", menuyeDon);
 })();
+
