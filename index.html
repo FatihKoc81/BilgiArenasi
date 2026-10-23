@@ -8,37 +8,41 @@
 </head>
 <body>
 
-    <div id="ana-menu" class="ekran">
+    <div id="menuEkran" class="ekran">
         <h1>🧠 BİLGİ ARENASI</h1>
-        <div class="menu-kutusu">
-            <p>Efsanevi Bilgi Sınavı</p>
-            <!-- Milyoner Butonu -->
-            <button id="milyoner-btn" class="menu-btn" onclick="milyonerOyunuBaslat()">🎯 Milyoner</button>
-            <button id="passaparola-btn" class="menu-btn">abc Passaparola</button>
-            <button id="kelime-btn" class="menu-btn">💎 Kelime Oyunu</button>
-            <button id="islem-btn" class="menu-btn" onclick="islemOyununuBaslat()">🔢 İşlem Oyunu</button>
+        <div class="kutu">
+            <div class="baslik">Efsanevi Bilgi Sınavı</div>
+            <div class="altbaslik">Bilgini test et ve stratejini konuştur, zirvedeki büyük ödüle adım adım yaklaş!</div>
+            
+            <!-- Oyun Butonları (Orijinal CSS sınıflarıyla) -->
+            <button id="milyoner-btn" class="buton milyoner" onclick="milyonerOyunuBaslat()">🎯 Milyoner</button>
+            <button id="passaparola-btn" class="buton passaparola">abc Passaparola</button>
+            <button id="kelime-btn" class="buton kelime">💎 Kelime Oyunu</button>
+            <button id="islem-btn" class="buton islem" onclick="islemOyununuBaslat()">🔢 İşlem Oyunu</button>
         </div>
     </div>
 
     <!-- Milyoner Ekranı -->
     <div id="milyoner-ekrani" class="ekran" style="display: none;">
-        <h2 id="seviye-bilgi">Seviye 1</h2>
-        <h3 id="soru-bilgi">Soru 1/15</h3>
-        <div id="soru-metni">Soru yükleniyor...</div>
+        <div class="ust-bilgi">
+            <span id="seviye-bilgi">Seviye 1</span>
+            <span id="soru-bilgi">Soru 1/15</span>
+        </div>
+        <div id="soru-metni" class="soru-kutu">Soru yükleniyor...</div>
         
-        <div class="secenekler-alani">
+        <div class="secenekler">
             <button class="secenek-btn">A) ---</button>
             <button class="secenek-btn">B) ---</button>
             <button class="secenek-btn">C) ---</button>
             <button class="secenek-btn">D) ---</button>
         </div>
         
-        <button onclick="anaMenuyeDon()">Ana Menü</button>
+        <button class="buton" onclick="anaMenuyeDon()">Ana menü</button>
     </div>
 
     <!-- İşlem Oyunu Ekranı -->
     <div id="islem-ekrani" class="ekran" style="display: none;">
-        <h2>TRT 1 Bir İşlem Oyun Alanı</h2>
+        <h2>TRT 1 Bir İşlem</h2>
         <div class="hedef-alani">
             <span>HEDEF SAYI:</span>
             <h1 id="hedef-sayi">---</h1>
@@ -53,11 +57,11 @@
             <span class="sayi-kutusu buyuk-sayi">-</span>
         </div>
 
-        <button onclick="islemOyununuBaslat()">Yeni Sayılar Çek</button>
-        <button onclick="anaMenuyeDon()">Ana Menü</button>
+        <button class="buton" onclick="islemOyununuBaslat()">Yeni Sayılar</button>
+        <button class="buton" onclick="anaMenuyeDon()">Ana menü</button>
     </div>
 
-    <!-- JavaScript Dosyaları Doğru Sırayla Yükleniyor -->
+    <!-- JavaScript Dosyaları (Doğru Sıralama) -->
     <script src="ortak.js"></script>
     <script src="dm.js"></script>
     <script src="passaparola.js"></script>
@@ -66,8 +70,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Güvenli başlatma fonksiyonları
-            const jPas = document.getElementById("jPas") || document.querySelector("#jPas");
+            const jPas = document.getElementById("jPas");
             if (jPas) {
                 jPas.onclick = () => {
                     if (typeof kilit !== 'undefined' && (kilit || !jok.pas)) return;
@@ -77,10 +80,10 @@
                 };
             }
 
-            const baslaBtn = document.getElementById("basla") || document.querySelector("#basla");
+            const baslaBtn = document.getElementById("basla");
             if (baslaBtn) baslaBtn.onclick = typeof baslat === 'function' ? baslat : null;
 
-            const sifirlaBtn = document.getElementById("sifirla") || document.querySelector("#sifirla");
+            const sifirlaBtn = document.getElementById("sifirla");
             if (sifirlaBtn) {
                 sifirlaBtn.onclick = () => {
                     if (confirm("Tüm ilerleme silinsin mi?")) {
@@ -90,6 +93,12 @@
                     }
                 };
             }
+
+            const sDevam = document.getElementById("sDevam");
+            if (sDevam) sDevam.onclick = typeof baslat === 'function' ? baslat : null;
+
+            const sMenu = document.getElementById("sMenu");
+            if (sMenu) sMenu.onclick = typeof menu === 'function' ? menu : null;
         });
     </script>
 </body>
