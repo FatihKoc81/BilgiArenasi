@@ -1,107 +1,154 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bilgi Arenası</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bilgi Arenası</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<h1>🧠 BİLGİ ARENASI</h1>
 
-    <div id="menuEkran" class="ekran">
-        <h1>🧠 BİLGİ ARENASI</h1>
-        
-        <div class="kutu">
-            <div class="baslik">Efsanevi Bilgi Sınavı</div>
-            <div class="altbaslik">Bilgini test et ve stratejini konuştur, zirvedeki büyük ödüle adım adım yaklaş!</div>
-            
-            <button id="milyoner" class="buton milyoner" onclick="milyonerOyunuBaslat()">🎯 Milyoner</button>
-            <button id="passaparola" class="buton passaparola">abc Passaparola</button>
-            <button id="kelime" class="buton kelime">💎 Kelime Oyunu</button>
-            <button id="islem" class="buton islem" onclick="islemOyununuBaslat()">🔢 İşlem Oyunu</button>
-        </div>
-        
-        <div class="fk-logo">FK</div>
-    </div>
+<main class="kart" id="ana">
+<div class="pill" id="seviye">Seviye 1</div>
+<h2>Efsanevi Bilgi Sınavı</h2>
+<p class="alt"><span>Bilgini test et ve stratejini konuştur,</span><span>zirvedeki büyük ödüle adım adım yaklaş!</span></p>
+<button class="btn" id="basla">🎯 Oyuna Başla</button>
+<button class="btn ikinci" id="sifirla">🔄 İlerlemeyi Sıfırla</button>
+</main>
 
-    <!-- Milyoner Ekranı -->
-    <div id="milyoner-ekrani" class="ekran" style="display: none;">
-        <div class="ust-bilgi">
-            <span id="seviye-bilgi">Seviye 1</span>
-            <span id="soru-bilgi">Soru 1/15</span>
-        </div>
-        <div id="soru-metni" class="soru-kutu">Soru yükleniyor...</div>
-        
-        <div class="secenekler">
-            <button class="secenek-btn">A) ---</button>
-            <button class="secenek-btn">B) ---</button>
-            <button class="secenek-btn">C) ---</button>
-            <button class="secenek-btn">D) ---</button>
-        </div>
-        
-        <button class="buton" onclick="anaMenuyeDon()">Ana menü</button>
-    </div>
+<section class="kart hidden" id="oyun">
+<div class="ust"><b id="oSeviye"></b><span id="sayac"></span></div>
+<div class="cubuk"><div id="bar"></div></div>
+<p id="soruMetni"></p>
+<div id="secenekler"></div>
+<div class="jokerler">
+<button class="jok" id="jYarim">✂️ 50:50</button>
+<button class="jok" id="jSeyirci">👥 Seyirci</button>
+<button class="jok" id="jPas">⏭️ Pas</button>
+</div>
+</section>
 
-    <!-- İşlem Oyunu Ekranı -->
-    <div id="islem-ekrani" class="ekran" style="display: none;">
-        <h2>TRT 1 Bir İşlem</h2>
-        <div class="hedef-alani">
-            <span>HEDEF SAYI:</span>
-            <h1 id="hedef-sayi">---</h1>
-        </div>
-        
-        <div class="verilen-sayilar-alani">
-            <span class="sayi-kutusu">-</span>
-            <span class="sayi-kutusu">-</span>
-            <span class="sayi-kutusu">-</span>
-            <span class="sayi-kutusu">-</span>
-            <span class="sayi-kutusu">-</span>
-            <span class="sayi-kutusu buyuk-sayi">-</span>
-        </div>
+<section class="kart hidden" id="son">
+<h2 id="sBaslik"></h2>
+<p class="alt" id="sMetin"></p>
+<button class="btn" id="sDevam"></button>
+<button class="btn ikinci" id="sMenu">Ana menü</button>
+</section>
 
-        <button class="buton" onclick="islemOyununuBaslat()">Yeni Sayılar</button>
-        <button class="buton" onclick="anaMenuyeDon()">Ana menü</button>
-    </div>
+<script src="sorular.js"></script>
+<script>
+const KEY = "bilgiArenasi";
+const $` = id => document.getElementById(id);
+let st = { seviye: 1 };
+try { st = JSON.parse(localStorage.getItem(KEY)) || st; } catch (e) {}
+const kaydet = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
 
-    <!-- JavaScript Dosyaları (Doğru Sıralama) -->
-    <script src="ortak.js"></script>
-    <script src="dm.js"></script>
-    <script src="passaparola.js"></script>
-    <script src="kelime.js"></script>
-    <script src="islem.js"></script>
+let lv, soru, kilit, jok, butonlar;
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const jPas = document.getElementById("jPas");
-            if (jPas) {
-                jPas.onclick = () => {
-                    if (typeof kilit !== 'undefined' && (kilit || !jok.pas)) return;
-                    jok.pas = 0; 
-                    jPas.disabled = true;
-                    if (typeof sonraki === 'function') sonraki();
-                };
-            }
+function ekran(id) {
+["ana", "oyun", "son"].forEach(e => `$(e).classList.toggle("hidden", e !== id));
+}
 
-            const baslaBtn = document.getElementById("basla");
-            if (baslaBtn) baslaBtn.onclick = typeof baslat === 'function' ? baslat : null;
+function menu() {
+$`("seviye").textContent = st.seviye > SORULAR.length ? "Tamamlandı 🏆" : "Seviye " + st.seviye;
+ekran("ana");
+}
 
-            const sifirlaBtn = document.getElementById("sifirla");
-            if (sifirlaBtn) {
-                sifirlaBtn.onclick = () => {
-                    if (confirm("Tüm ilerleme silinsin mi?")) {
-                        if (typeof st !== 'undefined') st = { seviye: 1 };
-                        if (typeof kaydet === 'function') kaydet();
-                        if (typeof menu === 'function') menu();
-                    }
-                };
-            }
+function baslat() {
+if (st.seviye > SORULAR.length) { st.seviye = 1; kaydet(); }
+lv = SORULAR[st.seviye - 1];
+soru = 0;
+jok = { yarim: 1, seyirci: 1, pas: 1 };
+$("oSeviye").textContent = "Seviye " + st.seviye; ["jYarim", "jSeyirci", "jPas"].forEach(j =&gt; $(j).disabled = false);
+ekran("oyun");
+goster();
+}
 
-            const sDevam = document.getElementById("sDevam");
-            if (sDevam) sDevam.onclick = typeof baslat === 'function' ? baslat : null;
+function goster() {
+const q = lv[soru];
+kilit = false;
+$("sayac").textContent = "Soru " + (soru + 1) + "/" + lv.length; $("bar").style.width = (soru / lv.length * 100) + "%";
+$("soruMetni").textContent = q[0]; const kutu = $("secenekler");
+kutu.innerHTML = "";
+butonlar = q[1].map((t, i) => {
+const b = document.createElement("button");
+b.className = "sec";
+b.append("ABCD"[i] + ") " + t);
+b.onclick = () => cevapla(i);
+kutu.append(b);
+return b;
+});
+}
 
-            const sMenu = document.getElementById("sMenu");
-            if (sMenu) sMenu.onclick = typeof menu === 'function' ? menu : null;
-        });
-    </script>
+function sonraki() {
+soru++;
+soru >= lv.length ? bitir(true) : goster();
+}
+
+function cevapla(i) {
+if (kilit) return;
+kilit = true;
+const dogru = lv[soru][2];
+butonlar[dogru].classList.add("dogru");
+if (i === dogru) return void setTimeout(sonraki, 900);
+butonlar[i].classList.add("yanlis");
+setTimeout(() => bitir(false), 1300);
+}
+
+function bitir(kazandi) {
+$("bar").style.width = "100%"; if (kazandi) { st.seviye++; kaydet(); const hepsi = st.seviye &gt; SORULAR.length; $("sBaslik").textContent = hepsi ? "🏆 Büyük ödül senin!" : "🎉 Seviye geçildi!";
+$("sMetin").textContent = hepsi ? "Tüm seviyeleri tamamladın." : "Sıradaki: Seviye " + st.seviye; $("sDevam").textContent = hepsi ? "Baştan oyna" : "Sonraki seviye";
+} else {
+$("sBaslik").textContent = "❌ Yanlış cevap"; $("sMetin").textContent = "Seviye " + st.seviye + " tamamlanamadı. Tekrar dene!";
+`$("sDevam").textContent = "Tekrar dene";
+}
+ekran("son");
+}
+
+latex
+("jYarim").onclick = () =&gt; { if (kilit || !jok.yarim) return; jok.yarim = 0; 
+
+("jYarim").disabled = true;
+const dogru = lv[soru][2];
+const yanlislar = [0, 1, 2, 3].filter(i => i !== dogru).sort(() => Math.random() - .5);
+yanlislar.slice(0, 2).forEach(i => butonlar[i].classList.add("gizli"));
+};
+
+latex
+("jSeyirci").onclick = () =&gt; { if (kilit || !jok.seyirci) return; jok.seyirci = 0; 
+
+("jSeyirci").disabled = true;
+const dogru = lv[soru][2];
+const acik = [0, 1, 2, 3].filter(i => !butonlar[i].classList.contains("gizli"));
+let kalan = 100;
+const d = 45 + Math.floor(Math.random() * 30);
+const yuzde = {};
+yuzde[dogru] = d; kalan -= d;
+const digerleri = acik.filter(i => i !== dogru);
+digerleri.forEach((i, n) => {
+const p = n === digerleri.length - 1 ? kalan : Math.floor(Math.random() * kalan);
+yuzde[i] = p; kalan -= p;
+});
+acik.forEach(i => {
+const s = document.createElement("span");
+s.textContent = "%" + yuzde[i];
+butonlar[i].append(s);
+});
+};
+
+latex
+("jPas").onclick = () =&gt; { if (kilit || !jok.pas) return; jok.pas = 0; 
+
+("jPas").disabled = true;
+sonraki();
+};
+
+ ("sifirla").onclick = () => {
+if (confirm("Tüm ilerleme silinsin mi?")) { st = { seviye: 1 }; kaydet(); menu(); }
+};
+ ("sMenu").onclick = menu;
+menu();
+</script>
 </body>
 </html>
