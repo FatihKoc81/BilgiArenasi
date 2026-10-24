@@ -10,30 +10,30 @@ var LEVELS = [
 
 var css = document.createElement("style");
 css.textContent =
-"#cm{position:fixed;inset:0;background:#050510;color:#fff;z-index:9999;display:none;flex-direction:column;align-items:center;font-family:inherit;overflow:hidden}" +
-"#cm .top{width:100%;display:flex;justify-content:space-between;align-items:center;padding:14px 16px;box-sizing:border-box}" +
-"#cm button.sm{background:#1b1b33;color:#fff;border:0;border-radius:14px;padding:10px 14px;font-size:16px}" +
-"#cm .words{flex:1;width:100%;overflow:auto;display:flex;flex-direction:column;align-items:center;gap:8px;padding:8px 0}" +
-"#cm .row{display:flex;gap:6px}" +
-"#cm .box{width:38px;height:38px;border-radius:8px;background:#1b1b33;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#fff}" +
-"#cm .box.on{background:#e0892b}" +
-"#cm .box.hint{background:#2a3b6b;color:#9bb2ff}" +
-"#cm .cur{height:44px;font-size:30px;font-weight:800;letter-spacing:3px;color:#ffd27a}" +
-"#cm .wheel{position:relative;width:280px;height:280px;margin:6px 0 24px;border-radius:50%;background:#12122a;touch-action:none}" +
-"#cm .wheel svg{position:absolute;inset:0;pointer-events:none}" +
-"#cm .let{position:absolute;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:#fff;user-select:none}" +
-"#cm .let.sel{background:#e0892b}" +
-"#cm .msg{height:24px;color:#8aa;font-size:15px}";
+"#cm{position:fixed;top:0;left:0;right:0;bottom:0;height:100dvh;background:#050510;color:#fff;z-index:9999;display:none;flex-direction:column;align-items:center;font-family:inherit;overflow:hidden}" +
+"#cm .cm-top{width:100%;display:flex;justify-content:space-between;align-items:center;padding:10px 16px;box-sizing:border-box}" +
+"#cm button.cm-sm{background:#1b1b33;color:#fff;border:0;border-radius:14px;padding:10px 14px;font-size:16px}" +
+"#cm .cm-words{flex:1;width:100%;overflow:auto;display:flex;flex-direction:column;align-items:center;gap:5px;padding:6px 0;min-height:0}" +
+"#cm .cm-row{display:flex!important;flex-direction:row!important;gap:5px;margin:0!important;padding:0!important}" +
+"#cm .cm-box{width:28px!important;height:28px!important;min-width:0!important;border-radius:7px!important;background:#2a2a4a!important;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#fff;margin:0!important;padding:0!important;box-sizing:border-box}" +
+"#cm .cm-box.cm-on{background:#e0892b!important}" +
+"#cm .cm-box.cm-hint{background:#2a3b6b!important;color:#9bb2ff}" +
+"#cm .cm-cur{height:34px;font-size:26px;font-weight:800;letter-spacing:3px;color:#ffd27a}" +
+"#cm .cm-wheel{position:relative;width:230px;height:230px;margin:4px 0 14px;border-radius:50%;background:#1a1a3a;touch-action:none;flex:none}" +
+"#cm .cm-wheel svg{position:absolute;inset:0;pointer-events:none}" +
+"#cm .cm-let{position:absolute;width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;color:#fff;user-select:none}" +
+"#cm .cm-let.cm-sel{background:#e0892b}" +
+"#cm .cm-msg{height:20px;color:#8aa;font-size:15px}";
 document.head.appendChild(css);
 
 var root = document.createElement("div");
 root.id = "cm";
 root.innerHTML =
-  '<div class="top"><button class="sm" id="cmBack">‹ Menü</button><div id="cmLv" style="font-weight:700;font-size:18px"></div>' +
-  '<button class="sm" id="cmHint">💡 İpucu</button></div>' +
-  '<div class="words" id="cmWords"></div><div class="msg" id="cmMsg"></div><div class="cur" id="cmCur"></div>' +
-  '<div class="wheel" id="cmWheel"><svg id="cmSvg" width="280" height="280"></svg></div>' +
-  '<button class="sm" id="cmShuf" style="margin-bottom:20px">🔀 Karıştır</button>';
+  '<div class="cm-top"><button class="cm-sm" id="cmBack">‹ Menü</button><div id="cmLv" style="font-weight:700;font-size:18px"></div>' +
+  '<button class="cm-sm" id="cmHint">💡 İpucu</button></div>' +
+  '<div class="cm-words" id="cmWords"></div><div class="cm-msg" id="cmMsg"></div><div class="cm-cur" id="cmCur"></div>' +
+  '<div class="cm-wheel" id="cmWheel"><svg id="cmSvg" width="230" height="230"></svg></div>' +
+  '<button class="cm-sm" id="cmShuf" style="margin-bottom:14px">🔀 Karıştır</button>';
 document.body.appendChild(root);
 
 var $ = function (id) { return document.getElementById(id); };
@@ -59,11 +59,11 @@ function drawWords() {
   var ws = L.w.slice().sort(function (a, b) { return a.length - b.length || (a < b ? -1 : 1); });
   var h = "";
   ws.forEach(function (w) {
-    h += '<div class="row">';
+    h += '<div class="cm-row">';
     for (var i = 0; i < w.length; i++) {
-      if (found[w]) h += '<div class="box on">' + w[i] + "</div>";
-      else if (hints[w] > i) h += '<div class="box hint">' + w[i] + "</div>";
-      else h += '<div class="box"></div>';
+      if (found[w]) h += '<div class="cm-box cm-on">' + w[i] + "</div>";
+      else if (hints[w] > i) h += '<div class="cm-box cm-hint">' + w[i] + "</div>";
+      else h += '<div class="cm-box"></div>';
     }
     h += "</div>";
   });
@@ -72,15 +72,15 @@ function drawWords() {
 
 function pos(i) {
   var n = letters.length, a = (i / n) * 2 * Math.PI - Math.PI / 2;
-  return { x: 140 + 98 * Math.cos(a), y: 140 + 98 * Math.sin(a) };
+  return { x: 115 + 80 * Math.cos(a), y: 115 + 80 * Math.sin(a) };
 }
 
 function drawWheel() {
   var w = $("cmWheel");
-  Array.prototype.slice.call(w.querySelectorAll(".let")).forEach(function (e) { e.remove(); });
+  Array.prototype.slice.call(w.querySelectorAll(".cm-let")).forEach(function (e) { e.remove(); });
   letters.forEach(function (ch, i) {
     var p = pos(i), d = document.createElement("div");
-    d.className = "let"; d.textContent = ch; d.dataset.i = i;
+    d.className = "cm-let"; d.textContent = ch; d.dataset.i = i;
     d.style.left = p.x + "px"; d.style.top = p.y + "px";
     w.appendChild(d);
   });
@@ -90,8 +90,8 @@ function drawWheel() {
 function drawLine() {
   var pts = sel.map(function (i) { var p = pos(i); return p.x + "," + p.y; }).join(" ");
   $("cmSvg").innerHTML = '<polyline points="' + pts + '" fill="none" stroke="#e0892b" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/>';
-  Array.prototype.slice.call($("cmWheel").querySelectorAll(".let")).forEach(function (e) {
-    e.classList.toggle("sel", sel.indexOf(+e.dataset.i) > -1);
+  Array.prototype.slice.call($("cmWheel").querySelectorAll(".cm-let")).forEach(function (e) {
+    e.classList.toggle("cm-sel", sel.indexOf(+e.dataset.i) > -1);
   });
 }
 
@@ -100,7 +100,7 @@ function drawCur() { $("cmCur").textContent = word(); }
 
 function hit(e) {
   var el = document.elementFromPoint(e.clientX, e.clientY);
-  if (el && el.classList && el.classList.contains("let")) {
+  if (el && el.classList && el.classList.contains("cm-let")) {
     var i = +el.dataset.i;
     if (sel.indexOf(i) === -1) { sel.push(i); }
     else if (sel.length > 1 && sel[sel.length - 2] === i) { sel.pop(); }
