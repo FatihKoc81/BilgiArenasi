@@ -73,3 +73,29 @@
     s.style.whiteSpace = "nowrap";
   });
 })();
+
+// İŞLEM OYUNU EKRANI: üstteki "🔢 İşlem Oyunu" başlık yazısını gizle (Puan kalır)
+(function () {
+  function gizle() {
+    const ana = document.getElementById("ana");
+    const adaylar = [];
+    document.querySelectorAll("body *").forEach(el => {
+      if (el.dataset.islemGizli) return;
+      if (/^(SCRIPT|STYLE|BUTTON|H1|H2|H3)$/.test(el.tagName)) return;
+      if (ana && ana.contains(el)) return;      // ana menü butonuna dokunma
+      if (el.closest("#cm, button, h1")) return; // çember ve butonlar hariç
+      const t = (el.textContent || "").trim();
+      if (t.length <= 20 && /İşlem Oyunu$/.test(t)) adaylar.push(el);
+    });
+    // Sadece en içteki eşleşmeyi gizle
+    adaylar.forEach(el => {
+      if (adaylar.some(o => o !== el && el.contains(o))) return;
+      el.dataset.islemGizli = "1";
+      el.style.display = "none";
+      // Başlık gidince "Puan" sağda kalsın
+      if (el.parentElement) el.parentElement.style.justifyContent = "flex-end";
+    });
+  }
+  gizle();
+  new MutationObserver(gizle).observe(document.body, { childList: true, subtree: true });
+})();
