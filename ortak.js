@@ -99,3 +99,33 @@
   gizle();
   new MutationObserver(gizle).observe(document.body, { childList: true, subtree: true });
 })();
+
+// PASSAPAROLA EKRANI: sayfa yukarı aşağı kaymasın (klavye açıkken de)
+(function () {
+  let kilitli = false;
+  const st = document.createElement("style");
+  st.textContent = "html.pp-kilit,html.pp-kilit body{overflow:hidden!important;overscroll-behavior:none!important;height:100%!important}";
+  document.head.appendChild(st);
+
+  function passaparolaAcik() {
+    const bs = document.querySelectorAll("button");
+    for (const b of bs) {
+      if (b.offsetParent !== null && /^\s*(✅\s*)?Tahmin\s*$/.test(b.textContent)) return true;
+    }
+    return false;
+  }
+  function kontrol() {
+    const ac = passaparolaAcik();
+    if (ac === kilitli) return;
+    kilitli = ac;
+    document.documentElement.classList.toggle("pp-kilit", ac);
+    if (ac) window.scrollTo(0, 0);
+  }
+  window.addEventListener("scroll", () => { if (kilitli && window.scrollY) window.scrollTo(0, 0); });
+  document.addEventListener("touchmove", e => {
+    if (kilitli && !e.target.closest("input,textarea")) e.preventDefault();
+  }, { passive: false });
+  document.addEventListener("focusin", () => { if (kilitli) setTimeout(() => window.scrollTo(0, 0), 50); });
+  new MutationObserver(kontrol).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["class", "style"] });
+  kontrol();
+})();
