@@ -380,39 +380,19 @@
   if (mv && !/interactive-widget/.test(mv.content)) mv.content += ", interactive-widget=resizes-content";
   inp.addEventListener("keydown", e => { if (e.key === "Enter") gonder(); });
 
-  // Başlığa tıklanınca (ortak.js) süreyi durdur ve temizle
-    // Alt başlık: oyunda altta sabit, klavye açılınca gizli, tıklayınca ana sayfa
+  // Başlık: oyunda üstte küçük sabit çubuk (klavye açıkken de görünür), tıklayınca ana sayfa
   const stl = document.createElement("style");
-  stl.textContent = "body.ppOyunda{padding-bottom:70px}body.ppOyunda h1{display:block!important;position:fixed;left:0;right:0;bottom:0;margin:0;padding:10px 0 calc(10px + env(safe-area-inset-bottom));font-size:20px;text-align:center;background:rgba(3,3,12,.96);z-index:5;cursor:pointer}body.ppOyunda.ppKlavye h1{display:none!important}";
+  stl.textContent = "body.ppOyunda{padding-top:calc(30px + env(safe-area-inset-top))!important;padding-bottom:0}body.ppOyunda h1{display:block!important;position:fixed!important;top:0;left:0;right:0;margin:0!important;padding:5px 0;padding-top:calc(5px + env(safe-area-inset-top));font-size:15px!important;line-height:1.3;text-align:center;background:rgba(3,3,12,.96);border-bottom:1px solid #1d2540;z-index:5;cursor:pointer}#ppSoru{text-wrap:balance;text-align:center}";
   document.head.append(stl);
-  let enBuyukH = innerHeight;
   const hGuncelle = () => {
     const a = !sec.classList.contains("hidden") && !oyun.classList.contains("hidden");
     document.body.classList.toggle("ppOyunda", a);
-    if (!a) document.body.classList.remove("ppKlavye");
   };
-  const mo = new MutationObserver(hGuncelle);
-  mo.observe(sec, { attributes: true, attributeFilter: ["class"] });
-  mo.observe(oyun, { attributes: true, attributeFilter: ["class"] });
-  addEventListener("resize", () => {
-    enBuyukH = Math.max(enBuyukH, innerHeight);
-    document.body.classList.toggle("ppKlavye", document.body.classList.contains("ppOyunda") && innerHeight < enBuyukH - 150);
-  });
+  new MutationObserver(hGuncelle).observe(sec, { attributes: true, attributeFilter: ["class"] });
+  new MutationObserver(hGuncelle).observe(oyun, { attributes: true, attributeFilter: ["class"] });
   document.querySelector("h1").addEventListener("click", () => {
     if (document.body.classList.contains("ppOyunda")) menuyeDon();
   });
-    stl.textContent = "body.ppOyunda{padding-bottom:80px}body.ppOyunda h1{display:block!important;position:fixed!important;left:0;right:0;margin:0!important;text-align:center;z-index:5;cursor:pointer}body.ppOyunda.ppKlavye h1{display:none!important}";
-  const h1 = document.querySelector("h1");
-  const yerles = () => {
-    if (!document.body.classList.contains("ppOyunda")) return;
-    const alt = sec.getBoundingClientRect().bottom, h = h1.offsetHeight;
-    h1.style.top = Math.max(alt + 8, Math.min(alt + (innerHeight - alt - h) / 2, innerHeight - h - 8)) + "px";
-  };
-  new ResizeObserver(yerles).observe(sec);
-  new MutationObserver(yerles).observe(document.body, { attributes: true, attributeFilter: ["class"] });
-  addEventListener("resize", yerles);
-  addEventListener("scroll", yerles);
-    stl.textContent += "#ppSoru{text-wrap:balance;text-align:center}";
   inp.placeholder = "";
   document.addEventListener("anasayfa", menuyeDon);
 })();
