@@ -144,7 +144,8 @@
   };
   $("cmBack").onclick = function () { root.style.display = "none"; };
 
-  function addButton() {
+      function ensure() {
+    if (document.getElementById("cmBtn")) return;
     var all = document.querySelectorAll("button, a, div");
     var target = null;
     for (var i = 0; i < all.length; i++) {
@@ -152,7 +153,8 @@
     }
     if (!target) return;
     var b = target.cloneNode(true);
-    b.removeAttribute("onclick"); b.removeAttribute("id");
+    b.removeAttribute("onclick");
+    b.id = "cmBtn";
     b.textContent = "🔤 Kelime Çemberi";
     b.style.background = "#e0892b";
     b.addEventListener("click", function (e) {
@@ -161,6 +163,6 @@
     });
     target.parentNode.insertBefore(b, target.nextSibling);
   }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", addButton);
-  else addButton();
+  new MutationObserver(ensure).observe(document.body, { childList: true, subtree: true });
+  ensure();
 })();
