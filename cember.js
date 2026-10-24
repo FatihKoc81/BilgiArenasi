@@ -1,44 +1,59 @@
 /* Kelime Çemberi - Words of Wonders tarzı oyun. Butonunu ana menüye (#ana) kendisi ekler. */
 (function () {
+// w: ana kelimeler (tabloda görünür), b: bonus kelimeler (tabloda yok, bulununca bonus puan)
 var LEVELS = [
-  { l: "KALEM", w: ["KALEM", "KALE", "ELMA", "ALEM", "KEL", "KAL"] },
-  { l: "KİTAP", w: ["KİTAP", "KAP", "TAK", "KİT", "TİP", "PİK"] },
-  { l: "GÜNEŞ", w: ["GÜNEŞ", "GÜN", "ŞEN", "GEN", "EŞ", "ÜN"] },
-  { l: "DENİZ", w: ["DENİZ", "DİZ", "DİN", "DEN", "İZ", "EZ"] },
-  { l: "YAĞMUR", w: ["YAĞMUR", "YAĞ", "MAY", "RAY", "YAR", "YUM"] }
+  { l: "KALEM",  w: ["KALEM", "KALE", "ELMA", "ALEM", "KEL", "KAL"],
+                 b: ["KELAM", "LAME", "MAL", "AL", "EL", "AK"] },
+  { l: "KİTAP",  w: ["KİTAP", "KAP", "TAK", "KİT", "TİP", "PİK"],
+                 b: ["TAKİP", "PATİK", "KATİP", "AKİT", "ATİK", "KAT", "KİP", "PAK", "TİK", "AİT", "AT", "İP"] },
+  { l: "GÜNEŞ",  w: ["GÜNEŞ", "GÜN", "ŞEN", "GEN", "EŞ", "ÜN"],
+                 b: [] },
+  { l: "DENİZ",  w: ["DENİZ", "DİZ", "DİN", "DEN", "İZ", "EZ"],
+                 b: ["ZİNDE", "DİZE", "EN", "NE", "İN", "DE"] },
+  { l: "YAĞMUR", w: ["YAĞMUR", "YAĞ", "MAY", "RAY", "YAR", "YUM"],
+                 b: ["AĞ", "AY", "AR", "YA"] }
 ];
+var ANA_PUAN = 10, BONUS_PUAN = 15; // harf başına puan
 
 var css = document.createElement("style");
 css.textContent =
 "#cm{position:fixed;top:0;left:0;right:0;bottom:0;height:100dvh;background:#050510;color:#fff;z-index:9999;display:none;flex-direction:column;align-items:center;font-family:inherit;overflow:hidden}" +
 "#cm .cm-top{width:100%;display:flex;justify-content:space-between;align-items:center;padding:10px 16px;box-sizing:border-box}" +
 "#cm button.cm-sm{background:#1b1b33;color:#fff;border:0;border-radius:14px;padding:10px 14px;font-size:16px}" +
-"#cm .cm-words{flex:1;width:100%;overflow:auto;display:flex;flex-direction:column;align-items:center;gap:5px;padding:6px 0;min-height:0}" +
+"#cm .cm-words{flex:1;width:100%;overflow:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:6px 0;min-height:0}" +
 "#cm .cm-row{display:flex!important;flex-direction:row!important;gap:5px;margin:0!important;padding:0!important}" +
 "#cm .cm-box{width:28px!important;height:28px!important;min-width:0!important;border-radius:7px!important;background:#2a2a4a!important;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#fff;margin:0!important;padding:0!important;box-sizing:border-box}" +
 "#cm .cm-box.cm-on{background:#e0892b!important}" +
 "#cm .cm-box.cm-hint{background:#2a3b6b!important;color:#9bb2ff}" +
-"#cm .cm-cur{height:34px;font-size:26px;font-weight:800;letter-spacing:3px;color:#ffd27a}" +
+"#cm .cm-bonus{width:100%;box-sizing:border-box;padding:4px 16px;min-height:46px;max-height:70px;overflow:auto;text-align:center;flex:none}" +
+"#cm .cm-bonus .cm-bt{font-size:13px;color:#f2c14e;margin-bottom:4px}" +
+"#cm .cm-chip{display:inline-block;background:#3a2f12;color:#ffd27a;border:1px solid #f2c14e;border-radius:10px;padding:2px 9px;margin:2px 3px;font-size:14px;font-weight:700}" +
+"#cm .cm-cur{height:34px;font-size:26px;font-weight:800;letter-spacing:3px;color:#ffd27a;flex:none}" +
 "#cm .cm-wheel{position:relative;width:230px;height:230px;margin:4px 0 14px;border-radius:50%;background:#1a1a3a;touch-action:none;flex:none}" +
 "#cm .cm-wheel svg{position:absolute;inset:0;pointer-events:none}" +
 "#cm .cm-let{position:absolute;width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;color:#fff;user-select:none}" +
 "#cm .cm-let.cm-sel{background:#e0892b}" +
-"#cm .cm-msg{height:20px;color:#8aa;font-size:15px}";
+"#cm .cm-msg{height:20px;color:#8aa;font-size:15px;flex:none}";
 document.head.appendChild(css);
 
 var root = document.createElement("div");
 root.id = "cm";
 root.innerHTML =
-  '<div class="cm-top"><button class="cm-sm" id="cmBack">‹ Menü</button><div id="cmLv" style="font-weight:700;font-size:18px"></div>' +
+  '<div class="cm-top"><button class="cm-sm" id="cmBack">‹ Menü</button><div id="cmLv" style="font-weight:700;font-size:17px;text-align:center"></div>' +
   '<button class="cm-sm" id="cmHint">💡 İpucu</button></div>' +
-  '<div class="cm-words" id="cmWords"></div><div class="cm-msg" id="cmMsg"></div><div class="cm-cur" id="cmCur"></div>' +
+  '<div class="cm-words" id="cmWords"></div><div class="cm-bonus" id="cmBonus"></div>' +
+  '<div class="cm-msg" id="cmMsg"></div><div class="cm-cur" id="cmCur"></div>' +
   '<div class="cm-wheel" id="cmWheel"><svg id="cmSvg" width="230" height="230"></svg></div>' +
   '<button class="cm-sm" id="cmShuf" style="margin-bottom:14px">🔀 Karıştır</button>';
 document.body.appendChild(root);
 
 var $ = function (id) { return document.getElementById(id); };
-var lvIdx = 0, found = {}, hints = {}, letters = [], sel = [], drag = false;
+var lvIdx = 0, found = {}, foundB = {}, hints = {}, letters = [], sel = [], drag = false, puan = 0;
 try { lvIdx = Math.min(parseInt(localStorage.getItem("cemberLv") || "0", 10) || 0, LEVELS.length - 1); } catch (e) {}
+try { puan = parseInt(localStorage.getItem("cemberPuan") || "0", 10) || 0; } catch (e) {}
+
+function puanKaydet() { try { localStorage.setItem("cemberPuan", puan); } catch (e) {} }
+function baslikYaz() { $("cmLv").innerHTML = "Seviye " + (lvIdx + 1) + '<div style="font-size:14px;color:#f2c14e;font-weight:600">⭐ ' + puan + "</div>"; }
 
 function shuffle(a) {
   for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
@@ -47,11 +62,11 @@ function shuffle(a) {
 
 function startLevel() {
   var L = LEVELS[lvIdx];
-  found = {}; hints = {}; sel = [];
+  found = {}; foundB = {}; hints = {}; sel = [];
   letters = shuffle(L.l.split(""));
-  $("cmLv").textContent = "Seviye " + (lvIdx + 1);
+  baslikYaz();
   $("cmMsg").textContent = "";
-  drawWords(); drawWheel(); drawCur();
+  drawWords(); drawBonus(); drawWheel(); drawCur();
 }
 
 function drawWords() {
@@ -68,6 +83,14 @@ function drawWords() {
     h += "</div>";
   });
   $("cmWords").innerHTML = h;
+}
+
+function drawBonus() {
+  var L = LEVELS[lvIdx];
+  var list = Object.keys(foundB);
+  var h = '<div class="cm-bt">⭐ Bonus kelimeler (' + list.length + (L.b.length ? "/" + L.b.length : "") + ")</div>";
+  list.forEach(function (w) { h += '<span class="cm-chip">' + w + "</span>"; });
+  $("cmBonus").innerHTML = h;
 }
 
 function pos(i) {
@@ -119,7 +142,9 @@ function end() {
   if (w.length > 1) {
     if (L.w.indexOf(w) > -1 && !found[w]) {
       found[w] = true;
-      $("cmMsg").textContent = "✅ " + w;
+      var p = w.length * ANA_PUAN;
+      puan += p; puanKaydet(); baslikYaz();
+      $("cmMsg").textContent = "✅ " + w + "  +" + p;
       drawWords();
       if (L.w.every(function (x) { return found[x]; })) {
         $("cmMsg").textContent = "🎉 Seviye tamamlandı!";
@@ -129,7 +154,13 @@ function end() {
           startLevel();
         }, 1400);
       }
-    } else if (found[w]) {
+    } else if (L.b.indexOf(w) > -1 && !foundB[w]) {
+      foundB[w] = true;
+      var bp = w.length * BONUS_PUAN;
+      puan += bp; puanKaydet(); baslikYaz();
+      $("cmMsg").textContent = "⭐ BONUS " + w + "  +" + bp;
+      drawBonus();
+    } else if (found[w] || foundB[w]) {
       $("cmMsg").textContent = "Zaten buldun";
     } else {
       $("cmMsg").textContent = "❌ Yanlış";
@@ -189,7 +220,6 @@ function addButton(zorla) {
   boya();
 }
 addButton(false);
-// Diğer scriptler menüye butonları sonradan ekliyorsa, İşlem butonu gelince çemberi arkasına ekle
 var anaEl = $("ana");
 if (anaEl) {
   var mo = new MutationObserver(function () {
