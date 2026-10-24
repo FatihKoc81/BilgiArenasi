@@ -198,7 +198,7 @@
   #ppSure{font-size:20px;font-weight:700}
   #ppPuan{font-size:14px;color:#8e9bc4}
   #ppSoru{font-size:17px;line-height:1.35;margin-bottom:10px}
-  #ppCevap{width:100%;padding:12px;border-radius:16px;border:1px solid #1d2540;background:#0d1426;color:#fff;font:inherit;font-size:18px;text-align:center;outline:none}
+  #ppCevap{box-sizing:border-box;width:100%;min-height:50px;padding:12px;border-radius:16px;border:1px solid #1d2540;background:#0d1426;color:#fff;font:inherit;font-size:18px;line-height:24px;text-align:center;outline:none;caret-color:#fff;white-space:nowrap;overflow:hidden;-webkit-user-select:text;user-select:text}
   #ppCevap:focus{border-color:#8e9bc4}
   #ppGeriBildirim{min-height:22px;margin-top:6px;font-weight:700}
   .ppSatir{display:flex;gap:10px}
@@ -231,7 +231,7 @@
         <div id="ppChips"></div>
       </div>
       <p id="ppSoru"></p>
-      <input id="ppCevap" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" placeholder="Cevabını yaz (Türkçe karakterle)">
+      <div id="ppCevap" contenteditable="true" role="textbox" aria-label="Cevap" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="done"></div>
       <p id="ppGeriBildirim"></p>
       <div class="ppSatir">
         <button class="btn ikinci" id="ppPas">Pas</button>
@@ -249,6 +249,20 @@
   const $ = id => document.getElementById(id);
   const giris = $("ppGiris"), oyun = $("ppOyun"), son = $("ppSon");
   const inp = $("ppCevap"), fb = $("ppGeriBildirim");
+
+  // Cevap kutusu bilerek <input> değil, düzenlenebilir bir <div>:
+  // Chrome bunu şifre/kart/adres alanı sanıp otomatik doldurma çubuğu göstermesin diye.
+  const oku = () => inp.textContent;
+  const yaz = v => { inp.textContent = v; };
+  const odak = () => {
+    inp.focus();
+    const r = document.createRange();
+    r.selectNodeContents(inp);
+    r.collapse(false);
+    const sl = getSelection();
+    sl.removeAllRanges();
+    sl.addRange(r);
+  };
 
   // ---------- Durum ----------
   let dur, sorular, idx, sure, zaman, kilit;
@@ -300,12 +314,12 @@
   }
 
   function ileri() {
-    inp.value = "";
+    yaz("");
     const j = sonrakiBul();
     if (j < 0) return bitir();
     idx = j;
     ciz();
-    inp.focus();
+    odak();
   }
 
   function baslat() {
@@ -315,10 +329,10 @@
     sure = SURE;
     kilit = false;
     fb.textContent = "";
-    inp.value = "";
+    yaz("");
     bolum("oyun");
     ciz();
-    inp.focus();
+    odak();
     setTimeout(kaydir, 400);
     clearInterval(zaman);
     zaman = setInterval(() => {
@@ -330,7 +344,7 @@
 
   function gonder() {
     if (kilit) return;
-    const v = norm(inp.value);
+    const v = norm(oku());
     if (!v) return;
     const q = sorular[idx];
     if (q[1].map(norm).includes(v)) {
@@ -378,7 +392,12 @@
   inp.addEventListener("focus", () => setTimeout(kaydir, 400));
   const mv = document.querySelector('meta[name="viewport"]');
   if (mv && !/interactive-widget/.test(mv.content)) mv.content += ", interactive-widget=resizes-content";
-  inp.addEventListener("keydown", e => { if (e.key === "Enter") gonder(); });
+  inp.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); gonder(); } });
+  inp.addEventListener("paste", e => {
+    e.preventDefault();
+    const t = (e.clipboardData || window.clipboardData).getData("text").replace(/\s+/g, " ");
+    document.execCommand("insertText", false, t);
+  });
 
   // Başlık: oyunda üstte küçük sabit çubuk (klavye açıkken de görünür), tıklayınca ana sayfa
   const stl = document.createElement("style");
@@ -393,6 +412,5 @@
   document.querySelector("h1").addEventListener("click", () => {
     if (document.body.classList.contains("ppOyunda")) menuyeDon();
   });
-  inp.placeholder = "";
   document.addEventListener("anasayfa", menuyeDon);
 })();
