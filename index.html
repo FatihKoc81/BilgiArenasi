@@ -85,13 +85,21 @@ function baslat() {
   goster();
 }
 
+// Soruyu ortadan bölür: üst satır alttan uzun olmaz
+function bol(metin) {
+  const orta = Math.floor(metin.length / 2);
+  const i = metin.lastIndexOf(" ", orta);
+  if (i === -1) return metin;
+  return metin.slice(0, i) + "<br>" + metin.slice(i + 1);
+}
+
 function goster() {
   const q = lv[soru];
   kilit = false;
   ciftAktif = false; // çift cevap sadece joker basılan soru için geçerli
   $("sayac").textContent = "Soru " + (soru + 1) + "/" + lv.length;
   $("bar").style.width = (soru / lv.length * 100) + "%";
-  $("soruMetni").textContent = q[0];
+  $("soruMetni").innerHTML = bol(q[0]);
   const kutu = $("secenekler");
   kutu.innerHTML = "";
   butonlar = q[1].map((t, i) => {
