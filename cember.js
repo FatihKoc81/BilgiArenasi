@@ -3,11 +3,11 @@
 // w: ana kelimeler (tabloda görünür), b: bonus kelimeler (tabloda yok, bulununca bonus puan)
 var LEVELS = [
   { l: "KALEM",  w: ["KALEM", "KALE", "ELMA", "ALEM", "KEL", "KAL"],
-                 b: ["KELAM", "LAME", "MAL", "AL", "EL", "AK"] },
+                 b: ["EMLAK", "KELAM", "AMEL", "LAME", "MAL", "ELA", "LAM", "KAM", "KEM", "AL", "EL", "AK"] },
   { l: "KİTAP",  w: ["KİTAP", "KAP", "TAK", "KİT", "TİP", "PİK"],
-                 b: ["TAKİP", "PATİK", "KATİP", "AKİT", "ATİK", "KAT", "KİP", "PAK", "TİK", "AİT", "AT", "İP"] },
+                 b: ["TAKİP", "PATİK", "KATİP", "AKİT", "ATİK", "PAKT", "KAT", "KİP", "PAK", "TİK", "AİT", "PAT", "AT", "İP", "İT", "AK"] },
   { l: "GÜNEŞ",  w: ["GÜNEŞ", "GÜN", "ŞEN", "GEN", "EŞ", "ÜN"],
-                 b: [] },
+                 b: ["EN", "NE"] },
   { l: "DENİZ",  w: ["DENİZ", "DİZ", "DİN", "DEN", "İZ", "EZ"],
                  b: ["ZİNDE", "DİZE", "EN", "NE", "İN", "DE"] },
   { l: "YAĞMUR", w: ["YAĞMUR", "YAĞ", "MAY", "RAY", "YAR", "YUM"],
@@ -17,24 +17,25 @@ var ANA_PUAN = 10, BONUS_PUAN = 15; // harf başına puan
 
 var css = document.createElement("style");
 css.textContent =
-"#cm{position:fixed;top:0;left:0;right:0;bottom:0;height:100dvh;background:#050510;color:#fff;z-index:9999;display:none;flex-direction:column;align-items:center;font-family:inherit;overflow:hidden}" +
+"#cm{position:fixed;top:0;left:0;right:0;bottom:0;height:100dvh;background:#101436;color:#fff;color-scheme:dark;z-index:9999;display:none;flex-direction:column;align-items:center;font-family:inherit;overflow:hidden}" +
 "#cm .cm-top{width:100%;display:flex;justify-content:space-between;align-items:center;padding:10px 16px;box-sizing:border-box}" +
-"#cm button.cm-sm{background:#1b1b33;color:#fff;border:0;border-radius:14px;padding:10px 14px;font-size:16px}" +
+"#cm button.cm-sm{background:#2f3578;color:#fff;border:0;border-radius:14px;padding:10px 14px;font-size:16px}" +
 "#cm .cm-words{flex:1;width:100%;overflow:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:6px 0;min-height:0}" +
 "#cm .cm-row{display:flex!important;flex-direction:row!important;gap:5px;margin:0!important;padding:0!important}" +
-"#cm .cm-box{width:28px!important;height:28px!important;min-width:0!important;border-radius:7px!important;background:#2a2a4a!important;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#fff;margin:0!important;padding:0!important;box-sizing:border-box}" +
+"#cm .cm-box{width:28px!important;height:28px!important;min-width:0!important;border-radius:7px!important;background:#3b4286!important;border:2px solid #7580d6!important;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#fff;margin:0!important;padding:0!important;box-sizing:border-box}" +
 "#cm .cm-box.cm-on{background:#e0892b!important}" +
-"#cm .cm-box.cm-hint{background:#2a3b6b!important;color:#9bb2ff}" +
+"#cm .cm-box.cm-hint{background:#2f4fa0!important;color:#cfdcff}" +
 "#cm .cm-bonus{width:100%;box-sizing:border-box;padding:4px 16px;min-height:46px;max-height:70px;overflow:auto;text-align:center;flex:none}" +
 "#cm .cm-bonus .cm-bt{font-size:13px;color:#f2c14e;margin-bottom:4px}" +
 "#cm .cm-chip{display:inline-block;background:#3a2f12;color:#ffd27a;border:1px solid #f2c14e;border-radius:10px;padding:2px 9px;margin:2px 3px;font-size:14px;font-weight:700}" +
 "#cm .cm-cur{height:34px;font-size:26px;font-weight:800;letter-spacing:3px;color:#ffd27a;flex:none}" +
-"#cm .cm-wheel{position:relative;width:230px;height:230px;margin:4px 0 14px;border-radius:50%;background:#1a1a3a;touch-action:none;flex:none}" +
+"#cm .cm-wheel{position:relative;width:230px;height:230px;margin:4px 0 14px;border-radius:50%;background:#2a3070;border:3px solid #5f6ac4;box-sizing:content-box;touch-action:none;flex:none}" +
 "#cm .cm-wheel svg{position:absolute;inset:0;pointer-events:none}" +
 "#cm .cm-let{position:absolute;width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;color:#fff;user-select:none}" +
 "#cm .cm-let.cm-sel{background:#e0892b}" +
 "#cm .cm-msg{height:20px;color:#8aa;font-size:15px;flex:none}";
 document.head.appendChild(css);
+if (!document.querySelector('meta[name="color-scheme"]')) { var cs = document.createElement("meta"); cs.name = "color-scheme"; cs.content = "dark"; document.head.appendChild(cs); }
 
 var root = document.createElement("div");
 root.id = "cm";
