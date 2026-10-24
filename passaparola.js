@@ -413,4 +413,24 @@
     if (document.body.classList.contains("ppOyunda")) menuyeDon();
   });
   document.addEventListener("anasayfa", menuyeDon);
+
+  // Klavye açıkken her şey görünür alana sığsın: halkayı gerekirse küçült,
+  // böylece "Pas / Cevapla" klavyenin hemen üstünde tam görünür
+  const sigdir = () => {
+    if (oyun.classList.contains("hidden")) return;
+    const hr = $("ppHarfler"), vv = window.visualViewport;
+    hr.style.transform = "";
+    hr.style.marginBottom = "";
+    const vh = vv ? vv.height : innerHeight;
+    const asan = sec.offsetHeight + 30 + 24 - vh; // 24px = butonların altında boşluk
+    const s = asan > 0 ? Math.max(0.55, (250 - asan) / 250) : 1;
+    hr.style.transformOrigin = "top center";
+    hr.style.transform = "scale(" + s + ")";
+    hr.style.marginBottom = (8 - 250 * (1 - s)) + "px";
+    scrollTo(0, 0);
+  };
+  if (window.visualViewport) visualViewport.addEventListener("resize", sigdir);
+  inp.addEventListener("focus", () => { setTimeout(sigdir, 450); setTimeout(sigdir, 800); });
+  new MutationObserver(sigdir).observe($("ppSoru"), { childList: true });
+  window.addEventListener("resize", sigdir);
 })();
