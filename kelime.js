@@ -1,12 +1,12 @@
 // KELİME OYUNU (TV'deki Kelime Oyunu tarzı: ipucuna bak, altıgenlerdeki kelimeyi bul)
-// Kullanım: index.html'de passaparola.js satırından SONRA ekle:  <script src="kelime.js"></script>
+// Kullanım: index.html'de passaparola.js satırından SONRA ekle: <script src="kelime.js"></script>
 (function () {
-  const TUR = 10;     // bir oyundaki kelime sayısı
-  const SURE = 60;    // her kelime için saniye
-  const HAK = 3;      // her kelime için tahmin hakkı
-  const PUAN = 100;   // kapalı her harf için puan
+  const TUR = 10;   // bir oyundaki kelime sayısı
+  const SURE = 60;  // her kelime için saniye
+  const HAK = 3;    // her kelime için tahmin hakkı
+  const PUAN = 100; // kapalı her harf için puan
 
-  // [ "Kelime", "İpucu" ]  —  yeni kelime eklemek için listeye bir satır ekle
+  // [ "Kelime", "İpucu" ] — yeni kelime eklemek için listeye bir satır ekle
   const KELIMELER = [
     ["Kütüphane", "Çok sayıda kitabın bulunduğu, ödünç kitap alınabilen yer"],
     ["Bilgisayar", "Verileri işleyen, ekranı ve klavyesi olan elektronik cihaz"],
@@ -68,7 +68,7 @@
   .kkH.y{background:#ef4444;color:#fff}
   #kkPot{color:#ffe9c7;font-weight:700;font-size:16px}
   #kkIpucu{font-size:17px;line-height:1.35;margin:8px 0 10px;text-align:center;white-space:pre-line}
-  #kkCevap{width:100%;padding:12px;border-radius:16px;border:1px solid #1d2540;background:#0d1426;color:#fff;font:inherit;font-size:18px;text-align:center;outline:none;caret-color:#fff}
+  #kkCevap{box-sizing:border-box;width:100%;min-height:50px;padding:12px;border-radius:16px;border:1px solid #1d2540;background:#0d1426;color:#fff;font:inherit;font-size:18px;line-height:24px;text-align:center;outline:none;caret-color:#fff;white-space:nowrap;overflow:hidden;-webkit-user-select:text;user-select:text}
   #kkCevap:focus{border-color:#8e9bc4}
   #kkGeriBildirim{min-height:22px;margin-top:6px;font-weight:700;text-align:center}
   .kkSatir{display:flex;gap:8px}
@@ -86,6 +86,8 @@
   ana.append(menuBtn);
 
   // ---------- Ekran ----------
+  // Cevap kutusu bilerek <input> değil, düzenlenebilir bir <div>:
+  // Chrome bunu şifre/kart/adres alanı sanıp otomatik doldurma çubuğu göstermesin diye.
   const sec = document.createElement("section");
   sec.className = "kart hidden";
   sec.id = "kk";
@@ -101,7 +103,7 @@
       <div id="kkHeks"></div>
       <div id="kkBilgi2" style="display:flex;justify-content:space-between"><span id="kkPot"></span><span id="kkSure" style="font-weight:700"></span></div>
       <p id="kkIpucu"></p>
-      <input id="kkCevap" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false">
+      <div id="kkCevap" contenteditable="true" role="textbox" aria-label="Cevap" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="done"></div>
       <p id="kkGeriBildirim"></p>
       <div class="kkSatir">
         <button class="btn ikinci" id="kkHarfAl">💡 Harf Al</button>
@@ -121,6 +123,19 @@
   const giris = $("kkGiris"), oyun = $("kkOyun"), son = $("kkSon");
   const inp = $("kkCevap"), fb = $("kkGeriBildirim"), heks = $("kkHeks");
 
+  // Cevap kutusunu oku / yaz / odaklan (div olduğu için .value yok)
+  const oku = () => inp.textContent;
+  const yaz = v => { inp.textContent = v; };
+  const odak = () => {
+    inp.focus();
+    const r = document.createRange();
+    r.selectNodeContents(inp);
+    r.collapse(false);
+    const s = getSelection();
+    s.removeAllRanges();
+    s.addRange(r);
+  };
+
   // ---------- Durum ----------
   let liste, k, harfler, acik, hak, sure, toplam, dogruSayi, zaman, kilit;
 
@@ -131,15 +146,15 @@
   // İpucunu iki satıra böl: üst satır alt satırdan uzun olmasın
   function ipucuBol(metin) {
     if (metin.length <= 32) return metin;
-    const k = metin.split(" ");
+    const kel = metin.split(" ");
     let en = -1, enFark = Infinity;
-    for (let i = 1; i < k.length; i++) {
-      const ust = k.slice(0, i).join(" ").length;
-      const alt = k.slice(i).join(" ").length;
+    for (let i = 1; i < kel.length; i++) {
+      const ust = kel.slice(0, i).join(" ").length;
+      const alt = kel.slice(i).join(" ").length;
       if (ust <= alt && alt - ust < enFark) { enFark = alt - ust; en = i; }
     }
     if (en < 0) return metin;
-    return k.slice(0, en).join(" ") + "\n" + k.slice(en).join(" ");
+    return kel.slice(0, en).join(" ") + "\n" + kel.slice(en).join(" ");
   }
 
   const bolum = b => {
@@ -169,7 +184,7 @@
     }).join("");
     $("kkSayi").textContent = "Kelime " + (k + 1) + "/" + liste.length;
     $("kkPuan").textContent = "⭐ " + toplam;
-    $("kkPot").textContent = "💰 " + kapali() * PUAN + "  " + "❤️".repeat(hak);
+    $("kkPot").textContent = "💰 " + kapali() * PUAN + " " + "❤️".repeat(hak);
     $("kkIpucu").textContent = ipucuBol(liste[k][1]);
     $("kkHarfAl").disabled = kilit || kapali() <= 1;
     sureYaz();
@@ -182,9 +197,9 @@
     sure = SURE;
     kilit = false;
     fb.textContent = "";
-    inp.value = "";
+    yaz("");
     ciz();
-    inp.focus();
+    odak();
     clearInterval(zaman);
     zaman = setInterval(() => {
       sure--;
@@ -219,7 +234,7 @@
 
   function tahmin() {
     if (kilit) return;
-    const v = norm(inp.value);
+    const v = norm(oku());
     if (!v) return;
     if (v === norm(liste[k][0])) {
       const p = kapali() * PUAN;
@@ -233,7 +248,7 @@
       setTimeout(sonraki, 1300);
     } else {
       hak--;
-      inp.value = "";
+      yaz("");
       inp.classList.remove("kkTitre");
       void inp.offsetWidth;
       inp.classList.add("kkTitre");
@@ -249,7 +264,7 @@
     const kapaliIdx = acik.map((x, i) => x ? -1 : i).filter(i => i >= 0);
     acik[kapaliIdx[Math.floor(Math.random() * kapaliIdx.length)]] = true;
     ciz();
-    inp.focus();
+    odak();
   }
 
   function bitir() {
@@ -274,7 +289,15 @@
   $("kkTahmin").onclick = tahmin;
   $("kkHarfAl").onclick = harfAl;
   $("kkPas").onclick = () => kelimeBitir("⏭️ Pas geçildi. Cevap: " + harfler.join(""));
-  inp.addEventListener("keydown", e => { if (e.key === "Enter") tahmin(); });
+
+  // Enter: yeni satır açma, tahmin et
+  inp.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); tahmin(); } });
+  // Yapıştırılan metni düz metin yap
+  inp.addEventListener("paste", e => {
+    e.preventDefault();
+    const t = (e.clipboardData || window.clipboardData).getData("text").replace(/\s+/g, " ");
+    document.execCommand("insertText", false, t);
+  });
 
   // Klavye açılınca butonlar görünür kalsın
   const kaydir = () => $("kkTahmin").scrollIntoView({ block: "end", behavior: "smooth" });
