@@ -15,7 +15,6 @@
 
 <main class="kart" id="ana">
 <div class="pill" id="seviye">Seviye 1</div>
-<h2>Efsanevi Bilgi Sınavı</h2>
 <p class="alt"><span>Bilgini test et ve stratejini konuştur,</span><span>zirvedeki büyük ödüle adım adım yaklaş!</span></p>
 <button class="btn" id="basla">🎯 Oyuna Başla</button>
 <button class="btn ikinci" id="sifirla">🔄 İlerlemeyi Sıfırla</button>
@@ -140,7 +139,8 @@ function cevapla(i) {
 function bitir(kazandi) {
   $("bar").style.width = "100%";
   if (kazandi) {
-    st.seviye++; kaydet();
+    st.seviye++;
+    kaydet();
     const hepsi = st.seviye > SORULAR.length;
     $("sBaslik").textContent = hepsi ? "🏆 Büyük ödül senin!" : "🎉 Seviye geçildi!";
     $("sMetin").textContent = hepsi ? "Tüm seviyeleri tamamladın." : "Sıradaki: Seviye " + st.seviye;
@@ -179,7 +179,8 @@ document.addEventListener("click", e => {
 
 $("jYarim").onclick = () => {
   if (kilit || !jok.yarim) return;
-  jok.yarim = 0; $("jYarim").disabled = true;
+  jok.yarim = 0;
+  $("jYarim").disabled = true;
   const dogru = lv[soru][2];
   const yanlislar = [0, 1, 2, 3].filter(i => i !== dogru).sort(() => Math.random() - .5);
   yanlislar.slice(0, 2).forEach(i => butonlar[i].classList.add("gizli"));
@@ -187,7 +188,8 @@ $("jYarim").onclick = () => {
 
 $("jSeyirci").onclick = () => {
   if (kilit || !jok.seyirci) return;
-  jok.seyirci = 0; $("jSeyirci").disabled = true;
+  jok.seyirci = 0;
+  $("jSeyirci").disabled = true;
   const dogru = lv[soru][2];
   const acik = [0, 1, 2, 3].filter(i => !butonlar[i].classList.contains("gizli"));
   let kalan = 100;
@@ -211,7 +213,9 @@ $("jSeyirci").onclick = () => {
 // ÇİFT CEVAP: bu soruda iki cevap hakkı verir
 $("jCift").onclick = () => {
   if (kilit || !jok.cift) return;
-  jok.cift = 0; ciftAktif = true; $("jCift").disabled = true;
+  jok.cift = 0;
+  ciftAktif = true;
+  $("jCift").disabled = true;
 };
 
 $("sMenu").onclick = menu;
