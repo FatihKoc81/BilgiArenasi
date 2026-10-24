@@ -229,6 +229,25 @@ menu();
 <script src="islem.js"></script>
 <script src="cember.js"></script>
 <script>
+(function () {
+  const duzelt = el => {
+    if (el.dataset.ad) return;
+    el.dataset.ad = 1;
+    el.setAttribute("autocomplete", "off");
+    el.setAttribute("name", "q" + Math.random().toString(36).slice(2));
+    el.setAttribute("autocorrect", "off");
+    el.setAttribute("autocapitalize", "none");
+    el.setAttribute("spellcheck", "false");
+    el.setAttribute("data-lpignore", "true");
+    el.setAttribute("data-form-type", "other");
+    el.setAttribute("enterkeyhint", "done");
+  };
+  const tara = () => document.querySelectorAll("input[type=text],input:not([type])").forEach(duzelt);
+  tara();
+  new MutationObserver(tara).observe(document.body, { childList: true, subtree: true });
+})();
+</script>
+<script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
 }
