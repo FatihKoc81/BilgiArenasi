@@ -16,6 +16,7 @@ var LEVELS = [
 ];
 var ANA_PUAN = 10, BONUS_PUAN = 15; // harf başına puan
 var MAVI = "#1f55b8";
+var BASLANGIC_HAK = 3; // ampül ve tokmak için başlangıç hakkı
 
 // LAYOUT-BEGIN
 // Kelimeleri çapraz bulmaca gibi yerleştirir. d: 0 yatay, 1 dikey
@@ -113,6 +114,7 @@ css.textContent =
 "#cm .cm-cell{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:20%;background:rgba(255,255,255,.78);color:#fff;font-weight:800;box-sizing:border-box;box-shadow:0 2px 0 rgba(0,40,120,.25)}" +
 "#cm .cm-cell.cm-on{background:#1e56c0}" +
 "#cm .cm-cell.cm-hint{color:#1e56c0}" +
+"#cm .cm-hm .cm-cell:not(.cm-on):not(.cm-hint){outline:3px solid #ffb300;outline-offset:-3px}" +
 "#cm .cm-bonus{width:100%;box-sizing:border-box;padding:2px 14px;text-align:center;flex:none;max-height:64px;overflow:auto}" +
 "#cm .cm-bonus .cm-bt{display:inline-block;font-size:13px;color:#fff;background:rgba(10,24,64,.6);border-radius:999px;padding:2px 10px;margin-bottom:3px}" +
 "#cm .cm-chip{display:inline-block;background:#fff6d6;color:#8a5a00;border:1px solid #f2c14e;border-radius:10px;padding:1px 8px;margin:2px 3px;font-size:13px;font-weight:700}" +
@@ -125,7 +127,12 @@ css.textContent =
 "#cm .cm-let{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:50%;font-weight:800;color:#111;pointer-events:none;transform:translate(-50%,-50%)}" +
 "#cm .cm-let.cm-sel{background:" + MAVI + ";color:#fff}" +
 "#cm button.cm-shuf{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:transparent;border:0;padding:0;display:flex;align-items:center;justify-content:center}" +
-"#cm button.cm-bulb{position:absolute;right:14px;top:28%;width:54px;height:54px;border-radius:50%;background:#3a2a20;border:3px solid rgba(255,255,255,.55);font-size:26px;padding:0;box-shadow:0 3px 8px rgba(0,0,0,.35)}";
+"#cm button.cm-tool{position:absolute;top:4px;width:54px;height:54px;border-radius:50%;background:#3a3f48;border:3px solid rgba(255,255,255,.55);font-size:26px;line-height:1;padding:0;box-shadow:0 3px 8px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;overflow:visible}" +
+"#cm button.cm-tool.cm-act{border-color:#ffb300;background:#6b4a00}" +
+"#cm button.cm-bulb{right:14px}" +
+"#cm button.cm-ham{left:14px}" +
+"#cm .cm-badge{position:absolute;top:-6px;right:-6px;min-width:22px;height:22px;border-radius:11px;background:#e53935;color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-sizing:border-box;padding:0 4px;font-family:inherit}" +
+"#cm .cm-badge.zero{background:#2e9e4a}";
 document.head.appendChild(css);
 
 var root = document.createElement("div");
@@ -137,17 +144,46 @@ root.innerHTML =
   '<div class="cm-cur" id="cmCur"></div>' +
   '<div class="cm-wrap"><div class="cm-wheel" id="cmWheel"><svg id="cmSvg"></svg>' +
   '<button class="cm-shuf" id="cmShuf" aria-label="Karıştır"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="#9aa3b4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h3c4 0 5 10 9 10h5"/><path d="M3 17h3c1.6 0 2.7-1.4 3.7-3"/><path d="M13.3 10C14.3 8.4 15.4 7 17 7h3"/><path d="M17 4l3 3-3 3"/><path d="M17 14l3 3-3 3"/></svg></button></div>' +
-  '<button class="cm-bulb" id="cmHint" aria-label="İpucu">💡</button></div>';
+  '<button class="cm-tool cm-ham" id="cmHam" aria-label="Tokmak">🔨<span class="cm-badge" id="cmHamN"></span></button>' +
+  '<button class="cm-tool cm-bulb" id="cmHint" aria-label="İpucu">💡<span class="cm-badge" id="cmHintN"></span></button></div>';
 document.body.appendChild(root);
 
 var $ = function (id) { return document.getElementById(id); };
 var lvIdx = 0, found = {}, foundB = {}, hintCells = {}, letters = [], sel = [], drag = false, puan = 0;
 var cur = null, bonusList = [], placedMap = {}, S = 260, D = 54, ptr = null, flashT = null;
+var hakIpucu = BASLANGIC_HAK, hakTokmak = BASLANGIC_HAK, hammerOn = false;
 try { lvIdx = Math.min(parseInt(localStorage.getItem("cemberLv") || "0", 10) || 0, LEVELS.length - 1); } catch (e) {}
 try { puan = parseInt(localStorage.getItem("cemberPuan") || "0", 10) || 0; } catch (e) {}
+try {
+  var h1 = localStorage.getItem("cemberHakIpucu"), h2 = localStorage.getItem("cemberHakTokmak");
+  if (h1 !== null) hakIpucu = Math.max(0, parseInt(h1, 10) || 0);
+  if (h2 !== null) hakTokmak = Math.max(0, parseInt(h2, 10) || 0);
+} catch (e) {}
 
 function puanKaydet() { try { localStorage.setItem("cemberPuan", puan); } catch (e) {} }
 function baslikYaz() { $("cmLv").textContent = "Seviye " + (lvIdx + 1); $("cmPuan").textContent = "⭐ " + puan; }
+
+// Haklar: rozet sayı gösterir, 0 olunca "+" olur (ileride reklam/satın alma buraya bağlanacak)
+function hakYaz() {
+  var a = $("cmHintN"), b = $("cmHamN");
+  a.textContent = hakIpucu > 0 ? hakIpucu : "+"; a.classList.toggle("zero", hakIpucu <= 0);
+  b.textContent = hakTokmak > 0 ? hakTokmak : "+"; b.classList.toggle("zero", hakTokmak <= 0);
+  try { localStorage.setItem("cemberHakIpucu", hakIpucu); localStorage.setItem("cemberHakTokmak", hakTokmak); } catch (e) {}
+}
+// İLERİDE: reklam izlenince veya satın alınca çağır -> window.cemberHakEkle("ipucu", 3)
+window.cemberHakEkle = function (tur, n) {
+  if (tur === "tokmak") hakTokmak += n; else hakIpucu += n;
+  hakYaz();
+};
+function hakBitti() {
+  // İLERİDE: burada reklam izle / satın al penceresi açılacak
+  flash("Hakkın bitti", "info");
+}
+function tokmakKapat() {
+  hammerOn = false;
+  $("cmGrid").classList.remove("cm-hm");
+  $("cmHam").classList.remove("cm-act");
+}
 
 function shuffle(a) {
   for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
@@ -168,12 +204,13 @@ function boyut() {
 function startLevel() {
   var L = LEVELS[lvIdx];
   found = {}; foundB = {}; hintCells = {}; sel = []; drag = false;
+  tokmakKapat();
   cur = makeLayout(L.w);
   placedMap = {};
   cur.words.forEach(function (p) { placedMap[p.w] = p; });
   bonusList = L.b.concat(cur.un.filter(function (w) { return L.b.indexOf(w) === -1; }));
   letters = shuffle(L.l.split(""));
-  baslikYaz();
+  baslikYaz(); hakYaz();
   $("cmCur").innerHTML = "";
   boyut();
   drawWords(); drawBonus(); drawWheel();
@@ -203,7 +240,7 @@ function drawWords() {
     var x = cells[k], cls = "cm-cell", txt = "";
     if (x.on) { cls += " cm-on"; txt = x.ch; }
     else if (hintCells[k]) { cls += " cm-hint"; txt = x.ch; }
-    h += '<div class="' + cls + '" style="left:' + (x.c * (cs + g)) + "px;top:" + (x.r * (cs + g)) + "px;width:" + cs + "px;height:" + cs + "px;font-size:" + Math.round(cs * 0.6) + 'px">' + txt + "</div>";
+    h += '<div class="' + cls + '" data-k="' + k + '" style="left:' + (x.c * (cs + g)) + "px;top:" + (x.r * (cs + g)) + "px;width:" + cs + "px;height:" + cs + "px;font-size:" + Math.round(cs * 0.6) + 'px">' + txt + "</div>";
   });
   inner.innerHTML = h;
   box.appendChild(inner);
@@ -317,8 +354,12 @@ window.addEventListener("pointerup", end);
 window.addEventListener("pointercancel", end);
 
 $("cmShuf").onclick = function () { letters = shuffle(letters); sel = []; drawWheel(); };
+
+// Ampül: ilk kapalı harfi açar. Hak sadece gerçekten bir harf açılırsa düşer.
 $("cmHint").onclick = function () {
   if (!cur) return;
+  if (hakIpucu <= 0) { hakBitti(); return; }
+  tokmakKapat();
   for (var k = 0; k < cur.words.length; k++) {
     var p = cur.words[k];
     if (found[p.w]) continue;
@@ -334,15 +375,36 @@ $("cmHint").onclick = function () {
         return false;
       });
       if (acik) continue;
-      hintCells[key] = true; drawWords(); return;
+      hintCells[key] = true; hakIpucu--; hakYaz(); drawWords(); return;
     }
   }
 };
+
+// Tokmak: önce butona bas, sonra tablodan açmak istediğin kutuya dokun.
+$("cmHam").onclick = function () {
+  if (!cur) return;
+  if (hammerOn) { tokmakKapat(); return; }
+  if (hakTokmak <= 0) { hakBitti(); return; }
+  hammerOn = true;
+  $("cmGrid").classList.add("cm-hm");
+  $("cmHam").classList.add("cm-act");
+  flash("🔨 Açmak istediğin kutuya dokun", "info");
+};
+$("cmGrid").addEventListener("click", function (e) {
+  if (!hammerOn) return;
+  var el = e.target.closest ? e.target.closest(".cm-cell") : null;
+  if (!el || el.classList.contains("cm-on") || el.classList.contains("cm-hint")) return;
+  hintCells[el.getAttribute("data-k")] = true;
+  hakTokmak--; hakYaz();
+  tokmakKapat();
+  drawWords();
+});
+
 window.addEventListener("resize", function () {
   if (root.style.display !== "flex") return;
   boyut(); drawWheel(); drawWords();
 });
-function kapat() { root.style.display = "none"; }
+function kapat() { tokmakKapat(); root.style.display = "none"; }
 $("cmBack").onclick = kapat;
 document.addEventListener("anasayfa", kapat);
 
