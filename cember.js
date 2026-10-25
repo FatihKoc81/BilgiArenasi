@@ -106,8 +106,8 @@ var svg =
 var css = document.createElement("style");
 css.textContent =
 "#cm{position:fixed;top:0;left:0;right:0;bottom:0;height:100dvh;color:#fff;color-scheme:light;z-index:9999;display:none;flex-direction:column;align-items:center;font-family:inherit;overflow:hidden;box-sizing:border-box;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);-webkit-user-select:none;user-select:none}" +
-"#cm .cm-top{width:100%;display:flex;align-items:center;gap:8px;padding:10px 12px;box-sizing:border-box;flex:none}" +
-"#cm button.cm-sm{background:rgba(10,24,64,.72);color:#fff;border:2px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700}" +
+"#cm .cm-top{width:100%;display:flex;align-items:center;gap:8px;padding:0;box-sizing:border-box;flex:none}" +
+"#cm button.cm-sm{width:100%;background:#05050d;color:#fff;border:0;border-bottom:1px solid #232a4d;border-radius:0;padding:12px 0;font-family:inherit;font-size:20px;font-weight:800;letter-spacing:.5px;text-align:center}" +
 "#cm .cm-pill{background:rgba(10,24,64,.72);border:2px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 14px;font-size:16px;font-weight:700}" +
 "#cm .cm-gridbox{flex:1;width:100%;min-height:0;display:flex;align-items:center;justify-content:center;padding:6px 12px;box-sizing:border-box}" +
 "#cm .cm-gridin{position:relative}" +
@@ -142,7 +142,7 @@ var root = document.createElement("div");
 root.id = "cm";
 root.style.background = 'url("data:image/svg+xml,' + encodeURIComponent(svg) + '") center/cover no-repeat, #2a6fd0';
 root.innerHTML =
-  '<div class="cm-top"><button class="cm-sm" id="cmBack">Bilgi Arenası</button></div><div class="cm-banner" id="cmBanner"></div>' +
+  '<div class="cm-top"><button class="cm-sm" id="cmBack">🧠 BİLGİ ARENASI</button></div><div class="cm-banner" id="cmBanner"></div>' +
   '<div class="cm-gridbox" id="cmGrid"></div><div class="cm-bonus" id="cmBonus"></div>' +
   '<div class="cm-cur" id="cmCur"></div>' +
   '<div class="cm-wrap"><div class="cm-wheel" id="cmWheel"><svg id="cmSvg"></svg>' +
