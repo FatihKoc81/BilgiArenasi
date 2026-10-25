@@ -1,6 +1,6 @@
 *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
-html{background:#080c20;color-scheme:dark;overscroll-behavior:none} /* EKLENDİ: kaydırmada beyaz/farklı renk çıkmasın */
-body{min-height:100vh;min-height:100dvh;background:radial-gradient(ellipse at 50% 0%,#14204a 0%,#080c20 50%,#02030f 100%) fixed;color:#fff;font-family:Roboto,system-ui,sans-serif;padding:24px 16px;padding-top:calc(24px + env(safe-area-inset-top));padding-bottom:calc(24px + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center} /* EKLENDİ: çentik/durum çubuğu boşluğu */
+html{background:#080c20;color-scheme:dark;overscroll-behavior:none}
+body{min-height:100vh;min-height:100dvh;background:radial-gradient(ellipse at 50% 0%,#14204a 0%,#080c20 50%,#02030f 100%) fixed;color:#fff;font-family:Roboto,system-ui,sans-serif;padding:24px 16px;padding-top:calc(24px + env(safe-area-inset-top));padding-bottom:calc(24px + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center}
 h1{font-size:clamp(28px,8vw,44px);margin:40px 0 36px;text-align:center}
 .kart{width:100%;max-width:460px;background:#070b1d;border:2px solid #4a5a9a;box-shadow:0 0 22px rgba(74,90,154,.35);border-radius:36px;padding:32px 20px;text-align:center}
 .hidden{display:none!important}
