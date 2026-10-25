@@ -5,6 +5,9 @@ on:
     branches: [main, master, ana]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -46,3 +49,11 @@ jobs:
         with:
           name: bilgi-arenasi-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
+
+      - name: APK'yı herkese açık indirme bağlantısı olarak yayınla
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cp android/app/build/outputs/apk/debug/app-debug.apk bilgi-arenasi.apk
+          gh release delete son --yes --cleanup-tag || true
+          gh release create son bilgi-arenasi.apk --target "${{ github.sha }}" --title "Son sürüm" --notes "Otomatik derlenen son APK" --latest
