@@ -283,7 +283,7 @@ var css = document.createElement("style");
 css.textContent =
 "#cm{position:fixed;top:0;left:0;right:0;bottom:0;height:100dvh;color:#fff;color-scheme:dark;z-index:9999;display:none;flex-direction:column;align-items:center;font-family:inherit;overflow:hidden;box-sizing:border-box;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);-webkit-user-select:none;user-select:none}" +
 "#cm .cm-top{width:100%;display:flex;align-items:center;gap:8px;padding:0;box-sizing:border-box;flex:none}" +
-"#cm button.cm-sm{width:100%;background:#05050d;color:#fff;border:0;border-bottom:1px solid #232a4d;border-radius:0;padding:12px 0;font-family:inherit;font-size:20px;font-weight:800;letter-spacing:.5px;text-align:center}" +
+"#cm button.cm-sm{width:100%;background:transparent!important;background-image:none!important;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.7);border:0!important;border-radius:0;padding:12px 0;font-family:inherit;font-size:20px;font-weight:800;letter-spacing:.5px;text-align:center}" +
 "#cm .cm-pill{background:rgba(10,24,64,.72);border:2px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 14px;font-size:16px;font-weight:700}" +
 "#cm .cm-gridbox{flex:1;width:100%;min-height:0;display:flex;align-items:center;justify-content:center;padding:6px 12px;box-sizing:border-box}" +
 "#cm .cm-gridin{position:relative}" +
@@ -365,20 +365,27 @@ function arkaYaz() {
   if (!sahneOnb[i]) sahneOnb[i] = encodeURIComponent(SAHNELER[i]());
   root.style.background = 'url("data:image/svg+xml,' + sahneOnb[i] + '") center/cover no-repeat, #2a6fd0';
 }
+
+// Üst yazı çubuğu şeffaf: sahne arka planı görünür. Tarayıcı üst rengi (theme-color) sahnenin üst rengine eşitlenir.
+var TEMA = ["#3b4a9c", "#4a2a72", "#232f78", "#2f8fe8", "#040a22", "#17235c"];
+var eskiTema = null;
+function temaMeta() {
+  var m = document.querySelector('meta[name="theme-color"]');
+  if (!m) { m = document.createElement("meta"); m.name = "theme-color"; document.head.appendChild(m); }
+  return m;
+}
 function barRenk() {
   try {
     var bar = $("cmBack");
-    var seffaf = function (c) { return !c || c === "transparent" || /rgba\(.*,\s*0\)$/.test(c); };
-    var var_ = function (c) { return (c.backgroundImage && c.backgroundImage !== "none") || !seffaf(c.backgroundColor); };
-    var src = getComputedStyle(document.documentElement);
-    if (!var_(src)) src = getComputedStyle(document.body);
-    bar.style.backgroundColor = seffaf(src.backgroundColor) ? "#05050d" : src.backgroundColor;
-    bar.style.backgroundImage = src.backgroundImage;
-    bar.style.backgroundSize = src.backgroundSize;
-    bar.style.backgroundPosition = src.backgroundPosition;
-    bar.style.backgroundRepeat = src.backgroundRepeat;
-    bar.style.backgroundAttachment = "fixed";
-    bar.style.borderBottom = "0";
+    bar.removeAttribute("style"); // eski inline arka planı temizle
+    var m = temaMeta();
+    if (eskiTema === null) eskiTema = m.getAttribute("content") || "";
+    m.setAttribute("content", TEMA[lvIdx % TEMA.length]);
+  } catch (e) {}
+}
+function temaGeri() {
+  try {
+    if (eskiTema !== null) { temaMeta().setAttribute("content", eskiTema); eskiTema = null; }
   } catch (e) {}
 }
 
@@ -643,7 +650,7 @@ window.addEventListener("resize", function () {
   if (root.style.display !== "flex") return;
   boyut(); drawWheel(); drawWords();
 });
-function kapat() { tokmakKapat(); root.style.display = "none"; }
+function kapat() { tokmakKapat(); temaGeri(); root.style.display = "none"; }
 $("cmBack").onclick = kapat;
 document.addEventListener("anasayfa", kapat);
 
