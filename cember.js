@@ -107,7 +107,7 @@ var css = document.createElement("style");
 css.textContent =
 "#cm{position:fixed;top:0;left:0;right:0;bottom:0;height:100dvh;color:#fff;color-scheme:light;z-index:9999;display:none;flex-direction:column;align-items:center;font-family:inherit;overflow:hidden;box-sizing:border-box;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);-webkit-user-select:none;user-select:none}" +
 "#cm .cm-top{width:100%;display:flex;align-items:center;gap:8px;padding:10px 12px;box-sizing:border-box;flex:none}" +
-"#cm button.cm-sm{background:rgba(10,24,64,.72);color:#fff;border:2px solid rgba(255,255,255,.35);border-radius:999px;padding:7px 14px;font-size:16px;font-weight:700}" +
+"#cm button.cm-sm{background:rgba(10,24,64,.72);color:#fff;border:2px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700}" +
 "#cm .cm-pill{background:rgba(10,24,64,.72);border:2px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 14px;font-size:16px;font-weight:700}" +
 "#cm .cm-gridbox{flex:1;width:100%;min-height:0;display:flex;align-items:center;justify-content:center;padding:6px 12px;box-sizing:border-box}" +
 "#cm .cm-gridin{position:relative}" +
@@ -131,6 +131,9 @@ css.textContent =
 "#cm button.cm-tool.cm-act{border-color:#ffb300;background:#6b4a00}" +
 "#cm button.cm-bulb{right:14px}" +
 "#cm button.cm-ham{left:14px}" +
+"#cm .cm-score{position:absolute;left:14px;bottom:0}" +
+"#cm .cm-banner{position:absolute;top:28%;left:50%;transform:translate(-50%,-50%);background:rgba(10,24,64,.82);color:#fff;font-size:34px;font-weight:800;padding:10px 30px;border-radius:999px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:5;white-space:nowrap}" +
+"#cm .cm-banner.show{opacity:1}" +
 "#cm .cm-badge{position:absolute;top:-6px;right:-6px;min-width:22px;height:22px;border-radius:11px;background:#e53935;color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-sizing:border-box;padding:0 4px;font-family:inherit}" +
 "#cm .cm-badge.zero{background:#2e9e4a}";
 document.head.appendChild(css);
@@ -139,13 +142,14 @@ var root = document.createElement("div");
 root.id = "cm";
 root.style.background = 'url("data:image/svg+xml,' + encodeURIComponent(svg) + '") center/cover no-repeat, #2a6fd0';
 root.innerHTML =
-  '<div class="cm-top"><button class="cm-sm" id="cmBack">‹ Menü</button><div class="cm-pill" id="cmLv"></div><div class="cm-pill" id="cmPuan"></div></div>' +
+  '<div class="cm-top"><button class="cm-sm" id="cmBack">Bilgi Arenası</button></div><div class="cm-banner" id="cmBanner"></div>' +
   '<div class="cm-gridbox" id="cmGrid"></div><div class="cm-bonus" id="cmBonus"></div>' +
   '<div class="cm-cur" id="cmCur"></div>' +
   '<div class="cm-wrap"><div class="cm-wheel" id="cmWheel"><svg id="cmSvg"></svg>' +
   '<button class="cm-shuf" id="cmShuf" aria-label="Karıştır"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="#9aa3b4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h3c4 0 5 10 9 10h5"/><path d="M3 17h3c1.6 0 2.7-1.4 3.7-3"/><path d="M13.3 10C14.3 8.4 15.4 7 17 7h3"/><path d="M17 4l3 3-3 3"/><path d="M17 14l3 3-3 3"/></svg></button></div>' +
   '<button class="cm-tool cm-ham" id="cmHam" aria-label="Tokmak">🔨<span class="cm-badge" id="cmHamN"></span></button>' +
-  '<button class="cm-tool cm-bulb" id="cmHint" aria-label="İpucu">💡<span class="cm-badge" id="cmHintN"></span></button></div>';
+  '<button class="cm-tool cm-bulb" id="cmHint" aria-label="İpucu">💡<span class="cm-badge" id="cmHintN"></span></button>' +
+  '<div class="cm-pill cm-score" id="cmPuan"></div></div>';
 document.body.appendChild(root);
 
 var $ = function (id) { return document.getElementById(id); };
@@ -161,7 +165,15 @@ try {
 } catch (e) {}
 
 function puanKaydet() { try { localStorage.setItem("cemberPuan", puan); } catch (e) {} }
-function baslikYaz() { $("cmLv").textContent = "Seviye " + (lvIdx + 1); $("cmPuan").textContent = "⭐ " + puan; }
+var bannerT = null;
+function baslikYaz() { $("cmPuan").textContent = "⭐ " + puan; }
+function bolumGoster() {
+  var b = $("cmBanner");
+  b.textContent = "Bölüm " + (lvIdx + 1);
+  b.classList.add("show");
+  if (bannerT) clearTimeout(bannerT);
+  bannerT = setTimeout(function () { b.classList.remove("show"); }, 1000);
+}
 
 // Haklar: rozet sayı gösterir, 0 olunca "+" olur (ileride reklam/satın alma buraya bağlanacak)
 function hakYaz() {
@@ -210,7 +222,7 @@ function startLevel() {
   cur.words.forEach(function (p) { placedMap[p.w] = p; });
   bonusList = L.b.concat(cur.un.filter(function (w) { return L.b.indexOf(w) === -1; }));
   letters = shuffle(L.l.split(""));
-  baslikYaz(); hakYaz();
+  baslikYaz(); hakYaz(); bolumGoster();
   $("cmCur").innerHTML = "";
   boyut();
   drawWords(); drawBonus(); drawWheel();
