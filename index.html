@@ -232,7 +232,7 @@ menu();
 <script>
 // Ana sayfanın sol altına APK indirme butonu (uygulamanın içinde görünmez)
 (function () {
-  var APK_ADRES = "bilgi-arenasi.apk"; // APK dosyasının adı (repoya bu isimle yüklenecek) ya da tam adresi
+  var APK_ADRES = "https://github.com/FatihKoc81/bilgi-arenasi/releases/latest/download/bilgi-arenasi.apk"; // her derlemede otomatik güncellenir
   if (window.Capacitor || (window.matchMedia && matchMedia("(display-mode: standalone)").matches)) return;
   var st = document.createElement("style");
   st.textContent = ".apk-btn{position:fixed;left:10px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:5;display:flex;align-items:center;gap:5px;padding:7px 11px;border:2px solid #c9a032;border-radius:12px;background:rgba(0,0,0,.35);color:#d4a63a;font:italic 800 15px Georgia,'Times New Roman',serif;text-decoration:none;letter-spacing:.5px}.apk-btn:active{opacity:.7}.apk-btn.gizli{display:none}";
