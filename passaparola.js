@@ -949,7 +949,7 @@
   sec.innerHTML = `
     <div id="ppGiris">
       <h2><span class="ppRozet b">abc</span> Passaparola</h2>
-      <p class="alt">28 harf, ${SURE} saniye. Her harfin sorusunu bil, bilemezsen pas geç; pas geçilenlere sonra tekrar dönersin. Cevapları Türkçe karakterlerle yaz (ş, ç, ğ, ı, ö, ü).</p>
+      <p class="alt">28 harf, ${SURE} saniye. Her harfin<br>sorusunu bil, bilemezsen pas geç;<br>pas geçilenlere sonra tekrar dönersin.</p>
       <button class="btn" id="ppBasla">▶️ Başla</button>
       <button class="btn ikinci" id="ppGeri">Ana menü</button>
     </div>
