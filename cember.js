@@ -281,7 +281,7 @@ function makeLayout(words) {
 
 var css = document.createElement("style");
 css.textContent =
-"#cm{position:fixed;top:0;left:0;right:0;bottom:0;height:100dvh;color:#fff;color-scheme:light;z-index:9999;display:none;flex-direction:column;align-items:center;font-family:inherit;overflow:hidden;box-sizing:border-box;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);-webkit-user-select:none;user-select:none}" +
+"#cm{position:fixed;top:0;left:0;right:0;bottom:0;height:100dvh;color:#fff;color-scheme:dark;z-index:9999;display:none;flex-direction:column;align-items:center;font-family:inherit;overflow:hidden;box-sizing:border-box;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);-webkit-user-select:none;user-select:none}" +
 "#cm .cm-top{width:100%;display:flex;align-items:center;gap:8px;padding:0;box-sizing:border-box;flex:none}" +
 "#cm button.cm-sm{width:100%;background:#05050d;color:#fff;border:0;border-bottom:1px solid #232a4d;border-radius:0;padding:12px 0;font-family:inherit;font-size:20px;font-weight:800;letter-spacing:.5px;text-align:center}" +
 "#cm .cm-pill{background:rgba(10,24,64,.72);border:2px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 14px;font-size:16px;font-weight:700}" +
@@ -367,17 +367,18 @@ function arkaYaz() {
 }
 function barRenk() {
   try {
-    var h = document.querySelector("h1"), bar = $("cmBack"), bg = "", bb = "";
-    var t = function (c) { return !c || c === "transparent" || /rgba\(.*,\s*0\)$/.test(c); };
-    if (h) {
-      var cs = getComputedStyle(h); bg = cs.backgroundColor;
-      if (parseFloat(cs.borderBottomWidth) > 0) bb = cs.borderBottomWidth + " " + cs.borderBottomStyle + " " + cs.borderBottomColor;
-    }
-    if (t(bg)) bg = getComputedStyle(document.body).backgroundColor;
-    if (t(bg)) bg = getComputedStyle(document.documentElement).backgroundColor;
-    if (t(bg)) bg = "#05050d";
-    bar.style.background = bg;
-    bar.style.borderBottom = bb || "0";
+    var bar = $("cmBack");
+    var seffaf = function (c) { return !c || c === "transparent" || /rgba\(.*,\s*0\)$/.test(c); };
+    var var_ = function (c) { return (c.backgroundImage && c.backgroundImage !== "none") || !seffaf(c.backgroundColor); };
+    var src = getComputedStyle(document.documentElement);
+    if (!var_(src)) src = getComputedStyle(document.body);
+    bar.style.backgroundColor = seffaf(src.backgroundColor) ? "#05050d" : src.backgroundColor;
+    bar.style.backgroundImage = src.backgroundImage;
+    bar.style.backgroundSize = src.backgroundSize;
+    bar.style.backgroundPosition = src.backgroundPosition;
+    bar.style.backgroundRepeat = src.backgroundRepeat;
+    bar.style.backgroundAttachment = "fixed";
+    bar.style.borderBottom = "0";
   } catch (e) {}
 }
 
