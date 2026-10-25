@@ -233,10 +233,12 @@ menu();
 <script src="islem.js"></script>
 <script src="cember.js"></script>
 <script>
-// Ana menüde sayfa kaymasın + sol alta APK indirme butonu (FK ile aynı hizada, uygulamanın içinde görünmez)
+// Ana menüde sayfa kaymasın + sol alta APK indirme / güncelleme butonu
+// Tarayıcıda "⬇ APK", uygulamanın içinde aynı yerde "⬇ Güncelle" yazar.
 (function () {
   var APK_ADRES = "https://github.com/FatihKoc81/bilgi-arenasi/releases/latest/download/bilgi-arenasi.apk"; // her derlemede otomatik güncellenir
-  var uygulamaIci = !!(window.Capacitor || (window.matchMedia && matchMedia("(display-mode: standalone)").matches));
+  var apkUygulamasi = !!window.Capacitor;
+  var uygulamaIci = !!(apkUygulamasi || (window.matchMedia && matchMedia("(display-mode: standalone)").matches));
   var stl = document.createElement("style");
   stl.textContent =
     ".apk-btn{position:fixed;left:10px;bottom:4px;height:40px;padding:0 14px;box-sizing:border-box;z-index:5;display:flex;align-items:center;justify-content:center;gap:5px;border:2px solid #d4a63a;border-radius:11px;background:rgba(0,0,0,.35);color:#d4a63a;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:700;font-size:21px;line-height:1;text-decoration:none}" +
@@ -246,12 +248,15 @@ menu();
   document.head.appendChild(stl);
   var ios = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   var a = null;
-  if (!uygulamaIci && !ios) {
+  // APK uygulamasında "Güncelle", tarayıcıda "APK"; yüklenmiş web uygulamasında (PWA) görünmez
+  if (!ios && (apkUygulamasi || !uygulamaIci)) {
     a = document.createElement("a");
     a.className = "apk-btn gizli";
     a.href = APK_ADRES;
     a.setAttribute("download", "");
-    a.textContent = "⬇ APK";
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.textContent = apkUygulamasi ? "⬇ Güncelle" : "⬇ APK";
     document.body.appendChild(a);
   }
   function guncelle() {
