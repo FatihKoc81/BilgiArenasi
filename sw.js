@@ -24,6 +24,7 @@ self.addEventListener("activate", e => {
 
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
+  if (/\.apk(\?|$)/i.test(e.request.url)) return; // APK dosyası önbelleğe alınmaz
   e.respondWith(
     fetch(e.request, { cache: "no-store" })
       .then(r => {
