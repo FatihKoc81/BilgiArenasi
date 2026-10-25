@@ -230,6 +230,29 @@ menu();
 <script src="islem.js"></script>
 <script src="cember.js"></script>
 <script>
+// Ana sayfanın sol altına APK indirme butonu (uygulamanın içinde görünmez)
+(function () {
+  var APK_ADRES = "bilgi-arenasi.apk"; // APK dosyasının adı (repoya bu isimle yüklenecek) ya da tam adresi
+  if (window.Capacitor || (window.matchMedia && matchMedia("(display-mode: standalone)").matches)) return;
+  var st = document.createElement("style");
+  st.textContent = ".apk-btn{position:fixed;left:10px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:5;display:flex;align-items:center;gap:5px;padding:7px 11px;border:2px solid #c9a032;border-radius:12px;background:rgba(0,0,0,.35);color:#d4a63a;font:italic 800 15px Georgia,'Times New Roman',serif;text-decoration:none;letter-spacing:.5px}.apk-btn:active{opacity:.7}.apk-btn.gizli{display:none}";
+  document.head.appendChild(st);
+  var a = document.createElement("a");
+  a.className = "apk-btn gizli";
+  a.href = APK_ADRES;
+  a.setAttribute("download", "");
+  a.textContent = "⬇ APK";
+  document.body.appendChild(a);
+  function guncelle() {
+    var ana = document.getElementById("ana");
+    var gor = ana && !ana.classList.contains("hidden") && getComputedStyle(ana).display !== "none";
+    a.classList.toggle("gizli", !gor);
+  }
+  guncelle();
+  setInterval(guncelle, 500);
+})();
+</script>
+<script>
 if ("serviceWorker" in navigator) {
   const eskiKontrol = navigator.serviceWorker.controller;
   let yenilendi = false;
