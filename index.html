@@ -230,13 +230,16 @@ menu();
 <script src="islem.js"></script>
 <script src="cember.js"></script>
 <script>
-// Ana sayfanın sol altına APK indirme butonu (uygulamanın içinde görünmez)
+// Ana sayfanın sol altına APK indirme butonu (FK ile aynı hizada, uygulamanın içinde görünmez)
 (function () {
   var APK_ADRES = "https://github.com/FatihKoc81/bilgi-arenasi/releases/latest/download/bilgi-arenasi.apk"; // her derlemede otomatik güncellenir
   if (window.Capacitor || (window.matchMedia && matchMedia("(display-mode: standalone)").matches)) return;
-  var st = document.createElement("style");
-  st.textContent = ".apk-btn{position:fixed;left:10px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:5;display:flex;align-items:center;gap:5px;padding:7px 11px;border:2px solid #c9a032;border-radius:12px;background:rgba(0,0,0,.35);color:#d4a63a;font:italic 800 15px Georgia,'Times New Roman',serif;text-decoration:none;letter-spacing:.5px}.apk-btn:active{opacity:.7}.apk-btn.gizli{display:none}";
-  document.head.appendChild(st);
+  var stl = document.createElement("style");
+  stl.textContent =
+    ".apk-btn{position:fixed;left:10px;bottom:4px;height:40px;padding:0 14px;box-sizing:border-box;z-index:5;display:flex;align-items:center;justify-content:center;gap:5px;border:2px solid #d4a63a;border-radius:11px;background:rgba(0,0,0,.35);color:#d4a63a;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:700;font-size:21px;line-height:1;text-decoration:none}" +
+    ".apk-btn:active{opacity:.7}.apk-btn.gizli{display:none}" +
+    "body.apk-pad{padding-bottom:64px}";
+  document.head.appendChild(stl);
   var a = document.createElement("a");
   a.className = "apk-btn gizli";
   a.href = APK_ADRES;
@@ -247,6 +250,7 @@ menu();
     var ana = document.getElementById("ana");
     var gor = ana && !ana.classList.contains("hidden") && getComputedStyle(ana).display !== "none";
     a.classList.toggle("gizli", !gor);
+    document.body.classList.toggle("apk-pad", !!gor);
   }
   guncelle();
   setInterval(guncelle, 500);
