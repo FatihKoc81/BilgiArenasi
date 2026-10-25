@@ -14,169 +14,337 @@
       ["Türkiye'nin başkenti", ["Ankara"]],
       ["Dünyanın en büyük kıtası", ["Asya"]],
       ["Ormanlar kralı olarak bilinen hayvan", ["Aslan"]],
-      ["Nuh'un gemisinin karaya oturduğu rivayet edilen, Türkiye'nin en yüksek dağı", ["Ağrı", "Ağrı Dağı"]]
+      ["Nuh'un gemisinin karaya oturduğu rivayet edilen, Türkiye'nin en yüksek dağı", ["Ağrı", "Ağrı Dağı"]],
+      ["Kışın uykuya yatan, balı seven iri ve tüylü hayvan", ["Ayı"]],
+      ["Dünyanın en küçük kıtası", ["Avustralya"]],
+      ["Yunanistan'ın başkenti", ["Atina"]],
+      ["Türkiye Cumhuriyeti'nin kurucusu", ["Atatürk", "Mustafa Kemal Atatürk"]],
+      ["Kökü toprakta, dalları ve yaprakları olan büyük bitki", ["Ağaç"]],
+      ["Bal yapan, iğnesi olan böcek", ["Arı"]]
     ],
     "B": [
       ["Çocukların oynadığı, üflenince şişen renkli lastik oyuncak", ["Balon"]],
       ["Gökyüzünde yağmur getiren beyaz veya gri kümeler", ["Bulut"]],
       ["Marmara Bölgesi'nde, Osmanlı'nın ilk başkenti olan şehir", ["Bursa"]],
-      ["Çiçeklerin açtığı, kıştan sonra gelen mevsim", ["Bahar"]]
+      ["Çiçeklerin açtığı, kıştan sonra gelen mevsim", ["Bahar"]],
+      ["Suda yaşayan, solungaçlarıyla soluyan hayvan", ["Balık"]],
+      ["İki tekerlekli, pedal çevirerek giden taşıt", ["Bisiklet"]],
+      ["Almanya'nın başkenti", ["Berlin"]],
+      ["Suyun donmuş hâli", ["Buz"]],
+      ["Kartal simgeli, siyah beyaz renkli İstanbul futbol kulübü", ["Beşiktaş"]],
+      ["Geceleri avlanan, büyük gözlü kuş", ["Baykuş"]]
     ],
     "C": [
       ["Yumurtadan yeni çıkmış tavuk yavrusu", ["Civciv"]],
       ["Pantolon ve ceketlerde eşya koymaya yarayan bölüm", ["Cep"]],
       ["Haftanın beşinci günü", ["Cuma"]],
-      ["Atatürk'ün 1923'te ilan ettiği yönetim biçimi", ["Cumhuriyet"]]
+      ["Atatürk'ün 1923'te ilan ettiği yönetim biçimi", ["Cumhuriyet"]],
+      ["Para ve kartları koyduğumuz küçük kap", ["Cüzdan"]],
+      ["Çizgi çekmek ve uzunluk ölçmek için kullanılan araç", ["Cetvel"]],
+      ["Kabuğu sert, içi beyni andıran kuruyemiş", ["Ceviz"]],
+      ["Haftanın altıncı günü", ["Cumartesi"]],
+      ["Pencerelerde kullanılan şeffaf ve kırılgan madde", ["Cam"]],
+      ["Türk kahvesi pişirilen, uzun saplı küçük kap", ["Cezve"]]
     ],
     "Ç": [
       ["Yemek yerken kullanılan, uçları dişli sofra aleti", ["Çatal"]],
       ["Kum tepeleriyle kaplı, yağmurun çok az düştüğü kurak bölge", ["Çöl"]],
       ["Türklerin en çok içtiği, demlenerek hazırlanan sıcak içecek", ["Çay"]],
-      ["Okula giderken sırtta veya omuzda taşınan eşya taşıma aracı", ["Çanta"]]
+      ["Okula giderken sırtta veya omuzda taşınan eşya taşıma aracı", ["Çanta"]],
+      ["Kaşıkla içilen, sıvı sıcak yemek", ["Çorba"]],
+      ["Arıların nektar topladığı, rengârenk bitki parçası", ["Çiçek"]],
+      ["Haftanın dördüncü günü", ["Çarşamba"]],
+      ["Kırmızı, yüzeyinde minik tohumlar olan yaz meyvesi", ["Çilek"]],
+      ["Çivi çakmaya yarayan alet", ["Çekiç"]],
+      ["Boğazıyla ünlü, 1915 savaşlarının yaşandığı il", ["Çanakkale"]]
     ],
     "D": [
       ["Yemekleri çiğnememizi sağlayan, ağızdaki sert yapılar", ["Diş"]],
       ["Karadeniz ve Akdeniz gibi tuzlu su kütlesi", ["Deniz"]],
       ["Üzerinde yaşadığımız gezegen", ["Dünya"]],
-      ["Ağızda bulunan, tat almamızı sağlayan organ", ["Dil"]]
+      ["Ağızda bulunan, tat almamızı sağlayan organ", ["Dil"]],
+      ["Zirvesi karla kaplı olabilen, yerden yüksek doğal yükselti", ["Dağ"]],
+      ["Hastaları muayene edip tedavi eden kişi", ["Doktor"]],
+      ["Salatalarda kullanılan, kırmızı ve sulu sebze", ["Domates"]],
+      ["Çubukla vurularak çalınan vurmalı çalgı", ["Davul"]],
+      ["Yazın külahta yenen soğuk tatlı", ["Dondurma"]],
+      ["Pamukkale'nin bulunduğu Ege şehri", ["Denizli"]]
     ],
     "E": [
       ["Adem ile Havva'nın yediği rivayet edilen meyve", ["Elma"]],
       ["Dünyanın en yüksek dağı", ["Everest", "Everest Dağı"]],
       ["Eylül'den sonra gelen ay", ["Ekim"]],
-      ["Uzun kulaklı, 'anıran' çiftlik hayvanı", ["Eşek"]]
+      ["Uzun kulaklı, 'anıran' çiftlik hayvanı", ["Eşek"]],
+      ["Fırında pişirilen, sofranın vazgeçilmez yiyeceği", ["Ekmek"]],
+      ["Paris'te bulunan, demirden yapılmış ünlü kule", ["Eyfel", "Eyfel Kulesi"]],
+      ["Palandöken kayak merkeziyle ünlü Doğu Anadolu şehri", ["Erzurum"]],
+      ["Yılın dokuzuncu ayı", ["Eylül"]],
+      ["Prizden gelen, ampulleri yakan enerji", ["Elektrik"]],
+      ["Selimiye Camii ile ünlü Trakya şehri", ["Edirne"]]
     ],
     "F": [
       ["Hortumu olan, karaların en büyük hayvanı", ["Fil"]],
       ["Kadıköy'de stadı bulunan sarı lacivert futbol kulübü", ["Fenerbahçe"]],
       ["Başkenti Paris olan ülke", ["Fransa"]],
-      ["Türkiye'nin Karadeniz kıyılarında en çok yetiştirilen kuruyemiş", ["Fındık"]]
+      ["Türkiye'nin Karadeniz kıyılarında en çok yetiştirilen kuruyemiş", ["Fındık"]],
+      ["Kediler tarafından kovalanan küçük kemirgen", ["Fare"]],
+      ["Kaleye gol atılarak oynanan, on birer kişilik takım sporu", ["Futbol"]],
+      ["Ekmek ve kek pişirilen, kapalı ve sıcak bölme", ["Fırın"]],
+      ["Makineyle çekilen, anıları saklamaya yarayan görüntü", ["Fotoğraf"]],
+      ["İstanbul'u 1453'te fetheden Osmanlı padişahı", ["Fatih", "Fatih Sultan Mehmet"]],
+      ["Şiddetli rüzgârlı ve yağışlı hava olayı", ["Fırtına"]]
     ],
     "G": [
       ["Dünyamızı ısıtan ve aydınlatan yıldız", ["Güneş"]],
       ["Yağmurdan sonra gökyüzünde beliren yedi renkli yay", ["Gökkuşağı"]],
       ["Aslan simgeli, sarı kırmızı renkli İstanbul futbol kulübü", ["Galatasaray"]],
-      ["Görmemizi sağlayan organ", ["Göz"]]
+      ["Görmemizi sağlayan organ", ["Göz"]],
+      ["Güneş battıktan sonra gelen karanlık zaman", ["Gece"]],
+      ["Altından sonra en değerli sayılan, parlak beyaz maden", ["Gümüş"]],
+      ["Altı telli çalgı", ["Gitar"]],
+      ["Her gün çıkan, haberleri içeren basılı yayın", ["Gazete"]],
+      ["Baklavası ve fıstığıyla ünlü Güneydoğu şehri", ["Gaziantep"]],
+      ["Çevresi karayla çevrili tatlı su kütlesi", ["Göl"]]
     ],
     "H": [
       ["Mekke'ye yapılan kutsal ziyaret", ["Hac"]],
       ["Yeryüzünü saran, soluduğumuz gaz karışımı", ["Hava"]],
       ["Doktorun muayene ettiği kişi", ["Hasta"]],
-      ["Futbol maçını yöneten ve düdük çalan kişi", ["Hakem"]]
+      ["Futbol maçını yöneten ve düdük çalan kişi", ["Hakem"]],
+      ["Turuncu renkli, tavşanın sevdiği kök sebze", ["Havuç"]],
+      ["Yere serilen, desenli dokuma örtü", ["Halı"]],
+      ["Yıkanmak için kullanılan, buharlı yapı", ["Hamam"]],
+      ["Antakya'nın da içinde bulunduğu Akdeniz şehri", ["Hatay"]],
+      ["Yılın altıncı ayı", ["Haziran"]],
+      ["Pervaneleriyle dikey kalkıp inebilen hava aracı", ["Helikopter"]]
     ],
     "I": [
       ["Lambadan ve güneşten yayılan, aydınlatan şey", ["Işık"]],
       ["Yeşil yapraklı, Temel Reis'in güç almak için yediği sebze", ["Ispanak"]],
       ["Başkenti Bağdat olan ülke", ["Irak"]],
-      ["Nehir sözcüğünün Türkçe karşılığı", ["Irmak"]]
+      ["Nehir sözcüğünün Türkçe karşılığı", ["Irmak"]],
+      ["Köfte ve et pişirmede kullanılan, demir çubuklu pişirme aracı", ["Izgara"]],
+      ["Soğuk algınlığında içilen, çiçeğinden yapılan çay", ["Ihlamur"]],
+      ["Gülüyle ünlü Göller Yöresi şehri", ["Isparta"]],
+      ["Ne sıcak ne soğuk olan", ["Ilık"]],
+      ["Dokununca yakan, çorbası yapılan bitki", ["Isırgan"]],
+      ["Ağrı Dağı'nın eteğinde, Ermenistan sınırındaki il", ["Iğdır"]]
     ],
     "İ": [
       ["Türkiye'nin en kalabalık şehri", ["İstanbul"]],
       ["Ege'nin en büyük limanı olan, Kordon'uyla ünlü şehir", ["İzmir"]],
       ["Dikiş dikmeye yarayan, ucu sivri ve iplik geçirilen araç", ["İğne"]],
-      ["Sütü içilen, boynuzlu çiftlik hayvanı", ["İnek"]]
+      ["Sütü içilen, boynuzlu çiftlik hayvanı", ["İnek"]],
+      ["Düğümlenen, ince uzun bağlama malzemesi", ["İp"]],
+      ["Başkenti Londra olan ülke", ["İngiltere"]],
+      ["Başkenti Madrid olan ülke", ["İspanya"]],
+      ["Çizme biçimindeki Avrupa ülkesi", ["İtalya"]],
+      ["İpekböceğinin kozasından elde edilen parlak kumaş", ["İpek"]],
+      ["Düşünebilen ve konuşabilen canlı", ["İnsan"]]
     ],
     "J": [
       ["Kırsal bölgelerde görev yapan askeri güvenlik gücü", ["Jandarma"]],
       ["Yarışmalarda puan veren veya karar veren kurul", ["Jüri"]],
       ["Sakal tıraşında kullanılan keskin ince bıçak", ["Jilet"]],
-      ["Başkenti Tokyo olan ülke", ["Japonya"]]
+      ["Başkenti Tokyo olan ülke", ["Japonya"]],
+      ["Güneş Sistemi'nin en büyük gezegeni", ["Jüpiter"]],
+      ["Güney Amerika'da yaşayan, benekli büyük kedi", ["Jaguar"]],
+      ["Telefon veya oyun makinelerinde kullanılan küçük metal para", ["Jeton"]],
+      ["Halka, barfiks ve yer hareketleri içeren spor dalı", ["Jimnastik"]],
+      ["Yerkabuğunu ve kayaçları inceleyen bilim dalı", ["Jeoloji"]],
+      ["El kol hareketiyle yapılan anlatım", ["Jest"]]
     ],
     "K": [
       ["Yazı yazmaya yarayan araç", ["Kalem"]],
       ["Sayfalardan oluşan, okumak için kullanılan ciltli eser", ["Kitap"]],
       ["Vücutta kanı pompalayan organ", ["Kalp"]],
-      ["Kış mevsiminde gökten yağan beyaz taneler", ["Kar"]]
+      ["Kış mevsiminde gökten yağan beyaz taneler", ["Kar"]],
+      ["Miyavlayan evcil hayvan", ["Kedi"]],
+      ["Havlayan, insanın en sadık dostu sayılan hayvan", ["Köpek"]],
+      ["Fincanda içilen, çekirdeklerinden yapılan koyu içecek", ["Kahve"]],
+      ["Mantısı ve pastırmasıyla ünlü İç Anadolu şehri", ["Kayseri"]],
+      ["Bayrağında akçaağaç yaprağı bulunan Kuzey Amerika ülkesi", ["Kanada"]],
+      ["Güçlü pençeli, yüksekten uçan yırtıcı kuş", ["Kartal"]]
     ],
     "L": [
       ["Sarı renkli, ekşi bir narenciye", ["Limon"]],
       ["Hollanda ile özdeşleşen, soğanından yetişen çiçek", ["Lale"]],
       ["Pudra şekerine bulanmış, jelatinimsi Türk tatlısı", ["Lokum"]],
-      ["İngiltere'nin başkenti", ["Londra"]]
+      ["İngiltere'nin başkenti", ["Londra"]],
+      ["Uzun bacaklı, yuvasını bacalara yapan göçmen kuş", ["Leylek"]],
+      ["Odayı aydınlatan elektrikli eşya", ["Lamba"]],
+      ["Sarma yapılan, yaprakları iç içe yapraklı sebze", ["Lahana"]],
+      ["Koyu mavi renk", ["Lacivert"]],
+      ["Başkenti Beyrut olan Akdeniz ülkesi", ["Lübnan"]],
+      ["Vagonları çeken, trenin önündeki makine", ["Lokomotif"]]
     ],
     "M": [
       ["Güneş Sistemi'nin Kızıl Gezegeni", ["Mars"]],
       ["Piramitleriyle ünlü, Nil kıyısındaki ülke", ["Mısır"]],
       ["Güneş'e en yakın gezegen", ["Merkür"]],
-      ["Yanarak ışık veren, balmumundan yapılan eşya", ["Mum"]]
+      ["Yanarak ışık veren, balmumundan yapılan eşya", ["Mum"]],
+      ["Üzerine yemek konan, ayaklı mobilya", ["Masa"]],
+      ["Sarı kabuklu, maymunların sevdiği meyve", ["Muz"]],
+      ["İspanya'nın başkenti", ["Madrid"]],
+      ["Tarihi eserlerin ve sanat yapıtlarının sergilendiği yer", ["Müze"]],
+      ["Gözle görülemeyen küçük cisimleri büyütüp gösteren alet", ["Mikroskop"]],
+      ["Taş evleriyle ünlü Güneydoğu Anadolu şehri", ["Mardin"]]
     ],
     "N": [
       ["Mısır'dan geçen, dünyanın en uzun nehirlerinden biri", ["Nil"]],
       ["Kırmızı, içi taneli, ekşi tatlı meyve", ["Nar"]],
       ["Cümlenin sonuna konulan noktalama işareti", ["Nokta"]],
-      ["Yılın dördüncü ayı", ["Nisan"]]
+      ["Yılın dördüncü ayı", ["Nisan"]],
+      ["Ağız ferahlatan, yeşil yapraklı koku ve çay bitkisi", ["Nane"]],
+      ["Leblebinin ham hâli olan yuvarlak bakliyat", ["Nohut"]],
+      ["Fiyortlarıyla ünlü İskandinav ülkesi", ["Norveç"]],
+      ["Güneş'e en uzak gezegen", ["Neptün"]],
+      ["Su yüzeyinde açan, göl ve havuzlarda yetişen çiçek", ["Nilüfer"]],
+      ["Müzikte sesleri gösteren işaret", ["Nota"]]
     ],
     "O": [
       ["Öğrencilerin ders gördüğü yer", ["Okul"]],
       ["Askerlerin oluşturduğu büyük topluluk", ["Ordu"]],
       ["Çok sayıda ağacın bulunduğu geniş alan", ["Orman"]],
-      ["Soluduğumuz havadaki, yaşam için gerekli gaz", ["Oksijen"]]
+      ["Soluduğumuz havadaki, yaşam için gerekli gaz", ["Oksijen"]],
+      ["Yılın ilk ayı", ["Ocak"]],
+      ["Çok sayıda yolcu taşıyan kara taşıtı", ["Otobüs"]],
+      ["Birçok müzisyenin birlikte çaldığı büyük topluluk", ["Orkestra"]],
+      ["Pasifik ve Atlas gibi, denizlerden daha büyük su kütlesi", ["Okyanus"]],
+      ["Osman Gazi tarafından kurulan büyük devlet", ["Osmanlı"]],
+      ["Evin yatak odası veya salon gibi bölümlerinden her biri", ["Oda"]]
     ],
     "Ö": [
       ["Okulda ders anlatan kişi", ["Öğretmen"]],
       ["Gölde yüzen, 'vak vak' diyen kuş", ["Ördek"]],
       ["Öğretmenin evde yapılmak üzere verdiği çalışma", ["Ödev"]],
-      ["Ders gören kişi", ["Öğrenci"]]
+      ["Ders gören kişi", ["Öğrenci"]],
+      ["Ağ ören, sekiz bacaklı hayvan", ["Örümcek"]],
+      ["Yarışmada kazananlara verilen şey", ["Ödül"]],
+      ["Şişlerle yapılan, kazak ve atkı gibi şeylerin üretim biçimi", ["Örgü"]],
+      ["Sabah ile akşam arasındaki, gün ortası zamanı", ["Öğle"]],
+      ["Bağımsız ve baskısız olma hâli", ["Özgürlük"]],
+      ["Tarlada sabanı çeken, boynuzlu erkek sığır", ["Öküz"]]
     ],
     "P": [
       ["İtalyan mutfağından, yuvarlak hamur üzerine peynirli yemek", ["Pizza"]],
       ["Turuncu renkli, suyu içilen narenciye", ["Portakal"]],
       ["Doğum günlerinde mumlarla süslenen tatlı", ["Pasta"]],
-      ["Kutuplarda yaşayan, uçamayan siyah beyaz kuş", ["Penguen"]]
+      ["Kutuplarda yaşayan, uçamayan siyah beyaz kuş", ["Penguen"]],
+      ["Sütten yapılan, kahvaltının vazgeçilmezi", ["Peynir"]],
+      ["Beyaz lifli, kumaş yapımında kullanılan bitki", ["Pamuk"]],
+      ["Fransa'nın başkenti", ["Paris"]],
+      ["Uçağı kullanan kişi", ["Pilot"]],
+      ["Haftanın yedinci günü", ["Pazar"]],
+      ["Odaya ışık ve hava alan, camlı açıklık", ["Pencere"]]
     ],
     "R": [
       ["Kırmızı, mavi, sarı gibi şeylere verilen genel ad", ["Renk"]],
       ["Kalem veya boyayla kâğıda yapılan çizim", ["Resim"]],
       ["Müzik ve haber dinlemek için kullanılan, sesi dalgalarla alan cihaz", ["Radyo"]],
-      ["İtalya'nın başkenti", ["Roma"]]
+      ["İtalya'nın başkenti", ["Roma"]],
+      ["Havanın yatay yönde hareketi", ["Rüzgar"]],
+      ["Uykuda görülen hayaller", ["Rüya"]],
+      ["İnsan gibi hareket edebilen, programlanmış makine", ["Robot"]],
+      ["Çayıyla ünlü Doğu Karadeniz şehri", ["Rize"]],
+      ["Yüzölçümü bakımından dünyanın en büyük ülkesi", ["Rusya"]],
+      ["Müslümanların oruç tuttuğu, hicri yılın dokuzuncu ayı", ["Ramazan"]]
     ],
     "S": [
       ["İnekten elde edilen beyaz içecek", ["Süt"]],
       ["Zamanı gösteren araç", ["Saat"]],
       ["Dünyanın en büyük sıcak çölü", ["Sahra", "Sahra Çölü"]],
-      ["64 kareli tahtada oynanan, şah ve vezirli zeka oyunu", ["Satranç"]]
+      ["64 kareli tahtada oynanan, şah ve vezirli zeka oyunu", ["Satranç"]],
+      ["Üzerine oturulan, dört ayaklı mobilya", ["Sandalye"]],
+      ["Ellerimizi yıkarken kullandığımız, köpüren madde", ["Sabun"]],
+      ["Fındık toplayan, ağaçlarda yaşayan kuyruklu hayvan", ["Sincap"]],
+      ["Limonun ve muzun rengi", ["Sarı"]],
+      ["Filmlerin beyaz perdede izlendiği salon", ["Sinema"]],
+      ["Kafa derisinde çıkan kıllar", ["Saç"]]
     ],
     "Ş": [
       ["Çaya katılan tatlı beyaz kristal", ["Şeker"]],
       ["Yağmurdan korunmak için açılan araç", ["Şemsiye"]],
       ["Köyden büyük, kalabalık yerleşim yeri", ["Şehir"]],
-      ["Dizelerden oluşan edebi tür", ["Şiir"]]
+      ["Dizelerden oluşan edebi tür", ["Şiir"]],
+      ["Başa takılan giysi", ["Şapka"]],
+      ["Yağmurlu havada gökte çakan ışık", ["Şimşek"]],
+      ["Tüylü kabuklu, sulu yaz meyvesi", ["Şeftali"]],
+      ["Balıklıgöl ve Göbeklitepe'nin bulunduğu il", ["Şanlıurfa"]],
+      ["Yılın en kısa ayı", ["Şubat"]],
+      ["Sözlü veya sözsüz müzik eseri", ["Şarkı"]]
     ],
     "T": [
       ["Raylar üzerinde giden ulaşım aracı", ["Tren"]],
       ["Uzun kulaklı, havuç yemeyi seven hayvan", ["Tavşan"]],
       ["Görüntü ve ses yayınlayan ev eşyası", ["Televizyon"]],
-      ["Yemeklere lezzet veren beyaz mineral", ["Tuz"]]
+      ["Yemeklere lezzet veren beyaz mineral", ["Tuz"]],
+      ["Yumurtlayan, 'gıt gıt' ötüp kümeste yaşayan çiftlik kuşu", ["Tavuk"]],
+      ["Uzaktaki kişiyle konuşmaya yarayan cihaz", ["Telefon"]],
+      ["Yılın yedinci ayı", ["Temmuz"]],
+      ["Japonya'nın başkenti", ["Tokyo"]],
+      ["Hamsisi ve Sümela Manastırı ile ünlü Karadeniz şehri", ["Trabzon"]],
+      ["Kurnaz olarak bilinen, turuncu tüylü orman hayvanı", ["Tilki"]]
     ],
     "U": [
       ["Gökyüzünde uçan, yolcu taşıyan araç", ["Uçak"]],
       ["Geceleri yatakta uzanıp yaptığımız dinlenme hâli", ["Uyku"]],
       ["Gezegenlerin ve yıldızların bulunduğu sonsuz boşluk", ["Uzay"]],
-      ["Rüzgârda ipiyle uçurulan kâğıt oyuncak", ["Uçurtma"]]
+      ["Rüzgârda ipiyle uçurulan kâğıt oyuncak", ["Uçurtma"]],
+      ["Buğdaydan öğütülerek elde edilen, ekmek yapımında kullanılan toz", ["Un"]],
+      ["İyi şeylerin olacağına dair beklenti", ["Umut"]],
+      ["Boğaz'da balık ekmekte sıkça kullanılan, çizgili küçük balık", ["Uskumru"]],
+      ["Kırmızı üzerinde siyah benekleri olan, şans getirdiğine inanılan böcek", ["Uğurböceği", "Uğur Böceği"]],
+      ["Ege Bölgesi'nde, halıcılığıyla bilinen il", ["Uşak"]],
+      ["Çok dik ve derin yamaç", ["Uçurum"]]
     ],
     "Ü": [
       ["Salkım halinde yetişen, şarabı yapılan meyve", ["Üzüm"]],
       ["Liseden sonra eğitim alınan yüksek öğretim kurumu", ["Üniversite"]],
       ["Sınırları belli, bir devletin yönettiği toprak parçası", ["Ülke"]],
-      ["Kıyafetlerin kırışıklıklarını gideren cihaz", ["Ütü"]]
+      ["Kıyafetlerin kırışıklıklarını gideren cihaz", ["Ütü"]],
+      ["Üç kenarı ve üç köşesi olan geometrik şekil", ["Üçgen"]],
+      ["Başkenti Amman olan Orta Doğu ülkesi", ["Ürdün"]],
+      ["Umut sözcüğünün eş anlamlısı", ["Ümit"]],
+      ["Türkçede a, e, ı, i, o, ö, u, ü harflerine verilen genel ad", ["Ünlü"]],
+      ["Altın zıttı olan yön veya konum", ["Üst"]],
+      ["Askerin, polisin veya öğrencinin giydiği standart kıyafet", ["Üniforma"]]
     ],
     "V": [
       ["Elektrik geriliminin birimi", ["Volt"]],
       ["Çiçek koymak için kullanılan süs kabı", ["Vazo"]],
       ["İnsan veya hayvan bedeninin tamamı", ["Vücut"]],
-      ["Kirazı andıran, ekşi kırmızı meyve", ["Vişne"]]
+      ["Kirazı andıran, ekşi kırmızı meyve", ["Vişne"]],
+      ["Boğaz'da yolcu taşıyan deniz taşıtı", ["Vapur"]],
+      ["Gölü ve kedisiyle ünlü Doğu Anadolu şehri", ["Van"]],
+      ["Doğduğumuz, bağlı olduğumuz ülke", ["Vatan"]],
+      ["Avusturya'nın başkenti", ["Viyana"]],
+      ["İnşaatlarda ağır yük kaldıran makine", ["Vinç"]],
+      ["Fileli, altışar kişilik takım sporu", ["Voleybol"]]
     ],
     "Y": [
       ["Bulutlardan damla damla düşen su", ["Yağmur"]],
       ["Denizde yaşayan, zeki ve sevimli memeli", ["Yunus"]],
       ["Gece gökyüzünde parlayan, Güneş'in de türü olduğu gök cismi", ["Yıldız"]],
-      ["Yılın en sıcak mevsimi", ["Yaz"]]
+      ["Yılın en sıcak mevsimi", ["Yaz"]],
+      ["Tavuğun yumurtladığı, kahvaltıda yenen besin", ["Yumurta"]],
+      ["Ayaksız sürünen, bazı türleri zehirli hayvan", ["Yılan"]],
+      ["Türkiye'nin batısındaki komşu ülke", ["Yunanistan"]],
+      ["Uyurken başın altına konan yumuşak eşya", ["Yastık"]],
+      ["Geceleri uçan, tek uçabilen memeli", ["Yarasa"]],
+      ["Çimenin ve yaprakların rengi", ["Yeşil"]]
     ],
     "Z": [
       ["Siyah beyaz çizgili, at benzeri hayvan", ["Zebra"]],
       ["En uzun boyunlu kara hayvanı", ["Zürafa"]],
       ["Yağı çıkarılan, kahvaltıda yenen yeşil veya siyah meyve", ["Zeytin"]],
-      ["Okulda teneffüsü bildiren, çalan alet", ["Zil"]]
+      ["Okulda teneffüsü bildiren, çalan alet", ["Zil"]],
+      ["Mektubun içine konduğu kâğıt kılıf", ["Zarf"]],
+      ["Düşünme, anlama ve kavrama yeteneği", ["Zeka"]],
+      ["Tavla veya kutu oyunlarında atılan, altı yüzlü küçük küp", ["Zar"]],
+      ["Beyaz, güzel kokulu, soğanlı bir çiçek", ["Zambak"]],
+      ["Taş kömürüyle ünlü Batı Karadeniz şehri", ["Zonguldak"]],
+      ["Savaşçıların vücudunu korumak için giydiği metal giysi", ["Zırh"]]
     ]
   };
 
