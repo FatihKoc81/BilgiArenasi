@@ -38,6 +38,22 @@ jobs:
       - name: İkonları oluştur
         run: npx capacitor-assets generate --android
 
+      - name: Sabit imza anahtarını yükle (çakışma hatasını önler)
+        env:
+          KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          if [ -z "$KEYSTORE_B64" ]; then
+            echo "::error::ANDROID_KEYSTORE_BASE64 secret'ı tanımlı değil. Her derlemede farklı imza çıkar ve kurulumda çakışma olur."
+            exit 1
+          fi
+          mkdir -p ~/.android
+          echo "$KEYSTORE_B64" | base64 -d > ~/.android/debug.keystore
+
+      - name: versionCode'u her derlemede artır
+        run: |
+          sed -i "s/versionCode [0-9]*/versionCode ${{ github.run_number }}/" android/app/build.gradle
+          grep -n "versionCode" android/app/build.gradle
+
       - name: APK derle
         run: |
           cd android
