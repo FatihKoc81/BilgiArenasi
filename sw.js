@@ -1,37 +1,15 @@
-// Önce ağdan dene (güncel kalsın), internet yoksa önbellekten aç
-const ONBELLEK = "bilgi-arenasi-v6";
-const DOSYALAR = [
-  "./", "index.html", "style.css", "manifest.json",
-  "sorular.js", "ortak.js", "passaparola.js", "kelime.js", "kelimelerim.js", "islem.js", "cember.js",
-  "icon-192.png", "icon-512.png", "icon-maskable-512.png"
-];
-
-self.addEventListener("install", e => {
-  e.waitUntil(
-    caches.open(ONBELLEK)
-      .then(c => Promise.allSettled(DOSYALAR.map(d => c.add(new Request(d, { cache: "reload" })))))
-      .then(() => self.skipWaiting())
-  );
-});
-
-self.addEventListener("activate", e => {
-  e.waitUntil(
-    caches.keys()
-      .then(keys => Promise.all(keys.filter(k => k !== ONBELLEK).map(k => caches.delete(k))))
-      .then(() => self.clients.claim())
-  );
-});
-
+const CACHE = "bilgi-arenasi";
+self.addEventListener("install", () => self.skipWaiting());
+self.addEventListener("activate", e => e.waitUntil(self.clients.claim()));
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
-  if (/\.apk(\?|$)/i.test(e.request.url)) return; // APK dosyası önbelleğe alınmaz
   e.respondWith(
     fetch(e.request, { cache: "no-store" })
       .then(r => {
         const kopya = r.clone();
-        caches.open(ONBELLEK).then(c => c.put(e.request, kopya)).catch(() => {});
+        caches.open(CACHE).then(c => c.put(e.request, kopya));
         return r;
       })
-      .catch(() => caches.match(e.request).then(r => r || caches.match("index.html")))
+      .catch(() => caches.match(e.request))
   );
 });
