@@ -279,20 +279,6 @@ function makeLayout(words) {
 }
 // LAYOUT-END
 
-// Arka plan: gökyüzü, tepeler, nehir (dışarıdan resim gerekmez)
-var svg =
-"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 800' preserveAspectRatio='xMidYMid slice'>" +
-"<defs><linearGradient id='s' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#1747a8'/><stop offset='.4' stop-color='#3b8be0'/><stop offset='.68' stop-color='#b4e0ff'/></linearGradient></defs>" +
-"<rect width='400' height='800' fill='url(#s)'/>" +
-"<g fill='#fff' opacity='.85'><ellipse cx='330' cy='250' rx='60' ry='22'/><ellipse cx='362' cy='234' rx='40' ry='20'/><ellipse cx='50' cy='330' rx='55' ry='18'/><ellipse cx='84' cy='316' rx='35' ry='16'/><ellipse cx='260' cy='430' rx='45' ry='14'/></g>" +
-"<path d='M0 560 L70 500 L130 550 L200 480 L280 555 L340 505 L400 550 L400 800 L0 800Z' fill='#6f9fc8'/>" +
-"<path d='M0 600 Q100 540 200 590 T400 580 L400 800 L0 800Z' fill='#4fae4a'/>" +
-"<g fill='#1f6b2e'><path d='M30 610 l14 -44 l14 44z'/><path d='M60 616 l12 -38 l12 38z'/><path d='M330 600 l14 -46 l14 46z'/><path d='M362 606 l12 -38 l12 38z'/><path d='M120 604 l10 -32 l10 32z'/></g>" +
-"<path d='M0 655 Q120 605 240 655 T400 645 L400 800 L0 800Z' fill='#3a9a3c'/>" +
-"<path d='M0 725 Q100 695 200 720 T400 710 L400 800 L0 800Z' fill='#2aa3e6'/>" +
-"<ellipse cx='60' cy='770' rx='50' ry='16' fill='#8a7a6a'/><ellipse cx='140' cy='785' rx='42' ry='13' fill='#a39280'/><ellipse cx='300' cy='772' rx='55' ry='17' fill='#8a7a6a'/><ellipse cx='370' cy='788' rx='40' ry='12' fill='#a39280'/>" +
-"</svg>";
-
 var css = document.createElement("style");
 css.textContent =
 "#cm{position:fixed;top:0;left:0;right:0;bottom:0;height:100dvh;color:#fff;color-scheme:light;z-index:9999;display:none;flex-direction:column;align-items:center;font-family:inherit;overflow:hidden;box-sizing:border-box;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);-webkit-user-select:none;user-select:none}" +
@@ -330,7 +316,6 @@ document.head.appendChild(css);
 
 var root = document.createElement("div");
 root.id = "cm";
-root.style.background = 'url("data:image/svg+xml,' + encodeURIComponent(svg) + '") center/cover no-repeat, #2a6fd0';
 root.innerHTML =
   '<div class="cm-top"><button class="cm-sm" id="cmBack">🧠 BİLGİ ARENASI</button></div><div class="cm-banner" id="cmBanner"></div>' +
   '<div class="cm-gridbox" id="cmGrid"></div><div class="cm-bonus" id="cmBonus"></div>' +
@@ -345,6 +330,57 @@ document.body.appendChild(root);
 var $ = function (id) { return document.getElementById(id); };
 var lvIdx = 0, found = {}, foundB = {}, hintCells = {}, letters = [], sel = [], drag = false, puan = 0;
 var cur = null, bonusList = [], placedMap = {}, S = 260, D = 54, ptr = null, flashT = null;
+// Arka plan sahneleri: her bölümde sırayla değişir (dışarıdan resim gerekmez)
+function RND(seed) { var s = seed; return function () { s = (s * 9301 + 49297) % 233280; return s / 233280; }; }
+function svgSar(ic) { return "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 800' preserveAspectRatio='xMidYMid slice'>" + ic + "</svg>"; }
+function agac(x, y, s, c) { return `<g transform='translate(${x} ${y}) scale(${s})' fill='${c}'><path d='M0 -70 L16 -34 L8 -34 L22 -4 L10 -4 L26 28 L-26 28 L-10 -4 L-22 -4 L-8 -34 L-16 -34Z'/><rect x='-3' y='28' width='6' height='10'/></g>`; }
+function geyik(x, y, s, c) { return `<g transform='translate(${x} ${y}) scale(${s})' fill='${c}' stroke='${c}'><ellipse cx='0' cy='0' rx='22' ry='10' stroke='none'/><path d='M14 -4 L24 -22 L30 -20 L22 2Z' stroke='none'/><ellipse cx='31' cy='-23' rx='7' ry='4' transform='rotate(25 31 -23)' stroke='none'/><path d='M30 -27 l-4 -14 m4 14 l5 -15 m-9 5 l-7 -2 m12 -4 l6 -3' fill='none' stroke-width='1.6'/><rect x='-18' y='6' width='3' height='22' stroke='none'/><rect x='-11' y='6' width='3' height='22' stroke='none'/><rect x='12' y='6' width='3' height='22' stroke='none'/><rect x='18' y='6' width='3' height='22' stroke='none'/><path d='M-22 -3 l-6 -4' fill='none' stroke-width='3'/></g>`; }
+function zurafa(x, y, s, c) { return `<g transform='translate(${x} ${y}) scale(${s})' fill='${c}' stroke='${c}'><ellipse cx='0' cy='0' rx='20' ry='9' stroke='none'/><path d='M12 -4 L28 -52 L35 -50 L24 2Z' stroke='none'/><ellipse cx='38' cy='-54' rx='8' ry='4.5' transform='rotate(20 38 -54)' stroke='none'/><path d='M34 -58 l-2 -7 m7 8 l2 -7' fill='none' stroke-width='1.8'/><rect x='-16' y='6' width='3' height='34' stroke='none'/><rect x='-9' y='6' width='3' height='34' stroke='none'/><rect x='9' y='6' width='3' height='34' stroke='none'/><rect x='16' y='6' width='3' height='34' stroke='none'/><path d='M-20 -2 q-6 8 -4 20' fill='none' stroke-width='1.6'/></g>`; }
+function fil(x, y, s, c) { return `<g transform='translate(${x} ${y}) scale(${s})' fill='${c}' stroke='${c}'><ellipse cx='0' cy='0' rx='30' ry='20' stroke='none'/><circle cx='34' cy='-6' r='14' stroke='none'/><path d='M44 -2 q12 10 5 28 q-2 4 -5 2 q4 -14 -8 -22Z' stroke='none'/><ellipse cx='26' cy='-6' rx='9' ry='13' stroke='none'/><rect x='-24' y='12' width='8' height='20' stroke='none'/><rect x='-10' y='12' width='8' height='20' stroke='none'/><rect x='8' y='12' width='8' height='20' stroke='none'/><rect x='20' y='12' width='8' height='20' stroke='none'/><path d='M-30 -4 q-6 10 -3 22' fill='none' stroke-width='2'/></g>`; }
+function deve(x, y, s, c) { return `<g transform='translate(${x} ${y}) scale(${s})' fill='${c}' stroke='${c}'><ellipse cx='0' cy='0' rx='24' ry='9' stroke='none'/><ellipse cx='-8' cy='-12' rx='8' ry='9' stroke='none'/><ellipse cx='8' cy='-12' rx='8' ry='9' stroke='none'/><path d='M20 -4 L30 -30 L35 -28 L28 2Z' stroke='none'/><ellipse cx='38' cy='-31' rx='8' ry='4' transform='rotate(15 38 -31)' stroke='none'/><rect x='-20' y='6' width='3' height='28' stroke='none'/><rect x='-12' y='6' width='3' height='28' stroke='none'/><rect x='10' y='6' width='3' height='28' stroke='none'/><rect x='18' y='6' width='3' height='28' stroke='none'/></g>`; }
+function yunus(x, y, s, c, r) { return `<g transform='translate(${x} ${y}) rotate(${r}) scale(${s})' fill='${c}'><path d='M0 0 Q20 -30 55 -22 Q70 -18 80 -28 L74 -12 Q82 -10 90 -2 Q76 -8 64 -4 Q30 8 0 0Z'/><path d='M34 -22 L42 -36 L46 -20Z'/></g>`; }
+function kus(x, y, s, c) { return `<path transform='translate(${x} ${y}) scale(${s})' d='M0 0 q6 -9 12 0 q6 -9 12 0' fill='none' stroke='${c}' stroke-width='1.8' stroke-linecap='round'/>`; }
+function kelebek(x, y, s, a, b) { return `<g transform='translate(${x} ${y}) scale(${s})'><ellipse cx='-6' cy='-4' rx='6' ry='8' transform='rotate(-30 -6 -4)' fill='${a}'/><ellipse cx='6' cy='-4' rx='6' ry='8' transform='rotate(30 6 -4)' fill='${a}'/><ellipse cx='-4' cy='5' rx='4' ry='5' transform='rotate(20 -4 5)' fill='${b}'/><ellipse cx='4' cy='5' rx='4' ry='5' transform='rotate(-20 4 5)' fill='${b}'/><rect x='-0.8' y='-6' width='1.6' height='14' fill='#222'/></g>`; }
+function yildizlar(n, ymax, seed) { var r = RND(seed), h = ""; for (var i = 0; i < n; i++) h += `<circle cx='${(r() * 400).toFixed(0)}' cy='${(r() * ymax).toFixed(0)}' r='${(0.5 + r() * 1.1).toFixed(1)}' fill='#fff' opacity='${(0.4 + r() * 0.6).toFixed(2)}'/>`; return h; }
+
+var SAHNELER = [
+// 1) Dağ gölü, gün doğumu, geyik
+function () { return svgSar(`<defs><linearGradient id='a' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#3b4a9c'/><stop offset='.35' stop-color='#b0689e'/><stop offset='.55' stop-color='#ffa88a'/><stop offset='.66' stop-color='#ffe0a0'/></linearGradient><linearGradient id='b' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#ffc890'/><stop offset='.4' stop-color='#6a7fc4'/><stop offset='1' stop-color='#1f2f6a'/></linearGradient></defs><rect width='400' height='800' fill='url(#a)'/>` + yildizlar(25, 200, 5) + `<circle cx='200' cy='430' r='80' fill='#fff2c4' opacity='.25'/><circle cx='200' cy='430' r='42' fill='#fff6d6'/><path d='M0 470 L60 400 L110 450 L170 380 L230 450 L290 395 L340 440 L400 400 L400 540 L0 540Z' fill='#8a78b4'/><path d='M0 500 L50 450 L100 490 L160 440 L240 500 L300 455 L360 495 L400 470 L400 540 L0 540Z' fill='#5a5c9a'/><rect y='520' width='400' height='280' fill='url(#b)'/><g fill='#ffe9b0' opacity='.55'><rect x='170' y='528' width='60' height='4' rx='2'/><rect x='180' y='540' width='40' height='3' rx='2'/><rect x='188' y='551' width='24' height='3' rx='2'/></g><path d='M0 540 Q100 515 200 535 T400 525 L400 580 Q300 560 200 575 T0 585Z' fill='#243a52'/>` + agac(30, 520, 1.5, '#16313a') + agac(75, 535, 1.1, '#1b3d3f') + agac(360, 515, 1.7, '#16313a') + agac(320, 535, 1.2, '#1b3d3f') + geyik(235, 548, 0.9, '#10222c') + kus(60, 330, 1, '#2a2a4a') + kus(100, 350, 0.8, '#2a2a4a') + kus(300, 300, 1.1, '#2a2a4a') + kus(335, 322, .7, '#2a2a4a')); },
+// 2) Savan günbatımı: zürafa, fil
+function () { return svgSar(`<defs><linearGradient id='a' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#4a2a72'/><stop offset='.3' stop-color='#d0466e'/><stop offset='.52' stop-color='#ff8f3a'/><stop offset='.66' stop-color='#ffd36a'/></linearGradient><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#8a4a22'/><stop offset='1' stop-color='#2a1618'/></linearGradient></defs><rect width='400' height='800' fill='url(#a)'/><circle cx='270' cy='455' r='90' fill='#ffd88a' opacity='.25'/><circle cx='270' cy='455' r='56' fill='#ffe59a'/><g fill='#fff' opacity='.28'><ellipse cx='90' cy='300' rx='70' ry='10'/><ellipse cx='140' cy='286' rx='45' ry='8'/><ellipse cx='320' cy='360' rx='60' ry='9'/></g><path d='M0 520 Q100 505 200 520 T400 515 L400 800 L0 800Z' fill='url(#g)'/><g fill='#1c1020'><path d='M70 470 q-2 -34 -8 -48 l5 -1 q4 14 5 30 q4 -18 12 -30 l5 2 q-8 14 -10 32Z'/><ellipse cx='72' cy='418' rx='46' ry='9'/><ellipse cx='50' cy='424' rx='28' ry='7'/><path d='M330 478 l1 -40 l5 0 l1 36 q6 -14 14 -26 l4 3 q-10 14 -12 32Z'/><ellipse cx='338' cy='432' rx='44' ry='9'/><ellipse cx='360' cy='437' rx='26' ry='7'/></g>` + zurafa(150, 505, 1.15, '#1c1020') + fil(250, 512, 0.95, '#1c1020') + zurafa(335, 510, 0.8, '#1c1020') + kus(40, 330, 1.1, '#2a1230') + kus(80, 350, .8, '#2a1230') + kus(210, 280, 1, '#2a1230') + kus(240, 300, .7, '#2a1230')); },
+// 3) Okyanus, gün batımı, yunuslar
+function () { var r = RND(11), d = ""; for (var i = 0; i < 26; i++) d += `<rect x='${(r() * 380).toFixed(0)}' y='${(525 + r() * 240).toFixed(0)}' width='${(18 + r() * 40).toFixed(0)}' height='2' rx='1' fill='#fff' opacity='${(0.15 + r() * 0.3).toFixed(2)}'/>`; return svgSar(`<defs><linearGradient id='a' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#232f78'/><stop offset='.32' stop-color='#a0509a'/><stop offset='.52' stop-color='#ff9a7a'/><stop offset='.64' stop-color='#ffd09a'/></linearGradient><linearGradient id='s' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#f6a27a'/><stop offset='.25' stop-color='#6a68b4'/><stop offset='1' stop-color='#0f2a5a'/></linearGradient></defs><rect width='400' height='800' fill='url(#a)'/>` + yildizlar(25, 180, 9) + `<circle cx='140' cy='505' r='70' fill='#ffe0a0' opacity='.3'/><circle cx='140' cy='505' r='38' fill='#fff0c0'/><g fill='#fff' opacity='.3'><ellipse cx='300' cy='330' rx='70' ry='10'/><ellipse cx='260' cy='318' rx='40' ry='7'/></g><rect y='505' width='400' height='295' fill='url(#s)'/><rect x='110' y='510' width='60' height='3' fill='#fff2c4' opacity='.7'/><rect x='118' y='520' width='44' height='3' fill='#fff2c4' opacity='.6'/>` + d + yunus(215, 470, 0.8, '#102446', -8) + yunus(120, 560, 0.55, '#0e2040', -20) + `<path d='M0 640 Q100 625 200 640 T400 630' fill='none' stroke='#fff' stroke-width='2' opacity='.18'/>` + kus(60, 360, 1.1, '#2a2a5a') + kus(100, 378, .8, '#2a2a5a') + kus(320, 420, 1, '#2a2a5a')); },
+// 4) Çiçekli çayır, kelebekler
+function () { var r = RND(21), f = "", cl = ["#ff5d8f", "#ffd23f", "#ffffff", "#ff8a3c", "#b86bff", "#ff6b6b"]; for (var i = 0; i < 90; i++) { var y = 500 + r() * 290, s = 2 + (y - 500) / 290 * 5; f += `<circle cx='${(r() * 400).toFixed(0)}' cy='${y.toFixed(0)}' r='${s.toFixed(1)}' fill='${cl[Math.floor(r() * cl.length)]}'/>`; } return svgSar(`<defs><linearGradient id='a' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#2f8fe8'/><stop offset='.5' stop-color='#8fd0ff'/><stop offset='.66' stop-color='#e6f6ff'/></linearGradient></defs><rect width='400' height='800' fill='url(#a)'/><circle cx='320' cy='120' r='36' fill='#fff7c8'/><circle cx='320' cy='120' r='60' fill='#fff7c8' opacity='.25'/><g fill='#fff' opacity='.9'><ellipse cx='90' cy='220' rx='60' ry='18'/><ellipse cx='125' cy='204' rx='38' ry='16'/><ellipse cx='260' cy='330' rx='55' ry='16'/><ellipse cx='290' cy='316' rx='34' ry='14'/></g><path d='M0 480 Q100 430 220 470 T400 450 L400 800 L0 800Z' fill='#7cc86a'/><path d='M0 520 Q120 480 250 515 T400 500 L400 800 L0 800Z' fill='#55b04e'/><path d='M0 580 Q100 545 220 575 T400 565 L400 800 L0 800Z' fill='#3f9a3f'/>` + agac(50, 475, 1.2, '#2c7a3a') + agac(350, 462, 1.4, '#2c7a3a') + f + kelebek(120, 440, 1.4, '#ff7a3c', '#ffd23f') + kelebek(260, 395, 1.1, '#b86bff', '#ff9fd0') + kelebek(330, 520, 1.3, '#ffd23f', '#ff7a3c') + kus(60, 150, 1.2, '#35506a') + kus(110, 170, .9, '#35506a')); },
+// 5) Karlı dağlar, kuzey ışıkları, geyik
+function () { return svgSar(`<defs><linearGradient id='a' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#040a22'/><stop offset='.45' stop-color='#0c2a4c'/><stop offset='.66' stop-color='#1c5068'/></linearGradient><linearGradient id='u' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#3cffb0' stop-opacity='0'/><stop offset='.5' stop-color='#3cffb0' stop-opacity='.55'/><stop offset='1' stop-color='#8a5cff' stop-opacity='0'/></linearGradient></defs><rect width='400' height='800' fill='url(#a)'/>` + yildizlar(110, 420, 3) + `<path d='M-20 260 Q80 120 190 230 T420 150 L420 330 Q300 250 190 340 T-20 340Z' fill='url(#u)'/><path d='M-20 330 Q100 220 220 300 T420 260 L420 400 Q300 330 200 410 T-20 410Z' fill='url(#u)' opacity='.6'/><circle cx='320' cy='110' r='34' fill='#f5f1d8' opacity='.2'/><circle cx='320' cy='110' r='22' fill='#f5f1d8'/><path d='M0 520 L70 430 L130 490 L210 390 L290 490 L350 440 L400 500 L400 560 L0 560Z' fill='#b8cae6'/><path d='M210 390 L170 450 L215 430 L240 470 L290 490Z' fill='#8aa3cc'/><path d='M70 430 L40 480 L80 470 L100 500 L130 490Z' fill='#8aa3cc'/><path d='M0 535 Q100 515 220 540 T400 530 L400 800 L0 800Z' fill='#e6eefa'/><path d='M0 590 Q120 570 240 592 T400 585 L400 800 L0 800Z' fill='#cfdcf0'/>` + agac(35, 548, 1.5, '#0f2a2e') + agac(80, 560, 1.1, '#0f3236') + agac(365, 545, 1.6, '#0f2a2e') + agac(320, 560, 1.2, '#0f3236') + geyik(225, 575, 0.95, '#0b1a2a')); },
+// 6) Çöl alacakaranlığı, develer
+function () { return svgSar(`<defs><linearGradient id='a' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#17235c'/><stop offset='.38' stop-color='#7a449a'/><stop offset='.56' stop-color='#ff7e5a'/><stop offset='.68' stop-color='#ffc27a'/></linearGradient><mask id='m'><rect width='400' height='800' fill='#fff'/><circle cx='88' cy='140' r='22' fill='#000'/></mask></defs><rect width='400' height='800' fill='url(#a)'/>` + yildizlar(60, 330, 7) + `<circle cx='76' cy='146' r='22' fill='#fff4c8' mask='url(#m)'/><path d='M0 500 Q90 450 200 495 T400 470 L400 800 L0 800Z' fill='#d4713e'/><path d='M0 540 Q120 500 250 535 T400 520 L400 800 L0 800Z' fill='#b25234'/><path d='M0 600 Q100 565 230 595 T400 585 L400 800 L0 800Z' fill='#7a3a34'/>` + deve(110, 520, 0.9, '#2a1420') + deve(185, 527, 0.9, '#2a1420') + deve(260, 520, 0.9, '#2a1420') + `<path d='M0 520 Q90 500 160 515' fill='none' stroke='#ffd9a0' stroke-width='1.5' opacity='.3'/>` + kus(300, 260, 1, '#3a1f4a') + kus(335, 282, .7, '#3a1f4a')); }
+];
+var sahneIdx = -1, sahneOnb = {};
+function arkaYaz() {
+  var i = lvIdx % SAHNELER.length;
+  if (i === sahneIdx) return;
+  sahneIdx = i;
+  if (!sahneOnb[i]) sahneOnb[i] = encodeURIComponent(SAHNELER[i]());
+  root.style.background = 'url("data:image/svg+xml,' + sahneOnb[i] + '") center/cover no-repeat, #2a6fd0';
+}
+function barRenk() {
+  try {
+    var h = document.querySelector("h1"), bar = $("cmBack"), bg = "", bb = "";
+    var t = function (c) { return !c || c === "transparent" || /rgba\(.*,\s*0\)$/.test(c); };
+    if (h) {
+      var cs = getComputedStyle(h); bg = cs.backgroundColor;
+      if (parseFloat(cs.borderBottomWidth) > 0) bb = cs.borderBottomWidth + " " + cs.borderBottomStyle + " " + cs.borderBottomColor;
+    }
+    if (t(bg)) bg = getComputedStyle(document.body).backgroundColor;
+    if (t(bg)) bg = getComputedStyle(document.documentElement).backgroundColor;
+    if (t(bg)) bg = "#05050d";
+    bar.style.background = bg;
+    bar.style.borderBottom = bb || "0";
+  } catch (e) {}
+}
+
 var hakIpucu = BASLANGIC_HAK, hakTokmak = BASLANGIC_HAK, hammerOn = false;
 try { lvIdx = Math.min(parseInt(localStorage.getItem("cemberLv") || "0", 10) || 0, LEVELS.length - 1); } catch (e) {}
 try { puan = parseInt(localStorage.getItem("cemberPuan") || "0", 10) || 0; } catch (e) {}
@@ -412,7 +448,7 @@ function startLevel() {
   cur.words.forEach(function (p) { placedMap[p.w] = p; });
   bonusList = L.b.concat(cur.un.filter(function (w) { return L.b.indexOf(w) === -1; }));
   letters = shuffle(L.l.split(""));
-  baslikYaz(); hakYaz(); bolumGoster();
+  arkaYaz(); barRenk(); baslikYaz(); hakYaz(); bolumGoster();
   $("cmCur").innerHTML = "";
   boyut();
   drawWords(); drawBonus(); drawWheel();
