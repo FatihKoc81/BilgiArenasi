@@ -28,6 +28,7 @@ jobs:
           mkdir -p www
           cp index.html style.css www/
           cp ./*.js www/
+          cp manifest.json icon-*.png www/ 2>/dev/null || true
 
       - name: Capacitor kurulumu
         run: |
