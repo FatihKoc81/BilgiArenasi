@@ -230,7 +230,23 @@ menu();
 <script src="cember.js"></script>
 <script>
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+  const eskiKontrol = navigator.serviceWorker.controller;
+  let yenilendi = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (!eskiKontrol || yenilendi) return;
+    yenilendi = true;
+    location.reload();
+  });
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js", { updateViaCache: "none" })
+      .then(reg => {
+        reg.update();
+        document.addEventListener("visibilitychange", () => {
+          if (!document.hidden) reg.update();
+        });
+      })
+      .catch(() => {});
+  });
 }
 </script>
 </body>
