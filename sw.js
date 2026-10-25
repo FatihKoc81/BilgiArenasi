@@ -1,9 +1,9 @@
 // Önce ağdan dene (güncel kalsın), internet yoksa önbellekten aç
-const ONBELLEK = "bilgi-arenasi-v5";
+const ONBELLEK = "bilgi-arenasi-v6";
 const DOSYALAR = [
   "./", "index.html", "style.css", "manifest.json",
   "sorular.js", "ortak.js", "passaparola.js", "kelime.js", "kelimelerim.js", "islem.js", "cember.js",
-  "icon-192.png", "icon-512.png"
+  "icon-192.png", "icon-512.png", "icon-maskable-512.png"
 ];
 
 self.addEventListener("install", e => {
