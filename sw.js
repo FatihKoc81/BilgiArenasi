@@ -1,8 +1,8 @@
 // Önce ağdan dene (güncel kalsın), internet yoksa önbellekten aç
-const ONBELLEK = "bilgi-arenasi-v2";
+const ONBELLEK = "bilgi-arenasi-v3";
 const DOSYALAR = [
   "./", "index.html", "style.css", "manifest.json",
-  "sorular.js", "ortak.js", "passaparola.js", "kelime.js", "kelimelerim.js", "islem.js",
+  "sorular.js", "ortak.js", "passaparola.js", "kelime.js", "kelimelerim.js", "islem.js", "cember.js",
   "icon-192.png", "icon-512.png"
 ];
 
