@@ -241,10 +241,12 @@ menu();
   stl.textContent =
     ".apk-btn{position:fixed;left:10px;bottom:4px;height:40px;padding:0 14px;box-sizing:border-box;z-index:5;display:flex;align-items:center;justify-content:center;gap:5px;border:2px solid #d4a63a;border-radius:11px;background:rgba(0,0,0,.35);color:#d4a63a;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:700;font-size:21px;line-height:1;text-decoration:none}" +
     ".apk-btn:active{opacity:.7}.apk-btn.gizli{display:none}" +
-    "html.menu-kilit,html.menu-kilit body{overflow:hidden!important;overscroll-behavior:none!important;height:100%!important}";
+    "html.menu-kilit,html.menu-kilit body{overflow:hidden!important;overscroll-behavior:none!important;height:100%!important}" +
+    "html.menu-kilit body{position:fixed!important;top:0;left:0;right:0;width:100%}";
   document.head.appendChild(stl);
+  var ios = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   var a = null;
-  if (!uygulamaIci) {
+  if (!uygulamaIci && !ios) {
     a = document.createElement("a");
     a.className = "apk-btn gizli";
     a.href = APK_ADRES;
@@ -269,6 +271,9 @@ menu();
   window.addEventListener("scroll", function () {
     if (document.documentElement.classList.contains("menu-kilit") && window.scrollY) window.scrollTo(0, 0);
   });
+  document.addEventListener("touchmove", function (e) {
+    if (document.documentElement.classList.contains("menu-kilit") && !(e.target.closest && e.target.closest("input,textarea"))) e.preventDefault();
+  }, { passive: false });
   guncelle();
   setInterval(guncelle, 500);
 })();
