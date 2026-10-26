@@ -1,15 +1,27 @@
 const CACHE = "bilgi-arenasi";
+
 self.addEventListener("install", () => self.skipWaiting());
-self.addEventListener("activate", e => e.waitUntil(self.clients.claim()));
+
+self.addEventListener("activate", e => e.waitUntil(
+  caches.keys()
+    .then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x))))
+    .then(() => self.clients.claim())
+));
+
 self.addEventListener("fetch", e => {
-  if (e.request.method !== "GET") return;
+  const req = e.request;
+  const url = new URL(req.url);
+  if (req.method !== "GET" || url.origin !== location.origin) return;
+  url.searchParams.set("_t", Date.now());
   e.respondWith(
-    fetch(e.request, { cache: "no-store" })
+    fetch(url.toString(), { cache: "no-store" })
       .then(r => {
-        const kopya = r.clone();
-        caches.open(CACHE).then(c => c.put(e.request, kopya));
+        if (r.ok) {
+          const kopya = r.clone();
+          caches.open(CACHE).then(c => c.put(req, kopya));
+        }
         return r;
       })
-      .catch(() => caches.match(e.request))
+      .catch(() => caches.match(req, { ignoreSearch: true }))
   );
 });
