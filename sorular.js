@@ -2210,3 +2210,4 @@ const milyonerSorulari = {
     { soru: "İnsan vücudunda kanın pıhtılaşmasını sağlayan protein hangisidir?", secenekler: ["Fibrinojen", "Albumin", "Globulin", "Hemoglobin"], cevap: "Fibrinojen" },
     { soru: "Hangi ülke Avrupa kıtasındadır?", secenekler: ["Polonya", "Ürdün", "Peru", "Tunus"], cevap: "Polonya" }
   ]
+};
