@@ -129,13 +129,12 @@
   const BASLIK_OZELLIK = ["margin-top", "margin-bottom", "font-size", "line-height", "letter-spacing"];
 
   let baslikUst = null; // başlığın ana ekrandaki üst konumu
+  const BASLIK_INDIR = 13; // piksel: başlığı oyun ekranında bu kadar aşağı al (artır = daha aşağı)
   function baslikHizala() {
     const h1 = document.querySelector("h1");
-    if (!h1 || baslikUst === null) return;
-    h1.style.transform = "";
-    const simdi = h1.getBoundingClientRect().top + window.scrollY;
-    const fark = Math.round(baslikUst - simdi);
-    if (fark) h1.style.transform = "translateY(" + fark + "px)";
+    if (!h1) return;
+    if (sec.classList.contains("hidden")) { h1.style.removeProperty("transform"); return; }
+    h1.style.setProperty("transform", "translateY(" + BASLIK_INDIR + "px)", "important");
   }
   function baslikKilitle() {
     const h1 = document.querySelector("h1");
@@ -149,7 +148,7 @@
     const h1 = document.querySelector("h1");
     if (h1) {
       BASLIK_OZELLIK.forEach(p => h1.style.removeProperty(p));
-      h1.style.transform = "";
+      h1.style.removeProperty("transform");
     }
     baslikUst = null;
     document.body.style.paddingTop = "";
