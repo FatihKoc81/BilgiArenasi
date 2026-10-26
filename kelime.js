@@ -184,18 +184,35 @@
   };
 
   // Kartı klavyenin hemen üstüne indir
+  // Kart ekrana sabitlenir (position:fixed) ve klavyenin yüksekliğine göre alttan hizalanır.
+  function altaSifirla() {
+    ["position", "left", "width", "bottom", "top", "marginTop", "zIndex"].forEach(p => { sec.style[p] = ""; });
+  }
   function alta() {
-    if (!sec.classList.contains("kkK")) { sec.style.marginTop = ""; return; }
+    if (!sec.classList.contains("kkK")) { altaSifirla(); return; }
+    // Önce normal akışta genişlik ve soldan konumu ölç
+    altaSifirla();
+    const r = sec.getBoundingClientRect();
+    const sol = r.left, gen = r.width;
+    // Klavyenin kapladığı yükseklik (hem resizes-content hem resizes-visual için çalışır)
+    const vv = window.visualViewport;
+    const gorunenAlt = vv ? vv.offsetTop + vv.height : window.innerHeight;
+    const klavye = Math.max(0, window.innerHeight - gorunenAlt);
+    sec.style.position = "fixed";
+    sec.style.left = Math.round(sol) + "px";
+    sec.style.width = Math.round(gen) + "px";
+    sec.style.top = "auto";
     sec.style.marginTop = "0px";
-    const bos = window.innerHeight - sec.getBoundingClientRect().bottom - 8;
-    sec.style.marginTop = Math.max(0, Math.round(bos)) + "px";
+    sec.style.bottom = Math.round(klavye + 10) + "px";
+    sec.style.zIndex = "5";
+    window.scrollTo(0, 0); // başlık yerinden oynamasın
   }
 
   function menuyeDon() {
     clearInterval(zaman);
     sec.classList.add("hidden");
     sec.classList.remove("kkK");
-    sec.style.marginTop = "";
+    altaSifirla();
     baslikSerbest();
     document.querySelector("h1").style.display = "";
     ana.classList.remove("hidden");
@@ -242,7 +259,9 @@
     k = 0; toplam = 0; dogruSayi = 0;
     bolum("oyun");
     yeniKelime();
-    setTimeout(kaydir, 400);
+    alta();
+    setTimeout(alta, 300);
+    setTimeout(alta, 700);
   }
 
   function sonraki() {
@@ -333,16 +352,14 @@
     document.execCommand("insertText", false, t);
   });
 
-  // Klavye açılınca butonlar görünür kalsın
-  const kaydir = () => $("kkTahmin").scrollIntoView({ block: "end", behavior: "smooth" });
-  inp.addEventListener("focus", () => setTimeout(kaydir, 400));
-  const mv = document.querySelector('meta[name="viewport"]');
-  if (mv && !/interactive-widget/.test(mv.content)) mv.content += ", interactive-widget=resizes-content";
-
   // Kartı klavyenin hemen üstünde tut
   window.addEventListener("resize", alta);
-  if (window.visualViewport) visualViewport.addEventListener("resize", alta);
-  inp.addEventListener("focus", () => setTimeout(alta, 450));
+  if (window.visualViewport) {
+    visualViewport.addEventListener("resize", alta);
+    visualViewport.addEventListener("scroll", alta);
+  }
+  inp.addEventListener("focus", () => { setTimeout(alta, 150); setTimeout(alta, 450); setTimeout(alta, 900); });
+  inp.addEventListener("blur", () => setTimeout(alta, 200));
 
   // Başlığa tıklanınca (ortak.js) süreyi durdur ve ana sayfaya dön
   document.addEventListener("anasayfa", menuyeDon);
