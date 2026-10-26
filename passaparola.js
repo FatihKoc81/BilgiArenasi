@@ -1144,7 +1144,7 @@
 
   // Klavye açıkken her şey görünür alana sığsın: halkayı gerekirse küçült,
   // böylece "Pas / Cevapla" klavyenin hemen üstünde tam görünür.
-  // Yer fazlaysa kutuyu biraz aşağı indirir; alttaki boşluk Kelime Oyunu ile aynı (10px).
+  // Yer fazlaysa kutuyu biraz aşağı indirir (en fazla 6px; başlıkla kart arası boşluk az kalsın).
   const sigdir = () => {
     if (oyun.classList.contains("hidden")) return;
     const hr = $("ppHarfler"), vv = window.visualViewport;
@@ -1157,7 +1157,7 @@
     hr.style.transformOrigin = "top center";
     hr.style.transform = "scale(" + s + ")";
     hr.style.marginBottom = (8 - 250 * (1 - s)) + "px";
-    if (asan < 0) sec.style.marginTop = Math.min(-asan, 30) + "px"; // kutuyu klavyeye doğru indir
+    if (asan < 0) sec.style.marginTop = Math.min(-asan, 6) + "px"; // kutuyu klavyeye doğru indir (en fazla 6px)
     scrollTo(0, 0);
   };
   if (window.visualViewport) visualViewport.addEventListener("resize", sigdir);
