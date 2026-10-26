@@ -4,7 +4,7 @@ body{min-height:100vh;min-height:100dvh;background:radial-gradient(ellipse at 50
   --bosluk:clamp(10px,2.5vh,24px);--bosluk:clamp(10px,2.5svh,24px);
   --sec-pad:clamp(9px,1.7vh,16px);--sec-pad:clamp(9px,1.7svh,16px);
   padding:var(--bosluk) 16px;padding-top:calc(var(--bosluk) + env(safe-area-inset-top));padding-bottom:calc(var(--bosluk) + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center}
-h1{font-size:clamp(26px,8vw,44px);margin:clamp(12px,4.5vh,40px) 0 clamp(12px,4vh,36px);margin:clamp(12px,4.5svh,40px) 0 clamp(12px,4svh,36px);text-align:center}
+h1,.arena-baslik{font-size:clamp(26px,8vw,44px)!important;margin:clamp(12px,4.5vh,40px) 0 clamp(12px,4vh,36px)!important;margin:clamp(12px,4.5svh,40px) 0 clamp(12px,4svh,36px)!important;text-align:center;line-height:normal!important;font-weight:700;letter-spacing:normal!important;transform:none!important;zoom:1!important}
 .kart{width:100%;max-width:460px;background:#070b1d;border:2px solid #4a5a9a;box-shadow:0 0 22px rgba(74,90,154,.35);border-radius:36px;padding:clamp(14px,3.5vh,32px) 20px;padding:clamp(14px,3.5svh,32px) 20px;text-align:center}
 .hidden{display:none!important}
 .pill{display:inline-block;background:#3b0000;color:#ffe9c7;font-weight:700;font-size:20px;padding:12px 34px;border-radius:999px}
