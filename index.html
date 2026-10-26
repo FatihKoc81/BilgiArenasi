@@ -248,8 +248,23 @@ menu();
     // Kısa ekranlarda (tarayıcı çubukları açıkken) oyun ekranı sığsın diye boşlukları azalt
     "@media (max-height:800px){#oyun,#son{margin-top:8px!important;padding-top:14px!important;padding-bottom:14px!important}#oyun .sec,#son .btn{padding-top:10px!important;padding-bottom:10px!important}body>h1{margin-top:10px!important;margin-bottom:10px!important;font-size:26px!important}}" +
     // Passaparola üst başlığı: genel temayla aynı arka plan (çubuk rengi yok)
-    "body.ppOyunda h1{background:transparent!important;border-bottom:0!important}";
+    "body.ppOyunda h1{background:transparent!important;border-bottom:0!important}" +
+    // Kelime Oyunu: başlık Passaparola ile aynı, kart klavyenin hemen üstüne kadar uzar
+    "body.kkOyunda{padding-top:calc(50px + env(safe-area-inset-top))!important;padding-bottom:10px!important}" +
+    "body.kkOyunda h1{display:block!important;position:fixed!important;top:0;left:0;right:0;margin:0!important;padding:12px 0!important;padding-top:calc(12px + env(safe-area-inset-top))!important;font-size:20px!important;font-weight:800!important;letter-spacing:.5px;line-height:normal!important;text-align:center;text-shadow:0 1px 6px rgba(0,0,0,.7);background:transparent!important;border-bottom:0!important;z-index:5;cursor:pointer}" +
+    "body.kkOyunda #kk{display:flex;flex-direction:column;margin-top:0!important;min-height:calc(100vh - 62px - env(safe-area-inset-top));min-height:calc(100dvh - 62px - env(safe-area-inset-top))}" +
+    "body.kkOyunda #kkOyun{flex:1;display:flex;flex-direction:column}" +
+    "body.kkOyunda #kkIpucu{margin-top:auto;margin-bottom:auto;padding:8px 0}";
   document.head.appendChild(stl);
+  // Kelime Oyunu ekranı açıkken body'ye kkOyunda sınıfı ekle
+  var kk = document.getElementById("kk"), ko = document.getElementById("kkOyun");
+  function kkG() {
+    document.body.classList.toggle("kkOyunda", !!(kk && ko && !kk.classList.contains("hidden") && !ko.classList.contains("hidden")));
+  }
+  if (kk && ko) {
+    new MutationObserver(kkG).observe(kk, { attributes: true, attributeFilter: ["class"] });
+    new MutationObserver(kkG).observe(ko, { attributes: true, attributeFilter: ["class"] });
+  }
   var ios = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   var a = null;
   // APK uygulamasında "Güncelle", tarayıcıda "APK"; yüklenmiş web uygulamasında (PWA) görünmez
