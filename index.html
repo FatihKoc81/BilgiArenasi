@@ -254,7 +254,11 @@ menu();
     "body.kkOyunda h1{display:block!important;position:fixed!important;top:0;left:0;right:0;margin:0!important;padding:12px 0!important;padding-top:calc(12px + env(safe-area-inset-top))!important;font-size:20px!important;font-weight:800!important;letter-spacing:.5px;line-height:normal!important;text-align:center;text-shadow:0 1px 6px rgba(0,0,0,.7);background:transparent!important;border-bottom:0!important;z-index:5;cursor:pointer}" +
     "body.kkOyunda #kk{display:flex;flex-direction:column;margin-top:0!important;min-height:calc(100vh - 62px - env(safe-area-inset-top));min-height:calc(100dvh - 62px - env(safe-area-inset-top))}" +
     "body.kkOyunda #kkOyun{flex:1;display:flex;flex-direction:column}" +
-    "body.kkOyunda #kkIpucu{margin-top:auto;margin-bottom:auto;padding:8px 0}";
+    "body.kkOyunda #kkHeks{margin-top:auto;margin-bottom:6px}" +
+    "body.kkOyunda #kkIpucu{margin-top:10px;margin-bottom:auto;padding:4px 0}" +
+    // Altıgenlerin üstünde kaç harfli olduğu yazar (sayıyı CSS sayacı hesaplar)
+    "#kkHeks{counter-reset:kkh}#kkHeks .kkH{counter-increment:kkh}" +
+    "#kkHeks::after{content:counter(kkh) \" harfli\";order:-1;flex:0 0 100%;text-align:center;color:#8e9bc4;font-size:15px;font-weight:700;margin-bottom:4px}";
   document.head.appendChild(stl);
   // Kelime Oyunu ekranı açıkken body'ye kkOyunda sınıfı ekle
   var kk = document.getElementById("kk"), ko = document.getElementById("kkOyun");
