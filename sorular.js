@@ -169,9 +169,6 @@ const milyonerSorulari = {
     { soru: "Göbeklitepe'nin yaşı yaklaşık kaç yıldır?", secenekler: ["20.000", "12.000", "5.000", "8.000"], cevap: "12.000" },
     { soru: "Göbeklitepe hangi ilimizdedir?", secenekler: ["Diyarbakır", "Mardin", "Şanlıurfa", "Gaziantep"], cevap: "Şanlıurfa" },
   ],
-};
-const milyonerSorulari = {
-  // (Seviye 1 - 10 baştaki orijinal verilerinizdir)
   seviye11: [
     { soru: "Hangi gezegen halkalarıyla tanınır?", secenekler: ["Jüpiter", "Satürn", "Mars", "Venüs"], cevap: "Satürn" },
     { soru: "Türkiye'nin en batı ucunda yer alan ilçe hangisidir?", secenekler: ["Gökçeada", "Bozcaada", "Çeşme", "Ayvalık"], cevap: "Gökçeada" },
