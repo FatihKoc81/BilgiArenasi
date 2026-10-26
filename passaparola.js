@@ -1129,7 +1129,7 @@
 
   // Başlık: oyunda üstte küçük sabit çubuk (klavye açıkken de görünür), tıklayınca ana sayfa
   const stl = document.createElement("style");
-  stl.textContent = "body.ppOyunda{padding-top:calc(30px + env(safe-area-inset-top))!important;padding-bottom:0}body.ppOyunda h1{display:block!important;position:fixed!important;top:0;left:0;right:0;margin:0!important;padding:5px 0;padding-top:calc(5px + env(safe-area-inset-top));font-size:15px!important;line-height:1.3;text-align:center;background:rgba(3,3,12,.96);border-bottom:1px solid #1d2540;z-index:5;cursor:pointer}#ppSoru{text-wrap:balance;text-align:center}";
+  stl.textContent = "body.ppOyunda{padding-top:calc(50px + env(safe-area-inset-top))!important;padding-bottom:0}body.ppOyunda h1{display:block!important;position:fixed!important;top:0;left:0;right:0;margin:0!important;padding:12px 0!important;padding-top:calc(12px + env(safe-area-inset-top))!important;font-size:20px!important;font-weight:800!important;letter-spacing:.5px;line-height:normal!important;text-align:center;text-shadow:0 1px 6px rgba(0,0,0,.7);background:rgba(3,3,12,.96);border-bottom:1px solid #1d2540;z-index:5;cursor:pointer}#ppSoru{text-wrap:balance;text-align:center}";
   document.head.append(stl);
   const hGuncelle = () => {
     const a = !sec.classList.contains("hidden") && !oyun.classList.contains("hidden");
