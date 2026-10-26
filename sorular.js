@@ -14,7 +14,7 @@ const milyonerSorulari = {
     { soru: "Ahtapotun kaç kalbi vardır?", secenekler: ["1", "2", "3", "4"], cevap: "3" },
     { soru: "Satrançta bir oyuncunun başlangıçta kaç piyonu vardır?", secenekler: ["6", "8", "10", "16"], cevap: "8" },
     { soru: "Portakalda en çok bulunan vitamin hangisidir?", secenekler: ["A vitamini", "B12 vitamini", "C vitamini", "D vitamini"], cevap: "C vitamini" },
-    { soru: "Hangisi Karadeniz Bölgesi'nde yer alan bir il değildir?", secenekler: ["Rize", "Sinop", "Mersin", "Giresun"], cevap: "Mersin" },
+    { soru: "Hangisi Karadeniz Bölgesi'nde yer alan bir il değildir?", secenekler: ["Rize", "Sinop", "Mersin", "Giresun"], cevap: "Mersin" }
   ],
   seviye2: [
     { soru: "Yüzölçümü bakımından Türkiye'nin en büyük ili hangisidir?", secenekler: ["Ankara", "Sivas", "Konya", "Erzurum"], cevap: "Konya" },
@@ -31,7 +31,7 @@ const milyonerSorulari = {
     { soru: "Hangisi telli bir çalgı değildir?", secenekler: ["Gitar", "Keman", "Flüt", "Bağlama"], cevap: "Flüt" },
     { soru: "Dünyanın Yedi Harikası'ndan günümüze ulaşan tek yapı hangisidir?", secenekler: ["Rodos Heykeli", "Babil'in Asma Bahçeleri", "Büyük Giza Piramidi", "İskenderiye Feneri"], cevap: "Büyük Giza Piramidi" },
     { soru: "İslamiyet'i kabul eden ilk Türk devleti hangisidir?", secenekler: ["Hunlar", "Göktürkler", "Karahanlılar", "Uygurlar"], cevap: "Karahanlılar" },
-    { soru: "Kanda oksijen taşıyan hücreler hangileridir?", secenekler: ["Akyuvar", "Alyuvar", "Trombosit", "Plazma"], cevap: "Alyuvar" },
+    { soru: "Kanda oksijen taşıyan hücreler hangileridir?", secenekler: ["Akyuvar", "Alyuvar", "Trombosit", "Plazma"], cevap: "Alyuvar" }
   ],
   seviye3: [
     { soru: "Elektrik ampulünü geliştiren mucit olarak bilinen kişi kimdir?", secenekler: ["Nikola Tesla", "Thomas Edison", "Alessandro Volta", "Michael Faraday"], cevap: "Thomas Edison" },
@@ -48,7 +48,7 @@ const milyonerSorulari = {
     { soru: "Görünür ışıkta dalga boyu en uzun olan renk hangisidir?", secenekler: ["Mor", "Mavi", "Yeşil", "Kırmızı"], cevap: "Kırmızı" },
     { soru: "Hangi ilimiz 'gül şehri' olarak bilinir?", secenekler: ["Isparta", "Kırşehir", "Edirne", "Manisa"], cevap: "Isparta" },
     { soru: "Hangisi para birimi olarak Euro kullanmaz?", secenekler: ["Almanya", "Fransa", "İsviçre", "İtalya"], cevap: "İsviçre" },
-    { soru: "Güneş tutulması sırasında Dünya ile Güneş arasına hangi gök cismi girer?", secenekler: ["Mars", "Ay", "Venüs", "Jüpiter"], cevap: "Ay" },
+    { soru: "Güneş tutulması sırasında Dünya ile Güneş arasına hangi gök cismi girer?", secenekler: ["Mars", "Ay", "Venüs", "Jüpiter"], cevap: "Ay" }
   ],
   seviye4: [
     { soru: "Başkomutan Meydan Muharebesi hangi ilimizde yapılmıştır?", secenekler: ["Kütahya", "Eskişehir", "Afyonkarahisar", "Uşak"], cevap: "Afyonkarahisar" },
@@ -65,7 +65,7 @@ const milyonerSorulari = {
     { soru: "Pisagor teoremi hangi tür üçgen için geçerlidir?", secenekler: ["Eşkenar üçgen", "İkizkenar üçgen", "Dik üçgen", "Geniş açılı üçgen"], cevap: "Dik üçgen" },
     { soru: "Satürn'ün en büyük uydusu hangisidir?", secenekler: ["Europa", "Titan", "Triton", "Ganymede"], cevap: "Titan" },
     { soru: "'Guernica' tablosunun ressamı kimdir?", secenekler: ["Salvador Dalí", "Pablo Picasso", "Joan Miró", "Francisco Goya"], cevap: "Pablo Picasso" },
-    { soru: "Türklerin bilinen en eski yazılı belgeleri hangileridir?", secenekler: ["Kutadgu Bilig", "Orhun Yazıtları", "Divanü Lügati't-Türk", "Dede Korkut Hikâyeleri"], cevap: "Orhun Yazıtları" },
+    { soru: "Türklerin bilinen en eski yazılı belgeleri hangileridir?", secenekler: ["Kutadgu Bilig", "Orhun Yazıtları", "Divanü Lügati't-Türk", "Dede Korkut Hikâyeleri"], cevap: "Orhun Yazıtları" }
   ],
   seviye5: [
     { soru: "Malazgirt Savaşı hangi yıl yapılmıştır?", secenekler: ["1071", "1243", "1402", "1176"], cevap: "1071" },
@@ -82,7 +82,7 @@ const milyonerSorulari = {
     { soru: "Türkiye'nin en uzun nehri hangisidir?", secenekler: ["Yeşilırmak", "Kızılırmak", "Sakarya", "Fırat"], cevap: "Kızılırmak" },
     { soru: "Rönesans hareketi hangi ülkede başlamıştır?", secenekler: ["İspanya", "Fransa", "İtalya", "İngiltere"], cevap: "İtalya" },
     { soru: "pH değeri 7 olan çözelti nasıl adlandırılır?", secenekler: ["Asit", "Baz", "Nötr", "Tuz"], cevap: "Nötr" },
-    { soru: "'Yıldızlı Gece' tablosunun ressamı kimdir?", secenekler: ["Salvador Dalí", "Rembrandt", "Vincent van Gogh", "Claude Monet"], cevap: "Vincent van Gogh" },
+    { soru: "'Yıldızlı Gece' tablosunun ressamı kimdir?", secenekler: ["Salvador Dalí", "Rembrandt", "Vincent van Gogh", "Claude Monet"], cevap: "Vincent van Gogh" }
   ],
   seviye6: [
     { soru: "Birinci Dünya Savaşı hangi yıl başlamıştır?", secenekler: ["1918", "1914", "1939", "1905"], cevap: "1914" },
@@ -99,7 +99,7 @@ const milyonerSorulari = {
     { soru: "Efes Antik Kenti hangi ilimizin sınırları içindedir?", secenekler: ["Muğla", "Aydın", "İzmir", "Manisa"], cevap: "İzmir" },
     { soru: "Güney Amerika'nın batısında uzanan büyük dağ silsilesi hangisidir?", secenekler: ["Atlas Dağları", "And Dağları", "Himalayalar", "Kaya Dağları"], cevap: "And Dağları" },
     { soru: "Voltaire hangi ülkenin düşünürüdür?", secenekler: ["Fransa", "İngiltere", "Almanya", "İtalya"], cevap: "Fransa" },
-    { soru: "Dünyanın en büyük sıcak çölü hangisidir?", secenekler: ["Arabistan Çölü", "Gobi Çölü", "Kalahari Çölü", "Sahra Çölü"], cevap: "Sahra Çölü" },
+    { soru: "Dünyanın en büyük sıcak çölü hangisidir?", secenekler: ["Arabistan Çölü", "Gobi Çölü", "Kalahari Çölü", "Sahra Çölü"], cevap: "Sahra Çölü" }
   ],
   seviye7: [
     { soru: "Fransız İhtilali hangi yıl başlamıştır?", secenekler: ["1848", "1776", "1789", "1815"], cevap: "1789" },
@@ -116,7 +116,7 @@ const milyonerSorulari = {
     { soru: "Avrupa'da modern matbaayı geliştiren kişi kimdir?", secenekler: ["Leonardo da Vinci", "Johannes Gutenberg", "Galileo", "Martin Luther"], cevap: "Johannes Gutenberg" },
     { soru: "İspanya'ya geçen ve 711'de çıkarma yapan Müslüman komutan kimdir?", secenekler: ["Musa bin Nusayr", "Halid bin Velid", "Tarık bin Ziyad", "Amr bin As"], cevap: "Tarık bin Ziyad" },
     { soru: "DNA'nın yapısını çift sarmal olarak tanımlayan bilim insanları kimlerdir?", secenekler: ["Mendel ve Darwin", "Curie ve Bohr", "Pasteur ve Koch", "Watson ve Crick"], cevap: "Watson ve Crick" },
-    { soru: "'1984' romanının yazarı kimdir?", secenekler: ["Aldous Huxley", "Ray Bradbury", "H. G. Wells", "George Orwell"], cevap: "George Orwell" },
+    { soru: "'1984' romanının yazarı kimdir?", secenekler: ["Aldous Huxley", "Ray Bradbury", "H. G. Wells", "George Orwell"], cevap: "George Orwell" }
   ],
   seviye8: [
     { soru: "Nil Nehri hangi denize dökülür?", secenekler: ["Akdeniz", "Kızıldeniz", "Hint Okyanusu", "Atlas Okyanusu"], cevap: "Akdeniz" },
@@ -133,7 +133,7 @@ const milyonerSorulari = {
     { soru: "İnsülin hormonunu hangi organ salgılar?", secenekler: ["Karaciğer", "Mide", "Pankreas", "Dalak"], cevap: "Pankreas" },
     { soru: "Hammurabi Kanunları hangi uygarlığa aittir?", secenekler: ["Babil", "Asur", "Hitit", "Mısır"], cevap: "Babil" },
     { soru: "'Dönüşüm' adlı eserin yazarı kimdir?", secenekler: ["Stefan Zweig", "Thomas Mann", "Hermann Hesse", "Franz Kafka"], cevap: "Franz Kafka" },
-    { soru: "Dünyanın en büyük kapalı su kütlesi (göl) hangisidir?", secenekler: ["Aral Gölü", "Hazar Denizi", "Baykal Gölü", "Victoria Gölü"], cevap: "Hazar Denizi" },
+    { soru: "Dünyanın en büyük kapalı su kütlesi (göl) hangisidir?", secenekler: ["Aral Gölü", "Hazar Denizi", "Baykal Gölü", "Victoria Gölü"], cevap: "Hazar Denizi" }
   ],
   seviye9: [
     { soru: "Konstantinopolis şehrini başkent olarak kuran Roma imparatoru kimdir?", secenekler: ["Theodosius", "Büyük Konstantin", "Augustus", "Nero"], cevap: "Büyük Konstantin" },
@@ -150,7 +150,7 @@ const milyonerSorulari = {
     { soru: "Dünyanın en derin gölü hangisidir?", secenekler: ["Baykal Gölü", "Victoria Gölü", "Tanganyika Gölü", "Superior Gölü"], cevap: "Baykal Gölü" },
     { soru: "Dünyanın en yüksek ikinci dağı olan K2 hangi dağ silsilesindedir?", secenekler: ["Himalayalar", "Karakurum", "Alpler", "Hindukuş"], cevap: "Karakurum" },
     { soru: "Dinamiti icat eden kişi kimdir?", secenekler: ["Alfred Nobel", "Marie Curie", "Ernest Rutherford", "Robert Oppenheimer"], cevap: "Alfred Nobel" },
-    { soru: "Yetişkin bir insan iskeletinde kaç kemik bulunur?", secenekler: ["186", "206", "226", "256"], cevap: "206" },
+    { soru: "Yetişkin bir insan iskeletinde kaç kemik bulunur?", secenekler: ["186", "206", "226", "256"], cevap: "206" }
   ],
   seviye10: [
     { soru: "Preveze Deniz Savaşı'nda Osmanlı donanmasının komutanı kimdi?", secenekler: ["Turgut Reis", "Kılıç Ali Paşa", "Barbaros Hayreddin Paşa", "Piri Reis"], cevap: "Barbaros Hayreddin Paşa" },
@@ -167,7 +167,7 @@ const milyonerSorulari = {
     { soru: "Güneş'in en dış atmosfer katmanı hangisidir?", secenekler: ["Fotosfer", "Kromosfer", "Korona", "Çekirdek"], cevap: "Korona" },
     { soru: "Fibonacci dizisinde 1, 1, 2, 3, 5, 8 sayılarından sonra hangi sayı gelir?", secenekler: ["11", "12", "13", "15"], cevap: "13" },
     { soru: "Göbeklitepe'nin yaşı yaklaşık kaç yıldır?", secenekler: ["20.000", "12.000", "5.000", "8.000"], cevap: "12.000" },
-    { soru: "Göbeklitepe hangi ilimizdedir?", secenekler: ["Diyarbakır", "Mardin", "Şanlıurfa", "Gaziantep"], cevap: "Şanlıurfa" },
+    { soru: "Göbeklitepe hangi ilimizdedir?", secenekler: ["Diyarbakır", "Mardin", "Şanlıurfa", "Gaziantep"], cevap: "Şanlıurfa" }
   ],
   seviye11: [
     { soru: "Hangi gezegen halkalarıyla tanınır?", secenekler: ["Jüpiter", "Satürn", "Mars", "Venüs"], cevap: "Satürn" },
