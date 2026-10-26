@@ -1129,7 +1129,7 @@
 
   // Başlık: oyunda üstte küçük sabit çubuk (klavye açıkken de görünür), tıklayınca ana sayfa
   const stl = document.createElement("style");
-  stl.textContent = "body.ppOyunda{padding-top:calc(50px + env(safe-area-inset-top))!important;padding-bottom:0}body.ppOyunda h1{display:block!important;position:fixed!important;top:0;left:0;right:0;margin:0!important;padding:12px 0!important;padding-top:calc(12px + env(safe-area-inset-top))!important;font-size:20px!important;font-weight:800!important;letter-spacing:.5px;line-height:normal!important;text-align:center;text-shadow:0 1px 6px rgba(0,0,0,.7);background:rgba(3,3,12,.96);border-bottom:1px solid #1d2540;z-index:5;cursor:pointer}#ppSoru{text-wrap:balance;text-align:center}";
+  stl.textContent = "body.ppOyunda{padding-top:calc(58px + env(safe-area-inset-top))!important;padding-bottom:0}body.ppOyunda h1{display:block!important;position:fixed!important;top:0;left:0;right:0;margin:0!important;padding:12px 0!important;padding-top:calc(12px + env(safe-area-inset-top))!important;font-size:24px!important;font-weight:800!important;letter-spacing:.5px;line-height:normal!important;text-align:center;text-shadow:0 1px 6px rgba(0,0,0,.7);background:rgba(3,3,12,.96);border-bottom:1px solid #1d2540;z-index:5;cursor:pointer}#ppSoru{text-wrap:balance;text-align:center}";
   document.head.append(stl);
   const hGuncelle = () => {
     const a = !sec.classList.contains("hidden") && !oyun.classList.contains("hidden");
@@ -1143,18 +1143,21 @@
   document.addEventListener("anasayfa", menuyeDon);
 
   // Klavye açıkken her şey görünür alana sığsın: halkayı gerekirse küçült,
-  // böylece "Pas / Cevapla" klavyenin hemen üstünde tam görünür
+  // böylece "Pas / Cevapla" klavyenin hemen üstünde tam görünür.
+  // Yer fazlaysa kutuyu biraz aşağı indirir; alttaki boşluk Kelime Oyunu ile aynı (10px).
   const sigdir = () => {
     if (oyun.classList.contains("hidden")) return;
     const hr = $("ppHarfler"), vv = window.visualViewport;
     hr.style.transform = "";
     hr.style.marginBottom = "";
+    sec.style.marginTop = "";
     const vh = vv ? vv.height : innerHeight;
-    const asan = sec.offsetHeight + 50 + 24 - vh; // 24px = butonların altında boşluk
+    const asan = sec.offsetHeight + 58 + 10 - vh; // 58px = üst başlık payı, 10px = kartın altında boşluk
     const s = asan > 0 ? Math.max(0.55, (250 - asan) / 250) : 1;
     hr.style.transformOrigin = "top center";
     hr.style.transform = "scale(" + s + ")";
     hr.style.marginBottom = (8 - 250 * (1 - s)) + "px";
+    if (asan < 0) sec.style.marginTop = Math.min(-asan, 30) + "px"; // kutuyu klavyeye doğru indir
     scrollTo(0, 0);
   };
   if (window.visualViewport) visualViewport.addEventListener("resize", sigdir);
