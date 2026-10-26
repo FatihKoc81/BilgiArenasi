@@ -59,20 +59,20 @@
   const css = document.createElement("style");
   css.textContent = `
   .btn.oval{border-radius:999px}
-  #kk.kkK{padding:14px 12px}
-  #kkBilgi{display:flex;justify-content:space-between;color:#8e9bc4;font-size:15px;margin-bottom:4px}
-  #kkHeks{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin:10px 0}
+  #kk.kkK{padding:10px 12px;border-radius:28px;min-height:0;height:auto}
+  #kkBilgi{display:flex;justify-content:space-between;color:#8e9bc4;font-size:14px;margin-bottom:0}
+  #kkHeks{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin:6px 0}
   .kkH{display:flex;align-items:center;justify-content:center;background:#5b21b6;color:#fff;font-weight:700;clip-path:polygon(25% 3%,75% 3%,100% 50%,75% 97%,25% 97%,0 50%)}
   .kkH.a{background:#fff;color:#1d1040}
   .kkH.d{background:#22c55e;color:#fff}
   .kkH.y{background:#ef4444;color:#fff}
-  #kkPot{color:#ffe9c7;font-weight:700;font-size:16px}
-  #kkIpucu{font-size:17px;line-height:1.35;margin:8px 0 10px;text-align:center;white-space:pre-line}
-  #kkCevap{box-sizing:border-box;width:100%;min-height:50px;padding:12px;border-radius:16px;border:1px solid #1d2540;background:#0d1426;color:#fff;font:inherit;font-size:18px;line-height:24px;text-align:center;outline:none;caret-color:#fff;white-space:nowrap;overflow:hidden;-webkit-user-select:text;user-select:text}
+  #kkPot{color:#ffe9c7;font-weight:700;font-size:15px}
+  #kkIpucu{font-size:16px;line-height:1.3;margin:6px 0 8px;text-align:center;white-space:pre-line}
+  #kkCevap{box-sizing:border-box;width:100%;min-height:42px;padding:8px 12px;border-radius:16px;border:1px solid #1d2540;background:#0d1426;color:#fff;font:inherit;font-size:18px;line-height:24px;text-align:center;outline:none;caret-color:#fff;white-space:nowrap;overflow:hidden;-webkit-user-select:text;user-select:text}
   #kkCevap:focus{border-color:#8e9bc4}
-  #kkGeriBildirim{min-height:22px;margin-top:6px;font-weight:700;text-align:center}
+  #kkGeriBildirim{min-height:18px;margin-top:4px;font-size:15px;font-weight:700;text-align:center}
   .kkSatir{display:flex;gap:8px}
-  .kkSatir .btn{margin-top:6px;padding:13px 6px;font-size:15px}
+  .kkSatir .btn{margin-top:4px;padding:10px 6px;font-size:15px}
   .kkTitre{animation:kkt .3s}
   @keyframes kkt{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
   `;
@@ -123,6 +123,26 @@
   const giris = $("kkGiris"), oyun = $("kkOyun"), son = $("kkSon");
   const inp = $("kkCevap"), fb = $("kkGeriBildirim"), heks = $("kkHeks");
 
+  // ---------- Başlık konumunu ana ekranla aynı tut ----------
+  // Klavye açılınca vh/svh/lvh birimleri değişebiliyor ve başlık yukarı kayıyor.
+  // Bu yüzden ana ekrandayken (klavye kapalıyken) piksel değerlerini ölçüp sabitliyoruz.
+  function baslikKilitle() {
+    const h1 = document.querySelector("h1");
+    if (!h1) return;
+    const hs = getComputedStyle(h1);
+    h1.style.setProperty("margin-top", hs.marginTop, "important");
+    h1.style.setProperty("margin-bottom", hs.marginBottom, "important");
+    document.body.style.paddingTop = getComputedStyle(document.body).paddingTop;
+  }
+  function baslikSerbest() {
+    const h1 = document.querySelector("h1");
+    if (h1) {
+      h1.style.removeProperty("margin-top");
+      h1.style.removeProperty("margin-bottom");
+    }
+    document.body.style.paddingTop = "";
+  }
+
   // Cevap kutusunu oku / yaz / odaklan (div olduğu için .value yok)
   const oku = () => inp.textContent;
   const yaz = v => { inp.textContent = v; };
@@ -168,6 +188,7 @@
     clearInterval(zaman);
     sec.classList.add("hidden");
     sec.classList.remove("kkK");
+    baslikSerbest();
     document.querySelector("h1").style.display = "";
     ana.classList.remove("hidden");
   }
@@ -176,7 +197,7 @@
 
   function ciz(durum) {
     const n = harfler.length;
-    const s = Math.max(24, Math.min(40, Math.floor(300 / n) - 4));
+    const s = Math.max(24, Math.min(36, Math.floor(300 / n) - 4));
     heks.innerHTML = harfler.map((h, i) => {
       const c = durum || (acik[i] ? "a" : "");
       const goster = durum || acik[i];
@@ -281,7 +302,12 @@
   }
 
   // ---------- Olaylar ----------
-  menuBtn.onclick = () => { ana.classList.add("hidden"); sec.classList.remove("hidden"); bolum("giris"); };
+  menuBtn.onclick = () => {
+    baslikKilitle(); // ana ekrandayken (klavye kapalı) ölç ve sabitle
+    ana.classList.add("hidden");
+    sec.classList.remove("hidden");
+    bolum("giris");
+  };
   $("kkBasla").onclick = baslat;
   $("kkTekrar").onclick = baslat;
   $("kkGeri").onclick = menuyeDon;
