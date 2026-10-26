@@ -301,7 +301,8 @@ menu();
     }
     if (homeTop === null) return;
     h1.style.removeProperty("transform");
-    var fark = Math.round(homeTop - (h1.getBoundingClientRect().top + window.scrollY));
+    var PP_YUKARI = 14; // piksel: başlığı kartın çizgisinin üstüne almak için (artır = daha yukarı)
+    var fark = Math.round(homeTop - (h1.getBoundingClientRect().top + window.scrollY)) - PP_YUKARI;
     if (fark) h1.style.setProperty("transform", "translateY(" + fark + "px)", "important");
     ppSet = true;
   }
