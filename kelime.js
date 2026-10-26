@@ -133,7 +133,8 @@
   function baslikHizala() {
     const h1 = document.querySelector("h1");
     if (!h1) return;
-    if (sec.classList.contains("hidden")) { h1.style.removeProperty("transform"); return; }
+    // Sadece oyun ekranında kaydır; başlangıç ve bitiş ekranlarında başlık ana sayfadaki yerinde kalsın
+    if (sec.classList.contains("hidden") || !sec.classList.contains("kkK")) { h1.style.removeProperty("transform"); return; }
     h1.style.setProperty("transform", "translateY(" + BASLIK_INDIR + "px)", "important");
   }
   function baslikKilitle() {
