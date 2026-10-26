@@ -338,8 +338,7 @@ const milyonerSorulari = {
     { soru: "Hangi yazar 'Sinekli Bakkal' romanının yazarıdır?", secenekler: ["Halide Edip Adıvar", "Reşat Nuri Güntekin", "Peyami Safa", "Yakup Kadri"], cevap: "Halide Edip Adıvar" },
     { soru: "İnsan vücudunda kanı kalbe getiren damarlara ne ad verilir?", secenekler: ["Atardamar", "Toplardamar", "Kılcal damar", "Lenf damarı"], cevap: "Toplardamar" },
     { soru: "Hangi ülke Afrika kıtasındadır?", secenekler: ["Etiyopya", "Irak", "Suriye", "Afganistan"], cevap: "Etiyopya" }
-  ]
-};
+  ],
   seviye21: [
     { soru: "Hangi element periyodik tabloda 'Pb' simgesiyle gösterilir?", secenekler: ["Platin", "Kurşun", "Palladyum", "Polonyum"], cevap: "Kurşun" },
     { soru: "Türkiye'nin en büyük yüzölçümüne sahip körfezi hangisidir?", secenekler: ["İzmit Körfezi", "İzmir Körfezi", "Edremit Körfezi", "Bandırma Körfezi"], cevap: "İzmir Körfezi" },
@@ -509,7 +508,7 @@ const milyonerSorulari = {
     { soru: "Hangi yazar 'Acımak' romanının yazarıdır?", secenekler: ["Reşat Nuri Güntekin", "Peyami Safa", "Yakup Kadri", "Halide Edip"], cevap: "Reşat Nuri Güntekin" },
     { soru: "İnsan vücudunda en küçük kemik hangi bölgede yer alır?", secenekler: ["Burun", "Kulak (Üzengi)", "El parmakları", "Ayak parmakları"], cevap: "Kulak (Üzengi)" },
     { soru: "Hangi ülke Afrika kıtasındadır?", secenekler: ["Nijerya", "Irak", "Surinam", "Guatemala"], cevap: "Nijerya" }
-  ]
+ ],
   seviye51: [
     { soru: "Hangi element periyodik tabloda 'Fe' simgesiyle gösterilir?", secenekler: ["Flor", "Demir", "Fosfor", "Fransiyum"], cevap: "Demir" },
     { soru: "Türkiye'nin en batısındaki kara parçasının bulunduğu ada hangisidir?", secenekler: ["Gökçeada", "Bozcaada", "Avşa", "Marmara"], cevap: "Gökçeada" },
@@ -849,7 +848,7 @@ const milyonerSorulari = {
     { soru: "Hangi yazar 'İnce Memed' roman serisinin yazarıdır?", secenekler: ["Yaşar Kemal", "Orhan Kemal", "Kemal Tahir", "Fakir Baykurt"], cevap: "Yaşar Kemal" },
     { soru: "İnsan vücudunda kanın pıhtılaşmasını sağlayan protein hangisidir?", secenekler: ["Fibrinojen", "Albumin", "Globulin", "Hemoglobin"], cevap: "Fibrinojen" },
     { soru: "Hangi ülke Avrupa kıtasındadır?", secenekler: ["Polonya", "Ürdün", "Peru", "Tunus"], cevap: "Polonya" }
-  ]
+  ],
   seviye71: [
     { soru: "Hangi element periyodik tabloda 'Au' simgesiyle gösterilir?", secenekler: ["Gümüş", "Altın", "Bakır", "Platin"], cevap: "Altın" },
     { soru: "Türkiye'nin en batıdaki ilçesi hangisidir?", secenekler: ["Gökçeada", "Bozcaada", "Çeşme", "Foça"], cevap: "Gökçeada" },
@@ -1189,7 +1188,7 @@ const milyonerSorulari = {
     { soru: "Hangi yazar 'İnce Memed' roman serisinin yazarıdır?", secenekler: ["Yaşar Kemal", "Orhan Kemal", "Kemal Tahir", "Fakir Baykurt"], cevap: "Yaşar Kemal" },
     { soru: "İnsan vücudunda kanın pıhtılaşmasını sağlayan protein hangisidir?", secenekler: ["Fibrinojen", "Albumin", "Globulin", "Hemoglobin"], cevap: "Fibrinojen" },
     { soru: "Hangi ülke Avrupa kıtasındadır?", secenekler: ["Polonya", "Ürdün", "Peru", "Tunus"], cevap: "Polonya" }
-  ]
+  ],
   seviye91: [
     { soru: "Hangi element periyodik tabloda 'Fe' simgesiyle gösterilir?", secenekler: ["Flor", "Demir", "Fosfor", "Fransiyum"], cevap: "Demir" },
     { soru: "Türkiye'nin en batısındaki kara parçasının bulunduğu ada hangisidir?", secenekler: ["Gökçeada", "Bozcaada", "Avşa", "Marmara"], cevap: "Gökçeada" },
@@ -1529,7 +1528,7 @@ const milyonerSorulari = {
     { soru: "Hangi yazar 'İnce Memed' roman serisinin yazarıdır?", secenekler: ["Yaşar Kemal", "Orhan Kemal", "Kemal Tahir", "Fakir Baykurt"], cevap: "Yaşar Kemal" },
     { soru: "İnsan vücudunda kanın pıhtılaşmasını sağlayan protein hangisidir?", secenekler: ["Fibrinojen", "Albumin", "Globulin", "Hemoglobin"], cevap: "Fibrinojen" },
     { soru: "Hangi ülke Avrupa kıtasındadır?", secenekler: ["Polonya", "Ürdün", "Peru", "Tunus"], cevap: "Polonya" }
-  ]
+  ],
   seviye111: [
     { soru: "Hangi element periyodik tabloda 'Au' simgesiyle gösterilir?", secenekler: ["Gümüş", "Altın", "Bakır", "Platin"], cevap: "Altın" },
     { soru: "Türkiye'nin en batıdaki ilçesi hangisidir?", secenekler: ["Gökçeada", "Bozcaada", "Çeşme", "Foça"], cevap: "Gökçeada" },
@@ -1869,7 +1868,7 @@ const milyonerSorulari = {
     { soru: "Hangi yazar 'İnce Memed' roman serisinin yazarıdır?", secenekler: ["Yaşar Kemal", "Orhan Kemal", "Kemal Tahir", "Fakir Baykurt"], cevap: "Yaşar Kemal" },
     { soru: "İnsan vücudunda kanın pıhtılaşmasını sağlayan protein hangisidir?", secenekler: ["Fibrinojen", "Albumin", "Globulin", "Hemoglobin"], cevap: "Fibrinojen" },
     { soru: "Hangi ülke Avrupa kıtasındadır?", secenekler: ["Polonya", "Ürdün", "Peru", "Tunus"], cevap: "Polonya" }
-  ]
+  ],
   seviye131: [
     { soru: "Hangi element periyodik tabloda 'Fe' simgesiyle gösterilir?", secenekler: ["Flor", "Demir", "Fosfor", "Fransiyum"], cevap: "Demir" },
     { soru: "Türkiye'nin en batısındaki kara parçasının bulunduğu ada hangisidir?", secenekler: ["Gökçeada", "Bozcaada", "Avşa", "Marmara"], cevap: "Gökçeada" },
