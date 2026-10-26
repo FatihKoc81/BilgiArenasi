@@ -128,16 +128,30 @@
   // Bu yüzden ana ekrandayken (klavye kapalıyken) piksel değerlerini ölçüp sabitliyoruz.
   const BASLIK_OZELLIK = ["margin-top", "margin-bottom", "font-size", "line-height", "letter-spacing"];
 
+  let baslikUst = null; // başlığın ana ekrandaki üst konumu
+  function baslikHizala() {
+    const h1 = document.querySelector("h1");
+    if (!h1 || baslikUst === null) return;
+    h1.style.transform = "";
+    const simdi = h1.getBoundingClientRect().top + window.scrollY;
+    const fark = Math.round(baslikUst - simdi);
+    if (fark) h1.style.transform = "translateY(" + fark + "px)";
+  }
   function baslikKilitle() {
     const h1 = document.querySelector("h1");
     if (!h1) return;
+    baslikUst = h1.getBoundingClientRect().top + window.scrollY;
     const hs = getComputedStyle(h1);
     BASLIK_OZELLIK.forEach(p => h1.style.setProperty(p, hs.getPropertyValue(p), "important"));
     document.body.style.paddingTop = getComputedStyle(document.body).paddingTop;
   }
   function baslikSerbest() {
     const h1 = document.querySelector("h1");
-    if (h1) BASLIK_OZELLIK.forEach(p => h1.style.removeProperty(p));
+    if (h1) {
+      BASLIK_OZELLIK.forEach(p => h1.style.removeProperty(p));
+      h1.style.transform = "";
+    }
+    baslikUst = null;
     document.body.style.paddingTop = "";
   }
 
@@ -189,7 +203,7 @@
     ["position", "left", "width", "bottom", "top", "marginTop", "zIndex"].forEach(p => { sec.style[p] = ""; });
   }
   function alta() {
-    if (!sec.classList.contains("kkK")) { altaSifirla(); return; }
+    if (!sec.classList.contains("kkK")) { altaSifirla(); baslikHizala(); return; }
     // Önce normal akışta genişlik ve soldan konumu ölç
     altaSifirla();
     const r = sec.getBoundingClientRect();
@@ -206,6 +220,7 @@
     sec.style.bottom = Math.round(klavye + 10) + "px";
     sec.style.zIndex = "5";
     window.scrollTo(0, 0); // başlık yerinden oynamasın
+    baslikHizala();
   }
 
   function menuyeDon() {
