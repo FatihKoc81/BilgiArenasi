@@ -1150,7 +1150,7 @@
     hr.style.transform = "";
     hr.style.marginBottom = "";
     const vh = vv ? vv.height : innerHeight;
-    const asan = sec.offsetHeight + 30 + 24 - vh; // 24px = butonların altında boşluk
+    const asan = sec.offsetHeight + 50 + 24 - vh; // 24px = butonların altında boşluk
     const s = asan > 0 ? Math.max(0.55, (250 - asan) / 250) : 1;
     hr.style.transformOrigin = "top center";
     hr.style.transform = "scale(" + s + ")";
