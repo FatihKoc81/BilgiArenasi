@@ -259,7 +259,12 @@ menu();
     "body.kkOyunda #kkIpucu{margin-top:10px;margin-bottom:auto;padding:4px 0}" +
     // Altıgenlerin üstünde kaç harfli olduğu yazar (sayıyı CSS sayacı hesaplar)
     "#kkHeks{counter-reset:kkh}#kkHeks .kkH{counter-increment:kkh}" +
-    "#kkHeks::after{content:counter(kkh) \" Harfli\";order:-1;flex:0 0 100%;text-align:center;color:#8e9bc4;font-size:15px;font-weight:700;margin-bottom:4px}";
+    "#kkHeks::after{content:counter(kkh) \" Harfli\";order:-1;flex:0 0 100%;text-align:center;color:#8e9bc4;font-size:15px;font-weight:700;margin-bottom:4px}" +
+    // BAŞLIK BOYUTU: tüm oyunlarda ana sayfadakiyle birebir aynı (en sona konur, hepsini ezer)
+    ":root:root body h1{font-size:clamp(26px,8vw,44px)!important;font-weight:700!important;letter-spacing:normal!important}" +
+    "@media (max-height:800px){:root:root body h1{font-size:26px!important}}" +
+    ":root:root body.ppOyunda h1,:root:root body.kkOyunda h1{padding:8px 0!important;padding-top:calc(8px + env(safe-area-inset-top))!important}" +
+    ":root:root body.ppOyunda,:root:root body.kkOyunda{padding-top:calc(clamp(26px,8vw,44px) * 1.2 + 16px + env(safe-area-inset-top))!important}";
   document.head.appendChild(stl);
   // Kelime Oyunu ekranı açıkken body'ye kkOyunda sınıfı ekle
   var kk = document.getElementById("kk"), ko = document.getElementById("kkOyun");
