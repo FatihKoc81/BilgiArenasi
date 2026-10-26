@@ -287,11 +287,41 @@ menu();
     a.textContent = apkUygulamasi ? "⬇ Güncelle" : "⬇ APK";
     document.body.appendChild(a);
   }
+  // Passaparola oyunda başlık, ana sayfadaki yerine ölçülerek hizalanır
+  var homeTop = null, ppSet = false;
+  function ppHizala() {
+    var h1 = document.querySelector("body>h1");
+    if (!h1) return;
+    var an = document.getElementById("ana");
+    var anaGor = !!(an && !an.classList.contains("hidden"));
+    if (!document.body.classList.contains("ppOyunda")) {
+      if (ppSet) { h1.style.removeProperty("transform"); ppSet = false; }
+      if (anaGor && !document.body.classList.contains("kkOyunda")) homeTop = h1.getBoundingClientRect().top + window.scrollY;
+      return;
+    }
+    if (homeTop === null) return;
+    h1.style.removeProperty("transform");
+    var fark = Math.round(homeTop - (h1.getBoundingClientRect().top + window.scrollY));
+    if (fark) h1.style.setProperty("transform", "translateY(" + fark + "px)", "important");
+    ppSet = true;
+  }
+  // Kilit kararı sadece ekran/yükseklik değişince verilir (sürekli açıp kapatma titremeye ve yazıların kaybolmasına yol açıyordu)
+  var sonAnahtar = "";
   function guncelle() {
+    ppHizala();
     var ana = document.getElementById("ana");
     var gor = !!(ana && !ana.classList.contains("hidden") && getComputedStyle(ana).display !== "none");
     if (a) a.classList.toggle("gizli", !gor);
-    // Görünen en alttaki kartı bul (menü, oyun veya sonuç ekranı)
+    var gorunen = [];
+    document.querySelectorAll(".kart").forEach(function (k) {
+      if (k.classList.contains("hidden") || getComputedStyle(k).display === "none") return;
+      gorunen.push(k.id + ":" + k.offsetHeight);
+    });
+    var anahtar = window.innerHeight + "|" + gorunen.join(",");
+    if (anahtar === sonAnahtar) return;
+    sonAnahtar = anahtar;
+    var kl = document.documentElement.classList;
+    kl.remove("menu-kilit"); // doğal yerleşimi ölç
     var alt = 0;
     document.querySelectorAll(".kart").forEach(function (k) {
       if (k.classList.contains("hidden") || getComputedStyle(k).display === "none") return;
@@ -300,7 +330,7 @@ menu();
     // Ekrana sığıyorsa sayfa kaymasın; sığmıyorsa (çok küçük ekran) kaydırmaya izin ver
     var pay = gor ? 56 : 12;
     var kilit = alt > 0 && (alt + pay <= window.innerHeight + 24);
-    document.documentElement.classList.toggle("menu-kilit", kilit);
+    kl.toggle("menu-kilit", kilit);
     if (kilit && window.scrollY) window.scrollTo(0, 0);
   }
   window.addEventListener("resize", guncelle);
