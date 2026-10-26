@@ -123,23 +123,21 @@
   const giris = $("kkGiris"), oyun = $("kkOyun"), son = $("kkSon");
   const inp = $("kkCevap"), fb = $("kkGeriBildirim"), heks = $("kkHeks");
 
-  // ---------- Başlık konumunu ana ekranla aynı tut ----------
-  // Klavye açılınca vh/svh/lvh birimleri değişebiliyor ve başlık yukarı kayıyor.
+  // ---------- Başlığı ana ekranla aynı boyut ve konumda tut ----------
+  // Klavye açılınca vh/svh/lvh birimleri değişebiliyor; başlık küçülüp yukarı kayıyor.
   // Bu yüzden ana ekrandayken (klavye kapalıyken) piksel değerlerini ölçüp sabitliyoruz.
+  const BASLIK_OZELLIK = ["margin-top", "margin-bottom", "font-size", "line-height", "letter-spacing"];
+
   function baslikKilitle() {
     const h1 = document.querySelector("h1");
     if (!h1) return;
     const hs = getComputedStyle(h1);
-    h1.style.setProperty("margin-top", hs.marginTop, "important");
-    h1.style.setProperty("margin-bottom", hs.marginBottom, "important");
+    BASLIK_OZELLIK.forEach(p => h1.style.setProperty(p, hs.getPropertyValue(p), "important"));
     document.body.style.paddingTop = getComputedStyle(document.body).paddingTop;
   }
   function baslikSerbest() {
     const h1 = document.querySelector("h1");
-    if (h1) {
-      h1.style.removeProperty("margin-top");
-      h1.style.removeProperty("margin-bottom");
-    }
+    if (h1) BASLIK_OZELLIK.forEach(p => h1.style.removeProperty(p));
     document.body.style.paddingTop = "";
   }
 
@@ -182,12 +180,22 @@
     oyun.classList.toggle("hidden", b !== "oyun");
     son.classList.toggle("hidden", b !== "son");
     sec.classList.toggle("kkK", b === "oyun");
+    alta();
   };
+
+  // Kartı klavyenin hemen üstüne indir
+  function alta() {
+    if (!sec.classList.contains("kkK")) { sec.style.marginTop = ""; return; }
+    sec.style.marginTop = "0px";
+    const bos = window.innerHeight - sec.getBoundingClientRect().bottom - 8;
+    sec.style.marginTop = Math.max(0, Math.round(bos)) + "px";
+  }
 
   function menuyeDon() {
     clearInterval(zaman);
     sec.classList.add("hidden");
     sec.classList.remove("kkK");
+    sec.style.marginTop = "";
     baslikSerbest();
     document.querySelector("h1").style.display = "";
     ana.classList.remove("hidden");
@@ -330,6 +338,11 @@
   inp.addEventListener("focus", () => setTimeout(kaydir, 400));
   const mv = document.querySelector('meta[name="viewport"]');
   if (mv && !/interactive-widget/.test(mv.content)) mv.content += ", interactive-widget=resizes-content";
+
+  // Kartı klavyenin hemen üstünde tut
+  window.addEventListener("resize", alta);
+  if (window.visualViewport) visualViewport.addEventListener("resize", alta);
+  inp.addEventListener("focus", () => setTimeout(alta, 450));
 
   // Başlığa tıklanınca (ortak.js) süreyi durdur ve ana sayfaya dön
   document.addEventListener("anasayfa", menuyeDon);
