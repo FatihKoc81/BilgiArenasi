@@ -75,6 +75,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cp android/app/build/outputs/apk/debug/app-debug.apk bilgi-arenasi.apk
+          cp android/app/build/outputs/apk/debug/app-debug.apk BilgiArenasi.apk
           gh release delete son --yes --cleanup-tag || true
-          gh release create son bilgi-arenasi.apk --target "${{ github.sha }}" --title "Son sürüm" --notes "Otomatik derlenen son APK" --latest
+          gh release create son BilgiArenasi.apk --target "${{ github.sha }}" --title "Son sürüm" --notes "Otomatik derlenen son APK" --latest
