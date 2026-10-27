@@ -2142,7 +2142,7 @@ const milyonerSorulari = {
   ],
   seviye127: [
     { soru: "Hangi element periyodik tabloda 'Na' simgesiyle gösterilir?", secenekler: ["Sodyum", "Azot", "Nikel", "Neon"], cevap: "Sodyum" },
-    { soru: "Türkiye'nin en kuzey uydudaki ili Sinop'tur. Peki en kuzey ilçesi hangisidir?", secenekler: ["Gerze", "Inceburun / Merkez", "Ayancık", "Boyabat"], cevap: "Inceburun / Merkez" },
+    { soru: "Türkiye'nin en kuzey ucundaki ili Sinop'tur. Peki en kuzey ilçesi hangisidir?", secenekler: ["Gerze", "Inceburun / Merkez", "Ayancık", "Boyabat"], cevap: "Inceburun / Merkez" },
     { soru: "Güneş Sistemi'nin kütlece en büyük gezegeni hangisidir?", secenekler: ["Satürn", "Jüpiter", "Neptün", "Dünya"], cevap: "Jüpiter" },
     { soru: "Türkiye'nin NATO'ya üye olduğu yıl hangisidir?", secenekler: ["1945", "1950", "1952", "1960"], cevap: "1952" },
     { soru: "İnsan vücudunda solunum ve dolaşım gibi hayati otomatik merkezleri kontrol eden organ hangisidir?", secenekler: ["Beyincik", "Omurilik soğanı", "Hipofiz", "Talamus"], cevap: "Omurilik soğanı" },
