@@ -73,6 +73,11 @@
   #kkGeriBildirim{min-height:18px;margin-top:4px;font-size:15px;font-weight:700;text-align:center}
   .kkSatir{display:flex;gap:8px}
   .kkSatir .btn{margin-top:4px;padding:10px 6px;font-size:15px}
+  #kk.kkK{min-height:0!important;height:auto!important;padding:16px 14px!important}
+  body.kkOyunda #kkBilgi{margin-bottom:10px!important}
+  body.kkOyunda #kkHeks{margin-top:10px!important;margin-bottom:10px!important}
+  body.kkOyunda #kkIpucu{margin-top:12px!important;margin-bottom:14px!important}
+  #kkGeriBildirim{min-height:22px!important;margin-top:6px!important}
   .kkTitre{animation:kkt .3s}
   @keyframes kkt{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
   `;
