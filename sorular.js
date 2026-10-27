@@ -505,7 +505,7 @@ const milyonerSorulari = {
     { soru: "Türkiye'nin en büyük adası olan Gökçeada hangi ilimize bağlıdır?", secenekler: ["İzmir", "Balıkesir", "Çanakkale", "Muğla"], cevap: "Çanakkale" },
     { soru: "Hangi yazar 'Acımak' romanının yazarıdır?", secenekler: ["Reşat Nuri Güntekin", "Peyami Safa", "Yakup Kadri", "Halide Edip"], cevap: "Reşat Nuri Güntekin" },
     { soru: "İnsan vücudunda en küçük kemik hangi bölgede yer alır?", secenekler: ["Burun", "Kulak (Üzengi)", "El parmakları", "Ayak parmakları"], cevap: "Kulak (Üzengi)" },
-    { soru: "Hangi ülke Afrika kıtasındadır?", secenekler: ["Nijerya", "Irak", "Surinam", "Guatemala"], cevap: "Nijerya" },
+    { soru: "Hangi ülke Afrika kıtasındadır?", secenekler: ["Nijerya", "Irak", "Surinam", "Guatemala"], cevap: "Nijerya" }
   ], 
     seviye31: [
     { soru: "Hangi element periyodik tabloda 'Fe' simgesiyle gösterilir?", secenekler: ["Flor", "Demir", "Fosfor", "Fransiyum"], cevap: "Demir" },
