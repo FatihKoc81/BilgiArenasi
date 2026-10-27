@@ -302,8 +302,10 @@ menu();
     }
     if (homeTop === null) return;
     h1.style.removeProperty("transform");
-    var PP_YUKARI = 14; // piksel: başlığı kartın çizgisinin üstüne almak için (artır = daha yukarı)
-    var fark = Math.round(homeTop - (h1.getBoundingClientRect().top + window.scrollY)) - PP_YUKARI;
+    // Oyunda başlık position:fixed olduğu için sayfa kaydırması (klavye açılırken olur) konumunu etkilememeli.
+    // Eskiden scrollY de hesaba katılıyordu; klavye açılırken scrollY değişince başlık yukarı-aşağı zıplıyordu.
+    var PP_YUKARI = -2; // piksel: artır = başlık daha yukarı, azalt = daha aşağı
+    var fark = Math.round(homeTop - h1.getBoundingClientRect().top) - PP_YUKARI;
     if (fark) h1.style.setProperty("transform", "translateY(" + fark + "px)", "important");
     ppSet = true;
   }
