@@ -204,6 +204,37 @@ var LEVELS = [
   { l: "GÖZLÜK", w: ["GÖZLÜK", "GÜZ", "GÖZ", "GÜL", "GÖL", "ÖLÜ"],
     b: ["ÖZ"] }
 ];
+/* KELİME ÜRETİCİ: "var LEVELS = [ ... ];" satırından HEMEN SONRA yapıştır.
+   1) Geçersiz kelimeleri ve KURALI bölümünü siler.
+   2) Aşağıdaki sözlükten otomatik yeni bölümler üretir.
+   Daha çok bölüm için sadece SOZLUK'e TDK'da olan kelime ekle. */
+(function () {
+var YASAK = { YUM: 1, KIS: 1, YOLA: 1, VUR: 1 };
+LEVELS = LEVELS.filter(function (L) { return L.l !== "KURALI"; });
+LEVELS.forEach(function (L) {
+  L.w = L.w.filter(function (x) { return !YASAK[x]; });
+  L.b = L.b.filter(function (x) { return !YASAK[x]; });
+});
+var SOZLUK = "AL AT EL EN ET AK AY AŞ DA DE İL İN İP İT OK OL ON OT OY ÖN ÖZ SU UN UT UZ YA YE AH AĞ AR AZ EK İZ EZ " +
+"ABA ACI ADA AĞA AĞI ALA ANA ARA ARI ASA ATA AYI BAL BAN BAR BAŞ BEL BEN BİN BİR BİT BOL BOY BUZ CAM CAN ÇAM ÇAY ÇEK DAĞ DAL DAM DAR DEL DER DİL DİN DİŞ DOL DUA DUL DUR ELE ERK FİL GAZ GEN GÖL GÖZ GÜL GÜN GÜZ HAL HAN HAS HAT HAZ HIZ İLE İLK KAL KAM KAN KAP KAR KAS KAT KEL KEM KİL KİP KİR KİT KOL KUM KUŞ MAL MAT MAY MOR MUM MUZ NAL NAR NEM NOT ODA OYA PAK PAS PAY PİL RAF RAY SAÇ SAĞ SAL SAN SAP SAR SAT SAY SEL SER SES SİL SIR TAK TAM TAN TAŞ TAT TEL TEN TER TİP TOP TOZ TUZ ULU VAR YAĞ YAN YAR YAŞ YAZ YEL YER YOK YOL ZAM ZAR ZİL ZOR " +
+"ADAM ALAN ALAY ALIN ALTI ANIT ARKA ARPA ARZU ASIL ATKI AYAK AYNA AYRI BACA BANK BANT BİNA BOYA BURÇ ÇARK ÇATI DARI DEDE DERE DERİ DERT DERS DİZE DİZİ DOST EKİN ELMA ERİK ESKİ EVET GECE GEMİ GENÇ GERİ GÖÇ HALK HAVA İLAÇ İNCİ İNEK İSİM KAFA KALE KAPI KARA KASA KAYA KEDİ KESE KIRK KISA KİRA KOLA KURU KUZU LEKE LİSE MASA MAVİ MİDE NANE NOTA OLAY ONAY ORAN ORTA OYUN ÖDEV ÖĞLE PARA PARK PLAN POTA RENK SARI SAYI SOBA SORU SÜRE TARİH TAVA TOZ UZAK YASAK YEMİŞ ZAMAN " +
+"ADRES AKIL AKIN AKİT ALIŞ ANLAM ARABA ASLAN ATLAS AYRAN BAKIR BALIK BALON BANKA BARIŞ BASIN BAYRAK BEYAZ BİLGİ BOYUN BULUT BÜYÜK ÇALAR ÇANTA ÇİÇEK DAMLA DENİZ DEFTER DERGİ DOKUZ DOLAP DUMAN DURAK DUVAR EKMEK ELBİSE ERKEK FIRÇA GÖMLEK GÜNEŞ GÜZEL HAKLI HAYAT HEDEF İKRAM İSTEK KADIN KALEM KANAT KAPAK KARAR KAYIK KAZAN KELİME KENAR KİTAP KOKU KONAK KORKU KUMAŞ KUYRUK LAMBA LİMON MAKAS MANTAR MASAL MEKAN MERAK MERKEZ MEYVE MUTLU NAKIŞ NEHİR NOKTA ODUN ORMAN ÖRDEK PAZAR PEYNİR PİLAV RESİM SABAH SALON SAMAN SANAT SARAY SATIR SEBZE SELAM SEVGİ SINIF SİYAH SOKAK SÜRAT TABAK TAKIM TARAK TATLI TAVAN TAVLA TEMİZ TOPRAK TUZAK UYKU YAKIN YALAN YAPRAK YARIN YAZAR YILAN YOLCU YUMURTA ZEMİN KALKAN KARTAL KAPLAN KARPUZ KİRAZ KELEBEK KALEMLİK DAĞLIK KAŞIK TAKVİM BAKLAVA SAKAL SALATA PANTOLON KAVUN KİLİM KALIP KALAS TEPE TEPSİ";
+var D = SOZLUK.split(/\s+/).filter(function (x, i, a) { return x && a.indexOf(x) === i && !YASAK[x]; });
+function sayac(s) { var m = {}; for (var i = 0; i < s.length; i++) m[s[i]] = (m[s[i]] || 0) + 1; return m; }
+function sigar(w, m) { var c = {}; for (var i = 0; i < w.length; i++) { var h = w[i]; c[h] = (c[h] || 0) + 1; if (c[h] > (m[h] || 0)) return false; } return true; }
+var var_ = {};
+LEVELS.forEach(function (L) { var_[L.l] = 1; });
+D.forEach(function (r) {
+  if (r.length < 5 || r.length > 7 || var_[r]) return;
+  var m = sayac(r), alt = D.filter(function (w) { return w !== r && sigar(w, m); });
+  var ana = alt.filter(function (w) { return w.length >= 3; })
+    .sort(function (a, b) { return b.length - a.length || (a < b ? -1 : 1); }).slice(0, 6);
+  if (ana.length < 4) return;
+  LEVELS.push({ l: r, w: [r].concat(ana), b: alt.filter(function (w) { return ana.indexOf(w) < 0; }) });
+  var_[r] = 1;
+});
+})();
+
 var ANA_PUAN = 10, BONUS_PUAN = 15; // harf başına puan
 var MAVI = "#1f55b8";
 var BASLANGIC_HAK = 3; // ampül ve tokmak için başlangıç hakkı
