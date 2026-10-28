@@ -265,9 +265,9 @@ menu();
     "@media (max-height:800px){:root:root body h1{font-size:26px!important}}" +
     ":root:root body.ppOyunda h1,:root:root body.kkOyunda h1{padding:8px 0!important;padding-top:calc(8px + env(safe-area-inset-top))!important}" +
     ":root:root body.ppOyunda,:root:root body.kkOyunda{padding-top:calc(clamp(26px,8vw,44px) * 1.2 + 16px + env(safe-area-inset-top))!important}" +
-    // Passaparola başlığı: ana sayfadaki yerinin 14 px üstü. Ölçüm yok, sabit hesap: klavye açılırken oynamaz.
-    ":root:root body.ppOyunda h1{transform:none!important;top:max(0px,calc(var(--bosluk) + clamp(12px,4.5vh,40px) - 14px))!important}" +
-    ":root:root body.ppOyunda h1{top:max(0px,calc(var(--bosluk) + clamp(12px,4.5lvh,40px) - 14px))!important}";
+    // Passaparola başlığı: ana sayfadaki yerinin 21 px üstü (14 yerine 21: Chrome'da kartın çizgisine değiyordu). Ölçüm yok, sabit hesap: klavye açılırken oynamaz.
+    ":root:root body.ppOyunda h1{transform:none!important;top:max(0px,calc(var(--bosluk) + clamp(12px,4.5vh,40px) - 21px))!important}" +
+    ":root:root body.ppOyunda h1{top:max(0px,calc(var(--bosluk) + clamp(12px,4.5lvh,40px) - 21px))!important}";
   document.head.appendChild(stl);
   // Kelime Oyunu ekranı açıkken body'ye kkOyunda sınıfı ekle
   var kk = document.getElementById("kk"), ko = document.getElementById("kkOyun");
@@ -344,6 +344,29 @@ menu();
   document.addEventListener("touchmove", function (e) {
     if (document.documentElement.classList.contains("menu-kilit") && !(e.target.closest && e.target.closest("input,textarea"))) e.preventDefault();
   }, { passive: false });
+  // Chrome'da klavye açıkken görünür yükseklik (visualViewport.height) bazen tam, bazen kısalmış okunuyor;
+  // passaparola.js bu yüzden halkayı bir küçültüp bir büyütüyordu (düğmeler klavyenin altında kalıyordu).
+  // Cevap kutusu odaktayken görülen EN KÜÇÜK yüksekliği kullanırız: klavye açıkken sabit kalır.
+  (function () {
+    var vv = window.visualViewport;
+    if (!vv) return;
+    var okunan = function () { return Math.min(vv.height, window.innerHeight); };
+    var enKucuk = Infinity;
+    var kutu = document.getElementById("ppCevap");
+    var odakta = function () { return kutu && document.activeElement === kutu; };
+    if (kutu) kutu.addEventListener("blur", function () { enKucuk = Infinity; });
+    try {
+      Object.defineProperty(vv, "height", {
+        configurable: true,
+        get: function () {
+          var h = okunan();
+          if (!odakta()) { enKucuk = Infinity; return h; }
+          enKucuk = Math.min(enKucuk, h);
+          return enKucuk;
+        }
+      });
+    } catch (e) {}
+  })();
   guncelle();
   setInterval(guncelle, 500);
   // Passaparola oyunda klavye animasyonu bitince de kart klavyenin üstüne sığsın diye
