@@ -208,6 +208,9 @@
     ["position", "left", "width", "bottom", "top", "marginTop", "zIndex"].forEach(p => { sec.style[p] = ""; });
   }
   function alta() {
+    // Kelime Oyunu ekranı açık değilken hiçbir şeye dokunma (başlığı Passaparola/ana sayfa yönetiyor;
+    // klavye açılırken resize olayları başlığın hizasını sıfırlayıp sıçratıyordu)
+    if (sec.classList.contains("hidden")) return;
     if (!sec.classList.contains("kkK")) { altaSifirla(); baslikHizala(); return; }
     // Önce normal akışta genişlik ve soldan konumu ölç
     altaSifirla();
