@@ -1070,6 +1070,7 @@
   }
 
   function baslat() {
+    vhKilit = null; vhBuyukBas = 0;
     dur = HARFLER.map(() => 0);
     sorular = HARFLER.map(h => SORU[h][Math.floor(Math.random() * SORU[h].length)]);
     idx = 0;
@@ -1162,13 +1163,29 @@
   // Klavye açıkken her şey görünür alana sığsın: halkayı gerekirse küçült,
   // böylece "Pas / Cevapla" klavyenin hemen üstünde tam görünür.
   // Yer fazlaysa kutuyu biraz aşağı indirir (en fazla 6px; başlıkla kart arası boşluk az kalsın).
+  // Görünen yükseklik: klavye açıkken Chrome bazen tam, bazen kısalmış yükseklik okuyor.
+  // Küçülme hemen kabul edilir; büyüme ancak ~1,2 sn boyunca KESİNTİSİZ büyük kalırsa kabul edilir.
+  // Böylece halka klavye açıkken büyüyüp küçülmez (kapanan klavye yine de 1,2 sn içinde algılanır).
+  let vhKilit = null, vhBuyukBas = 0;
+  const gorunenYuk = () => {
+    const vv = window.visualViewport;
+    const ham = vv ? vv.height : innerHeight;
+    const t = Date.now();
+    if (vhKilit === null) { vhKilit = ham; vhBuyukBas = 0; }
+    else if (ham <= vhKilit + 2) { vhKilit = Math.min(vhKilit, ham); vhBuyukBas = 0; }
+    else {
+      if (!vhBuyukBas) vhBuyukBas = t;
+      if (t - vhBuyukBas >= 1200) { vhKilit = ham; vhBuyukBas = 0; }
+    }
+    return vhKilit;
+  };
   const sigdir = () => {
     if (oyun.classList.contains("hidden")) return;
     const hr = $("ppHarfler"), vv = window.visualViewport;
     hr.style.transform = "";
     hr.style.marginBottom = "";
     sec.style.marginTop = "";
-    const vh = vv ? vv.height : innerHeight;
+    const vh = gorunenYuk();
     const asan = sec.offsetHeight + 58 + 10 - vh; // 58px = üst başlık payı, 10px = kartın altında boşluk
     const s = asan > 0 ? Math.max(0.55, (250 - asan) / 250) : 1;
     hr.style.transformOrigin = "top center";
