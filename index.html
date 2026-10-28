@@ -308,40 +308,10 @@ menu();
     if (fark) h1.style.setProperty("transform", "translateY(" + fark + "px)", "important");
     ppSet = true;
   }
-  // Giriş ekranları (Kelime Oyunu, Passaparola, ...): kart, ana sayfadaki kartla aynı yükseklikten başlasın
-  var homeGap = null, kartAyarli = null;
-  function kartHizala() {
-    var b = document.body, h1 = document.querySelector("body>h1"), an = document.getElementById("ana");
-    if (!h1 || !an) return;
-    var oyunda = b.classList.contains("ppOyunda") || b.classList.contains("kkOyunda");
-    var anaGor = !an.classList.contains("hidden") && getComputedStyle(an).display !== "none";
-    if (kartAyarli) {
-      kartAyarli.style.removeProperty("top");
-      kartAyarli.style.removeProperty("position");
-      kartAyarli = null;
-    }
-    if (anaGor && !oyunda) homeGap = an.getBoundingClientRect().top - h1.getBoundingClientRect().bottom;
-    if (homeGap === null || anaGor || oyunda) return;
-    var btns = document.querySelectorAll("button"), btn = null;
-    for (var i = 0; i < btns.length; i++) {
-      var r = btns[i].getBoundingClientRect();
-      if (/Başla/.test(btns[i].textContent) && r.width > 0 && r.height > 0 && getComputedStyle(btns[i]).visibility !== "hidden") { btn = btns[i]; break; }
-    }
-    if (!btn) return;
-    var kart = btn.closest(".kart");
-    if (!kart || getComputedStyle(kart).position !== "static") return; // sabit/mutlak konumlu kartlara dokunma
-    var fark = Math.round(h1.getBoundingClientRect().bottom + homeGap - kart.getBoundingClientRect().top);
-    if (fark) {
-      kart.style.setProperty("position", "relative", "important");
-      kart.style.setProperty("top", fark + "px", "important");
-      kartAyarli = kart;
-    }
-  }
   // Kilit kararı sadece ekran/yükseklik değişince verilir (sürekli açıp kapatma titremeye ve yazıların kaybolmasına yol açıyordu)
   var sonAnahtar = "";
   function guncelle() {
     ppHizala();
-    kartHizala();
     var ana = document.getElementById("ana");
     var gor = !!(ana && !ana.classList.contains("hidden") && getComputedStyle(ana).display !== "none");
     if (a) a.classList.toggle("gizli", !gor);
@@ -369,7 +339,6 @@ menu();
   // Zıplamanın asıl sebebi: ekran açılınca hizalama 500 ms'lik zamanlayıcıyı bekliyordu.
   // Artık body sınıfı değişir değişmez (ilk çizimden önce) hemen hizalanır.
   new MutationObserver(ppHizala).observe(document.body, { attributes: true, attributeFilter: ["class"] });
-  new MutationObserver(function () { requestAnimationFrame(kartHizala); }).observe(document.body, { attributes: true, subtree: true, attributeFilter: ["class"] });
   window.addEventListener("resize", guncelle);
   window.addEventListener("scroll", function () {
     if (document.documentElement.classList.contains("menu-kilit") && window.scrollY) window.scrollTo(0, 0);
