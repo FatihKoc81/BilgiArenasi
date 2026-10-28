@@ -308,31 +308,10 @@ menu();
     if (fark) h1.style.setProperty("transform", "translateY(" + fark + "px)", "important");
     ppSet = true;
   }
-  // Giriş ekranları (Kelime Oyunu, Passaparola, ...): kart, ana sayfadaki kartla aynı yükseklikten başlasın
-  var homeGap = null, kartAyarli = null;
-  function kartHizala() {
-    var b = document.body, h1 = document.querySelector("body>h1"), an = document.getElementById("ana");
-    if (!h1 || !an) return;
-    var oyunda = b.classList.contains("ppOyunda") || b.classList.contains("kkOyunda");
-    var anaGor = !an.classList.contains("hidden") && getComputedStyle(an).display !== "none";
-    if (kartAyarli) { kartAyarli.style.removeProperty("transform"); kartAyarli = null; }
-    if (anaGor && !oyunda) homeGap = an.getBoundingClientRect().top - h1.getBoundingClientRect().bottom;
-    if (homeGap === null || anaGor || oyunda) return;
-    var btns = document.querySelectorAll("button"), btn = null;
-    for (var i = 0; i < btns.length; i++) {
-      if (/Başla/.test(btns[i].textContent) && btns[i].offsetParent !== null) { btn = btns[i]; break; }
-    }
-    if (!btn) return;
-    var kart = btn.closest(".kart") || btn.parentElement, c = btn;
-    while (c.parentElement && c.parentElement !== b) c = c.parentElement;
-    var fark = Math.round(h1.getBoundingClientRect().bottom + homeGap - kart.getBoundingClientRect().top);
-    if (fark) { c.style.setProperty("transform", "translateY(" + fark + "px)", "important"); kartAyarli = c; }
-  }
   // Kilit kararı sadece ekran/yükseklik değişince verilir (sürekli açıp kapatma titremeye ve yazıların kaybolmasına yol açıyordu)
   var sonAnahtar = "";
   function guncelle() {
     ppHizala();
-    kartHizala();
     var ana = document.getElementById("ana");
     var gor = !!(ana && !ana.classList.contains("hidden") && getComputedStyle(ana).display !== "none");
     if (a) a.classList.toggle("gizli", !gor);
@@ -360,7 +339,6 @@ menu();
   // Zıplamanın asıl sebebi: ekran açılınca hizalama 500 ms'lik zamanlayıcıyı bekliyordu.
   // Artık body sınıfı değişir değişmez (ilk çizimden önce) hemen hizalanır.
   new MutationObserver(ppHizala).observe(document.body, { attributes: true, attributeFilter: ["class"] });
-  new MutationObserver(function () { requestAnimationFrame(kartHizala); }).observe(document.body, { attributes: true, subtree: true, attributeFilter: ["class"] });
   window.addEventListener("resize", guncelle);
   window.addEventListener("scroll", function () {
     if (document.documentElement.classList.contains("menu-kilit") && window.scrollY) window.scrollTo(0, 0);
