@@ -376,8 +376,17 @@ menu();
   setInterval(guncelle, 500);
   // Passaparola oyunda klavye animasyonu bitince de kart klavyenin üstüne sığsın diye
   // passaparola.js'in "resize" ile çalışan sığdırmasını oyun açıkken sık sık tetikler.
+  // DÜZELTME: eskiden her 250 ms'de koşulsuz "resize" gönderiliyordu; halka sürekli yeniden
+  // hesaplanıp zıplıyordu. Artık sadece yükseklik değişince (ve değişimden sonra 1,5 sn boyunca,
+  // klavye animasyonu bitsin diye) gönderilir; yükseklik sabitken halka yerinde durur.
+  var sonYuk = -1, sonDegisim = 0;
   setInterval(function () {
-    if (document.body.classList.contains("ppOyunda")) window.dispatchEvent(new Event("resize"));
+    if (!document.body.classList.contains("ppOyunda")) { sonYuk = -1; return; }
+    var v = window.visualViewport;
+    var h = Math.round(v ? v.height : window.innerHeight);
+    var t = Date.now();
+    if (h !== sonYuk) { sonYuk = h; sonDegisim = t; }
+    if (t - sonDegisim < 1500) window.dispatchEvent(new Event("resize"));
   }, 250);
 })();
 </script>
