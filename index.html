@@ -352,7 +352,8 @@ menu();
   (function () {
     var vv = window.visualViewport;
     if (!vv) return;
-    var okunan = function () { return Math.min(vv.height, window.innerHeight); };
+    var gercekH = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(vv), "height").get; // üzerine yazmadan ÖNCE asıl değeri al
+    var okunan = function () { return Math.min(gercekH.call(vv), window.innerHeight); };
     var ornek = []; // [zaman, yükseklik]
     var kutu = document.getElementById("ppCevap");
     var odakta = function () { return kutu && document.activeElement === kutu; };
