@@ -352,7 +352,9 @@ menu();
   (function () {
     var vv = window.visualViewport;
     if (!vv) return;
-    var okunan = function () { return Math.min(vv.height, window.innerHeight); };
+    var orjH = null;
+    try { orjH = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(vv), "height").get; } catch (e) {}
+    var okunan = function () { return Math.min(orjH ? orjH.call(vv) : window.innerHeight, window.innerHeight); };
     var ornek = []; // [zaman, yükseklik]
     var kutu = document.getElementById("ppCevap");
     var odakta = function () { return kutu && document.activeElement === kutu; };
