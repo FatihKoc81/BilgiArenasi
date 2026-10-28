@@ -1003,6 +1003,7 @@
     oyun.classList.toggle("hidden", b !== "oyun");
     son.classList.toggle("hidden", b !== "son");
     sec.classList.toggle("ppK", b === "oyun");
+    if (b !== "oyun") sec.style.opacity = "";
     document.querySelector("h1").style.display = b === "oyun" ? "none" : "";
   };
 
@@ -1050,24 +1051,41 @@
     odak();
   }
 
-  function baslat() {
-    dur = HARFLER.map(() => 0);
-    sorular = HARFLER.map(h => SORU[h][Math.floor(Math.random() * SORU[h].length)]);
-    idx = 0;
-    sure = SURE;
-    kilit = false;
-    fb.textContent = "";
-    yaz("");
-    bolum("oyun");
-    ciz();
-    odak();
-    setTimeout(kaydir, 400);
+  // Kart klavye tam oturana kadar gizli tutulur, düzen hesaplandıktan sonra yumuşakça gösterilir.
+  // Süre de kart göründüğünde başlar.
+  let acildi = false, acTimer;
+  function ac() {
+    if (acildi) return;
+    acildi = true;
+    clearTimeout(acTimer);
+    sigdir();
+    sec.style.transition = "opacity .15s";
+    sec.style.opacity = "";
     clearInterval(zaman);
     zaman = setInterval(() => {
       sure--;
       sureYaz();
       if (sure <= 0) bitir();
     }, 1000);
+  }
+
+  function baslat() {
+    dur = HARFLER.map(() => 0);
+    sorular = HARFLER.map(h => SORU[h][Math.floor(Math.random() * SORU[h].length)]);
+    idx = 0;
+    sure = SURE;
+    kilit = false;
+    acildi = false;
+    clearTimeout(acTimer);
+    clearInterval(zaman);
+    fb.textContent = "";
+    yaz("");
+    sec.style.transition = "none";
+    sec.style.opacity = "0";
+    bolum("oyun");
+    ciz();
+    odak();
+    acTimer = setTimeout(ac, 900); // klavye hiç açılmazsa (masaüstü vb.) yine de başlasın
   }
 
   function gonder() {
@@ -1117,7 +1135,6 @@
   $("ppGonder").onclick = gonder;
   $("ppPas").onclick = pas;
   const kaydir = () => $("ppGonder").scrollIntoView({ block: "end", behavior: "smooth" });
-  inp.addEventListener("focus", () => setTimeout(kaydir, 400));
   const mv = document.querySelector('meta[name="viewport"]');
   if (mv && !/interactive-widget/.test(mv.content)) mv.content += ", interactive-widget=resizes-content";
   inp.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); gonder(); } });
@@ -1161,6 +1178,11 @@
     scrollTo(0, 0);
   };
   if (window.visualViewport) visualViewport.addEventListener("resize", sigdir);
+  if (window.visualViewport) visualViewport.addEventListener("resize", () => {
+    if (acildi || oyun.classList.contains("hidden")) return;
+    clearTimeout(acTimer);
+    acTimer = setTimeout(ac, 150); // yükseklik değişimi 150 ms durunca kartı aç
+  });
   inp.addEventListener("focus", () => { setTimeout(sigdir, 450); setTimeout(sigdir, 800); });
   new MutationObserver(sigdir).observe($("ppSoru"), { childList: true });
   window.addEventListener("resize", sigdir);
