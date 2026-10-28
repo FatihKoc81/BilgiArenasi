@@ -1069,6 +1069,17 @@
     }, 1000);
   }
 
+  // DÜZELTME: soru 1 satır mı 2 satır mı diye kart yüksekliği değişiyordu; sığdır() halkayı
+  // karta göre ölçeklediği için halka her soruda küçülüp büyüyordu. Burada oyundaki en uzun
+  // sorunun yüksekliği bir kez ölçülüp soru alanına sabitlenir; kart boyu hiç değişmez.
+  function soruYukseklikSabitle() {
+    const p = $("ppSoru");
+    p.style.minHeight = "";
+    let en = 0;
+    sorular.forEach(q => { p.textContent = q[0]; en = Math.max(en, p.offsetHeight); });
+    p.style.minHeight = en + "px";
+  }
+
   function baslat() {
     vhKilit = null; vhBuyukBas = 0;
     dur = HARFLER.map(() => 0);
@@ -1084,6 +1095,7 @@
     sec.style.transition = "none";
     sec.style.opacity = "0";
     bolum("oyun");
+    soruYukseklikSabitle();
     ciz();
     odak();
     acTimer = setTimeout(ac, 900); // klavye hiç açılmazsa (masaüstü vb.) yine de başlasın
@@ -1135,6 +1147,8 @@
   $("ppMenu").onclick = menuyeDon;
   $("ppGonder").onclick = gonder;
   $("ppPas").onclick = pas;
+  // DÜZELTME: düğmeye basınca odak kutudan çıkıyor, klavye kapanıp yeniden açılıyordu (halka zıplıyordu).
+  ["ppGonder", "ppPas"].forEach(id => $(id).addEventListener("mousedown", e => e.preventDefault()));
   const kaydir = () => $("ppGonder").scrollIntoView({ block: "end", behavior: "smooth" });
   const mv = document.querySelector('meta[name="viewport"]');
   if (mv && !/interactive-widget/.test(mv.content)) mv.content += ", interactive-widget=resizes-content";
