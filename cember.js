@@ -237,7 +237,8 @@ D.forEach(function (r) {
 
 var ANA_PUAN = 10, BONUS_PUAN = 15; // harf başına puan
 var MAVI = "#1f55b8";
-var BASLANGIC_HAK = 3; // ampül ve tokmak için başlangıç hakkı
+var HAK_IPUCU = 7, HAK_TOKMAK = 5; // başlangıç hakları: ampül 7, tokmak 5
+var HAK_SURUM = "2"; // başlangıç hakları değişince artır: kayıtlı eski haklar da yeni değere çekilir
 
 // LAYOUT-BEGIN
 // Kelimeleri çapraz bulmaca gibi yerleştirir. d: 0 yatay, 1 dikey
@@ -420,13 +421,17 @@ function temaGeri() {
   } catch (e) {}
 }
 
-var hakIpucu = BASLANGIC_HAK, hakTokmak = BASLANGIC_HAK, hammerOn = false;
+var hakIpucu = HAK_IPUCU, hakTokmak = HAK_TOKMAK, hammerOn = false;
 try { lvIdx = Math.min(parseInt(localStorage.getItem("cemberLv") || "0", 10) || 0, LEVELS.length - 1); } catch (e) {}
 try { puan = parseInt(localStorage.getItem("cemberPuan") || "0", 10) || 0; } catch (e) {}
 try {
   var h1 = localStorage.getItem("cemberHakIpucu"), h2 = localStorage.getItem("cemberHakTokmak");
-  if (h1 !== null) hakIpucu = Math.max(0, parseInt(h1, 10) || 0);
-  if (h2 !== null) hakTokmak = Math.max(0, parseInt(h2, 10) || 0);
+  if (localStorage.getItem("cemberHakSurum") !== HAK_SURUM) {
+    localStorage.setItem("cemberHakSurum", HAK_SURUM); // bir kerelik: yeni başlangıç haklarını uygula
+  } else {
+    if (h1 !== null) hakIpucu = Math.max(0, parseInt(h1, 10) || 0);
+    if (h2 !== null) hakTokmak = Math.max(0, parseInt(h2, 10) || 0);
+  }
 } catch (e) {}
 
 function puanKaydet() { try { localStorage.setItem("cemberPuan", puan); } catch (e) {} }
