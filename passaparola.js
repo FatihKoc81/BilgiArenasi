@@ -1209,14 +1209,14 @@
     if (oyun.classList.contains("hidden")) { kararYuk = 0; adayAdet = 0; return; }
     const h = yukOku();
     if (h === adayYuk) adayAdet++; else { adayYuk = h; adayAdet = 1; }
-    if (adayAdet < 5) return;
     if (!acildi) {
-      // İlk açılış: klavye oturana (yükseklik 500 ms sabit) kadar bekle, ölçeği hesapla, SONRA kartı göster.
-      // Böylece halka hiç büyük görünmeden doğrudan küçük haliyle açılır.
-      if (h < baslatYuk - 100 || Date.now() - baslatT > 1500) { kararYuk = h; hesapla(h); ac(); }
+      // İlk açılış: klavye oturunca (yükseklik 150 ms sabit) ölçeği hesapla ve kartı HEMEN göster.
+      // Halka büyük görünmeden doğrudan küçük haliyle açılır.
+      if (adayAdet >= 3 && (h < baslatYuk - 100 || Date.now() - baslatT > 1500)) { kararYuk = h; hesapla(h); ac(); }
       return;
     }
-    if (Math.abs(h - kararYuk) > 30) { kararYuk = h; hesapla(h); }
-  }, 100);
+    // Açıldıktan sonra: yükseklik 500 ms sabit kalırsa ve 30 px'ten fazla değiştiyse yeniden hesapla
+    if (adayAdet >= 10 && Math.abs(h - kararYuk) > 30) { kararYuk = h; hesapla(h); }
+  }, 50);
   new MutationObserver(sigdir).observe($("ppSoru"), { childList: true });
 })();
