@@ -9,6 +9,7 @@
 <script>window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();});</script>
 <title>Bilgi Arenası</title>
 <link rel="stylesheet" href="style.css">
+<style id="acilisGizle">#ana{visibility:hidden}</style><!-- ana menü, butonlar tamamlanana kadar gizli (eski başlangıç ekranı görünmesin) -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#080c20">
 <link rel="icon" type="image/png" href="icon-192.png?v=3">
@@ -370,6 +371,14 @@ if ("serviceWorker" in navigator) {
       .catch(() => {});
   });
 }
+</script>
+<script>
+// Tüm oyun dosyaları menüye butonlarını ekleyip bitirince (load) ana menü bir kerede görünür.
+(function () {
+  function ac() { var s = document.getElementById("acilisGizle"); if (s) s.remove(); }
+  window.addEventListener("load", function () { requestAnimationFrame(function () { requestAnimationFrame(ac); }); });
+  setTimeout(ac, 3000); // güvenlik: bir dosya yüklenemezse menü yine de açılır
+})();
 </script>
 </body>
 </html>
