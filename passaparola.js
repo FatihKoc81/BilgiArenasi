@@ -1081,7 +1081,7 @@
   }
 
   function baslat() {
-    vhKilit = null; vhBuyukBas = 0;
+    kararYuk = 0; adayAdet = 0;
     dur = HARFLER.map(() => 0);
     sorular = HARFLER.map(h => SORU[h][Math.floor(Math.random() * SORU[h].length)]);
     idx = 0;
@@ -1174,47 +1174,47 @@
   });
   document.addEventListener("anasayfa", menuyeDon);
 
-  // Klavye açıkken her şey görünür alana sığsın: halkayı gerekirse küçült,
-  // böylece "Pas / Cevapla" klavyenin hemen üstünde tam görünür.
-  // Yer fazlaysa kutuyu biraz aşağı indirir (en fazla 6px; başlıkla kart arası boşluk az kalsın).
-  // Görünen yükseklik: klavye açıkken Chrome bazen tam, bazen kısalmış yükseklik okuyor.
-  // Küçülme hemen kabul edilir; büyüme ancak ~1,2 sn boyunca KESİNTİSİZ büyük kalırsa kabul edilir.
-  // Böylece halka klavye açıkken büyüyüp küçülmez (kapanan klavye yine de 1,2 sn içinde algılanır).
-  let vhKilit = null, vhBuyukBas = 0;
-  const gorunenYuk = () => {
+  // HALKA ÖLÇEĞİ (sabit): Chrome klavye açıkken visualViewport.height'ı bazen tam, bazen kısalmış okuyor.
+  // Eskiden her okumada halka yeniden ölçekleniyordu, bu yüzden sürekli büyüyüp küçülüyordu.
+  // Şimdi: yükseklik 500 ms boyunca AYNI okunursa (klavye gerçekten oturduysa) ve önceki karardan
+  // 30 px'den fazla farklıysa ölçek bir kez hesaplanır. Soru değişince / resize olunca hiçbir şey ölçülmez.
+  let olcek = 1, marj = 8, kararYuk = 0, adayYuk = 0, adayAdet = 0;
+  const yukOku = () => {
     const vv = window.visualViewport;
-    const ham = vv ? vv.height : innerHeight;
-    const t = Date.now();
-    if (vhKilit === null) { vhKilit = ham; vhBuyukBas = 0; }
-    else if (ham <= vhKilit + 2) { vhKilit = Math.min(vhKilit, ham); vhBuyukBas = 0; }
-    else {
-      if (!vhBuyukBas) vhBuyukBas = t;
-      if (t - vhBuyukBas >= 1200) { vhKilit = ham; vhBuyukBas = 0; }
-    }
-    return vhKilit;
+    return Math.round(Math.min(vv ? vv.height : innerHeight, innerHeight));
   };
-  const sigdir = () => {
-    if (oyun.classList.contains("hidden")) return;
-    const hr = $("ppHarfler"), vv = window.visualViewport;
-    hr.style.transform = "";
-    hr.style.marginBottom = "";
-    sec.style.marginTop = "";
-    const vh = gorunenYuk();
-    const asan = sec.offsetHeight + 58 + 10 - vh; // 58px = üst başlık payı, 10px = kartın altında boşluk
-    const s = asan > 0 ? Math.max(0.55, (250 - asan) / 250) : 1;
+  const uygula = () => {
+    const hr = $("ppHarfler");
     hr.style.transformOrigin = "top center";
-    hr.style.transform = "scale(" + s + ")";
-    hr.style.marginBottom = (8 - 250 * (1 - s)) + "px";
-    if (asan < 0) sec.style.marginTop = Math.min(-asan, 6) + "px"; // kutuyu klavyeye doğru indir (en fazla 6px)
+    hr.style.transform = "scale(" + olcek + ")";
+    hr.style.marginBottom = marj + "px";
+  };
+  const hesapla = vh => {
+    const hr = $("ppHarfler");
+    hr.style.transform = ""; hr.style.marginBottom = ""; sec.style.marginTop = "";
+    const asan = sec.offsetHeight + 58 + 10 - vh; // 58px = üst başlık payı, 10px = kart altı boşluk
+    olcek = asan > 0 ? Math.max(0.55, (250 - asan) / 250) : 1;
+    marj = 8 - 250 * (1 - olcek);
+    uygula();
+    if (asan < 0) sec.style.marginTop = Math.min(-asan, 6) + "px";
     scrollTo(0, 0);
   };
-  if (window.visualViewport) visualViewport.addEventListener("resize", sigdir);
+  const sigdir = () => { // soru değişince vb.: sadece mevcut ölçeği yeniden uygula
+    if (oyun.classList.contains("hidden")) return;
+    if (!kararYuk) { kararYuk = yukOku(); hesapla(kararYuk); return; }
+    uygula();
+    scrollTo(0, 0);
+  };
+  setInterval(() => {
+    if (oyun.classList.contains("hidden")) { kararYuk = 0; adayAdet = 0; return; }
+    const h = yukOku();
+    if (h === adayYuk) adayAdet++; else { adayYuk = h; adayAdet = 1; }
+    if (adayAdet >= 5 && Math.abs(h - kararYuk) > 30) { kararYuk = h; hesapla(h); }
+  }, 100);
   if (window.visualViewport) visualViewport.addEventListener("resize", () => {
     if (acildi || oyun.classList.contains("hidden")) return;
     clearTimeout(acTimer);
     acTimer = setTimeout(ac, 150); // yükseklik değişimi 150 ms durunca kartı aç
   });
-  inp.addEventListener("focus", () => { setTimeout(sigdir, 450); setTimeout(sigdir, 800); });
   new MutationObserver(sigdir).observe($("ppSoru"), { childList: true });
-  window.addEventListener("resize", sigdir);
 })();

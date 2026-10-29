@@ -346,48 +346,8 @@ menu();
   document.addEventListener("touchmove", function (e) {
     if (document.documentElement.classList.contains("menu-kilit") && !(e.target.closest && e.target.closest("input,textarea"))) e.preventDefault();
   }, { passive: false });
-  // Chrome'da klavye açıkken görünür yükseklik (visualViewport.height) bazen tam, bazen kısalmış okunuyor;
-  // passaparola.js bu yüzden halkayı bir küçültüp bir büyütüyordu (düğmeler klavyenin altında kalıyordu).
-  // Cevap kutusu odaktayken görülen EN KÜÇÜK yüksekliği kullanırız: klavye açıkken sabit kalır.
-  (function () {
-    var vv = window.visualViewport;
-    if (!vv) return;
-    var gercekH = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(vv), "height").get; // üzerine yazmadan ÖNCE asıl değeri al
-    var okunan = function () { return Math.min(gercekH.call(vv), window.innerHeight); };
-    var ornek = []; // [zaman, yükseklik]
-    var kutu = document.getElementById("ppCevap");
-    var odakta = function () { return kutu && document.activeElement === kutu; };
-    if (kutu) kutu.addEventListener("blur", function () { ornek = []; });
-    try {
-      Object.defineProperty(vv, "height", {
-        configurable: true,
-        get: function () {
-          var h = okunan();
-          if (!odakta()) { ornek = []; return h; }
-          var t = Date.now();
-          ornek.push([t, h]);
-          ornek = ornek.filter(function (o) { return t - o[0] <= 1500; });
-          return Math.min.apply(null, ornek.map(function (o) { return o[1]; }));
-        }
-      });
-    } catch (e) {}
-  })();
   guncelle();
   setInterval(guncelle, 500);
-  // Passaparola oyunda klavye animasyonu bitince de kart klavyenin üstüne sığsın diye
-  // passaparola.js'in "resize" ile çalışan sığdırmasını oyun açıkken sık sık tetikler.
-  // DÜZELTME: eskiden her 250 ms'de koşulsuz "resize" gönderiliyordu; halka sürekli yeniden
-  // hesaplanıp zıplıyordu. Artık sadece yükseklik değişince (ve değişimden sonra 1,5 sn boyunca,
-  // klavye animasyonu bitsin diye) gönderilir; yükseklik sabitken halka yerinde durur.
-  var sonYuk = -1, sonDegisim = 0;
-  setInterval(function () {
-    if (!document.body.classList.contains("ppOyunda")) { sonYuk = -1; return; }
-    var v = window.visualViewport;
-    var h = Math.round(v ? v.height : window.innerHeight);
-    var t = Date.now();
-    if (h !== sonYuk) { sonYuk = h; sonDegisim = t; }
-    if (t - sonDegisim < 1500) window.dispatchEvent(new Event("resize"));
-  }, 250);
 })();
 </script>
 <script>
