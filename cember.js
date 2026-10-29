@@ -315,7 +315,7 @@ var css = document.createElement("style");
 css.textContent =
 "#cm{position:fixed;top:0;left:0;right:0;bottom:0;height:100dvh;color:#fff;color-scheme:dark;z-index:9999;display:none;flex-direction:column;align-items:center;font-family:inherit;overflow:hidden;box-sizing:border-box;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);-webkit-user-select:none;user-select:none}" +
 "#cm .cm-top{width:100%;display:flex;align-items:center;gap:8px;padding:0;box-sizing:border-box;flex:none}" +
-"#cm button.cm-sm{width:100%;background:transparent!important;background-image:none!important;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.7);border:0!important;border-radius:0;padding:12px 0;font-family:inherit;font-size:20px;font-weight:800;letter-spacing:.5px;text-align:center}" +
+"#cm button.cm-sm{width:100%;background:transparent!important;background-image:none!important;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.7);border:0!important;border-radius:0;padding:0;height:var(--bas-yuk);line-height:var(--bas-yuk);font-family:inherit;font-size:var(--bas-yazi);font-weight:800;letter-spacing:.3px;text-align:center;white-space:nowrap}" +
 "#cm .cm-pill{background:rgba(10,24,64,.72);border:2px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 14px;font-size:16px;font-weight:700}" +
 "#cm .cm-gridbox{flex:1;width:100%;min-height:0;display:flex;align-items:center;justify-content:center;padding:6px 12px;box-sizing:border-box}" +
 "#cm .cm-gridin{position:relative}" +
@@ -473,24 +473,7 @@ function shuffle(a) {
 }
 
 // Oyun başlığı, ana sayfadaki başlıkla (body>h1) aynı yazı boyutu ve aynı konumda olur; oyuna girerken kıpırdamaz.
-function baslikHizala() {
-  try {
-    var h = document.querySelector("body>h1"), bt = $("cmBack"), top = root.querySelector(".cm-top");
-    if (!h || !bt || !top) return;
-    var cs = getComputedStyle(h), r = h.getBoundingClientRect();
-    if (!r.height) return;
-    var pt = parseFloat(getComputedStyle(root).paddingTop) || 0;
-    top.style.marginTop = Math.max(0, r.top - pt) + "px";
-    bt.style.fontFamily = cs.fontFamily;
-    bt.style.fontSize = cs.fontSize;
-    bt.style.fontWeight = cs.fontWeight;
-    bt.style.letterSpacing = cs.letterSpacing;
-    bt.style.height = r.height + "px";
-    bt.style.lineHeight = r.height + "px";
-    bt.style.padding = "0";
-    bt.style.textShadow = "none";
-  } catch (e) {}
-}
+function baslikHizala() {} // başlık ölçüleri artık CSS'te (style.css --bas-yuk / --bas-yazi)
 
 function boyut() {
   S = Math.max(180, Math.min(300, Math.round(window.innerWidth * 0.74), Math.round(window.innerHeight * 0.36)));

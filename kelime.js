@@ -135,30 +135,10 @@
 
   let baslikUst = null; // başlığın ana ekrandaki üst konumu
   const BASLIK_INDIR = 13; // piksel: başlığı oyun ekranında bu kadar aşağı al (artır = daha aşağı)
-  function baslikHizala() {
-    const h1 = document.querySelector("h1");
-    if (!h1) return;
-    // Sadece oyun ekranında kaydır; başlangıç ve bitiş ekranlarında başlık ana sayfadaki yerinde kalsın
-    if (sec.classList.contains("hidden") || !sec.classList.contains("kkK")) { h1.style.removeProperty("transform"); return; }
-    h1.style.setProperty("transform", "translateY(" + BASLIK_INDIR + "px)", "important");
-  }
-  function baslikKilitle() {
-    const h1 = document.querySelector("h1");
-    if (!h1) return;
-    baslikUst = h1.getBoundingClientRect().top + window.scrollY;
-    const hs = getComputedStyle(h1);
-    BASLIK_OZELLIK.forEach(p => h1.style.setProperty(p, hs.getPropertyValue(p), "important"));
-    document.body.style.paddingTop = getComputedStyle(document.body).paddingTop;
-  }
-  function baslikSerbest() {
-    const h1 = document.querySelector("h1");
-    if (h1) {
-      BASLIK_OZELLIK.forEach(p => h1.style.removeProperty(p));
-      h1.style.removeProperty("transform");
-    }
-    baslikUst = null;
-    document.body.style.paddingTop = "";
-  }
+  // Başlık artık style.css'teki sabit çubuk; bu fonksiyonlar eski çağrılar bozulmasın diye boş bırakıldı.
+  function baslikHizala() {}
+  function baslikKilitle() {}
+  function baslikSerbest() {}
 
   // Cevap kutusunu oku / yaz / odaklan (div olduğu için .value yok)
   const oku = () => inp.textContent;
