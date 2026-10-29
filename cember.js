@@ -613,6 +613,9 @@ function end() {
         setTimeout(function () {
           lvIdx = (lvIdx + 1) % LEVELS.length;
           try { localStorage.setItem("cemberLv", lvIdx); } catch (e) {}
+          // Her yeni bölümde haklar tazelenir (ampül 7, tokmak 5). Satın alınan/kazanılan fazla hak varsa korunur.
+          hakIpucu = Math.max(hakIpucu, HAK_IPUCU);
+          hakTokmak = Math.max(hakTokmak, HAK_TOKMAK);
           startLevel();
         }, 1500);
       }
