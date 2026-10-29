@@ -40,6 +40,25 @@ jobs:
           [ -d android ] || npx cap add android
           npx cap sync android
 
+      - name: Uygulama ikonunu ayarla
+        run: |
+          RES=android/app/src/main/res
+          # 1) assets/ klasöründe ikon varsa @capacitor/assets ile üret
+          if ls assets/icon*.png >/dev/null 2>&1 && npx --yes @capacitor/assets generate --android; then
+            echo "İkon @capacitor/assets ile üretildi"
+          else
+            # 2) olmazsa icon-512.png'den tüm boyutları üret
+            echo "İkon icon-512.png'den üretiliyor"
+            rm -rf $RES/mipmap-anydpi-v26
+            for d in "mdpi 48" "hdpi 72" "xhdpi 96" "xxhdpi 144" "xxxhdpi 192"; do
+              set -- $d
+              mkdir -p $RES/mipmap-$1
+              rm -f $RES/mipmap-$1/ic_launcher*
+              convert icon-512.png -resize $2x$2 $RES/mipmap-$1/ic_launcher.png
+              cp $RES/mipmap-$1/ic_launcher.png $RES/mipmap-$1/ic_launcher_round.png
+            done
+          fi
+
       - name: Sabit imza anahtarını yükle
         run: |
           mkdir -p ~/.android
