@@ -1,6 +1,6 @@
 const milyonerSorulari = {
   seviye1: [
-    { soru: "Hangi element periyodik tabloda 'C' simgesiyle gösterilir?", secenekler: ["Kalsiyum", "Karbon", "Klor", "Bakır"], cevap: "Karbon" },
+    { soru: "Sümela Manastırı hangi ilimizdedir?", secenekler: ["Trabzon", "Ordu", "Rize", "Giresun"], cevap: "Trabzon" },
     { soru: "Türkiye'nin en büyük kapalı havzası hangi gölün bulunduğu alandır?", secenekler: ["Van Gölü", "Tuz Gölü", "Beyşehir Gölü", "Eğirdir Gölü"], cevap: "Tuz Gölü" },
     { soru: "Güneş Sistemi'nde en çok uydusu olan gezegen hangisidir?", secenekler: ["Jüpiter", "Satürn", "Uranüs", "Neptün"], cevap: "Satürn" },
     { soru: "Türkiye'de kadınlara mahalli seçimlerde seçme ve seçilme hakkı hangi yıl tanınmıştır?", secenekler: ["1930", "1933", "1934", "1935"], cevap: "1930" },
