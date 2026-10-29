@@ -87,7 +87,7 @@
   const ana = document.getElementById("ana");
   const menuBtn = document.createElement("button");
   menuBtn.className = "btn ikinci oval";
-  menuBtn.textContent = "🔷 Kelime Oyunu";
+  menuBtn.textContent = "Kelime Oyunu";
   ana.append(menuBtn);
 
   // ---------- Ekran ----------
@@ -98,7 +98,7 @@
   sec.id = "kk";
   sec.innerHTML = `
     <div id="kkGiris">
-      <h2>🔷 Kelime Oyunu</h2>
+      <h2><svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true" style="vertical-align:middle;margin-right:8px"><use href="#i-k"/></svg>Kelime Oyunu</h2>
       <p class="alt">İpucunu oku, altıgenlerdeki kelimeyi bul. Ne kadar az harf açarsan o kadar çok puan kazanırsın. ${TUR} kelime, her kelime için ${SURE} saniye ve ${HAK} tahmin hakkı var. Türkçe karakterleri doğru yaz.</p>
       <button class="btn" id="kkBasla">▶️ Başla</button>
       <button class="btn ikinci" id="kkGeri">Ana menü</button>

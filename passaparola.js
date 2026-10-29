@@ -939,7 +939,7 @@
   const menuBtn = document.createElement("button");
   menuBtn.className = "btn ikinci oval";
   menuBtn.id = "ppAc";
-  menuBtn.innerHTML = '<span class="ppRozet">abc</span> Passaparola';
+  menuBtn.textContent = "Passaparola";
   ana.append(menuBtn);
 
   // ---------- Passaparola ekranı ----------
@@ -948,7 +948,7 @@
   sec.id = "pp";
   sec.innerHTML = `
     <div id="ppGiris">
-      <h2><span class="ppRozet b">abc</span> Passaparola</h2>
+      <h2><svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true" style="vertical-align:middle;margin-right:8px"><use href="#i-p"/></svg>Passaparola</h2>
       <p class="alt">28 harf, ${SURE} saniye. Her harfin<br>sorusunu bil, bilemezsen pas geç;<br>pas geçilenlere sonra tekrar dönersin.</p>
       <button class="btn" id="ppBasla">▶️ Başla</button>
       <button class="btn ikinci" id="ppGeri">Ana menü</button>

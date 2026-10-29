@@ -25,7 +25,7 @@
 
   const st = document.createElement("style");
   st.textContent =
-    "#ana{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}" +
+    "#ana{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:22px}" +
     "#ana.hidden{display:none!important}" +
     "#ana>.alt{grid-column:1/-1;margin-bottom:6px;order:0}" +
     "#ana>.pill{display:none}" +
