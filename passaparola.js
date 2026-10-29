@@ -1081,7 +1081,7 @@
   }
 
   function baslat() {
-    kararYuk = 0; adayAdet = 0;
+    kararYuk = 0; adayAdet = 0; baslatYuk = yukOku(); baslatT = Date.now();
     dur = HARFLER.map(() => 0);
     sorular = HARFLER.map(h => SORU[h][Math.floor(Math.random() * SORU[h].length)]);
     idx = 0;
@@ -1098,7 +1098,7 @@
     soruYukseklikSabitle();
     ciz();
     odak();
-    acTimer = setTimeout(ac, 900); // klavye hiç açılmazsa (masaüstü vb.) yine de başlasın
+    acTimer = setTimeout(ac, 2000); // klavye hiç açılmazsa (masaüstü vb.) yine de başlasın
   }
 
   function gonder() {
@@ -1178,7 +1178,7 @@
   // Eskiden her okumada halka yeniden ölçekleniyordu, bu yüzden sürekli büyüyüp küçülüyordu.
   // Şimdi: yükseklik 500 ms boyunca AYNI okunursa (klavye gerçekten oturduysa) ve önceki karardan
   // 30 px'den fazla farklıysa ölçek bir kez hesaplanır. Soru değişince / resize olunca hiçbir şey ölçülmez.
-  let olcek = 1, marj = 8, kararYuk = 0, adayYuk = 0, adayAdet = 0;
+  let olcek = 1, marj = 8, kararYuk = 0, adayYuk = 0, adayAdet = 0, baslatYuk = 0, baslatT = 0;
   const yukOku = () => {
     const vv = window.visualViewport;
     return Math.round(Math.min(vv ? vv.height : innerHeight, innerHeight));
@@ -1209,12 +1209,14 @@
     if (oyun.classList.contains("hidden")) { kararYuk = 0; adayAdet = 0; return; }
     const h = yukOku();
     if (h === adayYuk) adayAdet++; else { adayYuk = h; adayAdet = 1; }
-    if (adayAdet >= 5 && Math.abs(h - kararYuk) > 30) { kararYuk = h; hesapla(h); }
+    if (adayAdet < 5) return;
+    if (!acildi) {
+      // İlk açılış: klavye oturana (yükseklik 500 ms sabit) kadar bekle, ölçeği hesapla, SONRA kartı göster.
+      // Böylece halka hiç büyük görünmeden doğrudan küçük haliyle açılır.
+      if (h < baslatYuk - 100 || Date.now() - baslatT > 1500) { kararYuk = h; hesapla(h); ac(); }
+      return;
+    }
+    if (Math.abs(h - kararYuk) > 30) { kararYuk = h; hesapla(h); }
   }, 100);
-  if (window.visualViewport) visualViewport.addEventListener("resize", () => {
-    if (acildi || oyun.classList.contains("hidden")) return;
-    clearTimeout(acTimer);
-    acTimer = setTimeout(ac, 150); // yükseklik değişimi 150 ms durunca kartı aç
-  });
   new MutationObserver(sigdir).observe($("ppSoru"), { childList: true });
 })();
