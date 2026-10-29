@@ -87,6 +87,19 @@ jobs:
         working-directory: android
         run: ./gradlew assembleDebug
 
+      - name: APK'yı sabit anahtarla yeniden imzala
+        run: |
+          # Gradle sabit anahtarı kullanmıyordu (APK farklı imzayla çıkıyordu). Burada imza zorla sabit anahtarla yapılır.
+          BT=$(ls -d $ANDROID_HOME/build-tools/*/ | tail -1)
+          SRC=android/app/build/outputs/apk/debug/app-debug.apk
+          "${BT}zipalign" -f -p 4 "$SRC" aligned.apk
+          "${BT}apksigner" sign \
+            --ks ~/.android/debug.keystore --ks-type PKCS12 \
+            --ks-pass pass:android --key-pass pass:android \
+            --ks-key-alias androiddebugkey \
+            --out signed.apk aligned.apk
+          cp signed.apk "$SRC"
+
       - name: APK adını ayarla
         run: cp android/app/build/outputs/apk/debug/app-debug.apk BilgiArenasi.apk
 
