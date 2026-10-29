@@ -472,6 +472,26 @@ function shuffle(a) {
   return a;
 }
 
+// Oyun başlığı, ana sayfadaki başlıkla (body>h1) aynı yazı boyutu ve aynı konumda olur; oyuna girerken kıpırdamaz.
+function baslikHizala() {
+  try {
+    var h = document.querySelector("body>h1"), bt = $("cmBack"), top = root.querySelector(".cm-top");
+    if (!h || !bt || !top) return;
+    var cs = getComputedStyle(h), r = h.getBoundingClientRect();
+    if (!r.height) return;
+    var pt = parseFloat(getComputedStyle(root).paddingTop) || 0;
+    top.style.marginTop = Math.max(0, r.top - pt) + "px";
+    bt.style.fontFamily = cs.fontFamily;
+    bt.style.fontSize = cs.fontSize;
+    bt.style.fontWeight = cs.fontWeight;
+    bt.style.letterSpacing = cs.letterSpacing;
+    bt.style.height = r.height + "px";
+    bt.style.lineHeight = r.height + "px";
+    bt.style.padding = "0";
+    bt.style.textShadow = "none";
+  } catch (e) {}
+}
+
 function boyut() {
   S = Math.max(180, Math.min(300, Math.round(window.innerWidth * 0.74), Math.round(window.innerHeight * 0.36)));
   D = Math.round(S * 0.21);
@@ -492,7 +512,7 @@ function startLevel() {
   cur.words.forEach(function (p) { placedMap[p.w] = p; });
   bonusList = L.b.concat(cur.un.filter(function (w) { return L.b.indexOf(w) === -1; }));
   letters = shuffle(L.l.split(""));
-  arkaYaz(); barRenk(); baslikYaz(); hakYaz(); bolumGoster();
+  arkaYaz(); barRenk(); baslikHizala(); baslikYaz(); hakYaz(); bolumGoster();
   $("cmCur").innerHTML = "";
   boyut();
   drawWords(); drawBonus(); drawWheel();
@@ -687,7 +707,7 @@ $("cmGrid").addEventListener("click", function (e) {
 
 window.addEventListener("resize", function () {
   if (root.style.display !== "flex") return;
-  boyut(); drawWheel(); drawWords();
+  baslikHizala(); boyut(); drawWheel(); drawWords();
 });
 function kapat() { tokmakKapat(); temaGeri(); root.style.display = "none"; }
 $("cmBack").onclick = kapat;
