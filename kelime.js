@@ -99,7 +99,7 @@
   sec.innerHTML = `
     <div id="kkGiris">
       <h2><svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true" style="vertical-align:middle;margin-right:8px"><use href="#i-k"/></svg>Kelime Oyunu</h2>
-      <p class="alt">İpucunu oku, altıgenlerdeki kelimeyi bul. Ne kadar az harf açarsan o kadar çok puan kazanırsın. ${TUR} kelime, her kelime için ${SURE} saniye ve ${HAK} tahmin hakkı var. Türkçe karakterleri doğru yaz.</p>
+      <p class="alt">İpucunu oku, kelimeyi bul.<br>Ne kadar az harf açarsan o kadar çok<br>puan kazanırsın. ${TUR} kelime, her kelime<br>için ${SURE} saniye ve ${HAK} tahmin hakkı var.</p>
       <button class="btn" id="kkBasla">▶️ Başla</button>
       <button class="btn ikinci" id="kkGeri">Ana menü</button>
     </div>
