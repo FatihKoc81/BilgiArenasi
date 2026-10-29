@@ -1,8 +1,8 @@
-name: Android APK
+name: Build APK
 
 on:
   push:
-    branches: [main, master, ana]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -23,58 +23,43 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Site dosyalarını www klasörüne kopyala
-        run: |
-          mkdir -p www
-          cp index.html style.css www/
-          cp ./*.js www/
-          cp manifest.json icon-*.png www/ 2>/dev/null || true
+      - name: Bağımlılıkları yükle
+        run: npm install
 
-      - name: Capacitor kurulumu
+      - name: Web dosyalarını hazırla
         run: |
-          npm install
-          npx cap add android
+          WEB=$(node -p "require('./capacitor.config.json').webDir || 'www'")
+          if [ "$WEB" != "." ]; then
+            mkdir -p "$WEB"
+            cp index.html style.css manifest.json sw.js *.js icon-*.png "$WEB"/ 2>/dev/null || true
+            cp -r assets "$WEB"/ 2>/dev/null || true
+          fi
+
+      - name: Android projesini hazırla
+        run: |
+          [ -d android ] || npx cap add android
           npx cap sync android
 
-      - name: İkonları oluştur
-        run: npx capacitor-assets generate --android
-
-      - name: Sabit imza anahtarını yükle (çakışma hatasını önler)
-        env:
-          KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+      - name: Sabit imza anahtarını yükle
         run: |
           mkdir -p ~/.android
-          if [ -n "$KEYSTORE_B64" ]; then
-            echo "$KEYSTORE_B64" | base64 -d > ~/.android/debug.keystore
-          elif [ -f debug.keystore.b64 ]; then
-            base64 -d debug.keystore.b64 > ~/.android/debug.keystore
-          else
-            echo "::error::Sabit imza anahtarı yok. Depoya debug.keystore.b64 dosyasını ekle."
-            exit 1
-          fi
-          keytool -list -keystore ~/.android/debug.keystore -storepass android | tail -2
+          base64 -d debug.keystore.b64 > ~/.android/debug.keystore
+          keytool -list -v -keystore ~/.android/debug.keystore -storepass android -alias androiddebugkey | grep -E "SHA256|Alias"
 
-      - name: versionCode'u her derlemede artır
-        run: |
-          sed -i "s/versionCode [0-9]*/versionCode ${{ github.run_number }}/" android/app/build.gradle
-          grep -n "versionCode" android/app/build.gradle
+      - name: Sürüm kodunu artır
+        run: sed -i -E "s/versionCode [0-9]+/versionCode ${{ github.run_number }}/" android/app/build.gradle
 
       - name: APK derle
-        run: |
-          cd android
-          chmod +x gradlew
-          ./gradlew assembleDebug
+        working-directory: android
+        run: ./gradlew assembleDebug
 
-      - name: APK yükle
-        uses: actions/upload-artifact@v4
+      - name: APK adını ayarla
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk BilgiArenasi.apk
+
+      - name: GitHub Release oluştur
+        uses: softprops/action-gh-release@v2
         with:
-          name: bilgi-arenasi-apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
-
-      - name: APK'yı herkese açık indirme bağlantısı olarak yayınla
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          cp android/app/build/outputs/apk/debug/app-debug.apk BilgiArenasi.apk
-          gh release delete son --yes --cleanup-tag || true
-          gh release create son BilgiArenasi.apk --target "${{ github.sha }}" --title "Son sürüm" --notes "Otomatik derlenen son APK" --latest
+          tag_name: v${{ github.run_number }}
+          name: Bilgi Arenası v${{ github.run_number }}
+          files: BilgiArenasi.apk
+          make_latest: true
