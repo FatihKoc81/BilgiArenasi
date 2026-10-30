@@ -5,11 +5,11 @@
   const ana = document.getElementById("ana");
   if (!ana) return;
 
-  // eşleşme sırası önemli: "Çember" "Kelime"den önce bakılır
+  // eşleşme sırası önemli: "Rotasyon" "Kelime"den önce bakılır
   const OYUNLAR = [
     { re: /Milyoner/, ad: "Milyoner", renk: "#5a1818", simge: "m", sira: 1 },
     { re: /Passaparola/, ad: "Passaparola", renk: "#0b6a52", simge: "p", sira: 2 },
-    { re: /Çember/, ad: "Kelime Çemberi", renk: "#8a3300", simge: "c", sira: 5, genis: true },
+    { re: /Rotasyon/, ad: "Rotasyon", renk: "#8a3300", simge: "c", sira: 5, genis: true },
     { re: /Kelime/, ad: "Kelime Oyunu", renk: "#0a3aa5", simge: "k", sira: 3 },
     { re: /İşlem/, ad: "İşlem Oyunu", renk: "#52139a", simge: "o", sira: 4 }
   ];
@@ -25,7 +25,7 @@
 
   const st = document.createElement("style");
   st.textContent =
-    "#ana{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:22px}" +
+    "#ana{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:auto;margin-bottom:auto;position:relative;top:-21px}" +
     "#ana.hidden{display:none!important}" +
     "#ana>.alt{grid-column:1/-1;margin-bottom:6px;order:0}" +
     "#ana>.pill{display:none}" +
