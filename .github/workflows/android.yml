@@ -98,22 +98,22 @@ jobs:
           "${BT}apksigner" sign \
             --ks ~/.android/release.keystore --ks-type PKCS12 \
             --ks-pass env:KEYSTORE_PASS --key-pass env:KEYSTORE_PASS \
-            --ks-key-alias beyinfirtinasi \
+            --ks-key-alias bilgiarenasi \
             --out signed.apk aligned.apk
           cp signed.apk "$SRC"
 
       - name: APK adını ayarla
-        run: cp android/app/build/outputs/apk/debug/app-debug.apk BeyinFirtinasi.apk
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk BilgiArenasi.apk
 
       - name: APK imzasını yazdır
         run: |
           AS=$(ls -d $ANDROID_HOME/build-tools/*/ | tail -1)apksigner
-          $AS verify --print-certs BeyinFirtinasi.apk | grep -E "SHA-256" || true
+          $AS verify --print-certs BilgiArenasi.apk | grep -E "SHA-256" || true
 
       - name: GitHub Release oluştur
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ github.run_number }}
-          name: Beyin Fırtınası v${{ github.run_number }}
-          files: BeyinFirtinasi.apk
+          name: Bilgi Arenası v${{ github.run_number }}
+          files: BilgiArenasi.apk
           make_latest: true
