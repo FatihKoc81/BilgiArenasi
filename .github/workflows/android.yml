@@ -49,6 +49,30 @@ jobs:
           [ -d android ] || npx cap add android
           npx cap sync android
 
+      - name: AdMob eklentisini kur
+        run: npm install @capacitor-community/admob@^6 --no-audit --no-fund
+
+      - name: AdMob uygulama kimliğini ekle
+        env:
+          ADMOB_APP_ID: ${{ secrets.ADMOB_APP_ID || 'ca-app-pub-3940256099942544~3347511713' }}
+        run: |
+          npx cap sync android
+          sed -i -E 's/minSdkVersion = [0-9]+/minSdkVersion = 23/' android/variables.gradle || true
+          node -e "
+          const fs=require('fs');
+          const f='android/app/src/main/AndroidManifest.xml';
+          let x=fs.readFileSync(f,'utf8');
+          if(!x.includes('com.google.android.gms.ads.APPLICATION_ID')){
+            x=x.replace('</application>','    <meta-data android:name=\"com.google.android.gms.ads.APPLICATION_ID\" android:value=\"'+process.env.ADMOB_APP_ID+'\"/>\n    </application>');
+            fs.writeFileSync(f,x);
+          }
+          console.log('AdMob app id:',process.env.ADMOB_APP_ID);"
+
+      - name: AdMob eklentisi Android projesinde mi kontrol et
+        run: |
+          npm ls @capacitor/core @capacitor-community/admob || true
+          grep -i admob android/capacitor.settings.gradle || { echo "HATA: AdMob eklentisi Android projesine eklenmedi"; exit 1; }
+
       - name: Paket adını Gradle'a uygula
         run: |
           ID=$(node -p "require('./capacitor.config.json').appId")
