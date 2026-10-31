@@ -41,8 +41,8 @@
     <div class="isGrid isIsl" id="isIsl"></div>
     <div class="isLog" id="isLog"></div>
     <div class="isMsg" id="isMsg"></div>
-    <button class="btn ikinci" id="isGeri">↩️ Geri al</button>
-    <button class="btn ikinci" id="isYeni">🔄 Yeni tur</button>`;
+    <button class="btn ikinci" id="isGeri">↩️ Geri Al</button>
+    <button class="btn ikinci" id="isYeni">🔄 Yeni Tur</button>`;
   ana.after(ekran);
 
   const buton = document.createElement("button");
@@ -170,7 +170,8 @@
   function yerlestir() {
     if (ekran.classList.contains("hidden")) return;
     const y = $("isYeni"), cs = getComputedStyle(y);
-    const kayma = Math.round(y.offsetHeight + (parseFloat(cs.marginTop) || 0));
+    const KAYMA_ORAN = 0.6; // 1 = "Yeni Tur" düğmesi yüksekliği kadar; küçültürsen kart yukarı çıkar
+    const kayma = Math.round((y.offsetHeight + (parseFloat(cs.marginTop) || 0)) * KAYMA_ORAN);
     ekran.style.top = "0px";
     ekran.style.height = "auto";
     const ust = ekran.getBoundingClientRect().top + window.scrollY;

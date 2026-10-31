@@ -31,7 +31,7 @@
   if (milyoner) {
     const b = document.createElement("button");
     b.className = "btn ikinci";
-    b.textContent = "Ana menü";
+    b.textContent = "Ana Menü";
     b.onclick = anaSayfa;
     milyoner.append(b);
   }
@@ -128,4 +128,19 @@
   document.addEventListener("focusin", () => { if (kilitli) setTimeout(() => window.scrollTo(0, 0), 50); });
   new MutationObserver(kontrol).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["class", "style"] });
   kontrol();
+})();
+
+// DÜĞME YAZILARI: "Ana menü" -> "Ana Menü" (tüm oyunlarda, sonradan eklenen düğmelerde de)
+(function () {
+  function duzelt() {
+    document.querySelectorAll("button").forEach(b => {
+      const w = document.createTreeWalker(b, NodeFilter.SHOW_TEXT);
+      let n;
+      while ((n = w.nextNode())) {
+        if (/Ana menü/.test(n.nodeValue)) n.nodeValue = n.nodeValue.replace(/Ana menü/g, "Ana Menü");
+      }
+    });
+  }
+  duzelt();
+  new MutationObserver(duzelt).observe(document.body, { childList: true, subtree: true, characterData: true });
 })();
