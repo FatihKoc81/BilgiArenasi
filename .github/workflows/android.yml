@@ -55,12 +55,10 @@ jobs:
           sed -i -E "s/applicationId \"[^\"]*\"/applicationId \"$ID\"/" android/app/build.gradle
           grep -n applicationId android/app/build.gradle
 
-      - name: Uygulama ikonunu ayarla (Beyin Fırtınası logosu, büyük, uyarlanabilir)
+      - name: Uygulama ikonunu ayarla (büyük logo, uyarlanabilir ikon)
         run: |
           RES=android/app/src/main/res
           BG="#00102b"
-          # ikon olarak Beyin Fırtınası logosunu kullan
-          curl -fsSL -o beyin-icon.png https://raw.githubusercontent.com/FatihKoc81/BeyinFirtinasi/main/icon-512.png
           # ImageMagick yoksa kur; yeni sürümde komut "magick", eskisinde "convert"
           if ! command -v magick >/dev/null && ! command -v convert >/dev/null; then
             sudo apt-get update -qq
@@ -68,7 +66,7 @@ jobs:
           fi
           IM=$(command -v magick || command -v convert)
           # logoyu daire olarak kırp (altın halka dahil, köşeler dışarıda)
-          $IM beyin-icon.png -alpha set \
+          $IM icon-512.png -alpha set \
             \( -size 512x512 xc:none -fill white -draw "circle 256,256 256,18" \) \
             -compose DstIn -composite logo-round.png
           rm -f $RES/mipmap-*/ic_launcher*
@@ -82,7 +80,7 @@ jobs:
             $IM -size ${S}x${S} xc:none \( logo-round.png -resize ${W}x${W} \) \
               -gravity center -composite $RES/mipmap-$1/ic_launcher_foreground.png
             # eski Android sürümleri için düz ikonlar
-            $IM beyin-icon.png -resize ${L}x${L} $RES/mipmap-$1/ic_launcher.png
+            $IM icon-512.png -resize ${L}x${L} $RES/mipmap-$1/ic_launcher.png
             $IM logo-round.png -resize ${L}x${L} $RES/mipmap-$1/ic_launcher_round.png
           done
           echo "<?xml version=\"1.0\" encoding=\"utf-8\"?><resources><color name=\"ic_launcher_background\">$BG</color></resources>" > $RES/values/ic_launcher_background.xml
