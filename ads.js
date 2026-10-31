@@ -7,8 +7,8 @@
   var TEST = true;
   var ID_ODUL_TEST = "ca-app-pub-3940256099942544/5224354917";
   var ID_GECIS_TEST = "ca-app-pub-3940256099942544/1033173712";
-  var ID_ODUL = "ca-app-pub-8747781588851121/BURAYA_ODULLU_BIRIM_NO";  // Bilgi Arenası ödüllü reklam birimi
-  var ID_GECIS = "ca-app-pub-8747781588851121/BURAYA_GECIS_BIRIM_NO"; // Bilgi Arenası geçiş reklam birimi
+  var ID_ODUL = "ca-app-pub-8747781588851121/4713032861";  // Bilgi Arenası ödüllü reklam birimi
+  var ID_GECIS = "ca-app-pub-8747781588851121/8067496505"; // Bilgi Arenası geçiş reklam birimi
   // ===================
 
   var C = window.Capacitor;
