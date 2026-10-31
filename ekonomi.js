@@ -50,6 +50,9 @@
     ov.innerHTML = '<div class="ek-dlg"><h3></h3><div class="ek-msg"></div><div class="ek-o"></div></div>';
     ov.querySelector("h3").textContent = baslik;
     ov.querySelector(".ek-msg").innerHTML = mesaj;
+    // uzun yazı pencereyi taşırıp kaydırmasın: yazı uzadıkça küçülür
+    var mEl = ov.querySelector(".ek-msg"), uz = mEl.textContent.length;
+    if (uz > 70) { mEl.style.fontSize = uz > 120 ? "13.5px" : uz > 95 ? "14.5px" : "15.5px"; mEl.style.lineHeight = "1.25"; }
     var kap = ov.querySelector(".ek-o");
     ops.forEach(function (o) {
       var b = document.createElement("button");

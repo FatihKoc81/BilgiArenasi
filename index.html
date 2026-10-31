@@ -206,7 +206,7 @@ function kayipSor() {
       if (Ekonomi.altin() >= KAYIP_BEDEL) { Ekonomi.ekle(-KAYIP_BEDEL); devamEt(CAN_MAX); }
       else Ekonomi.dukkan(kayipSor, "Altının yetmiyor");
     } },
-    { t: "📺 Reklam izle, 1 can kazan", c: "alt", f: () => {
+    { h: '<span class="ek-chip">📺</span>Can kazan', c: "alt", f: () => {
       Ekonomi.reklam("odul", ok => { if (ok) devamEt(1); else kayipSor(); });
     } },
     { t: alt ? "⬇️ Bir alt bölümden başla" : "🔄 Bölümü baştan başla", c: "gri", f: altBolum },
